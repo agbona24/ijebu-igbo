@@ -48,7 +48,7 @@ export default function VideoSection() {
             </button>
           ) : (
             <iframe
-              src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"
+              src="https://www.youtube.com/embed/VhVESFwl8Cs?autoplay=1"
               title="Celebrating Our Heritage"
               allow="autoplay; encrypted-media"
               allowFullScreen
