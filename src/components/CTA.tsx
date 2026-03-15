@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import JoinModal from "@/components/JoinModal";
 
 export default function CTA() {
   return (
@@ -26,17 +27,19 @@ export default function CTA() {
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="text-center max-w-3xl mx-auto"
         >
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-primary-foreground leading-tight tracking-tight mb-6">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display font-bold text-primary-foreground leading-tight tracking-tight mb-4 sm:mb-6">
             Together We Can Build a Greater Ijebu Igbo
           </h2>
-          <p className="text-primary-foreground/70 text-lg md:text-xl mb-10 max-w-xl mx-auto leading-relaxed">
+          <p className="text-primary-foreground/70 text-base sm:text-lg md:text-xl mb-8 sm:mb-10 max-w-xl mx-auto leading-relaxed">
             Your expertise, your resources, and your passion can help transform
             our homeland. Join us in making a lasting difference.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="btn-primary text-center">
-              Become a Member
-            </button>
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
+            <JoinModal>
+              <button className="btn-primary text-center">
+                Become a Member
+              </button>
+            </JoinModal>
             <button className="btn-outline-light text-center">
               Support Development
             </button>

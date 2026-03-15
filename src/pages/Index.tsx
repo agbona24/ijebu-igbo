@@ -5,11 +5,14 @@ import VideoSection from "@/components/VideoSection";
 import Impact from "@/components/Impact";
 import Team from "@/components/Team";
 import Story from "@/components/Story";
+import News from "@/components/News";
 import Gallery from "@/components/Gallery";
 import Events from "@/components/Events";
 import Registration from "@/components/Registration";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
+import FloatingContact from "@/components/FloatingContact";
+import BackToTop from "@/components/BackToTop";
 
 const Index = () => {
   return (
@@ -21,11 +24,14 @@ const Index = () => {
       <Impact />
       <Team />
       <Story />
+      <News />
       <Gallery />
       <Events />
       <Registration />
       <CTA />
       <Footer />
+      <FloatingContact />
+      <BackToTop />
     </div>
   );
 };

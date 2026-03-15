@@ -1,0 +1,112 @@
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Phone, Mail, MessageCircle, X } from "lucide-react";
+
+const contactInfo = {
+  phone: "+44 07723953174",
+  email: "info@ijebuigbodescendants.org",
+  whatsapp: "+4407723953174",
+};
+
+export default function FloatingContact() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const contactOptions = [
+    {
+      icon: Phone,
+      label: "Call Us",
+      href: `tel:${contactInfo.phone}`,
+      color: "bg-green-600 hover:bg-green-700 active:bg-green-800",
+      delay: 0.1,
+    },
+    {
+      icon: Mail,
+      label: "Email",
+      href: `mailto:${contactInfo.email}`,
+      color: "bg-blue-600 hover:bg-blue-700 active:bg-blue-800",
+      delay: 0.15,
+    },
+    {
+      icon: MessageCircle,
+      label: "WhatsApp",
+      href: `https://wa.me/${contactInfo.whatsapp.replace(/\s/g, "")}`,
+      color: "bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700",
+      delay: 0.2,
+    },
+  ];
+
+  return (
+    <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex flex-col items-end gap-3 safe-area-bottom">
+      {/* Contact options */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.8, y: 20 }}
+            transition={{ duration: 0.2 }}
+            className="flex flex-col gap-2 sm:gap-3 mb-2"
+          >
+            {contactOptions.map((option) => (
+              <motion.a
+                key={option.label}
+                href={option.href}
+                target={option.label === "WhatsApp" ? "_blank" : undefined}
+                rel={option.label === "WhatsApp" ? "noopener noreferrer" : undefined}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 20 }}
+                transition={{ delay: option.delay }}
+                className={`flex items-center gap-3 px-4 sm:px-5 py-3 sm:py-3.5 rounded-full text-white shadow-lg ${option.color} transition-all duration-200 touch-manipulation active:scale-95`}
+              >
+                <option.icon className="w-5 h-5 sm:w-6 sm:h-6" />
+                <span className="text-sm sm:text-base font-medium whitespace-nowrap">
+                  {option.label}
+                </span>
+              </motion.a>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Main toggle button */}
+      <motion.button
+        onClick={() => setIsOpen(!isOpen)}
+        className={`w-14 h-14 sm:w-16 sm:h-16 rounded-full shadow-xl flex items-center justify-center transition-all duration-300 touch-manipulation ${
+          isOpen
+            ? "bg-charcoal text-white rotate-0"
+            : "bg-accent text-charcoal hover:bg-accent/90"
+        }`}
+        whileTap={{ scale: 0.9 }}
+        aria-label={isOpen ? "Close contact menu" : "Open contact menu"}
+      >
+        <AnimatePresence mode="wait">
+          {isOpen ? (
+            <motion.div
+              key="close"
+              initial={{ rotate: -90, opacity: 0 }}
+              animate={{ rotate: 0, opacity: 1 }}
+              exit={{ rotate: 90, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              <X className="w-6 h-6 sm:w-7 sm:h-7" />
+            </motion.div>
+          ) : (
+            <motion.div
+              key="contact"
+              initial={{ rotate: 90, opacity: 0 }}
+              animate={{ rotate: 0, opacity: 1 }}
+              exit={{ rotate: -90, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="relative"
+            >
+              <Phone className="w-6 h-6 sm:w-7 sm:h-7" />
+              {/* Pulse ring */}
+              <span className="absolute -inset-1 rounded-full bg-accent/30 animate-ping" />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.button>
+    </div>
+  );
+}

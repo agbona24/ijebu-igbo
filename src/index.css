@@ -4,6 +4,43 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Native app-like experience */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    overscroll-behavior-y: contain;
+  }
+
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    touch-action: pan-y;
+    overscroll-behavior: none;
+  }
+
+  /* Prevent text selection on interactive elements */
+  button, a, [role="button"] {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  /* Smooth momentum scrolling on iOS */
+  .scroll-container {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Safe area padding for notched devices */
+  .safe-area-top {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -95,26 +132,39 @@
 
 @layer components {
   .btn-primary {
-    @apply px-8 py-4 bg-accent text-charcoal font-bold rounded-sm 
-           transition-all duration-300 hover:brightness-110 hover:shadow-elevated;
+    @apply px-6 py-3.5 md:px-8 md:py-4 bg-accent text-charcoal font-bold rounded-lg md:rounded-sm 
+           transition-all duration-300 hover:brightness-110 hover:shadow-elevated
+           active:scale-[0.98] active:brightness-95 touch-manipulation;
   }
 
   .btn-outline {
-    @apply px-8 py-4 border border-border text-foreground font-bold rounded-sm 
-           transition-all duration-300 hover:bg-muted;
+    @apply px-6 py-3.5 md:px-8 md:py-4 border border-border text-foreground font-bold rounded-lg md:rounded-sm 
+           transition-all duration-300 hover:bg-muted
+           active:scale-[0.98] active:bg-muted/80 touch-manipulation;
   }
 
   .btn-outline-light {
-    @apply px-8 py-4 border border-primary-foreground/30 text-primary-foreground font-bold rounded-sm 
-           transition-all duration-300 hover:bg-primary-foreground/10;
+    @apply px-6 py-3.5 md:px-8 md:py-4 border border-primary-foreground/30 text-primary-foreground font-bold rounded-lg md:rounded-sm 
+           transition-all duration-300 hover:bg-primary-foreground/10
+           active:scale-[0.98] active:bg-primary-foreground/20 touch-manipulation;
   }
 
   .section-padding {
-    @apply py-24 md:py-32 lg:py-40;
+    @apply py-16 md:py-24 lg:py-32;
   }
 
   .container-main {
-    @apply container mx-auto px-6;
+    @apply container mx-auto px-4 sm:px-6;
+  }
+
+  /* Touch-optimized card */
+  .touch-card {
+    @apply active:scale-[0.99] active:brightness-95 transition-transform duration-150 touch-manipulation;
+  }
+
+  /* Mobile-first tap targets (min 44px) */
+  .tap-target {
+    @apply min-h-[44px] min-w-[44px] flex items-center justify-center;
   }
 
   .label-accent {
@@ -122,7 +172,7 @@
   }
 
   .heading-section {
-    @apply text-4xl md:text-5xl font-display font-bold text-primary leading-tight tracking-tight;
+    @apply text-3xl sm:text-4xl md:text-5xl font-display font-bold text-primary leading-tight tracking-tight;
   }
 
   .text-body {
@@ -140,5 +190,20 @@
   }
   .shadow-elevated {
     box-shadow: var(--shadow-elevated);
+  }
+
+  /* Hide scrollbar for horizontal scroll galleries */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Smooth touch scrolling */
+  .scroll-smooth {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
   }
 }

@@ -28,32 +28,33 @@ export default function Impact() {
   return (
     <section id="impact" className="section-padding bg-background">
       <div className="container-main">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-20 gap-8">
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-10 sm:mb-16 lg:mb-20 gap-4 sm:gap-6 lg:gap-8">
           <div className="max-w-2xl">
             <h2 className="label-accent">Our Impact</h2>
             <h3 className="heading-section">
               Transforming heritage into sustainable progress.
             </h3>
           </div>
-          <p className="text-body max-w-sm pb-2">
+          <p className="text-body max-w-sm text-sm sm:text-base lg:pb-2">
             We measure our success by the tangible growth of our community and
             the strength of our global bonds.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-border border border-border rounded-sm overflow-hidden">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-px sm:bg-border sm:border sm:border-border rounded-xl sm:rounded-sm overflow-hidden">
           {impacts.map((item, idx) => (
             <motion.div
               key={idx}
               whileHover={{ y: -5 }}
+              whileTap={{ scale: 0.98 }}
               transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="bg-card p-10 flex flex-col h-full"
+              className="bg-card p-6 sm:p-8 lg:p-10 flex flex-col h-full rounded-xl sm:rounded-none border border-border sm:border-0 touch-manipulation"
             >
-              <item.icon className="w-10 h-10 text-accent mb-8" strokeWidth={1.5} />
-              <h4 className="text-xl font-bold text-primary mb-4 font-display">
+              <item.icon className="w-8 h-8 sm:w-10 sm:h-10 text-accent mb-4 sm:mb-6 lg:mb-8" strokeWidth={1.5} />
+              <h4 className="text-lg sm:text-xl font-bold text-primary mb-2 sm:mb-4 font-display">
                 {item.title}
               </h4>
-              <p className="text-body">{item.desc}</p>
+              <p className="text-body text-sm sm:text-base">{item.desc}</p>
             </motion.div>
           ))}
         </div>
