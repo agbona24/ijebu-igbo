@@ -38,7 +38,7 @@ export default function VideoSection() {
               aria-label="Play video"
             >
               <img
-                src="https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg"
+                src="https://img.youtube.com/vi/VhVESFwl8Cs/maxresdefault.jpg"
                 alt="Video thumbnail"
                 className="absolute inset-0 w-full h-full object-cover opacity-60"
               />
