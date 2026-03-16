@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { Mail, MapPin, Facebook, Twitter, Instagram, Youtube, Phone, Globe } from "lucide-react";
 
 const quickLinks = [
@@ -24,10 +25,15 @@ export default function Footer() {
           {/* Brand Section - Mobile */}
           <div className="bg-primary-foreground/5 rounded-2xl p-5 border border-primary-foreground/10">
             <div className="flex items-center gap-3 mb-3">
-              <img 
+              <motion.img 
                 src="/favicon.svg" 
                 alt="IID Logo" 
                 className="w-12 h-12"
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                whileHover={{ rotate: [0, -10, 10, 0], transition: { duration: 0.5 } }}
               />
               <h3 className="font-display font-bold text-base">
                 Ijebu Igbo Descendants in Diaspora
@@ -139,10 +145,15 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-2">
             <div className="flex items-center gap-3 mb-4">
-              <img 
+              <motion.img 
                 src="/favicon.svg" 
                 alt="IID Logo" 
                 className="w-14 h-14"
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                whileHover={{ rotate: [0, -10, 10, 0], transition: { duration: 0.5 } }}
               />
               <h3 className="font-display font-bold text-xl">
                 Ijebu Igbo Descendants in Diaspora

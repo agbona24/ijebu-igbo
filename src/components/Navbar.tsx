@@ -49,11 +49,43 @@ export default function Navbar() {
         } border-b border-primary-foreground/10`}
       >
         <div className="container-main flex items-center justify-between h-14 md:h-20">
-          <a href="#" className="group">
-            <img 
+          <a href="#" className="group relative">
+            <motion.img 
               src="/favicon.svg" 
               alt="IID Logo" 
-              className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 transition-transform group-hover:scale-110 duration-300"
+              className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 relative z-10"
+              initial={{ opacity: 0, rotate: -180, scale: 0 }}
+              animate={{ 
+                opacity: 1, 
+                rotate: 0, 
+                scale: 1,
+              }}
+              transition={{ 
+                duration: 0.8, 
+                ease: [0.16, 1, 0.3, 1],
+                rotate: { duration: 1, ease: "easeOut" }
+              }}
+              whileHover={{ 
+                scale: 1.15, 
+                rotate: [0, -5, 5, 0],
+                transition: { 
+                  scale: { duration: 0.3 },
+                  rotate: { duration: 0.5, ease: "easeInOut" }
+                }
+              }}
+              whileTap={{ scale: 0.95 }}
+            />
+            {/* Animated glow effect on hover */}
+            <motion.div
+              className="absolute inset-0 rounded-full bg-accent/20 blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"
+              animate={{
+                scale: [1, 1.2, 1],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
             />
           </a>
 
