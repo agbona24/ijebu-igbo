@@ -9,8 +9,11 @@ export default function Story() {
     <section id="story" className="section-padding bg-surface">
       <div className="container-main">
         <div className="text-center max-w-2xl mx-auto mb-20">
-          <h2 className="label-accent">Our Story</h2>
-          <h3 className="heading-section">The Heart of Ijebu Igbo</h3>
+          <h2 className="label-accent">Our Heritage</h2>
+          <h3 className="heading-section">Our Roots, Our Responsibility</h3>
+          <p className="text-body mt-4 sm:mt-6">
+            Ijebu Igbo is a land rich in culture, tradition, and history. Through festivals, community projects, and diaspora collaboration, we preserve the legacy of our ancestors while building opportunities for future generations.
+          </p>
         </div>
 
         {/* Block 1 */}
@@ -92,6 +95,27 @@ export default function Story() {
             />
           </motion.div>
         </div>
+
+        {/* Cultural Saying */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, ease }}
+          className="mt-16 sm:mt-20 lg:mt-24 text-center max-w-3xl mx-auto"
+        >
+          <div className="bg-accent/10 border-l-4 border-accent rounded-lg p-6 sm:p-8 lg:p-10">
+            <p className="text-xl sm:text-2xl lg:text-3xl font-display font-bold text-primary italic mb-3 sm:mb-4">
+              "Ijebu Igbo kì í ṣofo"
+            </p>
+            <p className="text-base sm:text-lg text-body">
+              Our town never stands empty.
+            </p>
+            <p className="text-sm sm:text-base text-body/70 mt-3 sm:mt-4">
+              Wherever an Ọmọ Alárè lives in the world, the spirit of Ijebu Igbo lives there too.
+            </p>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

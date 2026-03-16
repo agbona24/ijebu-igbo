@@ -23,9 +23,16 @@ export default function Footer() {
         <div className="lg:hidden space-y-4">
           {/* Brand Section - Mobile */}
           <div className="bg-primary-foreground/5 rounded-2xl p-5 border border-primary-foreground/10">
-            <h3 className="font-display font-bold text-base mb-2">
-              Ijebu Igbo Descendants in Diaspora
-            </h3>
+            <div className="flex items-center gap-3 mb-3">
+              <img 
+                src="/favicon.svg" 
+                alt="IID Logo" 
+                className="w-12 h-12"
+              />
+              <h3 className="font-display font-bold text-base">
+                Ijebu Igbo Descendants in Diaspora
+              </h3>
+            </div>
             <p className="text-primary-foreground/60 leading-relaxed text-sm mb-4">
               A global community promoting culture, unity, and sustainable
               development for Ijebu Igbo town in Nigeria.
@@ -131,9 +138,16 @@ export default function Footer() {
         <div className="hidden lg:grid lg:grid-cols-4 gap-12">
           {/* Brand */}
           <div className="lg:col-span-2">
-            <h3 className="font-display font-bold text-xl mb-4">
-              Ijebu Igbo Descendants in Diaspora
-            </h3>
+            <div className="flex items-center gap-3 mb-4">
+              <img 
+                src="/favicon.svg" 
+                alt="IID Logo" 
+                className="w-14 h-14"
+              />
+              <h3 className="font-display font-bold text-xl">
+                Ijebu Igbo Descendants in Diaspora
+              </h3>
+            </div>
             <p className="text-primary-foreground/60 leading-relaxed max-w-md mb-6 text-base">
               A global community promoting culture, unity, and sustainable
               development for Ijebu Igbo town in Nigeria.
@@ -200,11 +214,38 @@ export default function Footer() {
         </div>
       </div>
 
+      {/* Cultural Signature */}
+      <div className="border-t border-primary-foreground/10">
+        <div className="container-main py-6 sm:py-8 text-center">
+          <p className="text-lg sm:text-xl md:text-2xl font-display font-bold text-accent italic mb-2">
+            Ọmọ Alárè, ká gbé Ijebu Igbo ga
+          </p>
+          <p className="text-sm sm:text-base text-primary-foreground/70">
+            Together, we lift Ijebu Igbo higher
+          </p>
+        </div>
+      </div>
+
       {/* Bottom bar */}
       <div className="border-t border-primary-foreground/10">
         <div className="container-main py-5 md:py-6 flex flex-col md:flex-row justify-between items-center gap-2 md:gap-4 text-xs md:text-sm text-primary-foreground/40 text-center md:text-left">
           <p>&copy; {new Date().getFullYear()} Ijebu Igbo Descendants in Diaspora. All rights reserved.</p>
-          <p className="hidden md:block">Built with pride by the diaspora community.</p>
+          <a 
+            href="https://azeezagbona.com" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="group flex items-center gap-1.5 hover:text-accent transition-colors duration-300"
+          >
+            <span>Crafted with</span>
+            <svg 
+              className="w-3.5 h-3.5 md:w-4 md:h-4 fill-red-500 group-hover:scale-110 transition-transform duration-300" 
+              viewBox="0 0 24 24"
+            >
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+            <span>by</span>
+            <span className="font-semibold text-primary-foreground/60 group-hover:text-accent">Harzotech</span>
+          </a>
         </div>
       </div>
     </footer>

@@ -49,8 +49,15 @@ export default function Navbar() {
         } border-b border-primary-foreground/10`}
       >
         <div className="container-main flex items-center justify-between h-14 md:h-20">
-          <a href="#" className="font-display font-bold text-primary-foreground text-lg tracking-tight">
-            IJIDD
+          <a href="#" className="flex items-center gap-2 sm:gap-3 group">
+            <img 
+              src="/favicon.svg" 
+              alt="IID Logo" 
+              className="w-8 h-8 sm:w-10 sm:h-10 transition-transform group-hover:scale-110 duration-300"
+            />
+            <span className="font-display font-bold text-primary-foreground text-base sm:text-lg tracking-tight">
+              IJIDD
+            </span>
           </a>
 
           {/* Desktop */}

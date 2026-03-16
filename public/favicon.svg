@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Background Circle -->
+  <circle cx="32" cy="32" r="30" fill="#0c4da2"/>
+  
+  <!-- Inner glow -->
+  <circle cx="32" cy="32" r="28" fill="#09356b" opacity="0.4"/>
+  
+  <!-- IID Text - Large and Bold -->
+  <text x="32" y="40" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#FFFFFF" text-anchor="middle">
+    IID
+  </text>
+  
+  <!-- Top accent -->
+  <path d="M 32,10 L 35,15 L 29,15 Z" fill="#BF9A2D"/>
+  
+  <!-- Bottom accent -->
+  <path d="M 32,54 L 35,49 L 29,49 Z" fill="#BF9A2D"/>
+  
+  <!-- Side accents -->
+  <circle cx="12" cy="32" r="2" fill="#BF9A2D"/>
+  <circle cx="52" cy="32" r="2" fill="#BF9A2D"/>
+</svg>

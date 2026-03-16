@@ -519,7 +519,7 @@ export default function Hero() {
   return (
     <section className="relative min-h-screen lg:min-h-[700px] flex items-center overflow-hidden bg-charcoal pt-14 md:pt-20">
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-b sm:bg-gradient-to-r from-primary/95 via-primary/85 to-primary/70 z-10" />
+        <div className="absolute inset-0 bg-gradient-to-b sm:bg-gradient-to-r from-primary/70 via-primary/60 to-primary/40 z-10" />
         <img
           src={heroBg}
           alt="Ijebu Igbo aerial view at golden hour"
@@ -557,7 +557,7 @@ export default function Hero() {
               Across the World
             </h1>
             <p className="text-sm sm:text-base md:text-lg text-primary-foreground/80 font-sans max-w-xl mx-auto lg:mx-0 mb-6 sm:mb-8 leading-relaxed">
-              Promoting culture, unity, and development for the progress of Ijebu Igbo at home and in the diaspora.
+              From our ancestral homeland to communities across the globe, the spirit of Ijebu Igbo lives on through culture, unity, and a shared commitment to the progress of our town.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">

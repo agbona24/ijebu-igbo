@@ -17,20 +17,13 @@ export default function About() {
           >
             <h2 className="label-accent">About Us</h2>
             <h3 className="heading-section mb-4 sm:mb-6">
-              Ijebu Igbo Descendants in Diaspora
+              Proudly Ọmọ Alárè
             </h3>
             <p className="text-body mb-4 sm:mb-6 text-sm sm:text-base">
-              We are a global community of Ijebu Igbo sons and daughters united by
-              heritage and a shared vision for the development of our beloved
-              hometown. From Lagos to London, New York to Nairobi, we stand
-              together to preserve our culture and invest in the future of Ijebu
-              Igbo.
+              Being an Ọmọ Alárè is more than a title — it is a heritage of resilience, enterprise, and community. From the markets of Ijebu Igbo to cities around the world, our sons and daughters continue to carry the pride, culture, and values of our homeland wherever they go.
             </p>
             <p className="text-body text-sm sm:text-base">
-              Our mission is to mobilise the collective expertise, resources, and
-              goodwill of Ijebu Igbo descendants around the world to drive
-              transformative community development, educational advancement, and
-              cultural preservation for generations to come.
+              Our mission is to mobilise the collective expertise, resources, and goodwill of Ijebu Igbo descendants around the world to drive transformative community development, educational advancement, and cultural preservation for generations to come.
             </p>
           </motion.div>
 

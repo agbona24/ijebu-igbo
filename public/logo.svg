@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- Background Circle -->
+  <circle cx="100" cy="100" r="95" fill="#0c4da2" stroke="#BF9A2D" stroke-width="3"/>
+  
+  <!-- Inner Circle -->
+  <circle cx="100" cy="100" r="85" fill="#09356b" opacity="0.3"/>
+  
+  <!-- Decorative Pattern (representing unity/connection) -->
+  <path d="M 100,40 L 130,70 L 100,100 L 70,70 Z" fill="#BF9A2D" opacity="0.2"/>
+  <path d="M 100,100 L 130,130 L 100,160 L 70,130 Z" fill="#BF9A2D" opacity="0.2"/>
+  
+  <!-- IID Text -->
+  <text x="100" y="85" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="#FFFFFF" text-anchor="middle">
+    IID
+  </text>
+  
+  <!-- Subtitle -->
+  <text x="100" y="125" font-family="Arial, sans-serif" font-size="12" font-weight="500" fill="#BF9A2D" text-anchor="middle" letter-spacing="2">
+    IJEBU IGBO
+  </text>
+  
+  <!-- Bottom accent line -->
+  <line x1="60" y1="135" x2="140" y2="135" stroke="#BF9A2D" stroke-width="2" stroke-linecap="round"/>
+  
+  <!-- Corner decorative elements -->
+  <circle cx="40" cy="40" r="3" fill="#BF9A2D"/>
+  <circle cx="160" cy="40" r="3" fill="#BF9A2D"/>
+  <circle cx="40" cy="160" r="3" fill="#BF9A2D"/>
+  <circle cx="160" cy="160" r="3" fill="#BF9A2D"/>
+</svg>

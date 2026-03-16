@@ -74,7 +74,7 @@ export default function Team() {
           </p>
         </motion.div>
 
-        <Tabs defaultValue="current" className="w-full">
+        <Tabs defaultValue="past" className="w-full">
           <div className="flex justify-center mb-6 sm:mb-8 overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0">
             <TabsList className="bg-muted/50 p-1 sm:p-1.5 rounded-full flex-shrink-0">
               <TabsTrigger 

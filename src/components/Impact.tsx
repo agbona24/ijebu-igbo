@@ -30,14 +30,13 @@ export default function Impact() {
       <div className="container-main">
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-10 sm:mb-16 lg:mb-20 gap-4 sm:gap-6 lg:gap-8">
           <div className="max-w-2xl">
-            <h2 className="label-accent">Our Impact</h2>
+            <h2 className="label-accent">Global Community</h2>
             <h3 className="heading-section">
-              Transforming heritage into sustainable progress.
+              Ọmọ Alárè Across the World
             </h3>
           </div>
           <p className="text-body max-w-sm text-sm sm:text-base lg:pb-2">
-            We measure our success by the tangible growth of our community and
-            the strength of our global bonds.
+            From Nigeria to the United Kingdom, the United States, Canada, and beyond, Ijebu Igbo descendants continue to connect, support one another, and contribute to the development of our hometown.
           </p>
         </div>
 
