@@ -65,11 +65,11 @@ export default function Team() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="text-center max-w-2xl mx-auto mb-12"
+          className="text-center max-w-2xl mx-auto mb-8 sm:mb-10"
         >
           <h2 className="label-accent">Leadership</h2>
           <h3 className="heading-section">Our Executive Committee</h3>
-          <p className="text-body mt-4 text-sm sm:text-base">
+          <p className="text-body mt-2 sm:mt-3">
             Dedicated individuals driving the mission of unity, development, and cultural pride for Ijebu Igbo descendants worldwide.
           </p>
         </motion.div>

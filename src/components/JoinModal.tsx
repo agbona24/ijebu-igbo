@@ -22,24 +22,24 @@ export default function JoinModal({ children }: JoinModalProps) {
       label: "Call Us",
       value: "+44 07723953174",
       href: "tel:+4407723953174",
-      color: "bg-green-600",
-      description: "Speak directly with our team",
+      color: "bg-primary",
+      description: "Best for immediate conversation",
     },
     {
       icon: Mail,
       label: "Email Us",
       value: "info@ijebuigbodescendants.org",
       href: "mailto:info@ijebuigbodescendants.org",
-      color: "bg-blue-600",
-      description: "Send us your details",
+      color: "bg-primary",
+      description: "Best for full details and formal onboarding",
     },
     {
       icon: MessageCircle,
       label: "WhatsApp",
       value: "+44 07723953174",
       href: "https://wa.me/4407723953174",
-      color: "bg-emerald-600",
-      description: "Chat with us instantly",
+      color: "bg-primary",
+      description: "Best for quick chat and fastest reply",
     },
   ];
 
@@ -74,6 +74,28 @@ export default function JoinModal({ children }: JoinModalProps) {
               </strong>
               . Together, we're building a stronger community, preserving our heritage, 
               and driving development back home.
+            </p>
+          </div>
+
+          {/* Message clarity + expectation setting */}
+          <div className="bg-primary/5 border border-primary/15 rounded-xl p-5 space-y-3">
+            <h3 className="font-display font-bold text-lg">What Happens Next</h3>
+            <ul className="space-y-2 text-sm sm:text-base text-foreground/80">
+              <li className="flex items-start gap-3">
+                <span className="text-accent text-lg leading-none">1</span>
+                <span>Choose any contact channel below.</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-accent text-lg leading-none">2</span>
+                <span>Share your name, location, and interest in joining IID UK.</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-accent text-lg leading-none">3</span>
+                <span>Our team guides you into the community and upcoming activities.</span>
+              </li>
+            </ul>
+            <p className="text-xs sm:text-sm text-foreground/70">
+              Tip: For the fastest response, use WhatsApp.
             </p>
           </div>
 
@@ -117,17 +139,23 @@ export default function JoinModal({ children }: JoinModalProps) {
                   onClick={() => setOpen(false)}
                   className="flex items-center gap-4 p-4 rounded-xl bg-card border border-border hover:border-accent/50 active:scale-[0.98] transition-all duration-200 touch-manipulation group"
                 >
-                  <div className={`w-12 h-12 rounded-lg ${method.color} flex items-center justify-center flex-shrink-0`}>
+                  <div className={`w-12 h-12 rounded-lg ${method.color} border border-accent/30 flex items-center justify-center flex-shrink-0`}>
                     <method.icon className="w-6 h-6 text-white" />
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="font-semibold text-foreground group-hover:text-accent transition-colors text-sm sm:text-base">
                       {method.label}
                     </p>
-                    <p className="text-xs sm:text-sm text-muted-foreground mt-0.5 truncate">
+                    <p className="text-xs sm:text-sm text-muted-foreground mt-0.5">
                       {method.description}
                     </p>
+                    <p className="text-xs sm:text-sm text-foreground/85 font-medium mt-0.5 truncate">
+                      {method.value}
+                    </p>
                   </div>
+                  <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-wide text-accent bg-accent/10 px-2 py-1 rounded-full">
+                    Contact
+                  </span>
                 </a>
               ))}
             </div>

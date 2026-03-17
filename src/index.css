@@ -20,6 +20,13 @@
     overscroll-behavior: none;
   }
 
+  /* Support for mobile viewport units */
+  @supports (height: 100dvh) {
+    .min-h-\[100svh\] {
+      min-height: 100dvh;
+    }
+  }
+
   /* Prevent text selection on interactive elements */
   button, a, [role="button"] {
     -webkit-user-select: none;
@@ -132,9 +139,9 @@
 
 @layer components {
   .btn-primary {
-    @apply px-6 py-3.5 md:px-8 md:py-4 bg-accent text-charcoal font-bold rounded-lg md:rounded-sm 
+    @apply px-5 py-3 md:px-8 md:py-4 bg-accent text-charcoal font-bold rounded-lg md:rounded-sm 
            transition-all duration-300 hover:brightness-110 hover:shadow-elevated
-           active:scale-[0.98] active:brightness-95 touch-manipulation;
+           active:scale-[0.98] active:brightness-95 touch-manipulation min-h-[48px] flex items-center justify-center;
   }
 
   .btn-outline {
@@ -144,17 +151,17 @@
   }
 
   .btn-outline-light {
-    @apply px-6 py-3.5 md:px-8 md:py-4 border border-primary-foreground/30 text-primary-foreground font-bold rounded-lg md:rounded-sm 
+    @apply px-5 py-3 md:px-8 md:py-4 border border-primary-foreground/30 text-primary-foreground font-bold rounded-lg md:rounded-sm 
            transition-all duration-300 hover:bg-primary-foreground/10
-           active:scale-[0.98] active:bg-primary-foreground/20 touch-manipulation;
+           active:scale-[0.98] active:bg-primary-foreground/20 touch-manipulation min-h-[48px];
   }
 
   .section-padding {
-    @apply py-16 md:py-24 lg:py-32;
+    @apply py-12 md:py-20 lg:py-28;
   }
 
   .container-main {
-    @apply container mx-auto px-4 sm:px-6;
+    @apply container mx-auto px-4 sm:px-6 lg:px-8;
   }
 
   /* Touch-optimized card */
@@ -168,15 +175,15 @@
   }
 
   .label-accent {
-    @apply text-sm font-bold tracking-[0.2em] text-accent uppercase mb-4;
+    @apply text-xs sm:text-sm font-bold tracking-[0.15em] sm:tracking-[0.2em] text-accent uppercase mb-2 sm:mb-4;
   }
 
   .heading-section {
-    @apply text-3xl sm:text-4xl md:text-5xl font-display font-bold text-primary leading-tight tracking-tight;
+    @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display font-bold text-primary leading-tight tracking-tight;
   }
 
   .text-body {
-    @apply text-muted-foreground leading-relaxed;
+    @apply text-muted-foreground leading-relaxed text-sm sm:text-base;
   }
 
   .surface-card {

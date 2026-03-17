@@ -36,11 +36,11 @@ export default function Footer() {
                 whileHover={{ rotate: [0, -10, 10, 0], transition: { duration: 0.5 } }}
               />
               <h3 className="font-display font-bold text-base">
-                Ijebu Igbo Descendants in Diaspora
+                Ijebu Igbo Descendants in Diaspora, UK
               </h3>
             </div>
             <p className="text-primary-foreground/60 leading-relaxed text-sm mb-4">
-              A global community promoting culture, unity, and sustainable
+              The UK chapter promoting culture, unity, and sustainable
               development for Ijebu Igbo town in Nigeria.
             </p>
             {/* Social links */}
@@ -156,11 +156,11 @@ export default function Footer() {
                 whileHover={{ rotate: [0, -10, 10, 0], transition: { duration: 0.5 } }}
               />
               <h3 className="font-display font-bold text-xl">
-                Ijebu Igbo Descendants in Diaspora
+                Ijebu Igbo Descendants in Diaspora, UK
               </h3>
             </div>
             <p className="text-primary-foreground/60 leading-relaxed max-w-md mb-6 text-base">
-              A global community promoting culture, unity, and sustainable
+              The UK chapter promoting culture, unity, and sustainable
               development for Ijebu Igbo town in Nigeria.
             </p>
             <div className="flex gap-3">
@@ -240,22 +240,15 @@ export default function Footer() {
       {/* Bottom bar */}
       <div className="border-t border-primary-foreground/10">
         <div className="container-main py-5 md:py-6 flex flex-col md:flex-row justify-between items-center gap-2 md:gap-4 text-xs md:text-sm text-primary-foreground/40 text-center md:text-left">
-          <p>&copy; {new Date().getFullYear()} Ijebu Igbo Descendants in Diaspora. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Ijebu Igbo Descendants in Diaspora, UK. All rights reserved.</p>
           <a 
             href="https://azeezagbona.com" 
             target="_blank" 
             rel="noopener noreferrer"
             className="group flex items-center gap-1.5 hover:text-accent transition-colors duration-300"
           >
-            <span>Crafted with</span>
-            <svg 
-              className="w-3.5 h-3.5 md:w-4 md:h-4 fill-red-500 group-hover:scale-110 transition-transform duration-300" 
-              viewBox="0 0 24 24"
-            >
-              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-            </svg>
-            <span>by</span>
-            <span className="font-semibold text-primary-foreground/60 group-hover:text-accent">Harzotech</span>
+            <span>Crafted by the son of the soil,</span>
+            <span className="font-semibold text-primary-foreground/60 group-hover:text-accent">Agbona</span>
           </a>
         </div>
       </div>
