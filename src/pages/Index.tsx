@@ -5,6 +5,7 @@ import VideoSection from "@/components/VideoSection";
 import Impact from "@/components/Impact";
 import Team from "@/components/Team";
 import Story from "@/components/Story";
+import Timeline from "@/components/Timeline";
 import Testimonials from "@/components/Testimonials";
 import News from "@/components/News";
 import Gallery from "@/components/Gallery";
@@ -25,6 +26,7 @@ const Index = () => {
       <Impact />
       <Team />
       <Story />
+      <Timeline />
       <Testimonials />
       <News />
       <Gallery />

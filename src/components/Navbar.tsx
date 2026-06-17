@@ -2,33 +2,41 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronRight, Sparkles } from "lucide-react";
 import JoinModal from "@/components/JoinModal";
+import { useSoundManager } from "@/hooks/use-sound";
 
 const navLinks = [
-  { label: "Home", href: "#" },
-  { label: "About", href: "#about" },
-  { label: "Impact", href: "#impact" },
-  { label: "Team", href: "#team" },
-  { label: "Heritage", href: "#story" },
-  { label: "Events", href: "#events" },
-  { label: "Gallery", href: "#gallery" },
-  { label: "Contact", href: "#footer" },
+  { label: "Home", href: "/" },
+  { label: "About", href: "/#about" },
+  { label: "Impact", href: "/#impact" },
+  { label: "Team", href: "/#team" },
+  { label: "Heritage", href: "/#story" },
+  { label: "Events", href: "/#events" },
+  { label: "Directory", href: "/businesses" },
+  { label: "Gallery", href: "/#gallery" },
+  { label: "Contact", href: "/#footer" },
 ];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { playSound } = useSoundManager();
 
-  // Prevent body scroll when menu is open
+  // Play sound when menu toggles
   useEffect(() => {
     if (open) {
+      playSound("/sounds/menu-open.mp3", 0.3);
       document.body.style.overflow = "hidden";
     } else {
+      if (document.body.style.overflow === "hidden") {
+        // Only play close sound if menu was actually open
+        playSound("/sounds/menu-close.mp3", 0.3);
+      }
       document.body.style.overflow = "";
     }
     return () => {
       document.body.style.overflow = "";
     };
-  }, [open]);
+  }, [open, playSound]);
 
   // Track scroll position
   useEffect(() => {
@@ -102,6 +110,7 @@ export default function Navbar() {
             ))}
             <JoinModal>
               <motion.button
+                onClick={() => playSound("/sounds/talking-drum-press.mp3", 0.25)}
                 className="btn-primary relative overflow-hidden text-sm !py-2.5 !px-6"
                 whileHover={{ y: -3, scale: 1.06 }}
                 whileTap={{ scale: 0.97 }}

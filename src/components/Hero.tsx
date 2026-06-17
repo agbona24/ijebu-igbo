@@ -1,7 +1,9 @@
 import { motion } from "framer-motion";
+import { useEffect } from "react";
 import heroBg from "@/assets/hero-bg.jpg";
 import JoinModal from "@/components/JoinModal";
 import ClanNetwork from "@/components/ClanNetwork";
+import { useSoundManager } from "@/hooks/use-sound";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -15,6 +17,18 @@ const culturalPhrases = [
 ];
 
 export default function Hero() {
+  const { playSound, soundEnabled } = useSoundManager();
+
+  // Play greeting sound on mount
+  useEffect(() => {
+    if (soundEnabled) {
+      const timer = setTimeout(() => {
+        playSound("/sounds/yoruba-greeting.mp3", 0.4);
+      }, 1000); // Delay to respect autoplay policies
+      return () => clearTimeout(timer);
+    }
+  }, []); // Only run once on mount
+
   return (
     <section className="relative min-h-[100svh] lg:h-screen flex flex-col justify-between overflow-hidden bg-charcoal pt-14 md:pt-16">
       <div className="absolute inset-0 z-0">
@@ -78,11 +92,18 @@ export default function Hero() {
 
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
               <JoinModal>
-                <button className="btn-primary text-center w-full sm:w-auto min-h-[48px] font-semibold">
+                <button 
+                  onClick={() => playSound("/sounds/talking-drum-press.mp3", 0.25)}
+                  className="btn-primary text-center w-full sm:w-auto min-h-[48px] font-semibold"
+                >
                   Join the Community
                 </button>
               </JoinModal>
-              <a href="#impact" className="btn-outline-light text-center min-h-[48px] flex items-center justify-center font-semibold">
+              <a 
+                href="#impact" 
+                onClick={() => playSound("/sounds/talking-drum-tap.mp3", 0.25)}
+                className="btn-outline-light text-center min-h-[48px] flex items-center justify-center font-semibold"
+              >
                 Support Development
               </a>
             </div>
