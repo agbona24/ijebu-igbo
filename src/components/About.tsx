@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import aboutImg from "@/assets/about-culture.jpg";
-import { Users, Crown, Heart, Sparkles, MapPin } from "lucide-react";
+import { Users, Crown, Heart, Megaphone, MapPin } from "lucide-react";
 import ClanNetwork from "@/components/ClanNetwork";
 
 const ease = [0.16, 1, 0.3, 1] as const;
@@ -14,27 +14,27 @@ const clans = [
   { name: "Ojowo", meaning: "The Prosperous Path" },
 ];
 
-// Cultural pillars
+// IID Pillars
 const culturalPillars = [
   {
-    icon: Crown,
-    title: "Ọlá (Honour)",
-    description: "Upholding the dignity and respect of our ancestors",
+    icon: Megaphone,
+    title: "IID — Awareness",
+    description: "Ijebu Igbo Descendants create awareness on what is going on in Ijebu Igbo for all Omo Orimolusi living in the United Kingdom.",
   },
   {
     icon: Users,
-    title: "Ìṣọ̀kan (Unity)",
-    description: "Standing together as one people across all borders",
+    title: "IID — Togetherness",
+    description: "Ijebu Igbo Descendants create an atmosphere to bring all Omo Orimolusi living in the United Kingdom together.",
   },
   {
     icon: Heart,
-    title: "Ìfẹ́ Ìlú (Love for Home)",
-    description: "Devotion to the progress of our ancestral land",
+    title: "IID — Support",
+    description: "Ijebu Igbo Descendants give support to hometown projects and other related causes.",
   },
   {
-    icon: Sparkles,
-    title: "Àṣà (Culture)",
-    description: "Preserving traditions for future generations",
+    icon: Crown,
+    title: "IID — We Represent",
+    description: "One of our visions is to represent our most respected town — Ijebu Igbo — well in character, diversity and prosperity.",
   },
 ];
 
@@ -123,11 +123,19 @@ export default function About() {
               </p>
             </div>
 
-            {/* Mission */}
+            {/* Who We Are */}
             <div>
-              <h4 className="font-display font-bold text-lg text-foreground mb-2">Our Mission (UK Chapter)</h4>
+              <h4 className="font-display font-bold text-lg text-foreground mb-2">Who We Are</h4>
               <p className="text-body text-sm sm:text-base leading-relaxed">
-                As the United Kingdom chapter of Ijebu Igbo Descendants in Diaspora, we mobilise the collective expertise, resources, and goodwill of our members across the UK — driving transformative community development, educational advancement, and cultural preservation for Ijebu Igbo and generations to come.
+                IID (Ijebu Igbo Descendants Omo Orimolusi in Diaspora) is a non-profit organisation that comes together to raise awareness about what is happening in Ijebu Igbo. This organisation is open to all Ijebu Igbo Descendants in the UK.
+              </p>
+            </div>
+
+            {/* What We Do */}
+            <div>
+              <h4 className="font-display font-bold text-lg text-foreground mb-2">What We Do</h4>
+              <p className="text-body text-sm sm:text-base leading-relaxed">
+                We see to the welfare of our community and our people, both in Ijebu Igbo and in the Diaspora. We do this by complementing the efforts of the Government with whatever resources we have.
               </p>
             </div>
           </motion.div>
@@ -171,10 +179,10 @@ export default function About() {
         >
           <div className="text-center mb-6 sm:mb-8">
             <h3 className="font-display font-bold text-xl sm:text-2xl text-foreground mb-2">
-              Our Cultural Pillars
+              What We Stand For
             </h3>
             <p className="text-body text-sm sm:text-base">
-              The values that define who we are as Ọmọ Orímólúsí
+              The four pillars that guide everything IID does for our community
             </p>
           </div>
 

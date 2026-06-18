@@ -5,11 +5,11 @@ import VideoSection from "@/components/VideoSection";
 import Impact from "@/components/Impact";
 import Team from "@/components/Team";
 import Story from "@/components/Story";
-import Timeline from "@/components/Timeline";
 import Testimonials from "@/components/Testimonials";
 import News from "@/components/News";
 import Gallery from "@/components/Gallery";
-import Events from "@/components/Events";
+import OrimolusiSection from "@/components/OrimolusiSection";
+import FAQ from "@/components/FAQ";
 import Registration from "@/components/Registration";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
@@ -25,12 +25,12 @@ const Index = () => {
       <VideoSection />
       <Impact />
       <Team />
+      <OrimolusiSection />
       <Story />
-      <Timeline />
       <Testimonials />
       <News />
       <Gallery />
-      <Events />
+      <FAQ limit={2} />
       <Registration />
       <CTA />
       <Footer />

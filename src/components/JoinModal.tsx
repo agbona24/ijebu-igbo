@@ -20,8 +20,8 @@ export default function JoinModal({ children }: JoinModalProps) {
     {
       icon: Phone,
       label: "Call Us",
-      value: "+44 07723953174",
-      href: "tel:+4407723953174",
+      value: "+44 7496 933887",
+      href: "tel:+447496933887",
       color: "bg-primary",
       description: "Best for immediate conversation",
     },
@@ -36,8 +36,8 @@ export default function JoinModal({ children }: JoinModalProps) {
     {
       icon: MessageCircle,
       label: "WhatsApp",
-      value: "+44 07723953174",
-      href: "https://wa.me/4407723953174",
+      value: "+44 7496 933887",
+      href: "https://wa.me/447496933887",
       color: "bg-primary",
       description: "Best for quick chat and fastest reply",
     },

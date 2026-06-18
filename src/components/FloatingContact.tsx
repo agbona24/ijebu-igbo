@@ -3,9 +3,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Phone, Mail, MessageCircle, X } from "lucide-react";
 
 const contactInfo = {
-  phone: "+44 07723953174",
+  phone: "+44 7496 933887",
   email: "info@ijebuigbodescendants.org",
-  whatsapp: "+4407723953174",
+  whatsapp: "447496933887",
 };
 
 export default function FloatingContact() {
@@ -15,7 +15,7 @@ export default function FloatingContact() {
     {
       icon: Phone,
       label: "Call Us",
-      href: `tel:${contactInfo.phone}`,
+      href: `tel:+447496933887`,
       color: "bg-primary hover:bg-primary/90 active:bg-primary/95 border border-accent/30",
       delay: 0.1,
     },

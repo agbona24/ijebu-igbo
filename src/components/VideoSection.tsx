@@ -38,7 +38,7 @@ export default function VideoSection() {
               aria-label="Play video"
             >
               <img
-                src="https://img.youtube.com/vi/VhVESFwl8Cs/maxresdefault.jpg"
+                src="https://img.youtube.com/vi/KbInaslfyrk/maxresdefault.jpg"
                 alt="Video thumbnail"
                 className="absolute inset-0 w-full h-full object-cover opacity-60"
               />
@@ -48,7 +48,7 @@ export default function VideoSection() {
             </button>
           ) : (
             <iframe
-              src="https://www.youtube.com/embed/VhVESFwl8Cs?autoplay=1"
+              src="https://www.youtube.com/embed/KbInaslfyrk?autoplay=1"
               title="Celebrating Our Heritage"
               allow="autoplay; encrypted-media"
               allowFullScreen

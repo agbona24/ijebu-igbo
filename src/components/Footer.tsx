@@ -26,7 +26,7 @@ export default function Footer() {
           <div className="bg-primary-foreground/5 rounded-2xl p-5 border border-primary-foreground/10">
             <div className="flex items-center gap-3 mb-3">
               <motion.img 
-                src="/favicon.svg" 
+                src="/logo-tp.png" 
                 alt="IID Logo" 
                 className="w-12 h-12"
                 initial={{ opacity: 0, scale: 0.8 }}
@@ -146,7 +146,7 @@ export default function Footer() {
           <div className="lg:col-span-2">
             <div className="flex items-center gap-3 mb-4">
               <motion.img 
-                src="/favicon.svg" 
+                src="/logo-tp.png" 
                 alt="IID Logo" 
                 className="w-14 h-14"
                 initial={{ opacity: 0, scale: 0.8 }}

@@ -7,16 +7,16 @@ const events = [
     date: "April 15, 2026",
     time: "10:00 AM GMT",
     location: "Virtual (Zoom)",
-    description: "Join us for the annual review of achievements and plans for the coming year.",
-    upcoming: true,
+    description: "Join us for the annual review of achievements, financial reporting, and strategic plans for the coming year. All members are strongly encouraged to attend.",
+    upcoming: false,
   },
   {
     title: "Ojude Oba Cultural Festival",
     date: "June 20, 2026",
     time: "All Day",
     location: "Ijebu Igbo, Nigeria",
-    description: "Experience the grandeur of Ojude Oba — a celebration of Yoruba royalty, culture, and heritage.",
-    upcoming: true,
+    description: "Experience the grandeur of Ojude Oba — a celebration of Yoruba royalty, culture, equestrian displays, and the living heritage of Ijebu Igbo.",
+    upcoming: false,
   },
   {
     title: "Diaspora Networking Gala",
@@ -65,9 +65,15 @@ export default function Events() {
               className="surface-card rounded-xl sm:rounded-sm p-5 sm:p-7 border border-border hover:shadow-elevated transition-all duration-500 touch-card"
             >
               <div className="flex items-center gap-2 mb-2 sm:mb-3">
-                <span className="inline-block px-2.5 py-0.5 sm:px-3 sm:py-1 bg-accent/10 text-accent text-xs font-bold rounded-full uppercase tracking-wider">
-                  Upcoming
-                </span>
+                {event.upcoming ? (
+                  <span className="inline-block px-2.5 py-0.5 sm:px-3 sm:py-1 bg-accent/10 text-accent text-xs font-bold rounded-full uppercase tracking-wider">
+                    Upcoming
+                  </span>
+                ) : (
+                  <span className="inline-block px-2.5 py-0.5 sm:px-3 sm:py-1 bg-muted text-muted-foreground text-xs font-bold rounded-full uppercase tracking-wider border border-border">
+                    Past
+                  </span>
+                )}
               </div>
               <h4 className="font-display font-bold text-foreground text-lg sm:text-xl mb-3 sm:mb-4">{event.title}</h4>
               <p className="text-body mb-4 sm:mb-5">{event.description}</p>
