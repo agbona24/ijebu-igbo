@@ -88,27 +88,78 @@ export default function BusinessProfile() {
     return () => window.removeEventListener("scroll", fn);
   }, []);
 
-  // SEO: document title
+  // SEO: document title + meta tags
   useEffect(() => {
-    if (business) {
-      document.title = `${business.name} | Ijebu Igbo Business Directory — Connect Ijebu Roots`;
-    }
-    return () => { document.title = "Connect Ijebu Roots"; };
+    if (!business) return;
+    const title = `${business.name} | Ijebu Igbo Business Directory — Connect Ijebu Roots`;
+    const desc  = business.tagline
+      ? `${business.tagline} — ${business.description.slice(0, 140)}...`
+      : business.description.slice(0, 160);
+    const image = business.flyer ?? business.banner ?? "/logo.png";
+    const url   = window.location.href;
+
+    document.title = title;
+
+    const setMeta = (sel: string, attr: string, val: string) => {
+      let el = document.querySelector<HTMLMetaElement>(sel);
+      if (!el) { el = document.createElement("meta"); document.head.appendChild(el); }
+      el.setAttribute(attr, val);
+      el.setAttribute("data-biz-seo", "1");
+    };
+
+    setMeta('meta[name="description"]',           "content", desc);
+    setMeta('meta[property="og:title"]',           "content", title);
+    setMeta('meta[property="og:description"]',     "content", desc);
+    setMeta('meta[property="og:image"]',           "content", image);
+    setMeta('meta[property="og:url"]',             "content", url);
+    setMeta('meta[property="og:type"]',            "content", "business.business");
+    setMeta('meta[name="twitter:title"]',          "content", title);
+    setMeta('meta[name="twitter:description"]',    "content", desc);
+    setMeta('meta[name="twitter:image"]',          "content", image);
+
+    return () => {
+      document.title = "Connect Ijebu Roots";
+      document.querySelectorAll("[data-biz-seo]").forEach((el) => {
+        const orig = el.getAttribute("data-biz-original");
+        if (orig !== null) el.setAttribute("content", orig);
+      });
+    };
   }, [business]);
 
   // SEO: Schema.org LocalBusiness JSON-LD
   useEffect(() => {
     if (!business) return;
-    const schema = {
+
+    const sameAs: string[] = [
+      business.social?.instagram,
+      business.social?.facebook,
+      business.social?.twitter,
+      business.social?.tiktok,
+    ].filter(Boolean) as string[];
+
+    const schema: Record<string, unknown> = {
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
       name: business.name,
       description: business.description,
+      ...(business.tagline  && { slogan: business.tagline }),
       ...(business.phone    && { telephone: business.phone }),
       ...(business.email    && { email: business.email }),
       ...(business.website  && { url: business.website.startsWith("http") ? business.website : `https://${business.website}` }),
       ...(business.location && { address: { "@type": "PostalAddress", streetAddress: business.location } }),
+      ...(business.flyer    && { image: business.flyer }),
+      ...(business.established && { foundingDate: business.established }),
+      ...(sameAs.length     && { sameAs }),
+      ...(business.hours?.length && {
+        openingHoursSpecification: business.hours.map((h) => ({
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: h.day,
+          opens: h.time.split("–")[0]?.trim(),
+          closes: h.time.split("–")[1]?.trim(),
+        })),
+      }),
     };
+
     const el = Object.assign(document.createElement("script"), {
       type: "application/ld+json",
       id: "biz-schema",

@@ -26,6 +26,7 @@ const CATEGORY_PILLS = [
   "Technology",
   "Health & Wellness",
   "Retail & Trade",
+  "Education",
 ] as const;
 
 const REGIONS = ["All", "UK", "Nigeria", "Diaspora"] as const;
@@ -172,6 +173,22 @@ function BusinessCard({ business }: { business: Business }) {
 
 // ── Main page ───────────────────────────────────────────────────────────────
 export default function Businesses() {
+  useEffect(() => {
+    const title = "Business Directory | Ijebu Igbo Descendants — Connect Ijebu Roots";
+    const desc  = "Browse businesses owned by Ijebu Igbo descendants in the UK, Nigeria, and diaspora. Find food, transport, technology, health, and professional services.";
+    document.title = title;
+    const setMeta = (sel: string, val: string) => {
+      const el = document.querySelector<HTMLMetaElement>(sel);
+      if (el) el.setAttribute("content", val);
+    };
+    setMeta('meta[name="description"]',        desc);
+    setMeta('meta[property="og:title"]',        title);
+    setMeta('meta[property="og:description"]',  desc);
+    setMeta('meta[name="twitter:title"]',       title);
+    setMeta('meta[name="twitter:description"]', desc);
+    return () => { document.title = "Connect Ijebu Roots"; };
+  }, []);
+
   const [search, setSearch] = useState("");
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState<Set<string>>(new Set());

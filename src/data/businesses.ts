@@ -6,7 +6,8 @@ export type Category =
   | "Professional Services"
   | "Technology"
   | "Health & Wellness"
-  | "Retail & Trade";
+  | "Retail & Trade"
+  | "Education";
 
 export interface BusinessHours {
   day: string;
@@ -87,6 +88,7 @@ export const CATEGORIES: Category[] = [
   "Technology",
   "Health & Wellness",
   "Retail & Trade",
+  "Education",
 ];
 
 export const CATEGORY_COLORS: Record<string, string> = {
@@ -97,6 +99,7 @@ export const CATEGORY_COLORS: Record<string, string> = {
   "Technology": "bg-purple-100 text-purple-800 border-purple-200",
   "Health & Wellness": "bg-green-100 text-green-800 border-green-200",
   "Retail & Trade": "bg-yellow-100 text-yellow-800 border-yellow-200",
+  "Education": "bg-indigo-100 text-indigo-800 border-indigo-200",
 };
 
 export const CATEGORY_GRADIENTS: Record<string, string> = {
@@ -107,6 +110,7 @@ export const CATEGORY_GRADIENTS: Record<string, string> = {
   "Technology": "from-purple-400 to-violet-600",
   "Health & Wellness": "from-teal-400 to-green-500",
   "Retail & Trade": "from-yellow-400 to-amber-500",
+  "Education": "from-indigo-500 to-blue-700",
 };
 
 export const BUSINESSES: Business[] = [
@@ -763,6 +767,68 @@ export const BUSINESSES: Business[] = [
       "Agricultural investments supporting food security and economic growth",
       "Concrete hollow blocks production for construction projects",
       "Compliant, accountable, and client-focused at every stage",
+    ],
+  },
+  {
+    id: 10,
+    slug: "havilah-gold-school",
+    name: "Havilah Gold Secondary School",
+    category: "Education",
+    tagline: "Excellence Today, Leaders Tomorrow.",
+    description:
+      "Havilah Gold Secondary School is a government-approved secondary school located in Epe, Lagos, committed to raising the next generation of leaders through quality education. The school offers Junior Secondary School (JSS) and Senior Secondary School (SSS) programmes in a structured, disciplined, and nurturing environment. Admissions are conducted through a formal entrance examination, ensuring academic standards are upheld for every intake.",
+    location: "Sekoni House, Beside Fowobi Petrol Station, Epe-Ijebu Ode Road, Odomola Epe, Lagos",
+    phone: "08080030001 / 08107501847 / 08033564879 / 08020777088",
+    whatsapp: "+2348020777088",
+    email: "havilahgoldinternationalschool@gmail.com",
+    flyer: "/images/businesses/havilah-gold-school/flyer.jpeg",
+    region: "Nigeria",
+
+    serviceCategories: [
+      {
+        name: "Programmes Offered",
+        items: [
+          "Junior Secondary School (JSS 1–3)",
+          "Senior Secondary School (SSS 1–3)",
+        ],
+      },
+      {
+        name: "2026/2027 Entrance Examination",
+        items: [
+          "Entrance Exam into JSS & SSS",
+          "Date: 27th June, 2026",
+          "Time: 9:00 AM",
+          "Enquiries: 08020777088",
+        ],
+      },
+    ],
+
+    values: [
+      {
+        title: "Government Approved",
+        description: "Fully accredited and approved by the relevant government education authorities.",
+      },
+      {
+        title: "Academic Excellence",
+        description: "Rigorous academic programmes designed to develop well-rounded, high-achieving students.",
+      },
+      {
+        title: "Discipline & Character",
+        description: "Building strong character, discipline, and leadership values alongside academic achievement.",
+      },
+      {
+        title: "Nurturing Environment",
+        description: "A safe, structured, and supportive learning environment for every student.",
+      },
+    ],
+
+    benefits: [
+      "Government approved — fully accredited secondary school",
+      "Offering both JSS and SSS programmes",
+      "Entrance examination — structured and merit-based admissions",
+      "Located in Epe, Lagos — serving the Ijebu and Epe communities",
+      "Contact: 08080030001 / 08107501847 / 08033564879 / 08020777088",
+      "Email: havilahgoldinternationalschool@gmail.com",
     ],
   },
 ];
