@@ -70,6 +70,7 @@ export interface Business {
     facebook?: string;
     twitter?: string;
     tiktok?: string;
+    youtube?: string;
   };
   ownerName?: string;
   established?: string;
@@ -479,9 +480,75 @@ export const BUSINESSES: Business[] = [
   {
     id: 7,
     slug: "row-radio",
-    name: "Row Radio",
+    name: "ROW Radio",
     category: "Technology",
-    description: "Community broadcasting and media services connecting the Ijebu Igbo diaspora through music, news, and culture.",
+    tagline: "All The Hits. All The Gists.",
+    description:
+      "ROW Radio (Reach Our World Radio) is a dynamic digital radio station dedicated to connecting listeners with the latest music, trending conversations, entertainment news, inspiring stories, and engaging discussions from around the world. We bring people together through sound, culture, information, and entertainment — creating a platform where every voice matters and every listener belongs. At ROW Radio, we don't just broadcast. We connect the world.",
+    flyer: "/images/businesses/row-radio/flyer.jpeg",
+    email: "rowradiong@gmail.com",
+    website: "www.rowradio.ng",
+    social: {
+      instagram: "https://www.instagram.com/rowradiong",
+      facebook: "https://www.facebook.com/rowbroadcasting",
+      tiktok: "https://www.tiktok.com/@rowradiong",
+      youtube: "https://www.youtube.com/@RowBroadcastingService",
+    },
+    region: "Nigeria",
+
+    services: [
+      "Trending Music",
+      "Entertainment News",
+      "Celebrity Gists",
+      "Lifestyle & Culture",
+      "Business Updates",
+      "Sports Highlights",
+      "Inspirational Shows",
+      "Live Interviews",
+    ],
+
+    whatWeDo: [
+      {
+        title: "Our Mission",
+        description:
+          "To inform, entertain, inspire, and connect audiences globally through quality radio programming, music, news, and engaging conversations.",
+        items: [],
+      },
+      {
+        title: "Our Vision",
+        description:
+          "To become a leading global digital radio platform where listeners can access the best music, authentic stories, and meaningful conversations anytime, anywhere.",
+        items: [],
+      },
+    ],
+
+    values: [
+      {
+        title: "Reach Our World",
+        description: "ROW stands for Reach Our World — a mission to connect listeners across borders through the power of sound and storytelling.",
+      },
+      {
+        title: "Every Voice Matters",
+        description: "A platform where every listener belongs and every story deserves to be heard.",
+      },
+      {
+        title: "Music & Culture",
+        description: "All the hits, all the gists — keeping the community informed, entertained, and inspired.",
+      },
+      {
+        title: "Global Connection",
+        description: "Bringing people together through sound, culture, information, and entertainment from around the world.",
+      },
+    ],
+
+    benefits: [
+      "ROW = Reach Our World — The Home of Music, Entertainment, News & Lifestyle",
+      "Stream anywhere, listen anytime — all your devices",
+      "All the hits. All the gists. Your daily dose of music & entertainment",
+      "Live interviews, inspirational shows, sports highlights & celebrity gists",
+      "Listen live at www.rowradio.ng",
+      "Subscribe on YouTube @RowBroadcastingService | Follow @rowradiong",
+    ],
   },
   {
     id: 8,
@@ -829,6 +896,80 @@ export const BUSINESSES: Business[] = [
       "Located in Epe, Lagos — serving the Ijebu and Epe communities",
       "Contact: 08080030001 / 08107501847 / 08033564879 / 08020777088",
       "Email: havilahgoldinternationalschool@gmail.com",
+    ],
+  },
+  {
+    id: 11,
+    slug: "tkitchen",
+    name: "TKitchen",
+    category: "Food & Catering",
+    tagline: "Deliciously Nigerian, Lovingly Prepared!",
+    description:
+      "TKitchen is your Nigerian cuisines away from home — bringing authentic, freshly prepared Nigerian meals to your table wherever you are. From classic street food favourites to hearty home-cooked dishes, TKitchen caters for everyday meals, birthdays, weddings, graduations, corporate meetings, and surprise parties. Plates and kitchen wares hire also available. Good Food, Great Memories!",
+    phone: "+44 7496 933887 / +44 7946 654111",
+    whatsapp: "+447496933887",
+    flyer: "/images/businesses/tkitchen/flyer.jpeg",
+    region: "UK",
+    social: {
+      instagram: "https://www.instagram.com/tkitchen_xo",
+    },
+
+    serviceCategories: [
+      {
+        name: "Our Menu",
+        items: [
+          "Moi-Moi",
+          "Akara",
+          "Ikokore",
+          "Puff-Puff",
+          "Buns",
+          "Asaro",
+          "Ewedu",
+          "Ila Asepo",
+          "Ayamase",
+          "Jollof & Fried Rice",
+        ],
+      },
+      {
+        name: "We Cater For",
+        items: [
+          "Home Consumption",
+          "Birthdays",
+          "Weddings",
+          "Graduations",
+          "Meetings & Conferences",
+          "Surprise Parties",
+          "Plates & Kitchen Wares Hire",
+        ],
+      },
+    ],
+
+    values: [
+      {
+        title: "Fresh Ingredients",
+        description: "Every dish is made with the freshest, quality ingredients.",
+      },
+      {
+        title: "Authentic Nigerian Taste",
+        description: "Deliciously Nigerian, lovingly prepared — just like home.",
+      },
+      {
+        title: "Hygienic & Reliable",
+        description: "Clean, safe preparation you can always count on.",
+      },
+      {
+        title: "Made With Love",
+        description: "Every meal is crafted with care and passion for Nigerian cuisine.",
+      },
+    ],
+
+    benefits: [
+      "Good Food, Great Memories!",
+      "Full catering for birthdays, weddings, graduations & corporate events",
+      "Plates & kitchen wares hire available",
+      "WhatsApp: +44 7496 933887 or +44 7946 654111",
+      "Follow @tkitchen_xo on Instagram",
+      "Based in the UK — serving the Nigerian diaspora community",
     ],
   },
 ];

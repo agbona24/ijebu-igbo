@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Mail, MapPin, Facebook, Twitter, Instagram, Youtube, Phone, Globe, MessageCircle } from "lucide-react";
+import { Mail, MapPin, Facebook, Twitter, Instagram, Youtube, Phone, Globe, MessageCircle, ArrowRight, Users, CalendarDays, Flag } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const quickLinks = [
@@ -13,11 +13,27 @@ const quickLinks = [
   { label: "Contact", href: "/contact" },
 ];
 
+const communityLinks = [
+  { label: "Our Team", href: "/team" },
+  { label: "Impact", href: "/impact" },
+  { label: "News", href: "/news" },
+  { label: "Business Directory", href: "/businesses" },
+  { label: "Submit an Event", href: "mailto:softlineazeez123@gmail.com?subject=Event%20Submission" },
+  { label: "List Your Business", href: "/businesses" },
+];
+
 const socials = [
-  { icon: Facebook, href: "#", label: "Facebook" },
-  { icon: Twitter, href: "#", label: "Twitter" },
+  { icon: Facebook,  href: "#", label: "Facebook"  },
+  { icon: Twitter,   href: "#", label: "Twitter"   },
   { icon: Instagram, href: "#", label: "Instagram" },
-  { icon: Youtube, href: "#", label: "YouTube" },
+  { icon: Youtube,   href: "#", label: "YouTube"   },
+];
+
+const stats = [
+  { icon: Users,       value: "200+",  label: "Members"      },
+  { icon: CalendarDays, value: "2017",  label: "Est."         },
+  { icon: Globe,       value: "3",     label: "Countries"    },
+  { icon: Flag,        value: "1",     label: "Hometown"     },
 ];
 
 export default function Footer() {
@@ -106,87 +122,220 @@ export default function Footer() {
           </a>
         </div>
 
-        {/* Desktop: Original grid layout */}
-        <div className="hidden lg:grid lg:grid-cols-4 gap-12">
-          {/* Brand */}
-          <div className="lg:col-span-2">
-            <div className="flex items-center gap-3 mb-4">
-              <motion.img 
-                src="/logo-tp.png" 
-                alt="IID Logo" 
-                className="w-14 h-14"
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                whileHover={{ rotate: [0, -10, 10, 0], transition: { duration: 0.5 } }}
-              />
-              <h3 className="font-display font-bold text-xl">
-                Ijebu Igbo Descendants in Diaspora, UK
-              </h3>
-            </div>
-            <p className="text-primary-foreground/60 leading-relaxed max-w-md mb-6 text-base">
-              The UK chapter promoting culture, unity, and sustainable
-              development for Ijebu Igbo town in Nigeria.
-            </p>
-            <div className="flex gap-3">
-              {socials.map((s) => (
-                <a
-                  key={s.label}
-                  href={s.href}
-                  aria-label={s.label}
-                  className="w-10 h-10 rounded-sm bg-primary-foreground/10 flex items-center justify-center hover:bg-accent hover:text-charcoal active:scale-95 transition-all duration-300 touch-manipulation"
-                >
-                  <s.icon size={18} />
-                </a>
-              ))}
-            </div>
-          </div>
+        {/* Desktop: Premium grid layout */}
+        <div className="hidden lg:block">
 
-          {/* Quick Links */}
-          <div>
-            <h4 className="font-display font-bold mb-4 text-base">Quick Links</h4>
-            <ul className="space-y-3">
-              {quickLinks.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    to={link.href}
-                    className="text-primary-foreground/60 hover:text-accent active:text-accent/80 transition-colors duration-300 py-1 inline-block touch-manipulation text-base"
+          {/* Stats bar */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="grid grid-cols-4 gap-4 mb-14 border border-primary-foreground/10 rounded-2xl p-6 bg-primary-foreground/5"
+          >
+            {stats.map((s) => (
+              <div key={s.label} className="flex items-center gap-4">
+                <div className="w-10 h-10 rounded-xl bg-accent/15 flex items-center justify-center shrink-0">
+                  <s.icon size={18} className="text-accent" />
+                </div>
+                <div>
+                  <p className="font-display font-black text-2xl text-white leading-none">{s.value}</p>
+                  <p className="text-primary-foreground/50 text-xs mt-0.5">{s.label}</p>
+                </div>
+              </div>
+            ))}
+          </motion.div>
+
+          {/* Main grid */}
+          <div className="grid grid-cols-12 gap-10 mb-14">
+
+            {/* Brand — 4 cols */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.05 }}
+              className="col-span-4"
+            >
+              <div className="flex items-center gap-3 mb-5">
+                <motion.img
+                  src="/logo-tp.png"
+                  alt="IID Logo"
+                  className="w-14 h-14"
+                  whileHover={{ rotate: [0, -8, 8, 0], transition: { duration: 0.5 } }}
+                />
+                <div>
+                  <h3 className="font-display font-bold text-base leading-tight">
+                    Ijebu Igbo Descendants
+                  </h3>
+                  <p className="text-primary-foreground/50 text-xs">in Diaspora, United Kingdom</p>
+                </div>
+              </div>
+              <p className="text-primary-foreground/55 leading-relaxed text-sm mb-6">
+                Uniting Ijebu Igbo descendants across the UK and diaspora through culture,
+                development, and community pride. Proudly rooted in Ijebu Igbo, Nigeria.
+              </p>
+
+              {/* Social icons */}
+              <div className="flex gap-2 mb-6">
+                {socials.map((s) => (
+                  <a
+                    key={s.label}
+                    href={s.href}
+                    aria-label={s.label}
+                    className="w-9 h-9 rounded-xl bg-primary-foreground/10 flex items-center justify-center
+                               hover:bg-accent hover:text-charcoal transition-all duration-300"
                   >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+                    <s.icon size={16} />
+                  </a>
+                ))}
+              </div>
 
-          {/* Contact */}
-          <div>
-            <h4 className="font-display font-bold mb-4 text-base">Contact</h4>
-            <ul className="space-y-3 text-primary-foreground/60 text-base">
-              <li className="flex items-start gap-3">
-                <Phone size={16} className="mt-1 shrink-0" />
-                <a href="tel:+447496933887" className="hover:text-accent active:text-accent/80 transition-colors touch-manipulation">
-                  +44 7496 933887
-                </a>
-              </li>
-              <li className="flex items-start gap-3">
-                <Mail size={16} className="mt-1 shrink-0" />
-                <a href="mailto:info@ijebuigbodescendants.org" className="hover:text-accent active:text-accent/80 transition-colors touch-manipulation break-all">
-                  info@ijebuigbodescendants.org
-                </a>
-              </li>
-              <li className="flex items-start gap-3">
-                <MapPin size={16} className="mt-1 shrink-0" />
-                <span>United Kingdom</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <Globe size={16} className="mt-1 shrink-0" />
-                <a href="https://ijebuigbodescendants.org" target="_blank" rel="noopener noreferrer" className="hover:text-accent active:text-accent/80 transition-colors touch-manipulation">
-                  ijebuigbodescendants.org
-                </a>
-              </li>
-            </ul>
+              {/* Join CTA */}
+              <Link
+                to="/join"
+                className="inline-flex items-center gap-2 bg-accent text-charcoal text-sm font-bold
+                           px-5 py-2.5 rounded-xl hover:bg-accent/90 transition-colors duration-300 group"
+              >
+                Join the Community
+                <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </motion.div>
+
+            {/* Quick Links — 2 cols */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="col-span-2"
+            >
+              <h4 className="font-display font-bold text-sm text-white mb-5 uppercase tracking-widest">
+                Navigate
+              </h4>
+              <ul className="space-y-2.5">
+                {quickLinks.map((link) => (
+                  <li key={link.label}>
+                    <Link
+                      to={link.href}
+                      className="text-primary-foreground/55 hover:text-accent transition-colors duration-200
+                                 text-sm flex items-center gap-1.5 group"
+                    >
+                      <span className="w-0 group-hover:w-2 h-px bg-accent transition-all duration-200 rounded" />
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+
+            {/* Community — 2 cols */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+              className="col-span-2"
+            >
+              <h4 className="font-display font-bold text-sm text-white mb-5 uppercase tracking-widest">
+                Community
+              </h4>
+              <ul className="space-y-2.5">
+                {communityLinks.map((link) => (
+                  <li key={link.label}>
+                    {link.href.startsWith("mailto") ? (
+                      <a
+                        href={link.href}
+                        className="text-primary-foreground/55 hover:text-accent transition-colors duration-200
+                                   text-sm flex items-center gap-1.5 group"
+                      >
+                        <span className="w-0 group-hover:w-2 h-px bg-accent transition-all duration-200 rounded" />
+                        {link.label}
+                      </a>
+                    ) : (
+                      <Link
+                        to={link.href}
+                        className="text-primary-foreground/55 hover:text-accent transition-colors duration-200
+                                   text-sm flex items-center gap-1.5 group"
+                      >
+                        <span className="w-0 group-hover:w-2 h-px bg-accent transition-all duration-200 rounded" />
+                        {link.label}
+                      </Link>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+
+            {/* Contact — 4 cols */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="col-span-4"
+            >
+              <h4 className="font-display font-bold text-sm text-white mb-5 uppercase tracking-widest">
+                Get In Touch
+              </h4>
+              <ul className="space-y-4">
+                <li>
+                  <a
+                    href="tel:+447496933887"
+                    className="flex items-center gap-3 group"
+                  >
+                    <div className="w-9 h-9 rounded-xl bg-green-500/15 flex items-center justify-center shrink-0 group-hover:bg-green-500/30 transition-colors">
+                      <Phone size={15} className="text-green-400" />
+                    </div>
+                    <div>
+                      <p className="text-[10px] text-primary-foreground/40 uppercase tracking-widest">Phone</p>
+                      <p className="text-sm text-primary-foreground/75 group-hover:text-accent transition-colors">+44 7496 933887</p>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="mailto:info@ijebuigbodescendants.org"
+                    className="flex items-center gap-3 group"
+                  >
+                    <div className="w-9 h-9 rounded-xl bg-blue-500/15 flex items-center justify-center shrink-0 group-hover:bg-blue-500/30 transition-colors">
+                      <Mail size={15} className="text-blue-400" />
+                    </div>
+                    <div>
+                      <p className="text-[10px] text-primary-foreground/40 uppercase tracking-widest">Email</p>
+                      <p className="text-sm text-primary-foreground/75 group-hover:text-accent transition-colors break-all">
+                        info@ijebuigbodescendants.org
+                      </p>
+                    </div>
+                  </a>
+                </li>
+                <li className="flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-xl bg-primary-foreground/10 flex items-center justify-center shrink-0">
+                    <MapPin size={15} className="text-primary-foreground/50" />
+                  </div>
+                  <div>
+                    <p className="text-[10px] text-primary-foreground/40 uppercase tracking-widest">Location</p>
+                    <p className="text-sm text-primary-foreground/75">United Kingdom</p>
+                  </div>
+                </li>
+                <li>
+                  <a
+                    href="https://ijebuigbodescendants.org"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 group"
+                  >
+                    <div className="w-9 h-9 rounded-xl bg-accent/15 flex items-center justify-center shrink-0 group-hover:bg-accent/30 transition-colors">
+                      <Globe size={15} className="text-accent" />
+                    </div>
+                    <div>
+                      <p className="text-[10px] text-primary-foreground/40 uppercase tracking-widest">Website</p>
+                      <p className="text-sm text-accent group-hover:underline">ijebuigbodescendants.org</p>
+                    </div>
+                  </a>
+                </li>
+              </ul>
+            </motion.div>
           </div>
         </div>
       </div>
@@ -220,7 +369,7 @@ export default function Footer() {
           >
             Crafted by the son of the soil,{" "}
             <span className="font-bold text-white underline underline-offset-2 decoration-accent/60">
-              Azeez omo Agbona
+              Azeez Agbona
             </span>
           </motion.a>
         </div>

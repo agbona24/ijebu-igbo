@@ -10,8 +10,18 @@ const currentExecutives: Member[] = [
   { name: "Chief Toyin Odueyungbo", role: "President", photo: "/team/chief-toyin-odueyungbo.jpeg" },
   { name: "Revd Franklin Babaranti Okunowo", role: "Vice President (2022 – Present)", photo: "/team/evd-franklin-okunowo.jpeg" },
   { name: "Ms. Adetutu Ogunsanwo", role: "General Secretary (2021 – Present)", photo: "/team/ms-adetutu-ogunsanwo.jpeg" },
+  { name: "Pa (Barr.) Popoola Sojirin", role: "Legal Adviser 2 | Member, Council of Elders", photo: "/team/barr-popoola-sojirin.jpeg" },
   { name: "Alh Sadekunle Hamzat-Maja", role: "Auditor", photo: "/team/alh-sadekunle-hamzat-maja.jpeg" },
   { name: "Otunba Ola Busari", role: "PRO", photo: null },
+];
+
+// Council of Elders
+const councilOfElders: Member[] = [
+  {
+    name: "Pa (Barr.) Popoola Sojirin",
+    role: "Emeritus President | Legal Adviser 2 | Member, Council of Elders",
+    photo: "/team/barr-popoola-sojirin.jpeg",
+  },
 ];
 
 // General Members
@@ -33,7 +43,7 @@ const pastExecutives: Member[] = [
   { name: "Alh Sadekunle Hamzat-Maja", role: "Former Financial Secretary & Former Treasurer" },
   { name: "Bisi Daramola Odubanjo", role: "Social Secretary" },
   { name: "Prince Stephen Ademola Gbadebo", role: "Chairman, Dispute & Resolution Committee" },
-  { name: "Lawyer Michael Popoola Aojirin", role: "President Emeritus" },
+  { name: "Pa (Barr.) Popoola Sojirin", role: "President Emeritus | Former President | Former Secretary General", photo: "/team/barr-popoola-sojirin.jpeg" },
   { name: "Dr. Dayo Amudipe", role: "Former Vice President" },
   { name: "Alhaja Ikeoluwa Oguntayo", role: "Vice President" },
   { name: "Chief Toyin Odueyungbo", role: "Past Secretary" },
@@ -193,6 +203,12 @@ export default function Team() {
                 Past Executives
               </TabsTrigger>
               <TabsTrigger
+                value="elders"
+                className="px-4 sm:px-6 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm font-semibold data-[state=active]:bg-accent data-[state=active]:text-charcoal transition-all touch-manipulation whitespace-nowrap"
+              >
+                Council of Elders
+              </TabsTrigger>
+              <TabsTrigger
                 value="members"
                 className="px-4 sm:px-6 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm font-semibold data-[state=active]:bg-accent data-[state=active]:text-charcoal transition-all touch-manipulation whitespace-nowrap"
               >
@@ -214,6 +230,15 @@ export default function Team() {
                 Former Executive Members (including September 2017 – August 2019 tenure)
               </p>
               <MemberGrid members={pastExecutives} />
+            </motion.div>
+          </TabsContent>
+
+          <TabsContent value="elders" className="mt-0">
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }}>
+              <p className="text-center text-muted-foreground mb-8 text-sm">
+                Revered elders who guide, advise, and preserve the values of our community
+              </p>
+              <MemberGrid members={councilOfElders} />
             </motion.div>
           </TabsContent>
 

@@ -96,24 +96,6 @@ export default function Registration() {
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="max-w-2xl mx-auto text-center"
           >
-            <h2 className="label-accent !text-accent">Membership</h2>
-            <h3 className="heading-section !text-primary-foreground">Become a Member</h3>
-            <p className="text-primary-foreground/70 leading-relaxed mt-4 mb-8">
-              Join Ijebu Igbo descendants worldwide. As a member, you'll have access to community events, networking opportunities, and the chance to contribute to the development of our homeland.
-            </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-left mb-10">
-              {[
-                "Access to exclusive community events and networking",
-                "Voting rights in organizational decisions",
-                "Regular newsletters and cultural updates",
-                "Opportunity to contribute to development projects",
-              ].map((benefit) => (
-                <div key={benefit} className="flex items-start gap-3">
-                  <div className="w-2 h-2 rounded-full bg-accent mt-2 shrink-0" />
-                  <p className="text-primary-foreground/80 text-sm">{benefit}</p>
-                </div>
-              ))}
-            </div>
             <button
               onClick={() => setOpen(true)}
               className="btn-primary text-center"
