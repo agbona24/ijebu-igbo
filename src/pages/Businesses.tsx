@@ -1,4 +1,5 @@
 import { useState, useMemo, useRef, useEffect } from "react";
+import ListBusinessModal from "@/components/ListBusinessModal";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Search, Store, X, ArrowUpDown, ArrowRight, Building2,
@@ -109,7 +110,7 @@ function BusinessCard({ business }: { business: Business }) {
         {business.tagline && (
           <p className="text-[10px] sm:text-xs text-accent font-medium mt-0.5 line-clamp-1">{business.tagline}</p>
         )}
-        <p className="text-xs sm:text-sm text-muted-foreground mt-1.5 line-clamp-2 flex-1 hidden sm:block">
+        <p className="text-xs sm:text-sm text-muted-foreground mt-1.5 line-clamp-3">
           {business.description}
         </p>
 
@@ -179,6 +180,7 @@ export default function Businesses() {
   const [hasWebsite, setHasWebsite] = useState(false);
   const [sort, setSort] = useState<Sort>("default");
   const [showFilters, setShowFilters] = useState(false);
+  const [showListModal, setShowListModal] = useState(false);
   const searchRef = useRef<HTMLInputElement>(null);
 
   // Autocomplete suggestions
@@ -241,6 +243,8 @@ export default function Businesses() {
       return matchesCat && matchesSearch && matchesRegion && matchesWA && matchesWeb;
     });
 
+    // Default: businesses with images first
+    if (sort === "default") list = [...list].sort((a, b) => (b.flyer ? 1 : 0) - (a.flyer ? 1 : 0));
     if (sort === "featured") list = [...list].sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
     if (sort === "newest")   list = [...list].sort((a, b) => b.id - a.id);
     if (sort === "az")       list = [...list].sort((a, b) => a.name.localeCompare(b.name));
@@ -553,14 +557,14 @@ export default function Businesses() {
               </select>
             </div>
 
-            <a
-              href="mailto:info@ijebuigbodescendants.org?subject=Business%20Directory%20Listing%20Request&body=Business%20Name%3A%0ACategory%3A%0ADescription%3A%0ALocation%3A%0APhone%3A%0AWebsite%3A%0AOwner%20Name%3A"
+            <button
+              onClick={() => setShowListModal(true)}
               className="btn-primary text-sm !py-2 !px-3 sm:!px-4 flex items-center gap-1.5 whitespace-nowrap shrink-0"
             >
               <Building2 size={14} />
               <span className="hidden xs:inline">List Your Business</span>
               <span className="xs:hidden">List</span>
-            </a>
+            </button>
           </div>
         </div>
 
@@ -598,19 +602,22 @@ export default function Businesses() {
             Reach thousands of Ijebu Igbo community members in the diaspora and back home.
             Send us your details and we'll publish your profile within 48 hours.
           </p>
-          <a
-            href="mailto:softlineazeez123@gmail.com?subject=Business%20Directory%20Listing%20Request&body=Business%20Name%3A%0ACategory%3A%0ATagline%3A%0ADescription%3A%0ALocation%3A%0APhone%3A%0AWhatsApp%3A%0AEmail%3A%0AWebsite%3A%0AOwner%20Name%3A%0AYear%20Established%3A%0ARegion%20(UK%2FNigeria%2FDiaspora)%3A"
+          <button
+            onClick={() => setShowListModal(true)}
             className="btn-primary inline-flex items-center gap-2"
           >
+            <Building2 size={16} />
             Submit Your Business
-          </a>
+          </button>
           <p className="text-xs text-muted-foreground mt-3">
-            Free for all community members. Reviewed within 48 hours.
+            Pay yearly subscription · Submit details · We publish within 48 hours.
           </p>
         </div>
       </section>
 
       <Footer />
+
+      <ListBusinessModal open={showListModal} onOpenChange={setShowListModal} />
     </div>
   );
 }

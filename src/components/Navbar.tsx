@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Menu, X, ChevronRight, Sparkles } from "lucide-react";
 import JoinModal from "@/components/JoinModal";
-import { useSoundManager } from "@/hooks/use-sound";
 
 const navLinks = [
   { label: "Home",      href: "/" },
@@ -20,22 +19,17 @@ const navLinks = [
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const { playSound } = useSoundManager();
 
   useEffect(() => {
     if (open) {
-      playSound("/sounds/menu-open.mp3", 0.3);
       document.body.style.overflow = "hidden";
     } else {
-      if (document.body.style.overflow === "hidden") {
-        playSound("/sounds/menu-close.mp3", 0.3);
-      }
       document.body.style.overflow = "";
     }
     return () => {
       document.body.style.overflow = "";
     };
-  }, [open, playSound]);
+  }, [open]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -107,7 +101,6 @@ export default function Navbar() {
             ))}
             <JoinModal>
               <motion.button
-                onClick={() => playSound("/sounds/talking-drum-press.mp3", 0.25)}
                 className="btn-primary relative overflow-hidden text-sm !py-2.5 !px-6"
                 whileHover={{ y: -3, scale: 1.06 }}
                 whileTap={{ scale: 0.97 }}

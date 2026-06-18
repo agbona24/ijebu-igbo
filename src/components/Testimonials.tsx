@@ -30,7 +30,34 @@ export default function Testimonials() {
           <h3 className="heading-section">Voices of Ọmọ Alárè</h3>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        {/* Mobile: horizontal swipe */}
+        <div className="md:hidden -mx-4 px-4">
+          <div className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scroll-smooth scrollbar-hide">
+            {testimonials.map((testimonial, index) => (
+              <div
+                key={index}
+                className="relative bg-background rounded-xl p-6 shadow-md border border-primary/10
+                           flex-shrink-0 w-[80vw] max-w-[320px] snap-center"
+              >
+                <div className="absolute -top-4 left-6 w-10 h-10 bg-accent rounded-full flex items-center justify-center shadow-lg">
+                  <Quote className="w-5 h-5 text-white" />
+                </div>
+                <blockquote className="mt-6 mb-6">
+                  <p className="text-base text-primary font-medium leading-relaxed italic">
+                    "{testimonial.quote}"
+                  </p>
+                </blockquote>
+                <div className="border-t border-primary/10 pt-4">
+                  <p className="text-sm font-semibold text-primary">{testimonial.author}</p>
+                  <p className="text-xs text-body/60 mt-1">{testimonial.location}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Desktop: 3-column grid */}
+        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {testimonials.map((testimonial, index) => (
             <motion.div
               key={index}
@@ -40,26 +67,17 @@ export default function Testimonials() {
               transition={{ duration: 0.6, delay: index * 0.1, ease }}
               className="relative bg-background rounded-xl sm:rounded-lg p-6 sm:p-8 shadow-md hover:shadow-xl transition-shadow duration-300 border border-primary/10"
             >
-              {/* Quote Icon */}
               <div className="absolute -top-4 left-6 w-10 h-10 sm:w-12 sm:h-12 bg-accent rounded-full flex items-center justify-center shadow-lg">
                 <Quote className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
               </div>
-
-              {/* Quote Text */}
               <blockquote className="mt-6 sm:mt-8 mb-6">
                 <p className="text-base sm:text-lg text-primary font-medium leading-relaxed italic">
                   "{testimonial.quote}"
                 </p>
               </blockquote>
-
-              {/* Author */}
               <div className="border-t border-primary/10 pt-4">
-                <p className="text-sm font-semibold text-primary">
-                  {testimonial.author}
-                </p>
-                <p className="text-xs sm:text-sm text-body/60 mt-1">
-                  {testimonial.location}
-                </p>
+                <p className="text-sm font-semibold text-primary">{testimonial.author}</p>
+                <p className="text-xs sm:text-sm text-body/60 mt-1">{testimonial.location}</p>
               </div>
             </motion.div>
           ))}

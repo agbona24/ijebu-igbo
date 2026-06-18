@@ -1,10 +1,17 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
+import { useEffect } from "react";
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import SoundControl from "@/components/SoundControl";
-import AmbiencePlayer from "@/components/AmbiencePlayer";
 import Index from "./pages/Index.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import NewsPost from "./pages/NewsPost.tsx";
@@ -27,9 +34,8 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <SoundControl />
-      <AmbiencePlayer />
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           <Route path="/"            element={<Index />} />
           <Route path="/about"       element={<AboutPage />} />

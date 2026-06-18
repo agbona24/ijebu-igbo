@@ -121,7 +121,7 @@ export const BUSINESSES: Business[] = [
     ownerName: "Chief Mrs Bisi Kazeem — The Yeyeluwa of Atikori",
     phone: "+44 7464 940460",
     whatsapp: "+447464940460",
-    flyer: "/images/businesses/topawo-enterprises/flyer.png",
+    flyer: "/images/businesses/topawo-enterprises/flyer.jpeg",
     region: "UK",
 
     serviceCategories: [
@@ -164,7 +164,7 @@ export const BUSINESSES: Business[] = [
       "Odueyungbo Farms is a livestock and agricultural enterprise dedicated to producing high-quality, naturally raised animal products. The farm specialises in cattle, pigs, rams, poultry, and fish farming, ensuring healthy livestock through proper nutrition, veterinary care, and sustainable farming practices. With a commitment to food safety, quality assurance, and affordability, Odueyungbo Farms delivers fresh farm products directly from the farm to consumers, businesses, and food vendors.",
     ownerName: "Chief Toyin Odueyungbo",
     email: "odueyungbofarms@gmail.com",
-    flyer: "/images/businesses/odueyungbo-farms/flyer.png",
+    flyer: "/images/businesses/odueyungbo-farms/flyer.jpeg",
     region: "Nigeria",
 
     serviceCategories: [

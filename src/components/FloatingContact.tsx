@@ -36,7 +36,7 @@ export default function FloatingContact() {
   ];
 
   return (
-    <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex flex-col items-end gap-3 safe-area-bottom">
+    <div className="fixed bottom-20 right-4 sm:bottom-24 sm:right-6 z-50 flex flex-col items-end gap-3 safe-area-bottom">
       {/* Contact options */}
       <AnimatePresence>
         {isOpen && (
