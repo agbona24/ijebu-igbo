@@ -1,10 +1,13 @@
 import { useState, useMemo, useRef, useEffect } from "react";
 import ListBusinessModal from "@/components/ListBusinessModal";
-import { motion, AnimatePresence } from "framer-motion";
+import {
+  motion, AnimatePresence,
+  useMotionValue, useSpring, useTransform,
+} from "framer-motion";
 import {
   Search, Store, X, ArrowUpDown, ArrowRight, Building2,
   CheckCircle2, Globe, MessageCircle, MapPin, SlidersHorizontal,
-  ChevronDown,
+  ChevronDown, Sparkles, TrendingUp,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
@@ -17,7 +20,6 @@ import {
   type Business,
 } from "@/data/businesses";
 
-// Category list without "All" (handled by clear-selection logic)
 const CATEGORY_PILLS = [
   "Food & Catering",
   "Fashion & Beauty",
@@ -41,102 +43,211 @@ const SORT_OPTIONS = [
 ] as const;
 type Sort = typeof SORT_OPTIONS[number]["value"];
 
-// ── Initials helper ─────────────────────────────────────────────────────────
 function getInitials(name: string) {
   return name.split(" ").slice(0, 2).map((w) => w[0]).join("").toUpperCase();
 }
 
-// ── Business card ───────────────────────────────────────────────────────────
-function BusinessCard({ business }: { business: Business }) {
+/* ── Counting stat ──────────────────────────────────────────────── */
+function AnimatedCount({ target, suffix = "" }: { target: number; suffix?: string }) {
+  const [val, setVal] = useState(0);
+  useEffect(() => {
+    let start = 0;
+    const step = Math.ceil(target / 40);
+    const id = setInterval(() => {
+      start = Math.min(start + step, target);
+      setVal(start);
+      if (start >= target) clearInterval(id);
+    }, 30);
+    return () => clearInterval(id);
+  }, [target]);
+  return <>{val}{suffix}</>;
+}
+
+/* ── Floating shape for gradient cards ─────────────────────────── */
+function FloatingShapes({ gradient }: { gradient: string }) {
+  return (
+    <div className={`absolute inset-0 bg-gradient-to-br ${gradient} overflow-hidden`}>
+      {[...Array(3)].map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute rounded-full bg-white/10"
+          style={{
+            width: [80, 56, 100][i],
+            height: [80, 56, 100][i],
+            left: [`${[15, 65, 40][i]}%`],
+            top: [`${[10, 50, 65][i]}%`],
+          }}
+          animate={{
+            y: [0, -12, 0],
+            scale: [1, 1.08, 1],
+            opacity: [0.15, 0.25, 0.15],
+          }}
+          transition={{
+            duration: [4, 5.5, 3.5][i],
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: i * 0.8,
+          }}
+        />
+      ))}
+      <div className="absolute inset-0 flex flex-col items-center justify-center gap-1.5">
+        <span className="text-white/90 font-display font-black text-3xl sm:text-4xl tracking-tight select-none drop-shadow">
+          {/* initials injected by parent */}
+        </span>
+      </div>
+    </div>
+  );
+}
+
+/* ── Business card with 3D tilt ─────────────────────────────────── */
+function BusinessCard({ business, index }: { business: Business; index: number }) {
   const navigate = useNavigate();
+  const cardRef = useRef<HTMLDivElement>(null);
   const gradient = CATEGORY_GRADIENTS[business.category] ?? "from-primary to-primary/70";
   const waNumber = (business.whatsapp ?? business.phone ?? "").replace(/\D/g, "");
 
+  const rawX = useMotionValue(0);
+  const rawY = useMotionValue(0);
+  const spring = { stiffness: 220, damping: 22 };
+  const rotateX = useSpring(useTransform(rawY, [-1, 1], [6, -6]), spring);
+  const rotateY = useSpring(useTransform(rawX, [-1, 1], [-6, 6]), spring);
+  const glareOpacity = useSpring(useTransform(rawX, [-1, 1], [0, 0.12]), spring);
+  const glareBackground = useTransform(
+    glareOpacity,
+    (v) => `linear-gradient(135deg, rgba(255,255,255,${v}) 0%, transparent 55%)`
+  );
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    rawX.set((e.clientX - rect.left) / rect.width * 2 - 1);
+    rawY.set((e.clientY - rect.top) / rect.height * 2 - 1);
+  };
+  const handleMouseLeave = () => { rawX.set(0); rawY.set(0); };
+
+  const col = index % 4;
+  const row = Math.floor(index / 4);
+
   return (
     <motion.div
+      ref={cardRef}
       layout
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, scale: 0.95 }}
-      transition={{ duration: 0.3 }}
-      className="group bg-white rounded-2xl border border-border overflow-hidden shadow-sm
-                 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col
-                 active:scale-[0.98] touch-manipulation"
+      initial={{ opacity: 0, y: 28, scale: 0.95 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.92, y: 10 }}
+      transition={{
+        duration: 0.5,
+        delay: Math.min(col * 0.06 + row * 0.04, 0.5),
+        ease: [0.16, 1, 0.3, 1],
+      }}
+      style={{ rotateX, rotateY, transformPerspective: 900 }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
+      className="group bg-white rounded-2xl border border-border overflow-hidden
+                 shadow-sm hover:shadow-2xl transition-shadow duration-300
+                 flex flex-col cursor-pointer active:scale-[0.98] touch-manipulation"
+      onClick={() => navigate(`/businesses/${business.slug}`)}
     >
+      {/* Glare overlay */}
+      <motion.div
+        className="absolute inset-0 z-10 pointer-events-none rounded-2xl"
+        style={{ background: glareBackground }}
+      />
+
       {/* Visual header */}
-      <div
-        className="relative h-28 sm:h-44 overflow-hidden cursor-pointer"
-        onClick={() => navigate(`/businesses/${business.slug}`)}
-      >
+      <div className="relative h-32 sm:h-44 overflow-hidden shrink-0">
         {business.flyer ? (
           <img
             src={business.flyer}
             alt={business.name}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
           />
         ) : (
-          <div className={`w-full h-full bg-gradient-to-br ${gradient} flex flex-col items-center justify-center gap-1 sm:gap-2`}>
-            <span className="text-2xl sm:text-4xl font-display font-black text-white/90 tracking-tight select-none">
-              {getInitials(business.name)}
-            </span>
-            <span className="text-white/60 text-[10px] sm:text-xs font-medium tracking-widest uppercase hidden sm:block">
-              {business.category}
-            </span>
+          <div className={`relative w-full h-full bg-gradient-to-br ${gradient} overflow-hidden`}>
+            {[...Array(3)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute rounded-full bg-white/10"
+                style={{
+                  width: [90, 60, 110][i],
+                  height: [90, 60, 110][i],
+                  left: `${[12, 62, 38][i]}%`,
+                  top: `${[8, 48, 60][i]}%`,
+                }}
+                animate={{ y: [0, -10, 0], opacity: [0.12, 0.22, 0.12] }}
+                transition={{ duration: [4, 5.5, 3.5][i], repeat: Infinity, ease: "easeInOut", delay: i * 0.9 }}
+              />
+            ))}
+            <div className="absolute inset-0 flex flex-col items-center justify-center gap-1">
+              <span className="text-3xl sm:text-5xl font-display font-black text-white/90 tracking-tight select-none drop-shadow-md">
+                {getInitials(business.name)}
+              </span>
+              <span className="text-white/55 text-[9px] sm:text-[11px] font-semibold tracking-widest uppercase">
+                {business.category}
+              </span>
+            </div>
           </div>
         )}
 
+        {/* Hover overlay with CTA */}
+        <div className="absolute inset-0 bg-primary/80 backdrop-blur-[1px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            className="flex items-center gap-2 bg-accent text-primary font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0"
+          >
+            View Profile <ArrowRight size={13} />
+          </motion.div>
+        </div>
+
+        {/* Badges */}
         {business.featured && (
-          <div className="absolute top-2 left-2 sm:top-3 sm:left-3 bg-accent text-accent-foreground
-                          text-[10px] sm:text-xs font-bold px-2 py-0.5 sm:py-1 rounded-full shadow-md">
+          <div className="absolute top-2 left-2 sm:top-3 sm:left-3 bg-accent text-[10px] sm:text-xs font-bold px-2.5 py-1 rounded-full shadow z-10 text-primary">
             ★ Featured
           </div>
         )}
-
-        <div className={`absolute top-2 right-2 sm:top-3 sm:right-3 text-[10px] sm:text-xs font-semibold
-                         px-2 py-0.5 sm:py-1 rounded-full border backdrop-blur-sm bg-white/85 hidden sm:block
+        <div className={`absolute bottom-2 right-2 sm:bottom-3 sm:right-3 z-10
+                         text-[9px] sm:text-xs font-semibold px-2 py-0.5 sm:py-1
+                         rounded-full border backdrop-blur-sm bg-white/85 hidden sm:block
                          ${CATEGORY_COLORS[business.category] ?? "text-gray-700 border-gray-200"}`}>
           {business.category}
         </div>
       </div>
 
       {/* Body */}
-      <div className="p-3 sm:p-4 flex flex-col flex-1">
-        <h3
-          className="font-display font-bold text-foreground text-sm sm:text-base leading-tight
-                     group-hover:text-primary transition-colors cursor-pointer"
-          onClick={() => navigate(`/businesses/${business.slug}`)}
-        >
+      <div className="p-3 sm:p-4 flex flex-col flex-1 relative z-10">
+        <h3 className="font-display font-bold text-foreground text-sm sm:text-base leading-tight
+                       group-hover:text-primary transition-colors line-clamp-1">
           {business.name}
         </h3>
         {business.tagline && (
-          <p className="text-[10px] sm:text-xs text-accent font-medium mt-0.5 line-clamp-1">{business.tagline}</p>
+          <p className="text-[10px] sm:text-xs text-accent font-semibold mt-0.5 line-clamp-1">{business.tagline}</p>
         )}
-        <p className="text-xs sm:text-sm text-muted-foreground mt-1.5 line-clamp-3">
+        <p className="text-xs sm:text-sm text-muted-foreground mt-1.5 line-clamp-2 flex-1">
           {business.description}
         </p>
 
-        {/* Footer */}
-        <div className="mt-2 sm:mt-4 pt-2 sm:pt-3 border-t border-border flex items-center justify-between gap-1.5">
+        {/* Footer row */}
+        <div className="mt-2 sm:mt-3 pt-2 sm:pt-3 border-t border-border flex items-center justify-between gap-1">
           <div className="flex items-center gap-1 min-w-0">
             {business.location && (
-              <span className="text-[10px] sm:text-xs text-muted-foreground truncate flex items-center gap-1">
-                <MapPin size={9} className="shrink-0 sm:hidden" />
-                <MapPin size={10} className="shrink-0 hidden sm:block" />
-                <span className="truncate max-w-[70px] sm:max-w-none">
+              <span className="text-[10px] sm:text-xs text-muted-foreground flex items-center gap-0.5 truncate">
+                <MapPin size={10} className="shrink-0" />
+                <span className="truncate max-w-[72px] sm:max-w-none">
                   {business.location.split(",").slice(-1)[0].trim()}
                 </span>
               </span>
             )}
           </div>
-          <div className="flex items-center gap-1 sm:gap-1.5 shrink-0">
+
+          <div className="flex items-center gap-1 shrink-0" onClick={(e) => e.stopPropagation()}>
             {waNumber && (
               <a
                 href={`https://wa.me/${waNumber}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={(e) => e.stopPropagation()}
-                className="w-7 h-7 bg-[#25D366] hover:bg-[#1fba58] rounded-lg flex items-center
-                           justify-center transition-colors"
+                className="w-7 h-7 bg-[#25D366] hover:bg-[#1fba58] rounded-lg flex items-center justify-center transition-colors"
                 aria-label="WhatsApp"
               >
                 <svg className="w-3.5 h-3.5" fill="white" viewBox="0 0 24 24">
@@ -149,21 +260,12 @@ function BusinessCard({ business }: { business: Business }) {
                 href={business.website.startsWith("http") ? business.website : `https://${business.website}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={(e) => e.stopPropagation()}
-                className="w-7 h-7 bg-primary/10 hover:bg-primary/20 rounded-lg items-center
-                           justify-center transition-colors hidden sm:flex"
+                className="w-7 h-7 bg-primary/10 hover:bg-primary/20 rounded-lg items-center justify-center transition-colors hidden sm:flex"
                 aria-label="Website"
               >
                 <Globe size={13} className="text-primary" />
               </a>
             )}
-            <button
-              onClick={() => navigate(`/businesses/${business.slug}`)}
-              className="text-[10px] sm:text-xs font-semibold text-primary flex items-center gap-0.5 sm:gap-1
-                         group-hover:gap-1.5 transition-all whitespace-nowrap min-h-[32px] px-1"
-            >
-              View <ArrowRight size={10} />
-            </button>
           </div>
         </div>
       </div>
@@ -171,11 +273,11 @@ function BusinessCard({ business }: { business: Business }) {
   );
 }
 
-// ── Main page ───────────────────────────────────────────────────────────────
+/* ── Main page ──────────────────────────────────────────────────── */
 export default function Businesses() {
   useEffect(() => {
     const title = "Business Directory | Ijebu Igbo Descendants — Connect Ijebu Roots";
-    const desc  = "Browse businesses owned by Ijebu Igbo descendants in the UK, Nigeria, and diaspora. Find food, transport, technology, health, and professional services.";
+    const desc  = "Browse businesses owned by Ijebu Igbo descendants in Nigeria and across the diaspora.";
     document.title = title;
     const setMeta = (sel: string, val: string) => {
       const el = document.querySelector<HTMLMetaElement>(sel);
@@ -200,7 +302,6 @@ export default function Businesses() {
   const [showListModal, setShowListModal] = useState(false);
   const searchRef = useRef<HTMLInputElement>(null);
 
-  // Autocomplete suggestions
   const suggestions = useMemo(() => {
     const q = search.trim().toLowerCase();
     if (q.length < 2) return [];
@@ -212,7 +313,6 @@ export default function Businesses() {
     ).slice(0, 6);
   }, [search]);
 
-  // Toggle category in/out of selection
   const toggleCategory = (cat: string) => {
     setSelectedCategories((prev) => {
       const next = new Set(prev);
@@ -237,60 +337,57 @@ export default function Businesses() {
     (hasWhatsApp ? 1 : 0) +
     (hasWebsite ? 1 : 0);
 
-  // Filtered + sorted list
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();
-
     let list = BUSINESSES.filter((b) => {
-      const matchesCat =
-        selectedCategories.size === 0 || selectedCategories.has(b.category);
-
-      const matchesSearch =
-        !q ||
-        b.name.toLowerCase().includes(q) ||
-        b.description.toLowerCase().includes(q) ||
-        (b.location ?? "").toLowerCase().includes(q) ||
-        (b.tagline ?? "").toLowerCase().includes(q) ||
+      const matchesCat    = selectedCategories.size === 0 || selectedCategories.has(b.category);
+      const matchesSearch = !q || b.name.toLowerCase().includes(q) || b.description.toLowerCase().includes(q) ||
+        (b.location ?? "").toLowerCase().includes(q) || (b.tagline ?? "").toLowerCase().includes(q) ||
         (b.ownerName ?? "").toLowerCase().includes(q);
-
       const matchesRegion = region === "All" || b.region === region;
-      const matchesWA = !hasWhatsApp || !!(b.whatsapp ?? b.phone);
-      const matchesWeb = !hasWebsite || !!b.website;
-
+      const matchesWA     = !hasWhatsApp || !!(b.whatsapp ?? b.phone);
+      const matchesWeb    = !hasWebsite || !!b.website;
       return matchesCat && matchesSearch && matchesRegion && matchesWA && matchesWeb;
     });
-
-    // Default: businesses with images first
-    if (sort === "default") list = [...list].sort((a, b) => (b.flyer ? 1 : 0) - (a.flyer ? 1 : 0));
+    if (sort === "default")  list = [...list].sort((a, b) => (b.flyer ? 1 : 0) - (a.flyer ? 1 : 0));
     if (sort === "featured") list = [...list].sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
     if (sort === "newest")   list = [...list].sort((a, b) => b.id - a.id);
     if (sort === "az")       list = [...list].sort((a, b) => a.name.localeCompare(b.name));
     if (sort === "za")       list = [...list].sort((a, b) => b.name.localeCompare(a.name));
-
     return list;
   }, [search, selectedCategories, region, hasWhatsApp, hasWebsite, sort]);
 
+  const totalBusinesses = BUSINESSES.length;
+  const totalCategories = CATEGORY_PILLS.length;
+
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-[#f8f6f1]">
       <Navbar />
 
-      {/* ── HERO ──────────────────────────────────────────────────────────── */}
+      {/* ── HERO ──────────────────────────────────────────────────── */}
       <section className="relative pt-14 md:pt-20 overflow-hidden">
-        <div className="relative min-h-[400px] md:min-h-[460px] flex flex-col items-center justify-center px-4 py-14">
-          <AnimatedHeroBg gradientClass="bg-gradient-to-br from-primary via-primary to-primary/80" />
-          <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-white to-transparent z-10" />
+        <div className="relative min-h-[420px] md:min-h-[480px] flex flex-col items-center justify-center px-4 py-16">
+          <AnimatedHeroBg gradientClass="bg-gradient-to-br from-primary via-primary to-[#0b2a6e]" />
+          <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#f8f6f1] to-transparent z-10" />
 
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="relative z-10 text-center max-w-3xl mx-auto w-full"
           >
-            <div className="inline-flex items-center gap-2 bg-accent/20 border border-accent/30
-                            text-accent text-sm font-semibold px-4 py-1.5 rounded-full mb-6">
+            {/* Badge */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="inline-flex items-center gap-2 bg-accent/20 border border-accent/30
+                         text-accent text-sm font-bold px-4 py-1.5 rounded-full mb-6 backdrop-blur-sm"
+            >
               <Store size={14} />
               Community Business Directory
-            </div>
+            </motion.div>
+
             <h1 className="font-display font-black text-4xl sm:text-5xl md:text-6xl text-white mb-4 leading-tight">
               Support Ijebu Igbo{" "}
               <span className="text-accent">Businesses</span>
@@ -299,8 +396,34 @@ export default function Businesses() {
               Discover and support businesses owned by members of our community. Buy local, build together.
             </p>
 
-            {/* Search with autocomplete */}
-            <div className="relative max-w-lg mx-auto">
+            {/* Animated stats */}
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.35 }}
+              className="flex items-center justify-center gap-6 mb-8"
+            >
+              {[
+                { icon: Store, label: "Businesses", value: totalBusinesses, suffix: "+" },
+                { icon: Sparkles, label: "Categories", value: totalCategories, suffix: "" },
+                { icon: TrendingUp, label: "Reach", value: 3, suffix: " Regions" },
+              ].map((stat, i) => (
+                <div key={i} className="text-center">
+                  <div className="text-2xl sm:text-3xl font-display font-black text-white leading-none">
+                    <AnimatedCount target={stat.value} suffix={stat.suffix} />
+                  </div>
+                  <div className="text-white/50 text-[11px] font-semibold uppercase tracking-widest mt-0.5">{stat.label}</div>
+                </div>
+              ))}
+            </motion.div>
+
+            {/* Search */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.45 }}
+              className="relative max-w-lg mx-auto"
+            >
               <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none z-10" />
               <input
                 ref={searchRef}
@@ -313,7 +436,7 @@ export default function Businesses() {
                 onKeyDown={(e) => e.key === "Escape" && setShowSuggestions(false)}
                 className="w-full pl-11 pr-10 py-3.5 rounded-xl bg-white text-foreground
                            placeholder-muted-foreground text-sm focus:outline-none
-                           focus:ring-2 focus:ring-accent shadow-lg"
+                           focus:ring-2 focus:ring-accent/60 shadow-xl transition-shadow"
               />
               {search && (
                 <button
@@ -324,7 +447,7 @@ export default function Businesses() {
                 </button>
               )}
 
-              {/* Autocomplete dropdown */}
+              {/* Autocomplete */}
               <AnimatePresence>
                 {showSuggestions && suggestions.length > 0 && (
                   <motion.ul
@@ -336,22 +459,15 @@ export default function Businesses() {
                                border border-border shadow-xl z-20 overflow-hidden"
                   >
                     {suggestions.map((b) => {
-                      const gradient = CATEGORY_GRADIENTS[b.category] ?? "from-primary to-primary/70";
+                      const grad = CATEGORY_GRADIENTS[b.category] ?? "from-primary to-primary/70";
                       return (
                         <li key={b.id}>
                           <button
-                            className="w-full flex items-center gap-3 px-4 py-3 hover:bg-muted/50
-                                       transition-colors text-left"
-                            onMouseDown={() => {
-                              setSearch(b.name);
-                              setShowSuggestions(false);
-                            }}
+                            className="w-full flex items-center gap-3 px-4 py-3 hover:bg-muted/50 transition-colors text-left"
+                            onMouseDown={() => { setSearch(b.name); setShowSuggestions(false); }}
                           >
-                            <div className={`w-8 h-8 rounded-lg bg-gradient-to-br ${gradient}
-                                            flex items-center justify-center shrink-0`}>
-                              <span className="text-white text-[10px] font-bold">
-                                {getInitials(b.name)}
-                              </span>
+                            <div className={`w-8 h-8 rounded-lg bg-gradient-to-br ${grad} flex items-center justify-center shrink-0`}>
+                              <span className="text-white text-[10px] font-bold">{getInitials(b.name)}</span>
                             </div>
                             <div className="min-w-0">
                               <p className="text-sm font-semibold text-foreground truncate">{b.name}</p>
@@ -365,73 +481,86 @@ export default function Businesses() {
                   </motion.ul>
                 )}
               </AnimatePresence>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       </section>
 
-      {/* ── STICKY CATEGORY BAR (multi-select) ────────────────────────────── */}
+      {/* ── CATEGORY PILLS ────────────────────────────────────────── */}
       <div className="sticky top-14 md:top-20 z-30 bg-white/95 backdrop-blur border-b border-border shadow-sm">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="flex gap-2 overflow-x-auto py-3 scrollbar-none">
-            {/* All — clears selection */}
-            <button
+          <div className="flex gap-2 overflow-x-auto py-3 scrollbar-hide">
+            {/* All */}
+            <motion.button
               onClick={() => setSelectedCategories(new Set())}
-              className={`shrink-0 px-4 py-1.5 rounded-full text-sm font-medium transition-all
-                          duration-200 border ${
-                            selectedCategories.size === 0
-                              ? "bg-primary text-primary-foreground border-primary shadow-sm"
-                              : "bg-transparent text-muted-foreground border-border hover:border-primary hover:text-primary"
-                          }`}
+              whileTap={{ scale: 0.95 }}
+              className={`relative shrink-0 px-4 py-1.5 rounded-full text-sm font-semibold transition-colors duration-200 border ${
+                selectedCategories.size === 0
+                  ? "bg-primary text-white border-primary shadow-sm"
+                  : "bg-transparent text-muted-foreground border-border hover:border-primary hover:text-primary"
+              }`}
             >
               All
-            </button>
+            </motion.button>
 
             {CATEGORY_PILLS.map((cat) => {
-              const selected = selectedCategories.has(cat);
+              const active = selectedCategories.has(cat);
               return (
-                <button
+                <motion.button
                   key={cat}
                   onClick={() => toggleCategory(cat)}
-                  className={`shrink-0 flex items-center gap-1.5 px-4 py-1.5 rounded-full text-sm
-                              font-medium transition-all duration-200 border ${
-                                selected
-                                  ? "bg-primary text-primary-foreground border-primary shadow-sm"
+                  whileTap={{ scale: 0.94 }}
+                  className={`relative shrink-0 flex items-center gap-1.5 px-4 py-1.5 rounded-full text-sm
+                              font-semibold transition-colors duration-200 border ${
+                                active
+                                  ? "bg-primary text-white border-primary shadow-sm"
                                   : "bg-transparent text-muted-foreground border-border hover:border-primary hover:text-primary"
                               }`}
                 >
-                  {selected && <CheckCircle2 size={12} />}
+                  <AnimatePresence>
+                    {active && (
+                      <motion.span
+                        initial={{ width: 0, opacity: 0 }}
+                        animate={{ width: "auto", opacity: 1 }}
+                        exit={{ width: 0, opacity: 0 }}
+                        transition={{ duration: 0.2 }}
+                        className="overflow-hidden"
+                      >
+                        <CheckCircle2 size={12} />
+                      </motion.span>
+                    )}
+                  </AnimatePresence>
                   {cat}
-                </button>
+                </motion.button>
               );
             })}
           </div>
         </div>
       </div>
 
-      {/* ── ADVANCED FILTER ROW ───────────────────────────────────────────── */}
+      {/* ── ADVANCED FILTERS ──────────────────────────────────────── */}
       <div className="bg-white border-b border-border">
-        {/* Mobile: toggle button row */}
+        {/* Mobile toggle */}
         <div className="md:hidden max-w-7xl mx-auto px-4 py-2 flex items-center justify-between gap-2">
-          <button
+          <motion.button
             onClick={() => setShowFilters((v) => !v)}
+            whileTap={{ scale: 0.97 }}
             className={`flex items-center gap-1.5 text-sm font-semibold px-4 py-2 rounded-full
                         border transition-colors min-h-[40px] ${
                           showFilters || activeFilterCount > 0
-                            ? "bg-primary text-primary-foreground border-primary"
+                            ? "bg-primary text-white border-primary"
                             : "bg-transparent text-muted-foreground border-border"
                         }`}
           >
             <SlidersHorizontal size={14} />
             Filters
             {activeFilterCount > 0 && (
-              <span className="bg-accent text-charcoal text-xs font-bold w-5 h-5 rounded-full
-                               flex items-center justify-center ml-0.5">
+              <span className="bg-accent text-primary text-xs font-black w-5 h-5 rounded-full flex items-center justify-center ml-0.5">
                 {activeFilterCount}
               </span>
             )}
-            <ChevronDown size={14} className={`transition-transform ${showFilters ? "rotate-180" : ""}`} />
-          </button>
+            <ChevronDown size={14} className={`transition-transform duration-200 ${showFilters ? "rotate-180" : ""}`} />
+          </motion.button>
           {activeFilterCount > 0 && (
             <button onClick={clearAll} className="text-xs font-semibold text-destructive flex items-center gap-1">
               <X size={12} /> Clear all
@@ -439,14 +568,13 @@ export default function Businesses() {
           )}
         </div>
 
-        {/* Mobile: expandable filter panel */}
         <AnimatePresence>
           {showFilters && (
             <motion.div
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.2 }}
+              transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
               className="md:hidden overflow-hidden border-t border-border"
             >
               <div className="px-4 py-3 space-y-3">
@@ -454,90 +582,54 @@ export default function Businesses() {
                   <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2">Region</p>
                   <div className="flex flex-wrap gap-2">
                     {REGIONS.map((r) => (
-                      <button
-                        key={r}
-                        onClick={() => setRegion(r)}
+                      <button key={r} onClick={() => setRegion(r)}
                         className={`text-sm font-semibold px-4 py-2 rounded-full border transition-colors min-h-[40px] ${
-                          region === r
-                            ? "bg-accent text-accent-foreground border-accent"
-                            : "bg-transparent text-muted-foreground border-border"
+                          region === r ? "bg-accent text-primary border-accent" : "bg-transparent text-muted-foreground border-border"
                         }`}
-                      >
-                        {r}
-                      </button>
+                      >{r}</button>
                     ))}
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <button
-                    onClick={() => setHasWhatsApp((v) => !v)}
-                    className={`flex-1 flex items-center justify-center gap-1.5 text-sm font-semibold
-                                py-2.5 rounded-full border transition-colors min-h-[44px] ${
-                                  hasWhatsApp
-                                    ? "bg-[#25D366] text-white border-[#25D366]"
-                                    : "bg-transparent text-muted-foreground border-border"
-                                }`}
-                  >
-                    <MessageCircle size={14} /> WhatsApp
-                  </button>
-                  <button
-                    onClick={() => setHasWebsite((v) => !v)}
-                    className={`flex-1 flex items-center justify-center gap-1.5 text-sm font-semibold
-                                py-2.5 rounded-full border transition-colors min-h-[44px] ${
-                                  hasWebsite
-                                    ? "bg-primary text-primary-foreground border-primary"
-                                    : "bg-transparent text-muted-foreground border-border"
-                                }`}
-                  >
-                    <Globe size={14} /> Has Website
-                  </button>
+                  <button onClick={() => setHasWhatsApp((v) => !v)}
+                    className={`flex-1 flex items-center justify-center gap-1.5 text-sm font-semibold py-2.5 rounded-full border transition-colors min-h-[44px] ${
+                      hasWhatsApp ? "bg-[#25D366] text-white border-[#25D366]" : "bg-transparent text-muted-foreground border-border"
+                    }`}
+                  ><MessageCircle size={14} /> WhatsApp</button>
+                  <button onClick={() => setHasWebsite((v) => !v)}
+                    className={`flex-1 flex items-center justify-center gap-1.5 text-sm font-semibold py-2.5 rounded-full border transition-colors min-h-[44px] ${
+                      hasWebsite ? "bg-primary text-white border-primary" : "bg-transparent text-muted-foreground border-border"
+                    }`}
+                  ><Globe size={14} /> Has Website</button>
                 </div>
               </div>
             </motion.div>
           )}
         </AnimatePresence>
 
-        {/* Desktop: always-visible filter row */}
+        {/* Desktop filters */}
         <div className="hidden md:flex max-w-7xl mx-auto px-4 py-2.5 flex-wrap items-center gap-2">
           <div className="flex items-center gap-1.5 mr-1">
             <MapPin size={13} className="text-muted-foreground shrink-0" />
             {REGIONS.map((r) => (
-              <button
-                key={r}
-                onClick={() => setRegion(r)}
+              <button key={r} onClick={() => setRegion(r)}
                 className={`text-xs font-semibold px-3 py-1.5 rounded-full border transition-colors ${
-                  region === r
-                    ? "bg-accent text-accent-foreground border-accent"
-                    : "bg-transparent text-muted-foreground border-border hover:border-accent hover:text-accent"
+                  region === r ? "bg-accent text-primary border-accent" : "bg-transparent text-muted-foreground border-border hover:border-accent hover:text-accent"
                 }`}
-              >
-                {r}
-              </button>
+              >{r}</button>
             ))}
           </div>
           <div className="w-px h-5 bg-border mx-1" />
-          <button
-            onClick={() => setHasWhatsApp((v) => !v)}
-            className={`flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full
-                        border transition-colors ${
-                          hasWhatsApp
-                            ? "bg-[#25D366] text-white border-[#25D366]"
-                            : "bg-transparent text-muted-foreground border-border hover:border-[#25D366] hover:text-[#25D366]"
-                        }`}
-          >
-            <MessageCircle size={12} /> Has WhatsApp
-          </button>
-          <button
-            onClick={() => setHasWebsite((v) => !v)}
-            className={`flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full
-                        border transition-colors ${
-                          hasWebsite
-                            ? "bg-primary text-primary-foreground border-primary"
-                            : "bg-transparent text-muted-foreground border-border hover:border-primary hover:text-primary"
-                        }`}
-          >
-            <Globe size={12} /> Has Website
-          </button>
+          <button onClick={() => setHasWhatsApp((v) => !v)}
+            className={`flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full border transition-colors ${
+              hasWhatsApp ? "bg-[#25D366] text-white border-[#25D366]" : "bg-transparent text-muted-foreground border-border hover:border-[#25D366] hover:text-[#25D366]"
+            }`}
+          ><MessageCircle size={12} /> Has WhatsApp</button>
+          <button onClick={() => setHasWebsite((v) => !v)}
+            className={`flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full border transition-colors ${
+              hasWebsite ? "bg-primary text-white border-primary" : "bg-transparent text-muted-foreground border-border hover:border-primary hover:text-primary"
+            }`}
+          ><Globe size={12} /> Has Website</button>
           {activeFilterCount > 0 && (
             <button onClick={clearAll} className="flex items-center gap-1.5 text-xs font-semibold text-destructive hover:underline ml-auto">
               <X size={12} /> Clear {activeFilterCount} filter{activeFilterCount > 1 ? "s" : ""}
@@ -546,90 +638,131 @@ export default function Businesses() {
         </div>
       </div>
 
-      {/* ── LISTINGS ──────────────────────────────────────────────────────── */}
-      <section className="max-w-7xl mx-auto px-4 py-8">
-
+      {/* ── GRID ──────────────────────────────────────────────────── */}
+      <section className="max-w-7xl mx-auto px-4 py-8" style={{ perspective: "1400px" }}>
         {/* Toolbar */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 sm:mb-6 gap-3">
-          <p className="text-sm text-muted-foreground">
-            <span className="font-semibold text-foreground">{filtered.length}</span>{" "}
-            {filtered.length === 1 ? "business" : "businesses"}
-            {selectedCategories.size > 0 && ` in ${[...selectedCategories].join(", ")}`}
-            {region !== "All" && ` · ${region}`}
-          </p>
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-5 gap-3">
+          <AnimatePresence mode="wait">
+            <motion.p
+              key={filtered.length + [...selectedCategories].join(",")}
+              initial={{ opacity: 0, y: -6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 6 }}
+              transition={{ duration: 0.2 }}
+              className="text-sm text-muted-foreground"
+            >
+              <span className="font-bold text-foreground">{filtered.length}</span>{" "}
+              {filtered.length === 1 ? "business" : "businesses"}
+              {selectedCategories.size > 0 && ` in ${[...selectedCategories].join(", ")}`}
+              {region !== "All" && ` · ${region}`}
+            </motion.p>
+          </AnimatePresence>
 
           <div className="flex items-center gap-2">
-            {/* Sort */}
-            <div className="flex items-center gap-1.5 border border-border rounded-lg
-                            px-3 py-2 text-sm text-muted-foreground flex-1 sm:flex-none">
+            <div className="flex items-center gap-1.5 border border-border rounded-xl px-3 py-2 text-sm text-muted-foreground flex-1 sm:flex-none bg-white">
               <ArrowUpDown size={13} />
               <select
                 value={sort}
                 onChange={(e) => setSort(e.target.value as Sort)}
                 className="bg-transparent text-sm text-foreground focus:outline-none cursor-pointer w-full"
               >
-                {SORT_OPTIONS.map((o) => (
-                  <option key={o.value} value={o.value}>{o.label}</option>
-                ))}
+                {SORT_OPTIONS.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
               </select>
             </div>
-
-            <button
+            <motion.button
               onClick={() => setShowListModal(true)}
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
               className="btn-primary text-sm !py-2 !px-3 sm:!px-4 flex items-center gap-1.5 whitespace-nowrap shrink-0"
             >
               <Building2 size={14} />
-              <span className="hidden xs:inline">List Your Business</span>
-              <span className="xs:hidden">List</span>
-            </button>
+              <span className="hidden sm:inline">List Your Business</span>
+              <span className="sm:hidden">List</span>
+            </motion.button>
           </div>
         </div>
 
-        {/* Results */}
-        {filtered.length === 0 ? (
-          <div className="text-center py-24 text-muted-foreground">
-            <SlidersHorizontal size={48} className="mx-auto mb-4 opacity-20" />
-            <p className="text-lg font-semibold text-foreground">No businesses match these filters</p>
-            <p className="text-sm mt-1">Try adjusting your search or clearing some filters</p>
-            <button
-              onClick={clearAll}
-              className="mt-4 text-sm text-primary underline underline-offset-2"
+        {/* Cards */}
+        <AnimatePresence mode="popLayout">
+          {filtered.length === 0 ? (
+            <motion.div
+              key="empty"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.3 }}
+              className="text-center py-24"
             >
-              Clear all filters
-            </button>
-          </div>
-        ) : (
-          <motion.div layout className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-5">
-            <AnimatePresence mode="popLayout">
-              {filtered.map((business) => (
-                <BusinessCard key={business.id} business={business} />
+              <motion.div
+                animate={{ y: [0, -8, 0] }}
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <SlidersHorizontal size={52} className="mx-auto mb-4 text-muted-foreground/25" />
+              </motion.div>
+              <p className="text-lg font-bold text-foreground mb-1">No businesses match these filters</p>
+              <p className="text-sm text-muted-foreground mb-5">Try adjusting your search or clearing some filters</p>
+              <motion.button
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.96 }}
+                onClick={clearAll}
+                className="text-sm font-bold text-primary border border-primary/30 px-5 py-2.5 rounded-xl hover:bg-primary/5 transition-colors"
+              >
+                Clear all filters
+              </motion.button>
+            </motion.div>
+          ) : (
+            <motion.div
+              key="grid"
+              layout
+              className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-5"
+            >
+              {filtered.map((business, i) => (
+                <BusinessCard key={business.id} business={business} index={i} />
               ))}
-            </AnimatePresence>
-          </motion.div>
-        )}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </section>
 
-      {/* ── CTA ───────────────────────────────────────────────────────────── */}
-      <section className="bg-primary/5 border-t border-border py-16 px-4">
-        <div className="max-w-2xl mx-auto text-center">
-          <h2 className="font-display font-bold text-2xl sm:text-3xl text-foreground mb-3">
-            Own a Business? Get Listed Free.
-          </h2>
-          <p className="text-muted-foreground mb-6 text-sm sm:text-base">
-            Reach thousands of Ijebu Igbo community members in the diaspora and back home.
-            Send us your details and we'll publish your profile within 48 hours.
-          </p>
-          <button
-            onClick={() => setShowListModal(true)}
-            className="btn-primary inline-flex items-center gap-2"
-          >
-            <Building2 size={16} />
-            Submit Your Business
-          </button>
-          <p className="text-xs text-muted-foreground mt-3">
-            Pay yearly subscription · Submit details · We publish within 48 hours.
-          </p>
-        </div>
+      {/* ── CTA ───────────────────────────────────────────────────── */}
+      <section className="py-16 px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="max-w-2xl mx-auto text-center bg-primary rounded-3xl px-8 py-12 shadow-elevated relative overflow-hidden"
+        >
+          {/* Background decorative circles */}
+          <div className="absolute -top-12 -right-12 w-48 h-48 rounded-full bg-white/5" />
+          <div className="absolute -bottom-8 -left-8 w-32 h-32 rounded-full bg-accent/10" />
+
+          <div className="relative z-10">
+            <span className="inline-flex items-center gap-2 text-accent/80 text-xs font-bold tracking-[0.15em] uppercase mb-3">
+              <Sparkles size={12} />
+              Free Listing
+            </span>
+            <h2 className="font-display font-black text-2xl sm:text-3xl text-white mb-3">
+              Own a Business? Get Listed Free.
+            </h2>
+            <p className="text-white/65 mb-7 text-sm sm:text-base max-w-md mx-auto">
+              Reach thousands of Ijebu Igbo community members in the diaspora and back home. We publish your profile within 48 hours.
+            </p>
+            <motion.button
+              onClick={() => setShowListModal(true)}
+              whileHover={{ scale: 1.04, brightness: 1.1 }}
+              whileTap={{ scale: 0.97 }}
+              className="inline-flex items-center gap-2 bg-accent text-primary font-bold px-7 py-3.5 rounded-xl shadow-lg hover:brightness-110 transition-all text-sm sm:text-base"
+            >
+              <Building2 size={16} />
+              Submit Your Business
+              <ArrowRight size={15} />
+            </motion.button>
+            <p className="text-white/40 text-xs mt-4">
+              Yearly subscription · Submit details · Published within 48 hours
+            </p>
+          </div>
+        </motion.div>
       </section>
 
       <Footer />

@@ -19,12 +19,12 @@ const culturalPillars = [
   {
     icon: Megaphone,
     title: "IID — Awareness",
-    description: "Ijebu Igbo Descendants create awareness on what is going on in Ijebu Igbo for all Omo Orimolusi living in the United Kingdom.",
+    description: "Ijebu Igbo Descendants create awareness on what is going on in Ijebu Igbo for all Omo Orimolusi in Diaspora worldwide.",
   },
   {
     icon: Users,
     title: "IID — Togetherness",
-    description: "Ijebu Igbo Descendants create an atmosphere to bring all Omo Orimolusi living in the United Kingdom together.",
+    description: "Ijebu Igbo Descendants create an atmosphere to bring all Omo Orimolusi in Diaspora together, no matter where in the world they live.",
   },
   {
     icon: Heart,
@@ -127,7 +127,7 @@ export default function About() {
             <div>
               <h4 className="font-display font-bold text-lg text-foreground mb-2">Who We Are</h4>
               <p className="text-body text-sm sm:text-base leading-relaxed">
-                IID (Ijebu Igbo Descendants Omo Orimolusi in Diaspora) is a non-profit organisation that comes together to raise awareness about what is happening in Ijebu Igbo. This organisation is open to all Ijebu Igbo Descendants in the UK.
+                IID (Ijebu Igbo Descendants Omo Orimolusi in Diaspora) is a non-profit organisation that comes together to raise awareness about what is happening in Ijebu Igbo. This organisation is open to all Ijebu Igbo Descendants in Diaspora — wherever in the world they may be.
               </p>
             </div>
 

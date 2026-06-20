@@ -73,7 +73,7 @@ export default function Hero() {
               Across the World
             </h1>
             <p className="text-sm sm:text-base md:text-lg text-primary-foreground/85 font-sans max-w-xl mx-auto lg:mx-0 mb-4 sm:mb-7 leading-relaxed">
-              The UK chapter uniting our community. From our ancestral homeland to the United Kingdom and beyond.
+              Uniting Ijebu Igbo descendants wherever they are in the world — from our ancestral homeland to every corner of the diaspora.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">

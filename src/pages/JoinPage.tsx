@@ -110,7 +110,7 @@ export default function JoinPage() {
               Become a <span className="text-accent">Member</span>
             </h1>
             <p className="text-white/70 text-base sm:text-lg max-w-xl mx-auto">
-              Join IID Omo Orimolusi in Diaspora — open to all Ijebu Igbo descendants in the United Kingdom.
+              Join IID Omo Orimolusi in Diaspora — open to all Ijebu Igbo descendants worldwide, wherever you are.
             </p>
           </motion.div>
         </div>

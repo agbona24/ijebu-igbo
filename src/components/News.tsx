@@ -1,17 +1,9 @@
 import { motion } from "framer-motion";
 import { Calendar, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { NEWS_ARTICLES } from "@/data/news";
 
-const newsArticles = [
-  {
-    id: "police-area-command-commissioning",
-    title: "Commissioning of the New Police Area Command in Ijebu-Igbo",
-    excerpt: "Ijebu-Igbo recently marked a significant milestone with the commissioning of the new Police Area Command, now officially the 14th Area Command in Ogun State.",
-    featuredImage: "/images/police_area_command/review1.jpg",
-    date: "March 2026",
-    category: "Community Development"
-  }
-];
+const newsArticles = NEWS_ARTICLES;
 
 export default function News() {
   return (

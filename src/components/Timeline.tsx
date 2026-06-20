@@ -216,7 +216,7 @@ export default function Timeline() {
             href="#"
             className="btn-primary inline-flex items-center gap-2"
           >
-            Join the UK Chapter
+            Join the Community
             <motion.span
               animate={{ x: [0, 5, 0] }}
               transition={{ duration: 1, repeat: Infinity, ease: "easeInOut" }}

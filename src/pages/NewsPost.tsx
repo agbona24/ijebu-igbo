@@ -6,44 +6,11 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingContact from "@/components/FloatingContact";
 import BackToTop from "@/components/BackToTop";
-
-// Police Area Command images (23 images)
-const policeImages = Array.from({ length: 23 }, (_, i) => ({
-  src: `/images/police_area_command/review${i + 1}.jpg`,
-  alt: `Police Area Command Commissioning - Image ${i + 1}`
-}));
-
-const newsData = {
-  "police-area-command-commissioning": {
-    title: "Commissioning of the New Police Area Command in Ijebu-Igbo",
-    date: "March 2026",
-    category: "Community Development",
-    featuredImage: "/images/police_area_command/review1.jpg",
-    content: [
-      {
-        type: "paragraph",
-        text: "Ijebu-Igbo recently marked a significant milestone with the commissioning of the new Police Area Command, now officially the 14th Area Command in Ogun State. The commissioning was performed by Her Excellency, Engr. Noimot Salako-Oyedele, the Deputy Governor of Ogun State."
-      },
-      {
-        type: "paragraph",
-        text: "This historic event represents a major step forward in enhancing security infrastructure and ensuring the safety and well-being of the residents of Ijebu-Igbo and its surrounding communities."
-      },
-      {
-        type: "paragraph",
-        text: "The new Police Area Command facility is equipped with modern amenities and resources, demonstrating the state government's commitment to providing effective policing and community safety. The presence of the Deputy Governor at the commissioning ceremony underscores the importance of this development to the region."
-      },
-      {
-        type: "paragraph",
-        text: "Members of the Ijebu Igbo Descendants in Diaspora (IID), UK, join the entire community in celebrating this achievement, which will undoubtedly contribute to the continued growth and development of our beloved hometown."
-      }
-    ],
-    gallery: policeImages
-  }
-};
+import { NEWS_ARTICLES } from "@/data/news";
 
 export default function NewsPost() {
   const { id } = useParams();
-  const article = id ? newsData[id as keyof typeof newsData] : null;
+  const article = id ? NEWS_ARTICLES.find((a) => a.id === id) ?? null : null;
 
   // Scroll to top when component mounts
   useEffect(() => {
@@ -74,11 +41,11 @@ export default function NewsPost() {
         {/* Back Button */}
         <div className="container-main py-4 sm:py-6">
           <Link
-            to="/"
+            to="/news"
             className="inline-flex items-center gap-2 text-primary hover:text-accent transition-colors font-medium"
           >
             <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
-            <span>Back to Home</span>
+            <span>Back to News</span>
           </Link>
         </div>
 
@@ -182,11 +149,11 @@ export default function NewsPost() {
           {/* Back to News */}
           <div className="mt-12 sm:mt-16 pt-8 sm:pt-12 border-t border-gray-200">
             <Link
-              to="/"
+              to="/news"
               className="inline-flex items-center gap-2 text-primary hover:text-accent transition-colors font-semibold"
             >
               <ArrowLeft className="w-5 h-5" />
-              <span>Back to Home</span>
+              <span>Back to News</span>
             </Link>
           </div>
         </div>

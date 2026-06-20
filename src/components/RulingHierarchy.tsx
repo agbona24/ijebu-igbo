@@ -1,14 +1,16 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Crown, ChevronDown, MapPin } from "lucide-react";
+import { Crown, ChevronDown, MapPin, User } from "lucide-react";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
 const gradeTwo = [
   {
     title: "Sopenlukale",
-    area: "Okesopen",
+    area: "Oke-Sopen",
+    name: "His Royal Highness, Alayeluwa Oba Mufutau Adesesan Yusuf",
+    photo: "/images/oba-sopenlukale-mufutau-adesesan-yusuf.jpeg",
     color: "from-amber-700 to-amber-500",
     accent: "border-amber-500/40 bg-amber-50",
     badge: "bg-amber-100 text-amber-800",
@@ -111,15 +113,32 @@ function ObaCard({ oba, index }: { oba: typeof gradeTwo[0]; index: number }) {
         onClick={() => setOpen((v) => !v)}
         className="w-full text-left"
       >
-        <div className={`bg-gradient-to-r ${oba.color} px-5 py-4 flex items-center justify-between`}>
-          <div>
-            <p className="text-white/70 text-xs font-bold uppercase tracking-widest mb-0.5">Grade Two Oba</p>
-            <h3 className="text-white font-display font-black text-lg sm:text-xl leading-tight">
-              {oba.title} of {oba.area}
-            </h3>
+        <div className={`bg-gradient-to-r ${oba.color} px-5 py-4 flex items-center justify-between gap-4`}>
+          <div className="flex items-center gap-4 min-w-0">
+            {/* Photo or placeholder */}
+            {"photo" in oba && oba.photo ? (
+              <img
+                src={oba.photo}
+                alt={oba.name ?? oba.title}
+                className="w-14 h-14 sm:w-16 sm:h-16 rounded-full object-cover shrink-0 border-2 border-white/30 shadow-md"
+              />
+            ) : (
+              <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-white/15 border-2 border-white/20 flex items-center justify-center shrink-0">
+                <User className="w-6 h-6 text-white/50" />
+              </div>
+            )}
+            <div className="min-w-0">
+              <p className="text-white/70 text-xs font-bold uppercase tracking-widest mb-0.5">Grade Two Oba</p>
+              <h3 className="text-white font-display font-black text-lg sm:text-xl leading-tight">
+                {oba.title} of {oba.area}
+              </h3>
+              {"name" in oba && oba.name && (
+                <p className="text-white/80 text-xs sm:text-sm mt-1 leading-snug">{oba.name}</p>
+              )}
+            </div>
           </div>
           <div className="flex items-center gap-3 shrink-0">
-            <span className={`text-xs font-bold px-2.5 py-1 rounded-full ${oba.badge}`}>
+            <span className={`text-xs font-bold px-2.5 py-1 rounded-full ${oba.badge} hidden sm:inline-flex`}>
               {oba.bales.length} Bales
             </span>
             <ChevronDown

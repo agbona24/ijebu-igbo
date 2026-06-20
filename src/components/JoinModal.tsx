@@ -20,8 +20,8 @@ export default function JoinModal({ children }: JoinModalProps) {
     {
       icon: Phone,
       label: "Call Us",
-      value: "+44 7496 933887",
-      href: "tel:+447496933887",
+      value: "+44 7723 953174",
+      href: "tel:+447723953174",
       color: "bg-primary",
       description: "Best for immediate conversation",
     },
@@ -36,8 +36,8 @@ export default function JoinModal({ children }: JoinModalProps) {
     {
       icon: MessageCircle,
       label: "WhatsApp",
-      value: "+44 7496 933887",
-      href: "https://wa.me/447496933887",
+      value: "+44 7723 953174",
+      href: "https://wa.me/447723953174",
       color: "bg-primary",
       description: "Best for quick chat and fastest reply",
     },
@@ -70,7 +70,7 @@ export default function JoinModal({ children }: JoinModalProps) {
             <p className="text-sm sm:text-base text-foreground/80 leading-relaxed">
               We are thrilled that you want to join the{" "}
               <strong className="text-primary font-semibold">
-                Ijebu Igbo Descendants in Diaspora (IID), UK
+                Ijebu Igbo Descendants in Diaspora (IID)
               </strong>
               . Together, we're building a stronger community, preserving our heritage, 
               and driving development back home.
@@ -87,7 +87,7 @@ export default function JoinModal({ children }: JoinModalProps) {
               </li>
               <li className="flex items-start gap-3">
                 <span className="text-accent text-lg leading-none">2</span>
-                <span>Share your name, location, and interest in joining IID UK.</span>
+                <span>Share your name, location, and interest in joining IID.</span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="text-accent text-lg leading-none">3</span>
@@ -101,7 +101,7 @@ export default function JoinModal({ children }: JoinModalProps) {
 
           {/* Benefits */}
           <div className="space-y-3">
-            <h3 className="font-display font-bold text-lg">Why Join IID UK?</h3>
+            <h3 className="font-display font-bold text-lg">Why Join IID?</h3>
             <ul className="space-y-2.5 text-sm sm:text-base text-foreground/80">
               <li className="flex items-start gap-3">
                 <span className="text-accent text-lg mt-0.5">✓</span>

@@ -49,21 +49,21 @@ export default function Footer() {
               <h3 className="font-display font-bold text-sm leading-tight">
                 Ijebu Igbo Descendants
               </h3>
-              <p className="text-primary-foreground/50 text-xs">in Diaspora, UK</p>
+              <p className="text-primary-foreground/50 text-xs">in Diaspora</p>
             </div>
           </div>
 
           {/* Action buttons — large tap targets */}
           <div className="grid grid-cols-3 gap-2 mb-6">
             <a
-              href="tel:+447496933887"
+              href="tel:+447723953174"
               className="flex flex-col items-center gap-1.5 py-4 rounded-2xl bg-green-600/15 active:bg-green-600/30 transition-colors touch-manipulation"
             >
               <Phone size={22} className="text-green-400" />
               <span className="text-[11px] font-semibold text-primary-foreground/80">Call</span>
             </a>
             <a
-              href="https://wa.me/447496933887"
+              href="https://wa.me/447723953174"
               target="_blank"
               rel="noopener noreferrer"
               className="flex flex-col items-center gap-1.5 py-4 rounded-2xl bg-[#25D366]/15 active:bg-[#25D366]/30 transition-colors touch-manipulation"
@@ -168,11 +168,11 @@ export default function Footer() {
                   <h3 className="font-display font-bold text-base leading-tight">
                     Ijebu Igbo Descendants
                   </h3>
-                  <p className="text-primary-foreground/50 text-xs">in Diaspora, United Kingdom</p>
+                  <p className="text-primary-foreground/50 text-xs">Ijebu Igbo Descendants in Diaspora</p>
                 </div>
               </div>
               <p className="text-primary-foreground/55 leading-relaxed text-sm mb-6">
-                Uniting Ijebu Igbo descendants across the UK and diaspora through culture,
+                Uniting Ijebu Igbo descendants across the diaspora through culture,
                 development, and community pride. Proudly rooted in Ijebu Igbo, Nigeria.
               </p>
 
@@ -281,7 +281,7 @@ export default function Footer() {
               <ul className="space-y-4">
                 <li>
                   <a
-                    href="tel:+447496933887"
+                    href="tel:+447723953174"
                     className="flex items-center gap-3 group"
                   >
                     <div className="w-9 h-9 rounded-xl bg-green-500/15 flex items-center justify-center shrink-0 group-hover:bg-green-500/30 transition-colors">
@@ -289,7 +289,7 @@ export default function Footer() {
                     </div>
                     <div>
                       <p className="text-[10px] text-primary-foreground/40 uppercase tracking-widest">Phone</p>
-                      <p className="text-sm text-primary-foreground/75 group-hover:text-accent transition-colors">+44 7496 933887</p>
+                      <p className="text-sm text-primary-foreground/75 group-hover:text-accent transition-colors">+44 7723 953174</p>
                     </div>
                   </a>
                 </li>
@@ -315,7 +315,7 @@ export default function Footer() {
                   </div>
                   <div>
                     <p className="text-[10px] text-primary-foreground/40 uppercase tracking-widest">Location</p>
-                    <p className="text-sm text-primary-foreground/75">United Kingdom</p>
+                    <p className="text-sm text-primary-foreground/75">Worldwide — In Diaspora</p>
                   </div>
                 </li>
                 <li>
@@ -355,7 +355,7 @@ export default function Footer() {
       {/* Bottom bar */}
       <div className="border-t border-primary-foreground/10">
         <div className="container-main py-5 md:py-6 flex flex-col md:flex-row justify-between items-center gap-2 md:gap-4 text-xs md:text-sm text-primary-foreground/40 text-center md:text-left">
-          <p>&copy; {new Date().getFullYear()} Ijebu Igbo Descendants in Diaspora, UK. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Ijebu Igbo Descendants in Diaspora. All rights reserved.</p>
           <motion.a
             href="https://azeezagbona.com"
             target="_blank"

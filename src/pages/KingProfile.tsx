@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Crown, MapPin, Quote, ArrowLeft, CheckCircle2, ChevronLeft, ChevronRight } from "lucide-react";
+import { Crown, MapPin, Quote, ArrowLeft, ChevronLeft, ChevronRight, BookOpen, Star } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { kings } from "@/data/kings";
@@ -190,63 +190,109 @@ export default function KingProfile() {
 
         {/* Main biography */}
         <div className="lg:col-span-2 space-y-8">
+          {/* ── BIOGRAPHY ── */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease }}
-            className="bg-white rounded-2xl border border-border p-6 sm:p-8 shadow-sm"
+            className="bg-white rounded-3xl border border-border shadow-sm overflow-hidden"
           >
-            <h2 className="font-display font-bold text-foreground text-xl sm:text-2xl mb-5 flex items-center gap-2">
-              <Crown size={20} className="text-accent" />
-              Biography
-            </h2>
-            <div className="space-y-4">
-              {king.biography.map((para, i) => (
-                <p key={i} className="text-foreground/80 text-sm sm:text-base leading-relaxed">
+            {/* Card header */}
+            <div className="flex items-center gap-4 px-6 sm:px-8 py-5 border-b border-border bg-gradient-to-r from-primary/5 to-accent/5">
+              <div className="w-11 h-11 rounded-2xl bg-primary flex items-center justify-center shrink-0 shadow-sm">
+                <BookOpen size={18} className="text-accent" />
+              </div>
+              <div>
+                <h2 className="font-display font-bold text-foreground text-xl sm:text-2xl leading-tight">Biography</h2>
+                <p className="text-muted-foreground text-xs mt-0.5">Life &amp; Legacy</p>
+              </div>
+            </div>
+
+            {/* Body */}
+            <div className="px-6 sm:px-8 py-7 space-y-5">
+              {/* Lead paragraph — larger, with left accent */}
+              {king.biography[0] && (
+                <p className="text-foreground text-base sm:text-lg leading-relaxed font-medium border-l-4 border-accent pl-5 italic">
+                  {king.biography[0]}
+                </p>
+              )}
+              {/* Remaining paragraphs */}
+              {king.biography.slice(1).map((para, i) => (
+                <p key={i} className="text-foreground/75 text-sm sm:text-base leading-relaxed">
                   {para}
                 </p>
               ))}
             </div>
+
+            {/* Footer quote strip */}
+            {king.quote && (
+              <div className="mx-6 sm:mx-8 mb-7 rounded-2xl bg-primary/5 border border-primary/10 px-6 py-5">
+                <Quote size={22} className="text-accent mb-2 opacity-50" />
+                <p className="text-foreground/80 italic text-sm sm:text-base leading-relaxed">
+                  "{king.quote}"
+                </p>
+                {king.quoteAuthor && (
+                  <p className="text-muted-foreground text-xs mt-2">— {king.quoteAuthor}</p>
+                )}
+              </div>
+            )}
           </motion.div>
 
-          {/* Achievements / Timeline */}
+          {/* ── KEY MILESTONES ── */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1, ease }}
-            className="bg-white rounded-2xl border border-border p-6 sm:p-8 shadow-sm"
+            className="bg-white rounded-3xl border border-border shadow-sm overflow-hidden"
           >
-            <h2 className="font-display font-bold text-foreground text-xl sm:text-2xl mb-6">
-              Key Milestones
-            </h2>
-            <div className="space-y-4">
-              {king.achievements.map((item, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, x: -10 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: i * 0.07 }}
-                  className="flex gap-4 items-start"
-                >
-                  <div className="flex flex-col items-center shrink-0 pt-1">
-                    <CheckCircle2 size={18} className="text-accent" />
-                    {i < king.achievements.length - 1 && (
-                      <div className="w-px flex-1 bg-border mt-1 min-h-[28px]" />
-                    )}
-                  </div>
-                  <div className="pb-4">
-                    {item.year !== "—" && (
-                      <span className="text-xs font-bold text-accent bg-accent/10 px-2 py-0.5 rounded-full mb-1 inline-block">
-                        {item.year}
-                      </span>
-                    )}
-                    <p className="text-sm sm:text-base text-foreground/80 leading-relaxed">{item.event}</p>
-                  </div>
-                </motion.div>
-              ))}
+            {/* Card header */}
+            <div className="flex items-center gap-4 px-6 sm:px-8 py-5 border-b border-border bg-gradient-to-r from-accent/5 to-primary/5">
+              <div className="w-11 h-11 rounded-2xl bg-accent flex items-center justify-center shrink-0 shadow-sm">
+                <Star size={18} className="text-primary" />
+              </div>
+              <div>
+                <h2 className="font-display font-bold text-foreground text-xl sm:text-2xl leading-tight">Key Milestones</h2>
+                <p className="text-muted-foreground text-xs mt-0.5">Defining moments of the reign</p>
+              </div>
+            </div>
+
+            {/* Timeline */}
+            <div className="px-6 sm:px-8 py-7">
+              <div className="relative">
+                {/* Vertical gradient line */}
+                <div className="absolute left-[18px] top-2 bottom-2 w-0.5 bg-gradient-to-b from-accent via-accent/30 to-transparent" />
+
+                <div className="space-y-0">
+                  {king.achievements.map((item, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, x: -16 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.45, delay: i * 0.06, ease }}
+                      className="relative flex gap-5 pb-7 last:pb-0"
+                    >
+                      {/* Node */}
+                      <div className="relative z-10 shrink-0 w-9 h-9 rounded-full bg-primary border-2 border-accent flex items-center justify-center shadow-sm">
+                        <span className="font-display font-black text-accent text-xs">{i + 1}</span>
+                      </div>
+
+                      {/* Content card */}
+                      <div className="flex-1 bg-[#f8f6f1] rounded-2xl px-5 py-4 border border-border hover:border-accent/30 hover:shadow-sm transition-all duration-200">
+                        {item.year !== "—" && (
+                          <span className="inline-flex items-center gap-1 text-[11px] font-bold text-accent bg-accent/15 px-2.5 py-0.5 rounded-full mb-2">
+                            <Crown size={9} />
+                            {item.year}
+                          </span>
+                        )}
+                        <p className="text-sm sm:text-base text-foreground/80 leading-relaxed">{item.event}</p>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
             </div>
           </motion.div>
         </div>

@@ -10,7 +10,7 @@ export const faqs = [
     question: "What is Project 500, and is it a replacement for the Monthly Contribution?",
     answer: [
       "Project 500 (Please Count Me In) is NOT a replacement for the monthly contribution of £10. It is a separate initiative designed to generate funds for our community cause — and importantly, you do not have to be a Member of IID to participate. Anyone who wants to support our people is welcome.",
-      "The idea is simple: if we can find 500 Ijebu Igbo sons and daughters in the UK who each commit to donating just £2 a month to their hometown, we would raise £12,000 a year — enough to fund the projects we have been working hard to deliver.",
+      "The idea is simple: if we can find 500 Ijebu Igbo sons and daughters in Diaspora who each commit to donating just £2 a month to their hometown, we would raise £12,000 a year — enough to fund the projects we have been working hard to deliver.",
       "Members are also encouraged to participate voluntarily if they can afford it. Our children, friends, and others who may not wish to attend meetings but still want to help are especially welcome to be part of this initiative.",
       "It was envisioned that if we reach the 500-person target, the monthly contribution may be scrapped entirely. To join Project 500, please contact Alhaji Kazeem Haruna Ishola. Feel free to share this with friends who may not want to be members but simply want to help.",
     ],

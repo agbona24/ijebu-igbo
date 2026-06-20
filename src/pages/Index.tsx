@@ -23,8 +23,8 @@ const Index = () => {
       <About />
       <VideoSection />
       <Impact />
-      <Team />
       <OrimolusiSection />
+      <Team />
       <Story />
       <Testimonials />
       <News />

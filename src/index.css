@@ -7,17 +7,13 @@
 /* Native app-like experience */
 @layer base {
   html {
-    scroll-behavior: smooth;
     -webkit-tap-highlight-color: transparent;
     -webkit-touch-callout: none;
-    overscroll-behavior-y: contain;
   }
 
   body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    touch-action: pan-y;
-    overscroll-behavior: none;
   }
 
   /* Support for mobile viewport units */
@@ -157,7 +153,7 @@
   }
 
   .section-padding {
-    @apply py-12 md:py-20 lg:py-28;
+    @apply py-8 md:py-12 lg:py-16;
   }
 
   .container-main {
