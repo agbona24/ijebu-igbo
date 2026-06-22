@@ -1,11 +1,13 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Crown, ArrowRight } from "lucide-react";
-import { kings } from "@/data/kings";
+import { useSanityKings } from "@/hooks/useSanityKings";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
 export default function OrimolusiSection() {
+  const { data: kings = [] } = useSanityKings();
+
   return (
     <section className="section-padding bg-[#f8f6f1]">
       <div className="container-main">

@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
 import { Calendar, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import { NEWS_ARTICLES } from "@/data/news";
-
-const newsArticles = NEWS_ARTICLES;
+import { useSanityNews } from "@/hooks/useSanityNews";
 
 export default function News() {
+  const { data: newsArticles = [] } = useSanityNews();
+
   return (
     <section id="news" className="section-padding bg-background">
       <div className="container-main">

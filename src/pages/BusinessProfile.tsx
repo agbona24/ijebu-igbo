@@ -12,11 +12,11 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AnimatedHeroBg from "@/components/AnimatedHeroBg";
 import {
-  BUSINESSES,
   CATEGORY_GRADIENTS,
   type ServiceCategory,
   type Testimonial,
 } from "@/data/businesses";
+import { useSanityBusinesses } from "@/hooks/useSanityBusinesses";
 
 // ── Inline SVG icons ────────────────────────────────────────────────────────
 
@@ -71,12 +71,13 @@ const VALUE_ICONS: React.ReactNode[] = [
 export default function BusinessProfile() {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
+  const { data: businesses = [] } = useSanityBusinesses();
 
   const [showBar, setShowBar] = useState(false);
   const [activeTab, setActiveTab] = useState(0);
   const [lightbox, setLightbox] = useState<string | null>(null);
 
-  const business = BUSINESSES.find((b) => b.slug === slug);
+  const business = businesses.find((b) => b.slug === slug);
 
   // Reset tab when navigating between profiles
   useEffect(() => { setActiveTab(0); }, [slug]);
@@ -199,7 +200,7 @@ export default function BusinessProfile() {
     ? (business.website.startsWith("http") ? business.website : `https://${business.website}`)
     : null;
 
-  const related = BUSINESSES.filter(
+  const related = businesses.filter(
     (b) => b.category === business.category && b.slug !== business.slug
   ).slice(0, 3);
 

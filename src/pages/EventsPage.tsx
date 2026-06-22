@@ -329,6 +329,9 @@ export default function EventsPage() {
         </div>
       </div>
 
+      {/* ── EVENT VIDEOS ────────────────────────────────────────────────── */}
+      <EventVideos />
+
       {/* ── FILTER BAR ──────────────────────────────────────────────────── */}
       <div className="max-w-5xl mx-auto px-4 py-5 flex flex-wrap items-center gap-2">
         <Filter size={14} className="text-muted-foreground shrink-0" />
@@ -399,9 +402,6 @@ export default function EventsPage() {
           </motion.div>
         )}
       </div>
-
-      {/* ── EVENT VIDEOS ────────────────────────────────────────────────── */}
-      <EventVideos />
 
       {/* ── SUBMIT EVENT CTA ────────────────────────────────────────────── */}
       <section className="bg-primary/5 border-t border-border py-14 px-4">

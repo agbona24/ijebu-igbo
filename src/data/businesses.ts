@@ -286,6 +286,7 @@ export const BUSINESSES: Business[] = [
     name: "Arinola Transport",
     category: "Professional Services",
     description: "Dependable passenger and freight transport solutions. Moving people and goods safely across destinations.",
+    flyer: "/images/businesses/arinola-transport/flyer.jpeg",
   },
   {
     id: 5,

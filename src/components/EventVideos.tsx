@@ -1,152 +1,113 @@
 import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Play, Pause, Volume2, VolumeX, Maximize, Film, ChevronRight } from "lucide-react";
+import { useSanityEventVideos, type EventVideo, type VideoTag } from "@/hooks/useSanityEventVideos";
+import {
+  Play, Pause, Volume2, VolumeX, Maximize,
+  Film, ChevronRight, Mic2, Users, Globe,
+  BookOpen, Sparkles, Radio,
+} from "lucide-react";
 
-type VideoTag = "Royal Visit" | "Ojude Oba" | "Carnival" | "Community" | "Live Stream" | "Performance";
+/* ── Tag config ───────────────────────────────────────────────── */
+const TAG_CONFIG: Record<VideoTag, {
+  pill: string; gradient: string; glow: string; icon: React.ReactNode;
+}> = {
+  "Royal Visit":  {
+    pill:     "bg-amber-500/20 text-amber-300 border-amber-500/30",
+    gradient: "from-amber-900/80 via-amber-700/40 to-black/90",
+    glow:     "rgba(245,158,11,0.5)",
+    icon:     <Sparkles size={12} />,
+  },
+  "Ojude Oba":   {
+    pill:     "bg-orange-500/20 text-orange-300 border-orange-500/30",
+    gradient: "from-orange-900/80 via-orange-700/40 to-black/90",
+    glow:     "rgba(234,88,12,0.5)",
+    icon:     <Mic2 size={12} />,
+  },
+  "Carnival":    {
+    pill:     "bg-pink-500/20 text-pink-300 border-pink-500/30",
+    gradient: "from-pink-900/80 via-pink-700/40 to-black/90",
+    glow:     "rgba(236,72,153,0.5)",
+    icon:     <Sparkles size={12} />,
+  },
+  "Community":   {
+    pill:     "bg-blue-500/20 text-blue-300 border-blue-500/30",
+    gradient: "from-blue-900/80 via-blue-700/40 to-black/90",
+    glow:     "rgba(59,130,246,0.5)",
+    icon:     <Users size={12} />,
+  },
+  "Live Stream": {
+    pill:     "bg-red-500/20 text-red-300 border-red-500/30",
+    gradient: "from-red-900/80 via-red-700/40 to-black/90",
+    glow:     "rgba(239,68,68,0.5)",
+    icon:     <Radio size={12} />,
+  },
+  "Performance": {
+    pill:     "bg-purple-500/20 text-purple-300 border-purple-500/30",
+    gradient: "from-purple-900/80 via-purple-700/40 to-black/90",
+    glow:     "rgba(168,85,247,0.5)",
+    icon:     <Mic2 size={12} />,
+  },
+};
 
-interface EventVideo {
-  id: number;
-  title: string;
-  description: string;
-  src?: string;
-  youtubeId?: string;
-  date: string;
-  credit?: string;
-  tag: VideoTag;
-  featured?: boolean;
-}
-
-const TAG_COLORS: Record<VideoTag, string> = {
-  "Royal Visit":   "bg-amber-500/20 text-amber-300 border-amber-500/30",
-  "Ojude Oba":     "bg-orange-500/20 text-orange-300 border-orange-500/30",
-  "Carnival":      "bg-pink-500/20 text-pink-300 border-pink-500/30",
-  "Community":     "bg-blue-500/20 text-blue-300 border-blue-500/30",
-  "Live Stream":   "bg-red-500/20 text-red-300 border-red-500/30",
-  "Performance":   "bg-purple-500/20 text-purple-300 border-purple-500/30",
+const TAG_FILTER_ICONS: Record<VideoTag, React.ReactNode> = {
+  "Royal Visit":  <Sparkles size={11} />,
+  "Ojude Oba":    <Mic2 size={11} />,
+  "Carnival":     <Sparkles size={11} />,
+  "Community":    <Users size={11} />,
+  "Live Stream":  <Radio size={11} />,
+  "Performance":  <Mic2 size={11} />,
 };
 
 const ALL_TAGS: VideoTag[] = ["Royal Visit", "Ojude Oba", "Carnival", "Community", "Live Stream", "Performance"];
 
-const EVENT_VIDEOS: EventVideo[] = [
-  {
-    id: 9,
-    title: "Full Live Stream — Ojude Oba 2026, Ijebu Igbo",
-    description:
-      "The full live stream of Ojude Oba 2026, Ijebu Igbo — capturing every moment of the grand cultural celebration in its entirety.",
-    youtubeId: "KbInaslfyrk",
-    date: "Ojude Oba Orimolusi 2026",
-    credit: "Raw Radio",
-    tag: "Live Stream",
-    featured: true,
-  },
-  {
-    id: 1,
-    title: "Royal Welcome — Alayeluwa Oba Aderemi Adewale Ogunye (Part 1)",
-    description:
-      "Alayeluwa Oba Aderemi Adewale Ogunye, The Kotolori-Ojuule I, Abijaparako of Japara, receives a royal welcome by IID Omo Orimolusi in Diaspora members in London.",
-    src: "/videos/events/oba-royal-welcome-london1.mp4",
-    date: "London, United Kingdom",
-    tag: "Royal Visit",
-  },
-  {
-    id: 2,
-    title: "Royal Welcome — Alayeluwa Oba Aderemi Adewale Ogunye (Part 2)",
-    description:
-      "Continuation of the royal welcome ceremony for Alayeluwa Oba Aderemi Adewale Ogunye, The Kotolori-Ojuule I, Abijaparako of Japara, hosted by IID Omo Orimolusi in Diaspora in London.",
-    src: "/videos/events/oba-royal-welcome-london2.mp4",
-    date: "London, United Kingdom",
-    tag: "Royal Visit",
-  },
-  {
-    id: 4,
-    title: "A Royal Gift for Ojude Oba Orimolusi 2026",
-    description:
-      "Kabiyesi HRM Oba Jaiyeoba Adebajo is presented with a magnificent new horse as a special gift for Ojude Oba Orimolusi 2026 — a powerful symbol of royalty, honour, and cultural heritage.",
-    src: "/videos/events/kabiyesi-horse-gift-ojude-oba-2026.mp4",
-    date: "Ojude Oba Orimolusi 2026",
-    tag: "Ojude Oba",
-  },
-  {
-    id: 5,
-    title: "Otunba Atunlunto of Ilugun Graces Ojude Oba Orimolusi 2026",
-    description:
-      "Otunba Atunlunto of Ilugun — alongside his beautiful Brazilian wife, friends from Brazil, and family — graces Ojude Oba Orimolusi 2026 in a magnificent display of royalty, elegance, and cultural heritage.",
-    src: "/videos/events/ojude-oba-2026-otunba-atunlunto.mp4",
-    date: "Ojude Oba Orimolusi 2026",
-    tag: "Ojude Oba",
-  },
-  {
-    id: 6,
-    title: "Nollywood Stars Grace Ojude Oba Orimolusi 2026",
-    description:
-      "Nollywood stars grace Ojude Oba Orimolusi 2026 in magnificent grand style, adding glamour, culture, and prestige to the historic celebration.",
-    src: "/videos/events/ojude-oba-2026-nollywood-stars.mp4",
-    date: "Ojude Oba Orimolusi 2026",
-    tag: "Performance",
-  },
-  {
-    id: 10,
-    title: "Saheed Osupa Thrills at Ojude Oba Orimolusi 2026",
-    description:
-      "Fuji music star Saheed Osupa thrills the people of Ijebu Igbo with melodious music, energetic performances, and unforgettable moments of dance and celebration.",
-    src: "/videos/events/ojude-oba-2026-saheed-osupa.mp4",
-    date: "Ojude Oba Orimolusi 2026",
-    credit: "MarvelTvUpdates",
-    tag: "Performance",
-  },
-  {
-    id: 7,
-    title: "IID Carnival 2025",
-    description:
-      "Members of IID Omo Orimolusi in Diaspora come alive at IID Carnival 2025 — a vibrant celebration of culture, colour, music, and community spirit.",
-    src: "/videos/events/iid-carnival-2025.mp4",
-    date: "IID Omo Orimolusi in Diaspora, 2025",
-    tag: "Carnival",
-  },
-  {
-    id: 11,
-    title: "IID Carnival 2025 (Part 2)",
-    description:
-      "More highlights from IID Carnival 2025 — continuing the vibrant celebration of culture, colour, music, and community spirit.",
-    src: "/videos/events/iid-carnival-2025-2.mp4",
-    date: "IID Omo Orimolusi in Diaspora, 2025",
-    tag: "Carnival",
-  },
-  {
-    id: 8,
-    title: "IID Carnival 2025 (Part 3)",
-    description:
-      "Further highlights from IID Carnival 2025 — more moments of culture, colour, music, and community celebration.",
-    src: "/videos/events/iid-carnival-3.mp4",
-    date: "IID Omo Orimolusi in Diaspora, 2025",
-    tag: "Carnival",
-  },
-  {
-    id: 3,
-    title: "IID New Year Party",
-    description:
-      "Members of IID Omo Orimolusi in Diaspora come together to celebrate the new year in style — a joyful evening of music, culture, and community.",
-    src: "/videos/events/iid-new-year-party.mp4",
-    date: "IID Omo Orimolusi in Diaspora",
-    tag: "Community",
-  },
-];
 
-// ── Video Player Card ─────────────────────────────────────────────────────────
-function VideoCard({ video, index, large = false }: { video: EventVideo; index: number; large?: boolean }) {
-  const videoRef = useRef<HTMLVideoElement>(null);
+/* ── Pulsing play button ─────────────────────────────────────── */
+function PlayBtn({ size = 28, glow }: { size?: number; glow: string }) {
+  return (
+    <div className="relative flex items-center justify-center">
+      {/* Pulse rings */}
+      {[1, 2].map((i) => (
+        <motion.div
+          key={i}
+          className="absolute rounded-full border border-white/20"
+          style={{ width: size * 2.6 + i * 22, height: size * 2.6 + i * 22 }}
+          animate={{ scale: [1, 1.25, 1], opacity: [0.4, 0, 0.4] }}
+          transition={{ duration: 2.2, repeat: Infinity, ease: "easeOut", delay: i * 0.5 }}
+        />
+      ))}
+      <motion.div
+        whileHover={{ scale: 1.12 }}
+        className="relative z-10 rounded-full bg-accent flex items-center justify-center shadow-lg"
+        style={{
+          width: size * 2.2,
+          height: size * 2.2,
+          boxShadow: `0 0 28px ${glow}`,
+        }}
+      >
+        <Play className="text-black ml-0.5" size={size} fill="currentColor" />
+      </motion.div>
+    </div>
+  );
+}
+
+/* ── Regular video card ──────────────────────────────────────── */
+function VideoCard({
+  video, index, wide = false,
+}: {
+  video: EventVideo; index: number; wide?: boolean;
+}) {
+  const videoRef  = useRef<HTMLVideoElement>(null);
   const [loaded, setLoaded]   = useState(false);
   const [playing, setPlaying] = useState(false);
   const [muted, setMuted]     = useState(false);
 
-  const handleFirstPlay = () => setLoaded(true);
+  const cfg = TAG_CONFIG[video.tag];
 
   const togglePlay = () => {
     if (!videoRef.current) return;
     playing ? videoRef.current.pause() : videoRef.current.play();
     setPlaying((v) => !v);
   };
-
   const toggleMute = () => {
     if (!videoRef.current) return;
     videoRef.current.muted = !muted;
@@ -155,40 +116,37 @@ function VideoCard({ video, index, large = false }: { video: EventVideo; index: 
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 32 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      layout
+      initial={{ opacity: 0, y: 28, scale: 0.96 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.55, delay: index * 0.07 }}
-      whileHover={{ y: -4 }}
-      className={`group relative rounded-2xl overflow-hidden border border-white/10
-                  bg-white/5 backdrop-blur-sm shadow-xl hover:shadow-2xl
-                  hover:border-accent/40 transition-all duration-300 flex flex-col`}
+      transition={{ duration: 0.5, delay: index * 0.06, ease: [0.16, 1, 0.3, 1] }}
+      className={`group relative rounded-2xl overflow-hidden border border-white/8
+                  bg-white/4 hover:border-accent/50 transition-all duration-300
+                  flex flex-col hover:shadow-[0_0_40px_rgba(180,140,60,0.15)]
+                  ${wide ? "sm:col-span-2" : ""}`}
     >
-      {/* Video area */}
-      <div className={`relative bg-black ${large ? "aspect-video" : "aspect-video"} overflow-hidden`}>
-
-        {/* Glow ring on hover */}
-        <div className="absolute inset-0 rounded-t-2xl ring-0 group-hover:ring-2 ring-accent/30 transition-all duration-300 z-10 pointer-events-none" />
+      {/* Thumbnail / player */}
+      <div className="relative aspect-video overflow-hidden">
+        {/* Hover glow ring */}
+        <div className="absolute inset-0 z-10 pointer-events-none rounded-t-2xl
+                        ring-0 group-hover:ring-2 ring-accent/40 transition-all duration-300" />
 
         {/* ── YouTube ── */}
         {video.youtubeId && !loaded && (
-          <button onClick={handleFirstPlay} className="absolute inset-0 w-full h-full" aria-label="Play video">
+          <button
+            onClick={() => setLoaded(true)}
+            className="absolute inset-0 w-full h-full"
+            aria-label="Play video"
+          >
             <img
               src={`https://img.youtube.com/vi/${video.youtubeId}/maxresdefault.jpg`}
               alt={video.title}
-              className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
+              className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-black/20" />
             <div className="absolute inset-0 flex items-center justify-center">
-              <motion.div
-                whileHover={{ scale: 1.15 }}
-                className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-accent flex items-center justify-center shadow-[0_0_30px_rgba(180,140,60,0.5)]"
-              >
-                <Play className="text-black ml-1" size={large ? 32 : 26} fill="currentColor" />
-              </motion.div>
-            </div>
-            <div className="absolute bottom-3 left-3">
-              <span className="text-xs font-bold text-white/70 bg-black/50 px-2 py-1 rounded-full">▶ Click to play</span>
+              <PlayBtn size={22} glow={cfg.glow} />
             </div>
           </button>
         )}
@@ -204,17 +162,27 @@ function VideoCard({ video, index, large = false }: { video: EventVideo; index: 
 
         {/* ── Local MP4 ── */}
         {video.src && !loaded && (
-          <button onClick={handleFirstPlay} className="absolute inset-0 w-full h-full group/play" aria-label="Play video">
-            {/* Gradient placeholder */}
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/40 via-primary/20 to-black/80" />
-            <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
-              <motion.div
-                whileHover={{ scale: 1.15 }}
-                className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-accent flex items-center justify-center shadow-[0_0_30px_rgba(180,140,60,0.5)] group-hover/play:shadow-[0_0_50px_rgba(180,140,60,0.7)] transition-shadow duration-300"
-              >
-                <Play className="text-black ml-1" size={large ? 32 : 26} fill="currentColor" />
-              </motion.div>
-              <p className="text-white/60 text-xs font-medium px-6 text-center line-clamp-1">{video.title}</p>
+          <button
+            onClick={() => setLoaded(true)}
+            className="absolute inset-0 w-full h-full"
+            aria-label="Play video"
+          >
+            {/* Tag-coloured gradient thumbnail */}
+            <div className={`absolute inset-0 bg-gradient-to-br ${cfg.gradient}`} />
+            {/* Subtle grid texture */}
+            <div
+              className="absolute inset-0 opacity-10"
+              style={{
+                backgroundImage: "linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px)",
+                backgroundSize: "32px 32px",
+              }}
+            />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <PlayBtn size={22} glow={cfg.glow} />
+            </div>
+            {/* Title overlay at bottom */}
+            <div className="absolute bottom-0 inset-x-0 px-4 pb-4 bg-gradient-to-t from-black/80 to-transparent">
+              <p className="text-white/80 text-xs font-semibold line-clamp-1">{video.title}</p>
             </div>
           </button>
         )}
@@ -229,73 +197,188 @@ function VideoCard({ video, index, large = false }: { video: EventVideo; index: 
               preload="none"
               playsInline
             />
-            {!playing && (
-              <div className="absolute inset-0 flex items-center justify-center bg-black/30">
-                <motion.button
-                  whileHover={{ scale: 1.12 }}
-                  onClick={togglePlay}
-                  className="w-16 h-16 rounded-full bg-accent flex items-center justify-center shadow-[0_0_30px_rgba(180,140,60,0.5)]"
+            <AnimatePresence>
+              {!playing && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="absolute inset-0 flex items-center justify-center bg-black/35"
                 >
-                  <Play className="text-black ml-1" size={26} fill="currentColor" />
-                </motion.button>
-              </div>
-            )}
-            {/* Controls bar */}
+                  <PlayBtn size={22} glow={cfg.glow} />
+                </motion.div>
+              )}
+            </AnimatePresence>
+            {/* Controls */}
             <div className="absolute bottom-0 inset-x-0 flex items-center gap-2 px-3 py-2.5
                             bg-gradient-to-t from-black/80 to-transparent
                             opacity-0 group-hover:opacity-100 transition-opacity duration-200">
               <button onClick={togglePlay} className="text-white hover:text-accent transition-colors">
-                {playing ? <Pause size={17} /> : <Play size={17} />}
+                {playing ? <Pause size={16} /> : <Play size={16} />}
               </button>
               <button onClick={toggleMute} className="text-white hover:text-accent transition-colors">
-                {muted ? <VolumeX size={17} /> : <Volume2 size={17} />}
+                {muted ? <VolumeX size={16} /> : <Volume2 size={16} />}
               </button>
               <div className="flex-1" />
               <button onClick={() => videoRef.current?.requestFullscreen()} className="text-white hover:text-accent transition-colors">
-                <Maximize size={15} />
+                <Maximize size={14} />
               </button>
             </div>
           </>
         )}
       </div>
 
-      {/* Info */}
+      {/* Card info */}
       <div className="p-4 flex-1 flex flex-col gap-2">
         <div className="flex items-center gap-2 flex-wrap">
-          <span className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full border ${TAG_COLORS[video.tag]}`}>
+          <span className={`inline-flex items-center gap-1 text-[10px] font-bold px-2.5 py-0.5 rounded-full border ${cfg.pill}`}>
+            {TAG_FILTER_ICONS[video.tag]}
             {video.tag}
           </span>
-          <span className="text-[10px] text-white/40 ml-auto">{video.date}</span>
+          <span className="text-[10px] text-white/35 ml-auto">{video.date}</span>
         </div>
-        <h3 className={`font-display font-bold text-white leading-snug
-                        ${large ? "text-lg sm:text-xl" : "text-sm sm:text-base"}`}>
+        <h3 className="font-display font-bold text-white text-sm sm:text-base leading-snug line-clamp-2 group-hover:text-accent/90 transition-colors duration-200">
           {video.title}
         </h3>
-        <p className={`text-white/55 leading-relaxed flex-1 ${large ? "text-sm" : "text-xs"} line-clamp-2`}>
+        <p className="text-white/50 text-xs leading-relaxed line-clamp-2 flex-1">
           {video.description}
         </p>
         {video.credit && (
-          <p className="text-[10px] text-white/30 mt-1">Courtesy of {video.credit}</p>
+          <p className="text-[10px] text-white/25 mt-1">Courtesy: {video.credit}</p>
         )}
       </div>
     </motion.div>
   );
 }
 
-// ── Main Export ───────────────────────────────────────────────────────────────
+/* ── Featured cinematic card ────────────────────────────────── */
+function FeaturedCard({ video }: { video: EventVideo }) {
+  const [loaded, setLoaded] = useState(false);
+  const cfg = TAG_CONFIG[video.tag];
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+      className="rounded-3xl overflow-hidden border border-white/10 bg-white/4
+                 hover:border-accent/40 transition-all duration-300
+                 hover:shadow-[0_0_60px_rgba(180,140,60,0.12)]"
+    >
+      <div className="grid grid-cols-1 lg:grid-cols-5">
+        {/* Left: info panel */}
+        <div className="lg:col-span-2 p-7 sm:p-10 flex flex-col justify-center
+                        bg-gradient-to-br from-white/5 to-transparent">
+          {/* Live badge */}
+          <div className="flex items-center gap-2 mb-5">
+            <span className="flex items-center gap-1.5 text-xs font-black text-red-400 uppercase tracking-widest">
+              <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+              Featured
+            </span>
+            <span className={`inline-flex items-center gap-1 text-[10px] font-bold px-2.5 py-0.5 rounded-full border ${cfg.pill}`}>
+              {TAG_FILTER_ICONS[video.tag]}
+              {video.tag}
+            </span>
+          </div>
+
+          <h2 className="font-display font-black text-white text-xl sm:text-2xl lg:text-3xl leading-tight mb-3">
+            {video.title}
+          </h2>
+          <p className="text-white/55 text-sm leading-relaxed mb-5">
+            {video.description}
+          </p>
+
+          <div className="flex flex-col gap-1.5 mb-6 text-xs text-white/40 font-medium">
+            <span>📅 {video.date}</span>
+            {video.credit && <span>🎥 Courtesy: {video.credit}</span>}
+          </div>
+
+          {!loaded && (
+            <motion.button
+              onClick={() => setLoaded(true)}
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              className="self-start inline-flex items-center gap-2 bg-accent text-black
+                         font-bold text-sm px-6 py-3 rounded-xl hover:brightness-110
+                         transition-all shadow-lg"
+              style={{ boxShadow: `0 0 20px ${cfg.glow}` }}
+            >
+              <Play size={15} fill="currentColor" />
+              Watch Now
+            </motion.button>
+          )}
+        </div>
+
+        {/* Right: video */}
+        <div className="lg:col-span-3 relative aspect-video lg:aspect-auto min-h-[220px] bg-black">
+          {video.youtubeId && !loaded && (
+            <button
+              onClick={() => setLoaded(true)}
+              className="absolute inset-0 w-full h-full group/thumb"
+              aria-label="Play featured video"
+            >
+              <img
+                src={`https://img.youtube.com/vi/${video.youtubeId}/maxresdefault.jpg`}
+                alt={video.title}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover/thumb:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/20 to-transparent lg:block hidden" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent lg:hidden" />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <PlayBtn size={32} glow={cfg.glow} />
+              </div>
+            </button>
+          )}
+          {video.youtubeId && loaded && (
+            <iframe
+              src={`https://www.youtube.com/embed/${video.youtubeId}?autoplay=1`}
+              title={video.title}
+              allow="autoplay; encrypted-media"
+              allowFullScreen
+              className="absolute inset-0 w-full h-full"
+            />
+          )}
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+/* ── Main export ─────────────────────────────────────────────── */
 export default function EventVideos() {
+  const { data: EVENT_VIDEOS = [] } = useSanityEventVideos();
   const [activeTag, setActiveTag] = useState<VideoTag | "All">("All");
 
   const featured = EVENT_VIDEOS.find((v) => v.featured);
-  const rest = EVENT_VIDEOS.filter((v) => !v.featured);
+  const rest     = EVENT_VIDEOS.filter((v) => !v.featured);
 
   const filtered = activeTag === "All"
     ? rest
     : rest.filter((v) => v.tag === activeTag);
 
+  const tagCounts = ALL_TAGS.reduce<Record<string, number>>((acc, tag) => {
+    acc[tag] = rest.filter((v) => v.tag === tag).length;
+    return acc;
+  }, {});
+
   return (
-    <section className="bg-[#0d0d0d] border-t border-white/10 py-16 px-4">
-      <div className="max-w-6xl mx-auto">
+    <section className="relative bg-[#080808] border-t border-white/8 py-16 px-4 overflow-hidden">
+      {/* Subtle noise/grain background */}
+      <div
+        className="absolute inset-0 opacity-[0.03] pointer-events-none"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+          backgroundRepeat: "repeat",
+          backgroundSize: "128px",
+        }}
+      />
+
+      {/* Ambient glow blobs */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-accent/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-primary/10 rounded-full blur-[100px] pointer-events-none" />
+
+      <div className="relative max-w-6xl mx-auto">
 
         {/* ── Section header ── */}
         <motion.div
@@ -307,81 +390,124 @@ export default function EventVideos() {
         >
           <div>
             <div className="inline-flex items-center gap-2 bg-accent/15 border border-accent/25
-                            text-accent text-xs font-bold px-3 py-1.5 rounded-full mb-4 tracking-wider uppercase">
+                            text-accent text-xs font-black px-3 py-1.5 rounded-full mb-4
+                            tracking-[0.15em] uppercase">
               <Film size={12} />
               Video Archive
             </div>
             <h2 className="font-display font-black text-white text-3xl sm:text-4xl md:text-5xl leading-tight">
               Relive the <span className="text-accent">Moments</span>
             </h2>
-            <p className="text-white/50 text-sm mt-2 max-w-lg">
-              Royal visits, cultural festivals, carnival celebrations, and community milestones —
-              all captured and preserved for generations to come.
+            <p className="text-white/45 text-sm mt-2.5 max-w-lg leading-relaxed">
+              Royal visits, cultural festivals, carnival celebrations — captured and preserved for generations to come.
             </p>
           </div>
-          <div className="text-white/30 text-sm font-semibold shrink-0">
-            {EVENT_VIDEOS.length} videos
-          </div>
+
+          {/* Video count pill */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.85 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: 0.2 }}
+            className="shrink-0 inline-flex items-center gap-2 border border-white/10
+                       rounded-2xl px-4 py-2.5 bg-white/4 backdrop-blur-sm"
+          >
+            <Film size={14} className="text-accent" />
+            <span className="text-white font-black text-lg leading-none">{EVENT_VIDEOS.length}</span>
+            <span className="text-white/40 text-xs font-semibold">videos</span>
+          </motion.div>
         </motion.div>
 
         {/* ── Featured video ── */}
         {featured && (
-          <div className="mb-8">
-            <div className="flex items-center gap-2 mb-3">
-              <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-              <span className="text-xs font-bold text-red-400 uppercase tracking-widest">Featured</span>
-            </div>
-            <VideoCard video={featured} index={0} large />
+          <div className="mb-10">
+            <FeaturedCard video={featured} />
           </div>
         )}
 
+        {/* ── Divider ── */}
+        <div className="flex items-center gap-4 mb-7">
+          <div className="flex-1 h-px bg-white/8" />
+          <span className="text-white/25 text-xs font-bold uppercase tracking-widest">More Videos</span>
+          <div className="flex-1 h-px bg-white/8" />
+        </div>
+
         {/* ── Filter tabs ── */}
-        <div className="flex items-center gap-2 flex-wrap mb-6">
-          <button
+        <div className="flex items-center gap-2 flex-wrap mb-7">
+          <motion.button
             onClick={() => setActiveTag("All")}
+            whileTap={{ scale: 0.94 }}
             className={`text-xs font-bold px-4 py-1.5 rounded-full border transition-all duration-200 ${
               activeTag === "All"
-                ? "bg-accent text-black border-accent"
-                : "border-white/15 text-white/50 hover:border-white/40 hover:text-white"
+                ? "bg-accent text-black border-accent shadow-[0_0_12px_rgba(180,140,60,0.4)]"
+                : "border-white/15 text-white/50 hover:border-white/35 hover:text-white"
             }`}
           >
-            All
-          </button>
-          {ALL_TAGS.map((tag) => (
-            <button
+            All ({rest.length})
+          </motion.button>
+          {ALL_TAGS.filter((t) => tagCounts[t] > 0).map((tag) => (
+            <motion.button
               key={tag}
               onClick={() => setActiveTag(tag === activeTag ? "All" : tag)}
-              className={`text-xs font-bold px-4 py-1.5 rounded-full border transition-all duration-200 ${
-                activeTag === tag
-                  ? "bg-accent text-black border-accent"
-                  : "border-white/15 text-white/50 hover:border-white/40 hover:text-white"
-              }`}
+              whileTap={{ scale: 0.94 }}
+              className={`inline-flex items-center gap-1.5 text-xs font-bold px-4 py-1.5
+                          rounded-full border transition-all duration-200 ${
+                            activeTag === tag
+                              ? "bg-accent text-black border-accent shadow-[0_0_12px_rgba(180,140,60,0.4)]"
+                              : "border-white/15 text-white/50 hover:border-white/35 hover:text-white"
+                          }`}
             >
+              {TAG_FILTER_ICONS[tag]}
               {tag}
-            </button>
+              <span className={`text-[10px] font-black px-1.5 py-0.5 rounded-full ${
+                activeTag === tag ? "bg-black/20" : "bg-white/10"
+              }`}>
+                {tagCounts[tag]}
+              </span>
+            </motion.button>
           ))}
         </div>
 
         {/* ── Video grid ── */}
         <AnimatePresence mode="popLayout">
-          <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {filtered.map((video, i) => (
-              <VideoCard key={video.id} video={video} index={i} />
-            ))}
-            {filtered.length === 0 && (
+          {filtered.length === 0 ? (
+            <motion.div
+              key="empty"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
+              className="py-20 text-center"
+            >
               <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="col-span-full py-16 text-center text-white/30"
+                animate={{ y: [0, -8, 0] }}
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
               >
-                <Film size={40} className="mx-auto mb-3 opacity-30" />
-                <p className="font-semibold">No videos in this category yet</p>
-                <button onClick={() => setActiveTag("All")} className="mt-2 text-sm text-accent hover:underline flex items-center gap-1 mx-auto">
-                  View all videos <ChevronRight size={14} />
-                </button>
+                <Film size={44} className="mx-auto mb-4 text-white/15" />
               </motion.div>
-            )}
-          </motion.div>
+              <p className="font-semibold text-white/40 mb-2">No videos in this category yet</p>
+              <button
+                onClick={() => setActiveTag("All")}
+                className="text-sm text-accent hover:underline flex items-center gap-1 mx-auto"
+              >
+                View all videos <ChevronRight size={14} />
+              </button>
+            </motion.div>
+          ) : (
+            <motion.div
+              key="grid"
+              layout
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
+            >
+              {filtered.map((video, i) => (
+                <VideoCard
+                  key={video.id}
+                  video={video}
+                  index={i}
+                  wide={i === 0 && filtered.length >= 3}
+                />
+              ))}
+            </motion.div>
+          )}
         </AnimatePresence>
       </div>
     </section>

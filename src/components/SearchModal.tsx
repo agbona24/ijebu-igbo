@@ -2,8 +2,8 @@ import { useState, useEffect, useRef, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, X, ArrowRight, Building2, Newspaper, Calendar, LayoutGrid } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { BUSINESSES } from "@/data/businesses";
-import { NEWS_ARTICLES } from "@/data/news";
+import { useSanityBusinesses } from "@/hooks/useSanityBusinesses";
+import { useSanityNews } from "@/hooks/useSanityNews";
 
 interface SearchResult {
   type: "business" | "news" | "event" | "page";
@@ -53,6 +53,8 @@ export default function SearchModal({ open, onOpenChange }: Props) {
   const [query, setQuery] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
+  const { data: BUSINESSES = [] } = useSanityBusinesses();
+  const { data: NEWS_ARTICLES = [] } = useSanityNews();
 
   useEffect(() => {
     if (open) {
@@ -111,7 +113,7 @@ export default function SearchModal({ open, onOpenChange }: Props) {
     });
 
     return found.slice(0, 12);
-  }, [query]);
+  }, [query, BUSINESSES, NEWS_ARTICLES]);
 
   const handleSelect = (href: string) => {
     navigate(href);

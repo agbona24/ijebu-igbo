@@ -1,27 +1,15 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence, useMotionValue, useTransform, useSpring } from "framer-motion";
 import { Images, X, ChevronLeft, ChevronRight, ZoomIn, Expand } from "lucide-react";
-
-const policeImages = Array.from({ length: 23 }, (_, i) => ({
-  src: `/images/police_area_command/review${i + 1}.jpg`,
-  alt: `Police Area Command Commissioning - ${i + 1}`,
-}));
-
-const images = [
-  { src: "/images/courtesy-call-orimolusi.jpeg", alt: "Courtesy Call to the Orimolusi of Ijebu Igbo" },
-  { src: "/images/iid-carnival1.jpeg", alt: "IID Carnival 2025" },
-  { src: "/images/iid-carnival2.jpeg", alt: "IID Carnival 2025" },
-  { src: "/images/iid-carnival3.jpeg", alt: "IID Carnival 2025" },
-  ...policeImages,
-];
+import { useSanityGallery, type GalleryImage } from "@/hooks/useSanityGallery";
 
 const PAGE_SIZE = 8;
 
 /* ── Lightbox with directional slide ─────────────────────────── */
 function Lightbox({
-  index, direction, onClose, onPrev, onNext,
+  images, index, direction, onClose, onPrev, onNext,
 }: {
-  index: number; direction: number;
+  images: GalleryImage[]; index: number; direction: number;
   onClose: () => void; onPrev: () => void; onNext: () => void;
 }) {
   const img = images[index];
@@ -210,6 +198,7 @@ function GalleryCard({
 
 /* ── Main component ───────────────────────────────────────────── */
 export default function Gallery() {
+  const { data: images = [] } = useSanityGallery();
   const [visible, setVisible] = useState(PAGE_SIZE);
   const [prevVisible, setPrevVisible] = useState(0);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
@@ -224,12 +213,12 @@ export default function Gallery() {
   const prev = useCallback(() => {
     setDirection(-1);
     setLightboxIndex((i) => i === null ? null : (i - 1 + images.length) % images.length);
-  }, []);
+  }, [images.length]);
 
   const next = useCallback(() => {
     setDirection(1);
     setLightboxIndex((i) => i === null ? null : (i + 1) % images.length);
-  }, []);
+  }, [images.length]);
 
   const handleShowMore = () => {
     setPrevVisible(visible);
@@ -333,6 +322,7 @@ export default function Gallery() {
       <AnimatePresence>
         {lightboxIndex !== null && (
           <Lightbox
+            images={images}
             index={lightboxIndex}
             direction={direction}
             onClose={close}

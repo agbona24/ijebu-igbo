@@ -4,12 +4,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Crown, MapPin, Quote, ArrowLeft, ChevronLeft, ChevronRight, BookOpen, Star } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { kings } from "@/data/kings";
+import { useSanityKings } from "@/hooks/useSanityKings";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
 export default function KingProfile() {
   const { slug } = useParams();
+  const { data: kings = [] } = useSanityKings();
   const king = kings.find((k) => k.slug === slug);
 
   if (!king) {

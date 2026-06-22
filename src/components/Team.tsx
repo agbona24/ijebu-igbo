@@ -1,60 +1,11 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { User, X, ChevronDown } from "lucide-react";
+import { useSanityTeam } from "@/hooks/useSanityTeam";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
 type Member = { name: string; role: string; photo?: string | null };
-
-/* ── Data ─────────────────────────────────────────────────────── */
-
-const patronMatron: Member[] = [
-  { name: "Chief Emmanuel Folorunso Ogunnaike, JP, MFR", role: "Patron", photo: "/team/chief-emmanuel-ogunnaike.jpeg" },
-  { name: "Chief Mrs Ibilola Solaja", role: "Matron", photo: "/team/chief-mrs-ibilola-solaja.png" },
-];
-
-const advisers: Member[] = [
-  { name: "Mrs Silifat Haruna Ishola Bello", role: "Special Adviser", photo: "/team/mrs-silifat-haruna-ishola-bello.jpeg" },
-  { name: "Architect Pa Sunday Kukoyi", role: "Special Adviser", photo: "/team/architect-pa-sunday-kukoyi.jpeg" },
-];
-
-const pastPresidents: Member[] = [
-  { name: "Pa (Barr.) Popoola Sojirin", role: "Emeritus President", photo: "/team/barr-popoola-sojirin.jpeg" },
-  { name: "Otunba Ola Busari", role: "Past President (2017–2019)", photo: null },
-];
-
-const currentExecutives: Member[] = [
-  { name: "Chief Toyin Odueyungbo", role: "President", photo: "/team/chief-toyin-odueyungbo.jpeg" },
-  { name: "Revd Franklin Babaranti Okunowo", role: "Vice President (2022 – Present)", photo: "/team/evd-franklin-okunowo.jpeg" },
-  { name: "Ms. Adetutu Ogunsanwo", role: "General Secretary (2021 – Present)", photo: "/team/ms-adetutu-ogunsanwo.jpeg" },
-  { name: "Pa (Barr.) Popoola Sojirin", role: "Legal Adviser 2 | Member, Council of Elders", photo: "/team/barr-popoola-sojirin.jpeg" },
-  { name: "Alh Sadekunle Hamzat-Maja", role: "Auditor", photo: "/team/alh-sadekunle-hamzat-maja.jpeg" },
-  { name: "Otunba Ola Busari", role: "PRO", photo: null },
-];
-
-const pastExecutiveTeam: Member[] = [
-  { name: "Mrs. Funke Adenuga", role: "Gen. Secretary" },
-  { name: "Princess Toun Adebanjo", role: "Asst. Gen. Secretary" },
-  { name: "Otunba Titi Bashorun", role: "Treasurer" },
-  { name: "Alhaji Wasiu Agbona", role: "Chief Whip" },
-  { name: "Mrs. Funleyi Oluyemisi Amudipe", role: "Internal Auditor" },
-  { name: "Alhaji Fatai Olaide", role: "Legal Affairs Officer" },
-  { name: "Deaconess Mrs. Roselyn Sojirin (JP)", role: "Women Affair Officer" },
-  { name: "Alhaji Bola Gafar", role: "PRO" },
-  { name: "Chief Mrs. Bisi Kazeem, Yeyeluwa of Atikori", role: "Social Secretary (4 Years)", photo: "/team/chief-mrs-bisi-kazeem.jpeg" },
-  { name: "Mr. Rafiu Adejobi", role: "Welfare Officer" },
-  { name: "Alh Sadekunle Hamzat-Maja", role: "Former Financial Secretary & Former Treasurer" },
-  { name: "Bisi Daramola Odubanjo", role: "Social Secretary" },
-  { name: "Prince Stephen Ademola Gbadebo", role: "Chairman, Dispute & Resolution Committee" },
-  { name: "Dr. Dayo Amudipe", role: "Former Vice President" },
-  { name: "Alhaja Ikeoluwa Oguntayo", role: "Vice President" },
-  { name: "Chief Toyin Odueyungbo", role: "Past Secretary" },
-  { name: "Dapo Nadi", role: "Past Executive" },
-  { name: "Abi Okuyemi", role: "Past Executive" },
-  { name: "Kaz Haruna Ishola", role: "Past Executive" },
-];
-
-const generalMembers: Member[] = [];
 
 /* ── Lightbox ─────────────────────────────────────────────────── */
 function PhotoLightbox({ member, onClose }: { member: Member; onClose: () => void }) {
@@ -272,6 +223,14 @@ function CollapsibleSection({ members }: { members: Member[] }) {
 
 /* ── Main Component ──────────────────────────────────────────── */
 export default function Team() {
+  const { data } = useSanityTeam();
+  const patronMatron = data?.patronMatron ?? [];
+  const advisers = data?.advisers ?? [];
+  const currentExecutives = data?.currentExecutives ?? [];
+  const pastPresidents = data?.pastPresidents ?? [];
+  const pastExecutiveTeam = data?.pastExecutiveTeam ?? [];
+  const generalMembers = data?.generalMembers ?? [];
+
   return (
     <section id="team" className="section-padding bg-background">
       <div className="container-main">

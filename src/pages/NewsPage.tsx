@@ -6,9 +6,11 @@ import Footer from "@/components/Footer";
 import FloatingContact from "@/components/FloatingContact";
 import BackToTop from "@/components/BackToTop";
 import AnimatedHeroBg from "@/components/AnimatedHeroBg";
-import { NEWS_ARTICLES } from "@/data/news";
+import { useSanityNews } from "@/hooks/useSanityNews";
 
 export default function NewsPage() {
+  const { data: NEWS_ARTICLES = [] } = useSanityNews();
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />

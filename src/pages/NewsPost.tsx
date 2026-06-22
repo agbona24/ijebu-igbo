@@ -6,11 +6,12 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingContact from "@/components/FloatingContact";
 import BackToTop from "@/components/BackToTop";
-import { NEWS_ARTICLES } from "@/data/news";
+import { useSanityNews } from "@/hooks/useSanityNews";
 
 export default function NewsPost() {
   const { id } = useParams();
-  const article = id ? NEWS_ARTICLES.find((a) => a.id === id) ?? null : null;
+  const { data: newsArticles = [] } = useSanityNews();
+  const article = id ? newsArticles.find((a) => a.id === id) ?? null : null;
 
   // Scroll to top when component mounts
   useEffect(() => {

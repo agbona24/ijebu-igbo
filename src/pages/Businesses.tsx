@@ -14,11 +14,11 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AnimatedHeroBg from "@/components/AnimatedHeroBg";
 import {
-  BUSINESSES,
   CATEGORY_GRADIENTS,
   CATEGORY_COLORS,
   type Business,
 } from "@/data/businesses";
+import { useSanityBusinesses } from "@/hooks/useSanityBusinesses";
 
 const CATEGORY_PILLS = [
   "Food & Catering",
@@ -275,6 +275,8 @@ function BusinessCard({ business, index }: { business: Business; index: number }
 
 /* ── Main page ──────────────────────────────────────────────────── */
 export default function Businesses() {
+  const { data: BUSINESSES = [] } = useSanityBusinesses();
+
   useEffect(() => {
     const title = "Business Directory | Ijebu Igbo Descendants — Connect Ijebu Roots";
     const desc  = "Browse businesses owned by Ijebu Igbo descendants in Nigeria and across the diaspora.";

@@ -33,6 +33,7 @@ import BusinessProfile from "./pages/BusinessProfile.tsx";
 import JoinPage from "./pages/JoinPage.tsx";
 import KingProfile from "./pages/KingProfile.tsx";
 import NewsPage from "./pages/NewsPage.tsx";
+import TourismPage from "./pages/TourismPage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -54,6 +55,7 @@ const App = () => (
           <Route path="/gallery"     element={<GalleryPage />} />
           <Route path="/contact"     element={<ContactPage />} />
           <Route path="/news"          element={<NewsPage />} />
+          <Route path="/tourism"       element={<TourismPage />} />
           <Route path="/news/:id"    element={<NewsPost />} />
           <Route path="/businesses"          element={<Businesses />} />
           <Route path="/businesses/:slug"    element={<BusinessProfile />} />
