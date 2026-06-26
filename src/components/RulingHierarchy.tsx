@@ -33,6 +33,8 @@ const gradeTwo = [
   {
     title: "Bejeroku",
     area: "Okeagbo",
+    name: "His Royal Highness Oba Stephen Adekoya, The Bejeroku of Oke-Agbo",
+    photo: "/images/oba-bejeroku-stephen-adekoya.png",
     color: "from-emerald-700 to-emerald-500",
     accent: "border-emerald-500/40 bg-emerald-50",
     badge: "bg-emerald-100 text-emerald-800",
