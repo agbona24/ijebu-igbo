@@ -1,7 +1,14 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Crown, ChevronDown, MapPin, User } from "lucide-react";
+import { Crown, ChevronDown, MapPin, User, Briefcase, Phone } from "lucide-react";
+
+interface ChiefRecord {
+  name: string;
+  title: string;
+  occupation: string;
+  phone?: string;
+}
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -46,6 +53,20 @@ const gradeTwo = [
     color: "from-blue-700 to-blue-500",
     accent: "border-blue-500/40 bg-blue-50",
     badge: "bg-blue-100 text-blue-800",
+    name: "His Royal Highness Oba Abdulrasheed Abayomi Banjo, PhD — Akereburu, Orilonise I",
+    photo: "/images/oba-olokine-abdulrasheed-banjo.png",
+    queenName: "Her Royal Highness Olori Oluyinka Banjo, FISLT — The Olori Olokine of Ojowo",
+    queenPhoto: "/images/olori-olokine-ojowo.png",
+    administrationImage: "/images/ojowo-administration.png",
+    administration: [
+      { name: "Chief Bisiriyu Ajobiewe",       title: "Pampa Molusewu",                occupation: "Native Doctor" },
+      { name: "Chief (Dr.) Gbolade Kazeem",    title: "Olootu Pampa",                  occupation: "Native Doctor" },
+      { name: "Chief Mufutau Isamo",           title: "Oloritun Agba",                 occupation: "Welder" },
+      { name: "Chief Abiodun Ogundero",        title: "Ojowo Babaloja",                occupation: "Estate Agent",        phone: "08076416098" },
+      { name: "Chief Akeem Saibu",             title: "Baale Olowa",                   occupation: "Farmer" },
+      { name: "Chief Pst. Adebisi Ogundero",   title: "Majebolije of Ojowo / Chief of Staff", occupation: "School Proprietor", phone: "08050662897" },
+      { name: "Chief Alaba Isamo",             title: "Olori Odo",                     occupation: "Estate Management",   phone: "08140387798" },
+    ] as ChiefRecord[],
     bales: [
       "Ita-Egba","Timode","Alege","Sonokiki","Oligbo","Sojinrin","Kujore",
       "Orita Agbede","Owonowen","Digbolu","Oluwa","Ajegunle","Lumogede",
@@ -115,25 +136,37 @@ function ObaCard({ oba, index }: { oba: typeof gradeTwo[0]; index: number }) {
       >
         <div className={`bg-gradient-to-r ${oba.color} px-5 py-4 flex items-center justify-between gap-4`}>
           <div className="flex items-center gap-4 min-w-0">
-            {/* Photo or placeholder */}
-            {"photo" in oba && oba.photo ? (
-              <img
-                src={oba.photo}
-                alt={oba.name ?? oba.title}
-                className="w-14 h-14 sm:w-16 sm:h-16 rounded-full object-cover shrink-0 border-2 border-white/30 shadow-md"
-              />
-            ) : (
-              <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-white/15 border-2 border-white/20 flex items-center justify-center shrink-0">
-                <User className="w-6 h-6 text-white/50" />
-              </div>
-            )}
+            {/* Oba photo (+ Olori if present) */}
+            <div className="flex items-center shrink-0">
+              {"photo" in oba && oba.photo ? (
+                <img
+                  src={oba.photo as string}
+                  alt={"name" in oba ? String(oba.name) : oba.title}
+                  className="w-14 h-14 sm:w-16 sm:h-16 rounded-full object-cover border-2 border-white/30 shadow-md"
+                />
+              ) : (
+                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-white/15 border-2 border-white/20 flex items-center justify-center">
+                  <User className="w-6 h-6 text-white/50" />
+                </div>
+              )}
+              {"queenPhoto" in oba && oba.queenPhoto && (
+                <img
+                  src={oba.queenPhoto as string}
+                  alt={"queenName" in oba ? String(oba.queenName) : "Olori"}
+                  className="w-14 h-14 sm:w-16 sm:h-16 rounded-full object-cover border-2 border-white/30 shadow-md -ml-4"
+                />
+              )}
+            </div>
             <div className="min-w-0">
               <p className="text-white/70 text-xs font-bold uppercase tracking-widest mb-0.5">Grade Two Oba</p>
               <h3 className="text-white font-display font-black text-lg sm:text-xl leading-tight">
                 {oba.title} of {oba.area}
               </h3>
               {"name" in oba && oba.name && (
-                <p className="text-white/80 text-xs sm:text-sm mt-1 leading-snug">{oba.name}</p>
+                <p className="text-white/80 text-xs sm:text-sm mt-1 leading-snug">{String(oba.name)}</p>
+              )}
+              {"queenName" in oba && oba.queenName && (
+                <p className="text-white/60 text-xs mt-0.5 leading-snug">{String(oba.queenName)}</p>
               )}
             </div>
           </div>
@@ -159,21 +192,107 @@ function ObaCard({ oba, index }: { oba: typeof gradeTwo[0]; index: number }) {
             transition={{ duration: 0.3 }}
             className="overflow-hidden"
           >
-            <div className="p-5">
-              <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-3">
-                Bales under {oba.title}
-              </p>
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
-                {oba.bales.map((bale, i) => (
-                  <div
-                    key={i}
-                    className="flex items-center gap-1.5 text-xs text-foreground/80 font-medium"
-                  >
-                    <span className="w-1.5 h-1.5 rounded-full bg-current opacity-40 shrink-0" />
-                    {bale}
+            <div className="p-5 space-y-6">
+
+              {/* Administration section (only for entries that have it) */}
+              {"administration" in oba && Array.isArray(oba.administration) && (
+                <div>
+                  <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-4">
+                    Head of Departments
+                  </p>
+
+                  {/* Royal couple portraits */}
+                  {"photo" in oba && (oba.photo || ("queenPhoto" in oba && oba.queenPhoto)) && (
+                    <div className="grid grid-cols-2 gap-4 mb-5">
+                      {"photo" in oba && oba.photo && (
+                        <div className="text-center">
+                          <img
+                            src={oba.photo as string}
+                            alt={"name" in oba ? String(oba.name) : oba.title}
+                            className="w-full max-w-[200px] mx-auto rounded-2xl object-cover shadow-md border border-border aspect-[3/4]"
+                            loading="lazy"
+                          />
+                          <p className="text-xs font-semibold text-foreground mt-2 leading-snug">
+                            {"name" in oba ? String(oba.name) : `${oba.title} of ${oba.area}`}
+                          </p>
+                        </div>
+                      )}
+                      {"queenPhoto" in oba && oba.queenPhoto && (
+                        <div className="text-center">
+                          <img
+                            src={oba.queenPhoto as string}
+                            alt={"queenName" in oba ? String(oba.queenName) : "Olori"}
+                            className="w-full max-w-[200px] mx-auto rounded-2xl object-cover shadow-md border border-border aspect-[3/4]"
+                            loading="lazy"
+                          />
+                          <p className="text-xs font-semibold text-foreground mt-2 leading-snug">
+                            {"queenName" in oba ? String(oba.queenName) : "Olori"}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {"administrationImage" in oba && oba.administrationImage && (
+                    <div className="rounded-xl overflow-hidden border border-border mb-4 shadow-sm">
+                      <img
+                        src={oba.administrationImage as string}
+                        alt={`${oba.title} Administration`}
+                        className="w-full h-auto"
+                        loading="lazy"
+                      />
+                    </div>
+                  )}
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                    {(oba.administration as ChiefRecord[]).map((chief, i) => (
+                      <div
+                        key={i}
+                        className="bg-background rounded-xl border border-border p-3.5 space-y-1"
+                      >
+                        <div className="flex items-start gap-2">
+                          <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center shrink-0 mt-0.5">
+                            <User size={14} className="text-blue-600" />
+                          </div>
+                          <div>
+                            <h5 className="font-bold text-foreground text-sm leading-tight">{chief.name}</h5>
+                            <p className="text-accent text-xs font-semibold mt-0.5">{chief.title}</p>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-1.5 text-muted-foreground text-xs pl-10">
+                          <Briefcase size={11} className="shrink-0" />
+                          {chief.occupation}
+                        </div>
+                        {chief.phone && (
+                          <div className="flex items-center gap-1.5 text-muted-foreground text-xs pl-10">
+                            <Phone size={11} className="shrink-0" />
+                            {chief.phone}
+                          </div>
+                        )}
+                      </div>
+                    ))}
                   </div>
-                ))}
+                </div>
+              )}
+
+              {/* Bales list */}
+              <div>
+                <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-3">
+                  Bales under {oba.title}
+                </p>
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
+                  {oba.bales.map((bale, i) => (
+                    <div
+                      key={i}
+                      className="flex items-center gap-1.5 text-xs text-foreground/80 font-medium"
+                    >
+                      <span className="w-1.5 h-1.5 rounded-full bg-current opacity-40 shrink-0" />
+                      {bale}
+                    </div>
+                  ))}
+                </div>
               </div>
+
             </div>
           </motion.div>
         )}

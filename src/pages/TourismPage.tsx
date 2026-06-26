@@ -39,6 +39,20 @@ const PLACES: Place[] = [
     mapLink: "https://maps.google.com/?q=Aafin+Orimolusi+Palace,+Ijebu-Igbo,+Ogun+State,+Nigeria",
   },
   {
+    id: "ojowo-important-places",
+    name: "Important Places in Ojowo",
+    subtitle: "Ojowo Quarter, Ijebu-Igbo",
+    badge: "Heritage Site",
+    badgeColor: "bg-blue-700 text-white",
+    location: "Ojowo, Ijebu-Igbo, Ogun State, Nigeria",
+    image: "/images/ojowo-important-places.png",
+    description: [
+      "Ojowo is one of the five historic quarters of Ijebu-Igbo, governed under the traditional leadership of the Olokine. The quarter is home to a number of landmarks, sacred sites, and community spaces that have shaped the identity and daily life of its people across generations.",
+      "These places of interest reflect the deep cultural roots, communal spirit, and living heritage of the Ojowo people — from traditional meeting grounds and community centres to historically significant locations that have witnessed the growth of Ijebu-Igbo over the centuries.",
+    ],
+    quote: "The roots of Ojowo run deep — in its land, its people, and its legacy.",
+  },
+  {
     id: "unity-house",
     name: "Unity House",
     subtitle: "Multipurpose Learning Resource Centre",
