@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, MapPin, Facebook, Twitter, Instagram, Youtube, Phone, Globe, MessageCircle, ArrowRight, Users, CalendarDays, Flag } from "lucide-react";
+import { Mail, MapPin, Facebook, Twitter, Instagram, Youtube, Phone, Globe, MessageCircle, ArrowRight, Users, CalendarDays, Flag, Send } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const quickLinks = [
@@ -35,6 +36,45 @@ const stats = [
   { icon: Globe,       value: "3",     label: "Countries"    },
   { icon: Flag,        value: "1",     label: "Hometown"     },
 ];
+
+function NewsletterSignup() {
+  const [name, setName] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name.trim()) return;
+    const msg = `👋 *Community Updates Signup*\n\nName: ${name}\n\nPlease add me to the IID community updates list.`;
+    window.open(`https://wa.me/447496933887?text=${encodeURIComponent(msg)}`, "_blank");
+    setSubmitted(true);
+    setTimeout(() => { setSubmitted(false); setName(""); }, 3000);
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="flex items-center gap-2 w-full sm:w-auto">
+      {submitted ? (
+        <span className="text-accent font-semibold text-sm">Opening WhatsApp…</span>
+      ) : (
+        <>
+          <input
+            type="text"
+            required
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Your name…"
+            className="px-4 py-2.5 rounded-xl bg-primary-foreground/10 border border-primary-foreground/20 text-white placeholder:text-primary-foreground/40 text-sm focus:outline-none focus:ring-2 focus:ring-accent/50 w-44"
+          />
+          <button
+            type="submit"
+            className="flex items-center gap-1.5 bg-accent text-charcoal font-bold text-sm px-4 py-2.5 rounded-xl hover:bg-accent/90 transition-colors shrink-0"
+          >
+            <Send size={14} /> Sign Up
+          </button>
+        </>
+      )}
+    </form>
+  );
+}
 
 export default function Footer() {
   return (
@@ -144,6 +184,23 @@ export default function Footer() {
                 </div>
               </div>
             ))}
+          </motion.div>
+
+          {/* Newsletter signup */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.05 }}
+            className="mb-12 bg-primary-foreground/5 border border-primary-foreground/10 rounded-2xl px-6 py-6 flex flex-col sm:flex-row items-center gap-5"
+          >
+            <div className="sm:flex-1">
+              <h4 className="font-display font-bold text-white text-base mb-1">Stay Connected</h4>
+              <p className="text-primary-foreground/55 text-sm">
+                Sign up to receive community updates, event announcements, and news via WhatsApp.
+              </p>
+            </div>
+            <NewsletterSignup />
           </motion.div>
 
           {/* Main grid */}

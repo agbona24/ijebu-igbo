@@ -1,22 +1,32 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Menu, X, ChevronRight, Sparkles, Search } from "lucide-react";
+import { Menu, X, ChevronRight, Sparkles, Search, ChevronDown, Heart } from "lucide-react";
 import JoinModal from "@/components/JoinModal";
 import SearchModal from "@/components/SearchModal";
 import JoinCommunityModal from "@/components/JoinCommunityModal";
+import { useLang } from "@/context/LanguageContext";
 
 const navLinks = [
   { label: "Home",      href: "/" },
   { label: "About",     href: "/about" },
-  { label: "Impact",    href: "/impact" },
-  { label: "Team",      href: "/team" },
   { label: "Heritage",  href: "/heritage" },
   { label: "Events",    href: "/events" },
-  { label: "Directory", href: "/businesses" },
-  { label: "Tourism",   href: "/tourism" },
+  { label: "News",      href: "/news" },
   { label: "Gallery",   href: "/gallery" },
+  { label: "Directory", href: "/businesses" },
   { label: "Contact",   href: "/contact" },
+];
+
+const moreLinks = [
+  { label: "Impact",         href: "/impact",        icon: "📊" },
+  { label: "Team",           href: "/team",          icon: "👥" },
+  { label: "Tourism",        href: "/tourism",       icon: "🏛️" },
+  { label: "Travel Guide",   href: "/travel",        icon: "✈️" },
+  { label: "Videos",         href: "/videos",        icon: "🎬" },
+  { label: "Members",        href: "/members",       icon: "🤝" },
+  { label: "Announcements",  href: "/announcements", icon: "📢" },
+  { label: "Scholarship",    href: "/scholarship",   icon: "🎓" },
 ];
 
 export default function Navbar() {
@@ -24,6 +34,19 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [communityOpen, setCommunityOpen] = useState(false);
+  const [moreOpen, setMoreOpen] = useState(false);
+  const moreRef = useRef<HTMLDivElement>(null);
+  const { lang, setLang } = useLang();
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (moreRef.current && !moreRef.current.contains(e.target as Node)) {
+        setMoreOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   useEffect(() => {
     if (open) {
@@ -94,16 +117,64 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-4">
             {navLinks.map((link) => (
               <Link
                 key={link.label}
                 to={link.href}
-                className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors duration-300 font-medium"
+                className="text-xs text-primary-foreground/70 hover:text-primary-foreground transition-colors duration-300 font-medium whitespace-nowrap"
               >
                 {link.label}
               </Link>
             ))}
+
+            {/* More dropdown */}
+            <div className="relative" ref={moreRef}>
+              <button
+                onClick={() => setMoreOpen((v) => !v)}
+                className="flex items-center gap-1 text-xs text-primary-foreground/70 hover:text-primary-foreground transition-colors font-medium"
+              >
+                More
+                <motion.span animate={{ rotate: moreOpen ? 180 : 0 }} transition={{ duration: 0.2 }}>
+                  <ChevronDown size={13} />
+                </motion.span>
+              </button>
+              <AnimatePresence>
+                {moreOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -8, scale: 0.96 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -8, scale: 0.96 }}
+                    transition={{ duration: 0.15 }}
+                    className="absolute top-full right-0 mt-2 w-52 bg-card border border-border rounded-xl shadow-xl overflow-hidden z-50"
+                  >
+                    {moreLinks.map((link) => (
+                      <Link
+                        key={link.href}
+                        to={link.href}
+                        onClick={() => setMoreOpen(false)}
+                        className="flex items-center gap-3 px-4 py-2.5 text-sm text-foreground/80 hover:bg-muted hover:text-foreground transition-colors"
+                      >
+                        <span>{link.icon}</span>
+                        {link.label}
+                      </Link>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Language toggle */}
+            <button
+              onClick={() => setLang(lang === "en" ? "yo" : "en")}
+              className="flex items-center gap-0.5 text-xs font-semibold bg-primary-foreground/10 hover:bg-primary-foreground/20 text-primary-foreground rounded-full px-2.5 py-1 transition-colors"
+              title={lang === "en" ? "Switch to Yoruba" : "Switch to English"}
+            >
+              <span className={lang === "en" ? "opacity-100" : "opacity-40"}>EN</span>
+              <span className="opacity-30 mx-0.5">|</span>
+              <span className={lang === "yo" ? "opacity-100" : "opacity-40"}>YO</span>
+            </button>
+
             <button
               onClick={() => setSearchOpen(true)}
               className="text-primary-foreground/70 hover:text-primary-foreground transition-colors duration-200"
@@ -111,6 +182,16 @@ export default function Navbar() {
             >
               <Search size={18} />
             </button>
+
+            {/* Donate button */}
+            <Link
+              to="/donate"
+              className="flex items-center gap-1.5 text-xs font-bold bg-accent text-accent-foreground hover:bg-accent/90 rounded-full px-3 py-1.5 transition-colors whitespace-nowrap"
+            >
+              <Heart size={11} />
+              Donate
+            </Link>
+
             <JoinModal>
               <motion.button
                 className="btn-primary relative overflow-hidden text-sm !py-2.5 !px-6"
@@ -212,35 +293,61 @@ export default function Navbar() {
                 {/* Header */}
                 <div className="flex items-center justify-between px-6 h-14 border-b border-primary-foreground/10">
                   <span className="font-display font-bold text-primary-foreground">Menu</span>
-                  <button
-                    onClick={() => setOpen(false)}
-                    className="tap-target text-primary-foreground/80 touch-manipulation"
-                    aria-label="Close menu"
-                  >
-                    <X size={24} />
-                  </button>
+                  <div className="flex items-center gap-3">
+                    {/* Language toggle */}
+                    <button
+                      onClick={() => setLang(lang === "en" ? "yo" : "en")}
+                      className="flex items-center gap-0.5 text-xs font-bold bg-primary-foreground/10 text-primary-foreground rounded-full px-2.5 py-1"
+                    >
+                      <span className={lang === "en" ? "opacity-100" : "opacity-40"}>EN</span>
+                      <span className="opacity-30 mx-0.5">|</span>
+                      <span className={lang === "yo" ? "opacity-100" : "opacity-40"}>YO</span>
+                    </button>
+                    <button
+                      onClick={() => setOpen(false)}
+                      className="tap-target text-primary-foreground/80 touch-manipulation"
+                      aria-label="Close menu"
+                    >
+                      <X size={24} />
+                    </button>
+                  </div>
                 </div>
 
                 {/* Nav links */}
                 <div className="flex-1 overflow-y-auto py-4">
-                  {navLinks.map((link, index) => (
+                  {[...navLinks, ...moreLinks.map(l => ({ label: l.label, href: l.href }))].map((link, index) => (
                     <motion.div
-                      key={link.label}
+                      key={link.href}
                       initial={{ opacity: 0, x: 20 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.05, duration: 0.3 }}
+                      transition={{ delay: index * 0.04, duration: 0.3 }}
                     >
                       <Link
                         to={link.href}
                         onClick={() => setOpen(false)}
-                        className="flex items-center justify-between px-6 py-4 text-primary-foreground/90 hover:bg-primary-foreground/5 active:bg-primary-foreground/10 font-medium text-lg transition-colors touch-manipulation"
+                        className="flex items-center justify-between px-6 py-3.5 text-primary-foreground/90 hover:bg-primary-foreground/5 active:bg-primary-foreground/10 font-medium text-base transition-colors touch-manipulation"
                       >
                         {link.label}
-                        <ChevronRight size={20} className="text-primary-foreground/40" />
+                        <ChevronRight size={18} className="text-primary-foreground/40" />
                       </Link>
                     </motion.div>
                   ))}
 
+                  {/* Donate link in mobile */}
+                  <motion.div
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: (navLinks.length + moreLinks.length) * 0.04, duration: 0.3 }}
+                  >
+                    <Link
+                      to="/donate"
+                      onClick={() => setOpen(false)}
+                      className="flex items-center justify-between px-6 py-3.5 text-accent hover:bg-primary-foreground/5 font-bold text-base transition-colors touch-manipulation border-t border-primary-foreground/10 mt-2"
+                    >
+                      <span className="flex items-center gap-2"><Heart size={16} /> Donate</span>
+                      <ChevronRight size={18} className="text-accent/60" />
+                    </Link>
+                  </motion.div>
                 </div>
 
                 {/* Bottom branding */}

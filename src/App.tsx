@@ -35,6 +35,12 @@ import KingProfile from "./pages/KingProfile.tsx";
 import NewsPage from "./pages/NewsPage.tsx";
 import TourismPage from "./pages/TourismPage.tsx";
 import OjowoKingdomPage from "./pages/OjowoKingdomPage.tsx";
+import DonatePage from "./pages/DonatePage.tsx";
+import AnnouncementsPage from "./pages/AnnouncementsPage.tsx";
+import MembersPage from "./pages/MembersPage.tsx";
+import ScholarshipPage from "./pages/ScholarshipPage.tsx";
+import TravelGuidePage from "./pages/TravelGuidePage.tsx";
+import VideoArchivePage from "./pages/VideoArchivePage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -58,6 +64,12 @@ const App = () => (
           <Route path="/news"          element={<NewsPage />} />
           <Route path="/tourism"       element={<TourismPage />} />
           <Route path="/ojowo"         element={<OjowoKingdomPage />} />
+          <Route path="/donate"        element={<DonatePage />} />
+          <Route path="/announcements" element={<AnnouncementsPage />} />
+          <Route path="/members"       element={<MembersPage />} />
+          <Route path="/scholarship"   element={<ScholarshipPage />} />
+          <Route path="/travel"        element={<TravelGuidePage />} />
+          <Route path="/videos"        element={<VideoArchivePage />} />
           <Route path="/news/:id"    element={<NewsPost />} />
           <Route path="/businesses"          element={<Businesses />} />
           <Route path="/businesses/:slug"    element={<BusinessProfile />} />

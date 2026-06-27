@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   Calendar, MapPin, Clock, Users, Globe, Mic2,
   BookOpen, Filter, X, ArrowRight, Mail, ExternalLink,
+  LayoutList, CalendarDays, ChevronLeft, ChevronRight,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -261,10 +262,132 @@ function EventCard({ event, index }: { event: Event; index: number }) {
   );
 }
 
+// ── Calendar view ───────────────────────────────────────────────────────────
+const MONTH_NAMES = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+const DAY_NAMES   = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+
+function CalendarView({ events }: { events: Event[] }) {
+  const today = new Date();
+  const [year,  setYear]  = useState(today.getFullYear());
+  const [month, setMonth] = useState(today.getMonth());
+  const [selected, setSelected] = useState<string | null>(null);
+
+  const eventsByDate = useMemo(() => {
+    const map: Record<string, Event[]> = {};
+    events.forEach((e) => {
+      const key = `${e.rawDate.slice(0,4)}-${e.rawDate.slice(4,6)}-${e.rawDate.slice(6,8)}`;
+      if (!map[key]) map[key] = [];
+      map[key].push(e);
+    });
+    return map;
+  }, [events]);
+
+  const firstDay = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const cells: (number | null)[] = [...Array(firstDay).fill(null), ...Array.from({ length: daysInMonth }, (_, i) => i + 1)];
+
+  const prev = () => { if (month === 0) { setMonth(11); setYear(y => y - 1); } else setMonth(m => m - 1); };
+  const next = () => { if (month === 11) { setMonth(0); setYear(y => y + 1); } else setMonth(m => m + 1); };
+
+  const selectedEvents = selected ? (eventsByDate[selected] ?? []) : [];
+
+  return (
+    <div className="bg-white rounded-2xl border border-border shadow-sm overflow-hidden">
+      {/* Month header */}
+      <div className="flex items-center justify-between px-5 py-4 border-b border-border">
+        <button onClick={prev} className="w-8 h-8 rounded-full hover:bg-muted flex items-center justify-center transition-colors">
+          <ChevronLeft size={16} />
+        </button>
+        <h3 className="font-display font-bold text-foreground text-base">
+          {MONTH_NAMES[month]} {year}
+        </h3>
+        <button onClick={next} className="w-8 h-8 rounded-full hover:bg-muted flex items-center justify-center transition-colors">
+          <ChevronRight size={16} />
+        </button>
+      </div>
+
+      {/* Day labels */}
+      <div className="grid grid-cols-7 border-b border-border">
+        {DAY_NAMES.map((d) => (
+          <div key={d} className="text-center text-[11px] font-bold text-muted-foreground py-2">{d}</div>
+        ))}
+      </div>
+
+      {/* Day cells */}
+      <div className="grid grid-cols-7">
+        {cells.map((day, i) => {
+          if (!day) return <div key={`empty-${i}`} className="aspect-square border-r border-b border-border/40 last:border-r-0" />;
+          const dateKey = `${year}-${String(month + 1).padStart(2,"0")}-${String(day).padStart(2,"0")}`;
+          const dayEvents = eventsByDate[dateKey] ?? [];
+          const isToday = day === today.getDate() && month === today.getMonth() && year === today.getFullYear();
+          const isSelected = selected === dateKey;
+
+          return (
+            <button
+              key={dateKey}
+              onClick={() => setSelected(isSelected ? null : dateKey)}
+              className={`relative aspect-square border-r border-b border-border/40 flex flex-col items-center justify-start pt-1.5 transition-colors group
+                ${isSelected ? "bg-primary/10" : "hover:bg-muted/50"}`}
+            >
+              <span className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-semibold leading-none
+                ${isToday ? "bg-accent text-white" : isSelected ? "text-primary font-bold" : "text-foreground"}`}>
+                {day}
+              </span>
+              {dayEvents.length > 0 && (
+                <div className="flex gap-0.5 mt-0.5 flex-wrap justify-center">
+                  {dayEvents.slice(0, 3).map((ev, di) => (
+                    <span key={di} className={`w-1.5 h-1.5 rounded-full bg-gradient-to-br ${ev.gradient}`} />
+                  ))}
+                </div>
+              )}
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Selected day events */}
+      <AnimatePresence>
+        {selected && selectedEvents.length > 0 && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="overflow-hidden border-t border-border"
+          >
+            <div className="p-4 space-y-3">
+              <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest">
+                {new Date(selected + "T12:00:00").toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long" })}
+              </p>
+              {selectedEvents.map((ev) => (
+                <div key={ev.id} className={`rounded-xl p-3 bg-gradient-to-r ${ev.gradient} text-white`}>
+                  <p className="font-bold text-sm">{ev.title}</p>
+                  <p className="text-white/80 text-xs mt-0.5">{ev.time} · {ev.location}</p>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        )}
+        {selected && selectedEvents.length === 0 && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="overflow-hidden border-t border-border"
+          >
+            <p className="text-center text-muted-foreground text-xs py-4">No events on this day.</p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
 // ── Main page ───────────────────────────────────────────────────────────────
 export default function EventsPage() {
   const [activeType, setActiveType] = useState<EventType | "All">("All");
   const [showVirtualOnly, setShowVirtualOnly] = useState(false);
+  const [view, setView] = useState<"list" | "calendar">("list");
 
   const filtered = useMemo(() => {
     return EVENTS.filter((e) => {
@@ -334,6 +457,21 @@ export default function EventsPage() {
 
       {/* ── FILTER BAR ──────────────────────────────────────────────────── */}
       <div className="max-w-5xl mx-auto px-4 py-5 flex flex-wrap items-center gap-2">
+        {/* View toggle */}
+        <div className="flex items-center bg-white border border-border rounded-xl p-1 mr-2">
+          <button
+            onClick={() => setView("list")}
+            className={`flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors ${view === "list" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
+          >
+            <LayoutList size={13} /> List
+          </button>
+          <button
+            onClick={() => setView("calendar")}
+            className={`flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors ${view === "calendar" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
+          >
+            <CalendarDays size={13} /> Calendar
+          </button>
+        </div>
         <Filter size={14} className="text-muted-foreground shrink-0" />
 
         {/* Type filters */}
@@ -379,7 +517,15 @@ export default function EventsPage() {
         </button>
       </div>
 
+      {/* ── CALENDAR OR LIST ────────────────────────────────────────────── */}
+      {view === "calendar" && (
+        <div className="max-w-5xl mx-auto px-4 pb-10">
+          <CalendarView events={EVENTS} />
+        </div>
+      )}
+
       {/* ── EVENT GRID ──────────────────────────────────────────────────── */}
+      {view === "list" && (
       <div className="max-w-5xl mx-auto px-4 pb-16">
         {filtered.length === 0 ? (
           <div className="text-center py-20 text-muted-foreground">
@@ -402,6 +548,7 @@ export default function EventsPage() {
           </motion.div>
         )}
       </div>
+      )}
 
       {/* ── SUBMIT EVENT CTA ────────────────────────────────────────────── */}
       <section className="bg-primary/5 border-t border-border py-14 px-4">
