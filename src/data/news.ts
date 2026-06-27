@@ -20,7 +20,7 @@ export interface NewsArticle {
 }
 
 const policeImages: NewsImage[] = Array.from({ length: 23 }, (_, i) => ({
-  src: `/images/police_area_command/review${i + 1}.jpg`,
+  src: `/images/police_area_command/review${i + 1}.webp`,
   alt: `Police Area Command Commissioning - Image ${i + 1}`,
 }));
 
@@ -30,7 +30,7 @@ export const NEWS_ARTICLES: NewsArticle[] = [
     title: "Commissioning of the New Police Area Command in Ijebu-Igbo",
     excerpt:
       "Ijebu-Igbo recently marked a significant milestone with the commissioning of the new Police Area Command, now officially the 14th Area Command in Ogun State.",
-    featuredImage: "/images/police_area_command/review1.jpg",
+    featuredImage: "/images/police_area_command/review1.webp",
     date: "March 2026",
     category: "Community Development",
     content: [

@@ -44,7 +44,7 @@ export default function Footer() {
         <div className="lg:hidden">
           {/* Brand header */}
           <div className="flex items-center gap-3 mb-6">
-            <img src="/logo-tp.png" alt="IID Logo" className="w-12 h-12" />
+            <img src="/logo-tp.webp" alt="IID Logo" className="w-12 h-12" />
             <div>
               <h3 className="font-display font-bold text-sm leading-tight">
                 Ijebu Igbo Descendants
@@ -159,7 +159,7 @@ export default function Footer() {
             >
               <div className="flex items-center gap-3 mb-5">
                 <motion.img
-                  src="/logo-tp.png"
+                  src="/logo-tp.webp"
                   alt="IID Logo"
                   className="w-14 h-14"
                   whileHover={{ rotate: [0, -8, 8, 0], transition: { duration: 0.5 } }}

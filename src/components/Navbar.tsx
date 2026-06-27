@@ -56,7 +56,7 @@ export default function Navbar() {
         <div className="container-main flex items-center justify-between h-14 md:h-20">
           <Link to="/" className="group relative">
             <motion.img
-              src="/logo-tp.png"
+              src="/logo-tp.webp"
               alt="IID Logo"
               className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 relative z-10"
               initial={{ opacity: 0, rotate: -180, scale: 0 }}

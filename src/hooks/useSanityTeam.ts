@@ -29,21 +29,21 @@ export interface TeamData {
 
 const FALLBACK_DATA: TeamData = {
   patronMatron: [
-    { name: "Chief Emmanuel Folorunso Ogunnaike, JP, MFR", role: "Patron", photo: "/team/chief-emmanuel-ogunnaike.jpeg", group: "patronMatron" },
-    { name: "Chief Mrs Ibilola Solaja", role: "Matron", photo: "/team/chief-mrs-ibilola-solaja.png", group: "patronMatron" },
+    { name: "Chief Emmanuel Folorunso Ogunnaike, JP, MFR", role: "Patron", photo: "/team/chief-emmanuel-ogunnaike.webp", group: "patronMatron" },
+    { name: "Chief Mrs Ibilola Solaja", role: "Matron", photo: "/team/chief-mrs-ibilola-solaja.webp", group: "patronMatron" },
   ],
   advisers: [
-    { name: "Mrs Silifat Haruna Ishola Bello", role: "Special Adviser", photo: "/team/mrs-silifat-haruna-ishola-bello.jpeg", group: "adviser" },
-    { name: "Architect Pa Sunday Kukoyi", role: "Special Adviser", photo: "/team/architect-pa-sunday-kukoyi.jpeg", group: "adviser" },
+    { name: "Mrs Silifat Haruna Ishola Bello", role: "Special Adviser", photo: "/team/mrs-silifat-haruna-ishola-bello.webp", group: "adviser" },
+    { name: "Architect Pa Sunday Kukoyi", role: "Special Adviser", photo: "/team/architect-pa-sunday-kukoyi.webp", group: "adviser" },
   ],
   currentExecutives: [
-    { name: "Chief Toyin Odueyungbo", role: "President", photo: "/team/chief-toyin-odueyungbo.jpeg", group: "currentExecutive" },
-    { name: "Pastor Franklin Babaranti Okunowo", role: "Vice President", photo: "/team/evd-franklin-okunowo.jpeg", group: "currentExecutive" },
-    { name: "Ms. Adetutu Ogunsanwo", role: "General Secretary", photo: "/team/ms-adetutu-ogunsanwo.jpeg", group: "currentExecutive" },
+    { name: "Chief Toyin Odueyungbo", role: "President", photo: "/team/chief-toyin-odueyungbo.webp", group: "currentExecutive" },
+    { name: "Pastor Franklin Babaranti Okunowo", role: "Vice President", photo: "/team/evd-franklin-okunowo.webp", group: "currentExecutive" },
+    { name: "Ms. Adetutu Ogunsanwo", role: "General Secretary", photo: "/team/ms-adetutu-ogunsanwo.webp", group: "currentExecutive" },
     { name: "Alhaji Lanre Amusa", role: "Financial Secretary", photo: null, group: "currentExecutive" },
-    { name: "Chief Mrs Bisi Kazeem", role: "Treasurer", photo: "/team/chief-mrs-bisi-kazeem.jpeg", group: "currentExecutive" },
+    { name: "Chief Mrs Bisi Kazeem", role: "Treasurer", photo: "/team/chief-mrs-bisi-kazeem.webp", group: "currentExecutive" },
     { name: "Princess Kemi Sijuade", role: "Social Secretary", photo: null, group: "currentExecutive" },
-    { name: "Alh Sadekunle Hamzat-Maja", role: "Chief Whip", photo: "/team/alh-sadekunle-hamzat-maja.jpeg", group: "currentExecutive" },
+    { name: "Alh Sadekunle Hamzat-Maja", role: "Chief Whip", photo: "/team/alh-sadekunle-hamzat-maja.webp", group: "currentExecutive" },
     { name: "Otunba Ola Busari", role: "PRO", photo: null, group: "currentExecutive" },
     { name: "Alhaji Sakiru Adekunle Hamzat", role: "Internal Auditor (by Appointment)", photo: null, group: "currentExecutive" },
     { name: "Chief Rafiu Adejobi", role: "Welfare Officer", photo: null, group: "currentExecutive" },
@@ -51,7 +51,7 @@ const FALLBACK_DATA: TeamData = {
   ],
   pastPresidents: [
     { name: "Alhaji Adebowale Kazeem Haruna Ishola", role: "1st President", photo: null, group: "pastPresident" },
-    { name: "Barrister Michael Popoola Sojirin", role: "2nd President", photo: "/team/barr-popoola-sojirin.jpeg", group: "pastPresident" },
+    { name: "Barrister Michael Popoola Sojirin", role: "2nd President", photo: "/team/barr-popoola-sojirin.webp", group: "pastPresident" },
     { name: "Otunba Ola Busari", role: "3rd President", photo: null, group: "pastPresident" },
     { name: "Prince Femi Sijuade", role: "4th President", photo: null, group: "pastPresident" },
   ],
@@ -64,7 +64,7 @@ const FALLBACK_DATA: TeamData = {
     { name: "Alhaji Fatai Olaide", role: "Legal Affairs Officer", group: "pastExecutive" },
     { name: "Deaconess Mrs. Roselyn Sojirin (JP)", role: "Women Affair Officer", group: "pastExecutive" },
     { name: "Alhaji Bola Gafar", role: "PRO", group: "pastExecutive" },
-    { name: "Chief Mrs. Bisi Kazeem, Yeyeluwa of Atikori", role: "Social Secretary (4 Years)", photo: "/team/chief-mrs-bisi-kazeem.jpeg", group: "pastExecutive" },
+    { name: "Chief Mrs. Bisi Kazeem, Yeyeluwa of Atikori", role: "Social Secretary (4 Years)", photo: "/team/chief-mrs-bisi-kazeem.webp", group: "pastExecutive" },
     { name: "Mr. Rafiu Adejobi", role: "Welfare Officer", group: "pastExecutive" },
     { name: "Alh Sadekunle Hamzat-Maja", role: "Former Financial Secretary & Former Treasurer", group: "pastExecutive" },
     { name: "Bisi Daramola Odubanjo", role: "Social Secretary", group: "pastExecutive" },

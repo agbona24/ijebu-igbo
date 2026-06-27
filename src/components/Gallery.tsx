@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence, useMotionValue, useTransform, useSpring } from "framer-motion";
 import { Images, X, ChevronLeft, ChevronRight, ZoomIn, Expand } from "lucide-react";
 import { useSanityGallery, type GalleryImage } from "@/hooks/useSanityGallery";
+import ImageWithSkeleton from "@/components/ImageWithSkeleton";
 
 const PAGE_SIZE = 8;
 
@@ -161,11 +162,11 @@ function GalleryCard({
       className="relative overflow-hidden rounded-2xl group shadow-md aspect-square w-full focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
       whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
     >
-      <img
+      <ImageWithSkeleton
         src={img.src}
         alt={img.alt}
-        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-        loading="lazy"
+        className="w-full h-full"
+        imgClassName="object-cover transition-transform duration-500 group-hover:scale-110"
       />
 
       {/* Glare layer */}
@@ -254,7 +255,7 @@ export default function Gallery() {
                 onClick={() => open(i)}
                 className="relative overflow-hidden rounded-2xl flex-shrink-0 w-[260px] h-[190px] snap-center shadow-lg group focus:outline-none"
               >
-                <img src={img.src} alt={img.alt} className="w-full h-full object-cover transition-transform duration-500 group-active:scale-105" loading="lazy" />
+                <ImageWithSkeleton src={img.src} alt={img.alt} className="w-full h-full" imgClassName="object-cover transition-transform duration-500 group-active:scale-105" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
                 <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-accent/80 flex items-center justify-center">
                   <ZoomIn size={14} className="text-primary" />

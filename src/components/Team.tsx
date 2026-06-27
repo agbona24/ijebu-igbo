@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { User, X, ChevronDown } from "lucide-react";
 import { useSanityTeam } from "@/hooks/useSanityTeam";
+import ImageWithSkeleton from "@/components/ImageWithSkeleton";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -32,7 +33,13 @@ function PhotoLightbox({ member, onClose }: { member: Member; onClose: () => voi
           >
             <X size={16} />
           </button>
-          <img src={member.photo!} alt={member.name} className="w-full object-cover max-h-[70vh]" />
+          <ImageWithSkeleton
+            src={member.photo ?? null}
+            alt={member.name}
+            className="w-full max-h-[70vh]"
+            imgClassName="object-cover"
+            loading="eager"
+          />
           <div className="p-4">
             <h4 className="font-display font-bold text-foreground text-base">{member.name}</h4>
             <p className="text-accent font-semibold text-sm mt-1">{member.role}</p>
@@ -54,24 +61,22 @@ function MemberCard({ member, index, onPhotoClick }: { member: Member; index: nu
       className="group bg-card border border-border rounded-2xl overflow-hidden hover:border-accent/50 hover:shadow-xl transition-all duration-300"
     >
       <div
-        className={`relative w-full aspect-[3/4] bg-primary/10 flex items-center justify-center overflow-hidden ${member.photo ? "cursor-pointer" : ""}`}
+        className={`relative w-full aspect-[3/4] overflow-hidden ${member.photo ? "cursor-pointer" : ""}`}
         onClick={() => member.photo && onPhotoClick?.(member)}
       >
-        {member.photo ? (
-          <>
-            <img
-              src={member.photo}
-              alt={member.name}
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
-              <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white text-xs font-semibold bg-black/50 px-3 py-1.5 rounded-full">
-                View Photo
-              </span>
-            </div>
-          </>
-        ) : (
-          <User className="w-16 h-16 text-primary/30" />
+        <ImageWithSkeleton
+          src={member.photo ?? null}
+          alt={member.name}
+          className="w-full h-full"
+          imgClassName="object-cover transition-transform duration-500 group-hover:scale-105"
+          fallback={<User className="w-16 h-16 text-primary/30" />}
+        />
+        {member.photo && (
+          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center pointer-events-none">
+            <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white text-xs font-semibold bg-black/50 px-3 py-1.5 rounded-full">
+              View Photo
+            </span>
+          </div>
         )}
       </div>
       <div className="p-4">

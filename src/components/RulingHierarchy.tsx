@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Crown, ChevronDown, MapPin, User, Briefcase, Phone } from "lucide-react";
+import ImageWithSkeleton from "@/components/ImageWithSkeleton";
 
 interface ChiefRecord {
   name: string;
@@ -17,7 +18,7 @@ const gradeTwo = [
     title: "Sopenlukale",
     area: "Oke-Sopen",
     name: "His Royal Highness, Alayeluwa Oba Mufutau Adesesan Yusuf",
-    photo: "/images/oba-sopenlukale-mufutau-adesesan-yusuf.jpeg",
+    photo: "/images/oba-sopenlukale-mufutau-adesesan-yusuf.webp",
     color: "from-amber-700 to-amber-500",
     accent: "border-amber-500/40 bg-amber-50",
     badge: "bg-amber-100 text-amber-800",
@@ -34,7 +35,7 @@ const gradeTwo = [
     title: "Bejeroku",
     area: "Okeagbo",
     name: "His Royal Highness Oba Stephen Adekoya, The Bejeroku of Oke-Agbo",
-    photo: "/images/oba-bejeroku-stephen-adekoya.png",
+    photo: "/images/oba-bejeroku-stephen-adekoya.webp",
     color: "from-emerald-700 to-emerald-500",
     accent: "border-emerald-500/40 bg-emerald-50",
     badge: "bg-emerald-100 text-emerald-800",
@@ -56,10 +57,10 @@ const gradeTwo = [
     accent: "border-blue-500/40 bg-blue-50",
     badge: "bg-blue-100 text-blue-800",
     name: "His Royal Highness Oba Abdulrasheed Abayomi Banjo, PhD — Akereburu, Orilonise I",
-    photo: "/images/oba-olokine-abdulrasheed-banjo.png",
+    photo: "/images/oba-olokine-abdulrasheed-banjo.webp",
     queenName: "Her Royal Highness Olori Oluyinka Banjo, FISLT — The Olori Olokine of Ojowo",
-    queenPhoto: "/images/olori-olokine-ojowo.png",
-    administrationImage: "/images/ojowo-administration.png",
+    queenPhoto: "/images/olori-olokine-ojowo.webp",
+    administrationImage: "/images/ojowo-administration.webp",
     administration: [
       { name: "Chief Bisiriyu Ajobiewe",       title: "Pampa Molusewu",                occupation: "Native Doctor" },
       { name: "Chief (Dr.) Gbolade Kazeem",    title: "Olootu Pampa",                  occupation: "Native Doctor" },
@@ -140,22 +141,19 @@ function ObaCard({ oba, index }: { oba: typeof gradeTwo[0]; index: number }) {
           <div className="flex items-center gap-4 min-w-0">
             {/* Oba photo (+ Olori if present) */}
             <div className="flex items-center shrink-0">
-              {"photo" in oba && oba.photo ? (
-                <img
-                  src={oba.photo as string}
-                  alt={"name" in oba ? String(oba.name) : oba.title}
-                  className="w-14 h-14 sm:w-16 sm:h-16 rounded-full object-cover border-2 border-white/30 shadow-md"
-                />
-              ) : (
-                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-white/15 border-2 border-white/20 flex items-center justify-center">
-                  <User className="w-6 h-6 text-white/50" />
-                </div>
-              )}
+              <ImageWithSkeleton
+                src={"photo" in oba ? (oba.photo as string | null) : null}
+                alt={"name" in oba ? String(oba.name) : oba.title}
+                className="w-14 h-14 sm:w-16 sm:h-16 rounded-full border-2 border-white/30 shadow-md"
+                imgClassName="object-cover rounded-full"
+                fallback={<User className="w-6 h-6 text-white/50" />}
+              />
               {"queenPhoto" in oba && oba.queenPhoto && (
-                <img
+                <ImageWithSkeleton
                   src={oba.queenPhoto as string}
                   alt={"queenName" in oba ? String(oba.queenName) : "Olori"}
-                  className="w-14 h-14 sm:w-16 sm:h-16 rounded-full object-cover border-2 border-white/30 shadow-md -ml-4"
+                  className="w-14 h-14 sm:w-16 sm:h-16 rounded-full border-2 border-white/30 shadow-md -ml-4"
+                  imgClassName="object-cover rounded-full"
                 />
               )}
             </div>
@@ -208,11 +206,11 @@ function ObaCard({ oba, index }: { oba: typeof gradeTwo[0]; index: number }) {
                     <div className="grid grid-cols-2 gap-4 mb-5">
                       {"photo" in oba && oba.photo && (
                         <div className="text-center">
-                          <img
+                          <ImageWithSkeleton
                             src={oba.photo as string}
                             alt={"name" in oba ? String(oba.name) : oba.title}
-                            className="w-full max-w-[200px] mx-auto rounded-2xl object-cover shadow-md border border-border aspect-[3/4]"
-                            loading="lazy"
+                            className="w-full max-w-[200px] mx-auto rounded-2xl shadow-md border border-border aspect-[3/4]"
+                            imgClassName="object-cover rounded-2xl"
                           />
                           <p className="text-xs font-semibold text-foreground mt-2 leading-snug">
                             {"name" in oba ? String(oba.name) : `${oba.title} of ${oba.area}`}
@@ -221,11 +219,11 @@ function ObaCard({ oba, index }: { oba: typeof gradeTwo[0]; index: number }) {
                       )}
                       {"queenPhoto" in oba && oba.queenPhoto && (
                         <div className="text-center">
-                          <img
+                          <ImageWithSkeleton
                             src={oba.queenPhoto as string}
                             alt={"queenName" in oba ? String(oba.queenName) : "Olori"}
-                            className="w-full max-w-[200px] mx-auto rounded-2xl object-cover shadow-md border border-border aspect-[3/4]"
-                            loading="lazy"
+                            className="w-full max-w-[200px] mx-auto rounded-2xl shadow-md border border-border aspect-[3/4]"
+                            imgClassName="object-cover rounded-2xl"
                           />
                           <p className="text-xs font-semibold text-foreground mt-2 leading-snug">
                             {"queenName" in oba ? String(oba.queenName) : "Olori"}
@@ -237,11 +235,11 @@ function ObaCard({ oba, index }: { oba: typeof gradeTwo[0]; index: number }) {
 
                   {"administrationImage" in oba && oba.administrationImage && (
                     <div className="rounded-xl overflow-hidden border border-border mb-4 shadow-sm">
-                      <img
+                      <ImageWithSkeleton
                         src={oba.administrationImage as string}
                         alt={`${oba.title} Administration`}
-                        className="w-full h-auto"
-                        loading="lazy"
+                        className="w-full"
+                        imgClassName="h-auto"
                       />
                     </div>
                   )}
@@ -336,10 +334,11 @@ export default function RulingHierarchy() {
             Ijebu-Igbo Traditional Council — Organisational Chart
           </h3>
           <div className="rounded-2xl overflow-hidden border border-border shadow-sm">
-            <img
-              src="/images/ijebu-traditional-council-chart.png"
+            <ImageWithSkeleton
+              src="/images/ijebu-traditional-council-chart.webp"
               alt="Ijebu-Igbo Traditional Council Organisational Chart"
-              className="w-full h-auto"
+              className="w-full"
+              imgClassName="h-auto"
             />
           </div>
         </motion.div>
@@ -353,22 +352,23 @@ export default function RulingHierarchy() {
           className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12"
         >
           {[
-            { label: "Previous Orimolusi", src: "/images/oba-adeboye.png", name: "Late Oba Joel Adeboye", slug: "adeboye" },
-            { label: "Present Orimolusi", src: "/images/oba-jaiyeoba.png", name: "Oba Lawrence Jaiyeoba Adebajo", slug: "jaiyeoba-adebajo" },
+            { label: "Previous Orimolusi", src: "/images/oba-adeboye.webp", name: "Late Oba Joel Adeboye", slug: "adeboye" },
+            { label: "Present Orimolusi", src: "/images/oba-jaiyeoba.webp", name: "Oba Lawrence Jaiyeoba Adebajo", slug: "jaiyeoba-adebajo" },
           ].map((king, i) => (
             <Link
               key={i}
               to={`/heritage/orimolusi/${king.slug}`}
               className="group bg-white rounded-2xl border border-border overflow-hidden shadow-sm hover:shadow-xl hover:border-accent/40 transition-all duration-300"
             >
-              <div className="aspect-[3/4] overflow-hidden bg-muted relative">
-                <img
+              <div className="aspect-[3/4] overflow-hidden relative">
+                <ImageWithSkeleton
                   src={king.src}
                   alt={king.label}
-                  className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                  className="w-full h-full"
+                  imgClassName="object-cover object-top transition-transform duration-500 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
-                <div className="absolute bottom-3 inset-x-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-center">
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 pointer-events-none" />
+                <div className="absolute bottom-3 inset-x-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-center pointer-events-none">
                   <span className="text-xs font-bold bg-accent text-charcoal px-3 py-1.5 rounded-full">
                     View Profile →
                   </span>

@@ -32,7 +32,7 @@ export default function OrgChart() {
           className="rounded-2xl overflow-hidden border border-border shadow-elevated bg-white"
         >
           <img
-            src="/images/org-chart.png"
+            src="/images/org-chart.webp"
             alt="IID Omo Orimolusi in Diaspora — Organisational Chart"
             className="w-full h-auto"
           />

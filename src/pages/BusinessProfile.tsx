@@ -11,6 +11,7 @@ import {
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AnimatedHeroBg from "@/components/AnimatedHeroBg";
+import ImageWithSkeleton from "@/components/ImageWithSkeleton";
 import {
   CATEGORY_GRADIENTS,
   type ServiceCategory,
@@ -96,7 +97,7 @@ export default function BusinessProfile() {
     const desc  = business.tagline
       ? `${business.tagline} — ${business.description.slice(0, 140)}...`
       : business.description.slice(0, 160);
-    const image = business.flyer ?? business.banner ?? "/logo.png";
+    const image = business.flyer ?? business.banner ?? "/logo.webp";
     const url   = window.location.href;
 
     document.title = title;
@@ -305,11 +306,12 @@ export default function BusinessProfile() {
             >
               <XIcon size={28} />
             </button>
-            <img
+            <ImageWithSkeleton
               src={lightbox}
               alt="Gallery image"
-              className="max-w-full max-h-[90vh] rounded-xl object-contain shadow-2xl"
-              onClick={(e) => e.stopPropagation()}
+              className="max-w-full max-h-[90vh] rounded-xl shadow-2xl"
+              imgClassName="object-contain"
+              loading="eager"
             />
           </motion.div>
         )}
@@ -322,10 +324,12 @@ export default function BusinessProfile() {
           {/* Background layer */}
           {business.banner || business.flyer ? (
             <>
-              <img
-                src={business.banner ?? business.flyer}
+              <ImageWithSkeleton
+                src={business.banner ?? business.flyer ?? null}
                 alt={business.name}
-                className="absolute inset-0 w-full h-full object-cover"
+                className="absolute inset-0 w-full h-full"
+                imgClassName="object-cover"
+                loading="eager"
               />
               <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/35 to-black/80" />
             </>
@@ -934,10 +938,11 @@ export default function BusinessProfile() {
                       className="relative aspect-square rounded-xl overflow-hidden group
                                  focus:outline-none focus:ring-2 focus:ring-accent"
                     >
-                      <img
+                      <ImageWithSkeleton
                         src={img}
                         alt={`${business.name} ${i + 1}`}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        className="w-full h-full"
+                        imgClassName="object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30
                                       transition-colors flex items-center justify-center">
@@ -962,11 +967,11 @@ export default function BusinessProfile() {
                   <SectionHeader icon={<Layers size={16} className="text-accent" />} title="Flyer" />
                 </div>
                 <button className="block w-full" onClick={() => setLightbox(business.flyer!)}>
-                  <img
-                    src={business.flyer}
+                  <ImageWithSkeleton
+                    src={business.flyer ?? null}
                     alt="Business flyer"
-                    className="w-full object-contain max-h-[520px]
-                               hover:opacity-95 transition-opacity"
+                    className="w-full max-h-[520px]"
+                    imgClassName="object-contain hover:opacity-95 transition-opacity"
                   />
                 </button>
               </motion.section>
@@ -1113,9 +1118,9 @@ export default function BusinessProfile() {
                   >
                     <div className={`h-28 bg-gradient-to-br ${g} flex items-center justify-center overflow-hidden`}>
                       {b.flyer ? (
-                        <img src={b.flyer} alt={b.name}
-                             className="w-full h-full object-cover group-hover:scale-105
-                                        transition-transform duration-500" />
+                        <ImageWithSkeleton src={b.flyer} alt={b.name}
+                             className="w-full h-full"
+                             imgClassName="object-cover group-hover:scale-105 transition-transform duration-500" />
                       ) : (
                         <span className="text-3xl font-display font-black text-white/75">{bi}</span>
                       )}

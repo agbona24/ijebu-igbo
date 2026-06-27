@@ -67,7 +67,7 @@ export default function HeritagePage() {
               >
                 <div className="relative h-36 bg-gradient-to-br from-blue-700 to-blue-500 flex items-center justify-center overflow-hidden">
                   <img
-                    src="/images/oba-olokine-abdulrasheed-banjo.png"
+                    src="/images/oba-olokine-abdulrasheed-banjo.webp"
                     alt="Olokine of Ojowo"
                     className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-50 transition-opacity duration-300"
                   />

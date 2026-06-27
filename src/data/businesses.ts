@@ -126,7 +126,7 @@ export const BUSINESSES: Business[] = [
     ownerName: "Chief Mrs Bisi Kazeem — The Yeyeluwa of Atikori",
     phone: "+44 7464 940460",
     whatsapp: "+447464940460",
-    flyer: "/images/businesses/topawo-enterprises/flyer.jpeg",
+    flyer: "/images/businesses/topawo-enterprises/flyer.webp",
     region: "UK",
 
     serviceCategories: [
@@ -169,7 +169,7 @@ export const BUSINESSES: Business[] = [
       "Odueyungbo Farms is a livestock and agricultural enterprise dedicated to producing high-quality, naturally raised animal products. The farm specialises in cattle, pigs, rams, poultry, and fish farming, ensuring healthy livestock through proper nutrition, veterinary care, and sustainable farming practices. With a commitment to food safety, quality assurance, and affordability, Odueyungbo Farms delivers fresh farm products directly from the farm to consumers, businesses, and food vendors.",
     ownerName: "Chief Toyin Odueyungbo",
     email: "odueyungbofarms@gmail.com",
-    flyer: "/images/businesses/odueyungbo-farms/flyer.jpeg",
+    flyer: "/images/businesses/odueyungbo-farms/flyer.webp",
     region: "Nigeria",
 
     serviceCategories: [
@@ -234,7 +234,7 @@ export const BUSINESSES: Business[] = [
     tagline: "Safe. Reliable. Always On Time.",
     description:
       "BAU Cars Limited is a transportation and logistics company providing reliable mini cab, taxi, and logistics services. Driven by the motto 'Driving You Forward. Delivering Excellence.' — BAU Cars offers comfortable rides at affordable rates, easy trip bookings for local and outstation travel, and prompt logistics delivery through BAU Logistics. Book via call, WhatsApp, or the BAUCARS.COM web app.",
-    flyer: "/images/businesses/bau-cars/flyer.png",
+    flyer: "/images/businesses/bau-cars/flyer.webp",
     promoVideo: "/videos/bau-cars-promo.mp4",
     phone: "+234 805 253 6443",
     whatsapp: "+2348052536606",
@@ -286,7 +286,7 @@ export const BUSINESSES: Business[] = [
     name: "Arinola Transport",
     category: "Professional Services",
     description: "Dependable passenger and freight transport solutions. Moving people and goods safely across destinations.",
-    flyer: "/images/businesses/arinola-transport/flyer.jpeg",
+    flyer: "/images/businesses/arinola-transport/flyer.webp",
   },
   {
     id: 5,
@@ -296,7 +296,7 @@ export const BUSINESSES: Business[] = [
     tagline: "Your Home Away From Home",
     description:
       "Lekki Kitchen is a Nigerian restaurant in Edgware, London, serving authentic African and Nigerian cuisine in a warm and welcoming environment. Known for its homely meals, great taste, and fast delivery service, Lekki Kitchen offers customers freshly prepared dishes made with quality ingredients. Whether dining in, ordering takeaway, or requesting delivery, customers enjoy the true taste of home with every meal.",
-    flyer: "/images/businesses/lekki-kitchen/flyer.png",
+    flyer: "/images/businesses/lekki-kitchen/flyer.webp",
     location: "86 Watling Avenue, Burnt Oak, Edgware, HA8 0LU, United Kingdom",
     phone: "020 8951 5488",
     website: "www.lekkikitchen.com",
@@ -366,7 +366,7 @@ export const BUSINESSES: Business[] = [
     description:
       "Bukola Herbal is a natural health and wellness practice dedicated to reconnecting people with nature through evidence-based herbal medicine, lifestyle guidance, and organic wellness products. Led by Bukola Adekoya Agbenle, a qualified Western Herbal Medicine practitioner trained in the United Kingdom, the practice offers personalised herbal consultations, training, natural remedies, and wellness solutions to support overall health and wellbeing. The business serves clients in both Nigeria and the United Kingdom.",
     ownerName: "Bukola Adekoya Fagbenle",
-    flyer: "/images/businesses/bukola-herbal/flyer.png",
+    flyer: "/images/businesses/bukola-herbal/flyer.webp",
     phone: "+234 816 327 2756",
     whatsapp: "+2348163272756",
     email: "Bukitfagbenla@gmail.com",
@@ -486,7 +486,7 @@ export const BUSINESSES: Business[] = [
     tagline: "All The Hits. All The Gists.",
     description:
       "ROW Radio (Reach Our World Radio) is a dynamic digital radio station dedicated to connecting listeners with the latest music, trending conversations, entertainment news, inspiring stories, and engaging discussions from around the world. We bring people together through sound, culture, information, and entertainment — creating a platform where every voice matters and every listener belongs. At ROW Radio, we don't just broadcast. We connect the world.",
-    flyer: "/images/businesses/row-radio/flyer.jpeg",
+    flyer: "/images/businesses/row-radio/flyer.webp",
     email: "rowradiong@gmail.com",
     website: "www.rowradio.ng",
     social: {
@@ -559,7 +559,7 @@ export const BUSINESSES: Business[] = [
     tagline: "Collaborative Technology Experience",
     description:
       "DG-Tal Mind Ltd is a UK-based IT services, digital transformation, and technology solutions company. Evolved from its original identity, DGtal-Mind Ltd, the company serves organisations ranging from SMEs to multinational corporations and is a specialist supplier to the UK Government. The core philosophy is simple: technology should make life easier, not harder. Every solution is customised around each client's business goals, culture, budget, and user experience needs — no off-the-shelf approaches, no unnecessary jargon.",
-    flyer: "/images/businesses/dg-tal-mind/flyer.png",
+    flyer: "/images/businesses/dg-tal-mind/flyer.webp",
     location: "32 Freeman's Close, Hitchin, SG5 2SE, United Kingdom",
     phone: "+44 794 765 6327",
     whatsapp: "+447947656327",
@@ -757,7 +757,7 @@ export const BUSINESSES: Business[] = [
     phone: "08033558213 / 08054661204",
     whatsapp: "+2348033558213",
     email: "amsunmaja4real@gmail.com",
-    flyer: "/images/businesses/amsun-maja/flyer.png",
+    flyer: "/images/businesses/amsun-maja/flyer.webp",
     region: "Nigeria",
 
     serviceCategories: [
@@ -849,7 +849,7 @@ export const BUSINESSES: Business[] = [
     phone: "08080030001 / 08107501847 / 08033564879 / 08020777088",
     whatsapp: "+2348020777088",
     email: "havilahgoldinternationalschool@gmail.com",
-    flyer: "/images/businesses/havilah-gold-school/flyer.jpeg",
+    flyer: "/images/businesses/havilah-gold-school/flyer.webp",
     region: "Nigeria",
 
     serviceCategories: [
@@ -909,7 +909,7 @@ export const BUSINESSES: Business[] = [
       "TKitchen is your Nigerian cuisines away from home — bringing authentic, freshly prepared Nigerian meals to your table wherever you are. From classic street food favourites to hearty home-cooked dishes, TKitchen caters for everyday meals, birthdays, weddings, graduations, corporate meetings, and surprise parties. Plates and kitchen wares hire also available. Good Food, Great Memories!",
     phone: "+44 7496 933887 / +44 7946 654111",
     whatsapp: "+447496933887",
-    flyer: "/images/businesses/tkitchen/flyer.jpeg",
+    flyer: "/images/businesses/tkitchen/flyer.webp",
     region: "UK",
     social: {
       instagram: "https://www.instagram.com/tkitchen_xo",
