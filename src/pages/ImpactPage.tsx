@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Impact from "@/components/Impact";
@@ -5,6 +6,7 @@ import AnimatedHeroBg from "@/components/AnimatedHeroBg";
 import { motion } from "framer-motion";
 
 export default function ImpactPage() {
+  useEffect(() => { document.title = "Our Impact | Connect Ijebu Roots"; }, []);
   return (
     <div className="min-h-screen bg-background">
       <Navbar />

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Plane, Car, MapPin, Sun, Shirt, Phone, AlertCircle, ChevronRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
@@ -36,6 +37,7 @@ const CONTACTS = [
 ];
 
 export default function TravelGuidePage() {
+  useEffect(() => { document.title = "Travel Guide | Connect Ijebu Roots"; }, []);
   return (
     <div className="min-h-screen bg-background">
       <Navbar />

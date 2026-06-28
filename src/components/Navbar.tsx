@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Menu, X, ChevronRight, Sparkles, Search, ChevronDown, Heart } from "lucide-react";
 import JoinModal from "@/components/JoinModal";
 import SearchModal from "@/components/SearchModal";
@@ -37,6 +37,13 @@ export default function Navbar() {
   const [moreOpen, setMoreOpen] = useState(false);
   const moreRef = useRef<HTMLDivElement>(null);
   const { lang, setLang } = useLang();
+  const location = useLocation();
+
+  // Close all menus on every route change
+  useEffect(() => {
+    setMoreOpen(false);
+    setOpen(false);
+  }, [location.pathname]);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {

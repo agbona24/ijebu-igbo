@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, MapPin, Facebook, Twitter, Instagram, Youtube, Phone, Globe, MessageCircle, ArrowRight, Users, CalendarDays, Flag, Send } from "lucide-react";
+import { Mail, MapPin, Phone, Globe, MessageCircle, ArrowRight, Users, CalendarDays, Flag, Send } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const quickLinks = [
@@ -23,12 +23,7 @@ const communityLinks = [
   { label: "List Your Business", href: "/businesses" },
 ];
 
-const socials = [
-  { icon: Facebook,  href: "#", label: "Facebook"  },
-  { icon: Twitter,   href: "#", label: "Twitter"   },
-  { icon: Instagram, href: "#", label: "Instagram" },
-  { icon: Youtube,   href: "#", label: "YouTube"   },
-];
+const WHATSAPP_COMMUNITY = "https://wa.me/447496933887?text=Hello%2C%20I%27d%20like%20to%20join%20the%20IID%20community.";
 
 const stats = [
   { icon: Users,       value: "200+",  label: "Members"      },
@@ -62,6 +57,7 @@ function NewsletterSignup() {
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Your name…"
+            aria-label="Your name for community updates"
             className="px-4 py-2.5 rounded-xl bg-primary-foreground/10 border border-primary-foreground/20 text-white placeholder:text-primary-foreground/40 text-sm focus:outline-none focus:ring-2 focus:ring-accent/50 w-44"
           />
           <button
@@ -135,20 +131,17 @@ export default function Footer() {
             ))}
           </div>
 
-          {/* Social row */}
-          <div className="flex justify-center gap-3 mb-6">
-            {socials.map((s) => (
-              <a
-                key={s.label}
-                href={s.href}
-                aria-label={s.label}
-                className="w-12 h-12 rounded-2xl bg-primary-foreground/10 flex items-center justify-center
-                           active:bg-accent active:text-charcoal transition-all touch-manipulation"
-              >
-                <s.icon size={20} />
-              </a>
-            ))}
-          </div>
+          {/* WhatsApp community */}
+          <a
+            href={WHATSAPP_COMMUNITY}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-2 py-3 rounded-2xl bg-[#25D366]/15 active:bg-[#25D366]/30 transition-colors touch-manipulation mb-6"
+            aria-label="Join our WhatsApp community"
+          >
+            <MessageCircle size={20} className="text-[#25D366]" />
+            <span className="text-sm font-semibold text-primary-foreground/80">Join WhatsApp Community</span>
+          </a>
 
           {/* Website link */}
           <a
@@ -233,20 +226,17 @@ export default function Footer() {
                 development, and community pride. Proudly rooted in Ijebu Igbo, Nigeria.
               </p>
 
-              {/* Social icons */}
-              <div className="flex gap-2 mb-6">
-                {socials.map((s) => (
-                  <a
-                    key={s.label}
-                    href={s.href}
-                    aria-label={s.label}
-                    className="w-9 h-9 rounded-xl bg-primary-foreground/10 flex items-center justify-center
-                               hover:bg-accent hover:text-charcoal transition-all duration-300"
-                  >
-                    <s.icon size={16} />
-                  </a>
-                ))}
-              </div>
+              {/* WhatsApp community */}
+              <a
+                href={WHATSAPP_COMMUNITY}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Join our WhatsApp community"
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#25D366]/15 hover:bg-[#25D366]/25 transition-colors duration-300 mb-6"
+              >
+                <MessageCircle size={16} className="text-[#25D366]" />
+                <span className="text-sm font-semibold text-primary-foreground/80">WhatsApp Community</span>
+              </a>
 
               {/* Join CTA */}
               <Link

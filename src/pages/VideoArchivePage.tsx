@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import EventVideos from "@/components/EventVideos";
@@ -7,6 +8,7 @@ import FloatingContact from "@/components/FloatingContact";
 import { motion } from "framer-motion";
 
 export default function VideoArchivePage() {
+  useEffect(() => { document.title = "Video Archive | Connect Ijebu Roots"; }, []);
   return (
     <div className="min-h-screen bg-background">
       <Navbar />

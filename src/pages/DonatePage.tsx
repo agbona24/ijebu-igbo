@@ -1,6 +1,6 @@
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Heart, Building2, Copy, CheckCircle2, Users, BookOpen, Wrench } from "lucide-react";
-import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AnimatedHeroBg from "@/components/AnimatedHeroBg";
@@ -47,6 +47,7 @@ function CopyButton({ text }: { text: string }) {
 }
 
 export default function DonatePage() {
+  useEffect(() => { document.title = "Donate | Connect Ijebu Roots"; }, []);
   const pct = Math.min(100, Math.round((RAISED / TARGET) * 100));
 
   return (

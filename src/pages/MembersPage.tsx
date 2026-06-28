@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Users, Search, MapPin, ChevronRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
@@ -17,6 +17,7 @@ const ALL_CLANS: (Clan | "All")[] = [
 ];
 
 export default function MembersPage() {
+  useEffect(() => { document.title = "Members | Connect Ijebu Roots"; }, []);
   const [query, setQuery] = useState("");
   const [clan, setClan] = useState<Clan | "All">("All");
 
@@ -112,7 +113,7 @@ export default function MembersPage() {
               <p className="text-muted-foreground text-sm">No members match your search.</p>
             </div>
           ) : (
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
               {filtered.map((member, i) => (
                 <motion.div
                   key={member.id}
@@ -136,7 +137,7 @@ export default function MembersPage() {
                     }
                   />
                   <div className="p-3">
-                    <p className="font-semibold text-foreground text-xs leading-snug">{member.name}</p>
+                    <p className="font-semibold text-foreground text-sm leading-snug">{member.name}</p>
                     {member.role && (
                       <p className="text-accent text-[11px] font-semibold mt-0.5">{member.role}</p>
                     )}

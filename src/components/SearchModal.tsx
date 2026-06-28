@@ -51,7 +51,9 @@ function match(query: string, ...fields: string[]): boolean {
 
 export default function SearchModal({ open, onOpenChange }: Props) {
   const [query, setQuery] = useState("");
+  const [activeIndex, setActiveIndex] = useState(-1);
   const inputRef = useRef<HTMLInputElement>(null);
+  const listRef = useRef<HTMLUListElement>(null);
   const navigate = useNavigate();
   const { data: BUSINESSES = [] } = useSanityBusinesses();
   const { data: NEWS_ARTICLES = [] } = useSanityNews();
@@ -61,8 +63,12 @@ export default function SearchModal({ open, onOpenChange }: Props) {
       setTimeout(() => inputRef.current?.focus(), 80);
     } else {
       setQuery("");
+      setActiveIndex(-1);
     }
   }, [open]);
+
+  // Reset active index when results change
+  useEffect(() => { setActiveIndex(-1); }, [query]);
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -120,6 +126,24 @@ export default function SearchModal({ open, onOpenChange }: Props) {
     onOpenChange(false);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (!results.length) return;
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      const next = Math.min(activeIndex + 1, results.length - 1);
+      setActiveIndex(next);
+      listRef.current?.children[next]?.scrollIntoView({ block: "nearest" });
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      const prev = Math.max(activeIndex - 1, 0);
+      setActiveIndex(prev);
+      listRef.current?.children[prev]?.scrollIntoView({ block: "nearest" });
+    } else if (e.key === "Enter" && activeIndex >= 0) {
+      e.preventDefault();
+      handleSelect(results[activeIndex].href);
+    }
+  };
+
   return (
     <AnimatePresence>
       {open && (
@@ -148,8 +172,14 @@ export default function SearchModal({ open, onOpenChange }: Props) {
                     ref={inputRef}
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
+                    onKeyDown={handleKeyDown}
                     placeholder="Search businesses, news, events, pages…"
                     className="flex-1 bg-transparent text-foreground placeholder:text-muted-foreground outline-none text-base"
+                    role="combobox"
+                    aria-expanded={results.length > 0}
+                    aria-autocomplete="list"
+                    aria-controls="search-results"
+                    aria-activedescendant={activeIndex >= 0 ? `search-result-${activeIndex}` : undefined}
                   />
                   {query && (
                     <button
@@ -179,15 +209,16 @@ export default function SearchModal({ open, onOpenChange }: Props) {
                   )}
 
                   {results.length > 0 && (
-                    <ul className="py-2">
+                    <ul id="search-results" ref={listRef} className="py-2" role="listbox">
                       {results.map((r, i) => {
                         const meta = TYPE_META[r.type];
                         const Icon = meta.icon;
+                        const isActive = i === activeIndex;
                         return (
-                          <li key={i}>
+                          <li key={i} id={`search-result-${i}`} role="option" aria-selected={isActive}>
                             <button
                               onClick={() => handleSelect(r.href)}
-                              className="w-full flex items-center gap-3 px-4 py-3 hover:bg-muted/60 active:bg-muted transition-colors text-left group"
+                              className={`w-full flex items-center gap-3 px-4 py-3 transition-colors text-left group ${isActive ? "bg-muted" : "hover:bg-muted/60 active:bg-muted"}`}
                             >
                               <span className={`flex-shrink-0 ${meta.color}`}>
                                 <Icon size={16} />

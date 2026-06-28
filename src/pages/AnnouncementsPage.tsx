@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Baby, Heart, Star, Bell, Trophy, Calendar, ChevronRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
@@ -65,6 +65,7 @@ function AnnouncementCard({ item, index }: { item: typeof ANNOUNCEMENTS[0]; inde
 }
 
 export default function AnnouncementsPage() {
+  useEffect(() => { document.title = "Announcements | Connect Ijebu Roots"; }, []);
   const [active, setActive] = useState<AnnouncementCategory | "All">("All");
 
   const filtered = active === "All"

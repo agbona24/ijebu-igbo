@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Story from "@/components/Story";
@@ -9,6 +10,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight, Crown, MapPin } from "lucide-react";
 
 export default function HeritagePage() {
+  useEffect(() => { document.title = "Heritage | Connect Ijebu Roots"; }, []);
   return (
     <div className="min-h-screen bg-background">
       <Navbar />

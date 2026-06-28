@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Gallery from "@/components/Gallery";
@@ -5,6 +6,7 @@ import AnimatedHeroBg from "@/components/AnimatedHeroBg";
 import { motion } from "framer-motion";
 
 export default function GalleryPage() {
+  useEffect(() => { document.title = "Gallery | Connect Ijebu Roots"; }, []);
   return (
     <div className="min-h-screen bg-background">
       <Navbar />

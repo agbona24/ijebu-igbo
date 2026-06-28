@@ -322,10 +322,13 @@ function CalendarView({ events }: { events: Event[] }) {
           const isToday = day === today.getDate() && month === today.getMonth() && year === today.getFullYear();
           const isSelected = selected === dateKey;
 
+          const monthName = new Date(year, month).toLocaleString("en-GB", { month: "long" });
           return (
             <button
               key={dateKey}
               onClick={() => setSelected(isSelected ? null : dateKey)}
+              aria-label={`${day} ${monthName} ${year}${dayEvents.length > 0 ? `, ${dayEvents.length} event${dayEvents.length > 1 ? "s" : ""}` : ""}`}
+              aria-pressed={isSelected}
               className={`relative aspect-square border-r border-b border-border/40 flex flex-col items-center justify-start pt-1.5 transition-colors group
                 ${isSelected ? "bg-primary/10" : "hover:bg-muted/50"}`}
             >

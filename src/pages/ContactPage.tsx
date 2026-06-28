@@ -143,6 +143,7 @@ function MessageForm() {
                 placeholder="Your full name"
                 className={inputClass}
                 required
+                disabled={submitting}
               />
             </div>
             <div>
@@ -157,6 +158,7 @@ function MessageForm() {
                 placeholder="your@email.com"
                 className={inputClass}
                 required
+                disabled={submitting}
               />
             </div>
           </div>
@@ -165,7 +167,7 @@ function MessageForm() {
             <label className="block text-xs font-semibold text-foreground mb-1.5 tracking-wide uppercase">
               Subject
             </label>
-            <select name="subject" value={form.subject} onChange={handleChange} className={inputClass}>
+            <select name="subject" value={form.subject} onChange={handleChange} className={inputClass} disabled={submitting}>
               <option value="">Select a topic…</option>
               <option value="membership">Membership Enquiry</option>
               <option value="events">Events & Programmes</option>
@@ -188,6 +190,7 @@ function MessageForm() {
               rows={5}
               className={inputClass + " resize-none"}
               required
+              disabled={submitting}
             />
           </div>
 

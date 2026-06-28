@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Team from "@/components/Team";
@@ -6,6 +7,7 @@ import AnimatedHeroBg from "@/components/AnimatedHeroBg";
 import { motion } from "framer-motion";
 
 export default function TeamPage() {
+  useEffect(() => { document.title = "Our Team | Connect Ijebu Roots"; }, []);
   return (
     <div className="min-h-screen bg-background">
       <Navbar />

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { MapPin, ExternalLink } from "lucide-react";
 import Navbar from "@/components/Navbar";
@@ -194,6 +195,7 @@ function PlaceCard({ place, index }: { place: Place; index: number }) {
 }
 
 export default function TourismPage() {
+  useEffect(() => { document.title = "Tourism | Connect Ijebu Roots"; }, []);
   return (
     <div className="min-h-screen bg-background">
       <Navbar />

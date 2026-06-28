@@ -67,7 +67,7 @@ export default function NewsPost() {
             <span className="inline-block px-3 py-1 sm:px-4 sm:py-1.5 bg-accent text-white text-xs sm:text-sm font-semibold rounded-full">
               {article.category}
             </span>
-            <div className="flex items-center gap-2 text-gray-600 text-sm sm:text-base">
+            <div className="flex items-center gap-2 text-muted-foreground text-sm sm:text-base">
               <Calendar className="w-4 h-4" />
               <time>{article.date}</time>
             </div>
@@ -80,7 +80,7 @@ export default function NewsPost() {
                   });
                 }
               }}
-              className="ml-auto inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors text-sm sm:text-base"
+              className="ml-auto inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 border border-border rounded-lg hover:bg-muted transition-colors text-sm sm:text-base"
             >
               <Share2 className="w-4 h-4" />
               <span className="hidden sm:inline">Share</span>
@@ -92,7 +92,7 @@ export default function NewsPost() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-6 sm:mb-8"
+            className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-6 sm:mb-8"
           >
             {article.title}
           </motion.h1>
@@ -105,7 +105,7 @@ export default function NewsPost() {
             className="prose prose-sm sm:prose-base lg:prose-lg max-w-none"
           >
             {article.content.map((block, index) => (
-              <p key={index} className="text-gray-700 leading-relaxed mb-4 sm:mb-6 text-base sm:text-lg">
+              <p key={index} className="text-foreground/80 leading-relaxed mb-4 sm:mb-6 text-base sm:text-lg">
                 {block.text}
               </p>
             ))}
@@ -119,7 +119,7 @@ export default function NewsPost() {
               transition={{ duration: 0.6, delay: 0.4 }}
               className="mt-12 sm:mt-16 lg:mt-20"
             >
-              <h2 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-gray-900">
+              <h2 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-foreground">
                 Photo Gallery
               </h2>
               
@@ -136,7 +136,7 @@ export default function NewsPost() {
                   >
                     <img
                       src={image.src}
-                      alt={image.alt}
+                      alt={image.alt || `${article.title} photo ${index + 1}`}
                       className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-110"
                       loading="lazy"
                     />
@@ -148,7 +148,7 @@ export default function NewsPost() {
           )}
 
           {/* Back to News */}
-          <div className="mt-12 sm:mt-16 pt-8 sm:pt-12 border-t border-gray-200">
+          <div className="mt-12 sm:mt-16 pt-8 sm:pt-12 border-t border-border">
             <Link
               to="/news"
               className="inline-flex items-center gap-2 text-primary hover:text-accent transition-colors font-semibold"

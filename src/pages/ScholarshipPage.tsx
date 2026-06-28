@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { BookOpen, CheckCircle2, Clock, FileText, Users, ChevronRight, GraduationCap } from "lucide-react";
 import Navbar from "@/components/Navbar";
@@ -28,6 +29,7 @@ const PAST_RECIPIENTS: { name: string; year: number; institution: string }[] = [
 ];
 
 export default function ScholarshipPage() {
+  useEffect(() => { document.title = "Scholarship | Connect Ijebu Roots"; }, []);
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -160,9 +162,16 @@ export default function ScholarshipPage() {
               <Users size={20} className="text-accent" /> Past Recipients
             </h2>
             {PAST_RECIPIENTS.length === 0 ? (
-              <p className="text-muted-foreground text-sm text-center py-8 border border-dashed border-border rounded-xl">
-                Past recipients will be listed here as the programme grows.
-              </p>
+              <div className="text-center py-10 border border-dashed border-border rounded-xl space-y-3">
+                <p className="text-muted-foreground text-sm">Past recipients will be listed here as the programme grows.</p>
+                <a
+                  href={`https://wa.me/447496933887?text=${encodeURIComponent("Hello, I'd like to apply for the IID Scholarship Programme.")}`}
+                  target="_blank" rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-primary border border-primary/30 px-5 py-2.5 rounded-xl hover:bg-primary/5 transition-colors"
+                >
+                  Ready to apply? Contact us →
+                </a>
+              </div>
             ) : (
               <div className="space-y-3">
                 {PAST_RECIPIENTS.map((r, i) => (
