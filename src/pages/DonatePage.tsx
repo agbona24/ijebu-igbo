@@ -9,12 +9,18 @@ import BackToTop from "@/components/BackToTop";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
-// ── Bank details — update these when confirmed ──────────────────────────────
-const BANK = {
+const BANK_UK = {
   accountName: "IID Omo Orimolusi in Diaspora",
-  bankName: "Lloyds Bank",
-  accountNumber: "XXXXXXXX",   // ← replace with real account number
-  sortCode: "XX-XX-XX",        // ← replace with real sort code
+  bankName: "Natwest",
+  accountNumber: "21598770",
+  sortCode: "50-10-29",
+  reference: "UNITY HOUSE",
+};
+
+const BANK_NG = {
+  accountName: "IID Omo Orimolusi in Diaspora",
+  bankName: "FCMB",
+  accountNumber: "4052231013",
   reference: "UNITY HOUSE",
 };
 
@@ -133,20 +139,43 @@ export default function DonatePage() {
             className="bg-card border border-border rounded-2xl p-6 sm:p-8 shadow-sm"
           >
             <h2 className="font-display font-black text-xl text-foreground mb-1">Bank Transfer Details</h2>
-            <p className="text-muted-foreground text-sm mb-6">Please use the reference <strong>UNITY HOUSE</strong> so we can track your donation.</p>
+            <p className="text-muted-foreground text-sm mb-6">
+              Please use the reference <strong className="text-foreground">UNITY HOUSE</strong> so we can track your donation.
+            </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {/* UK Account */}
+            <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-3">🇬🇧 UK Account</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
               {[
-                { label: "Account Name", value: BANK.accountName },
-                { label: "Bank",         value: BANK.bankName },
-                { label: "Account No.",  value: BANK.accountNumber },
-                { label: "Sort Code",    value: BANK.sortCode },
-                { label: "Reference",    value: BANK.reference },
+                { label: "Account Name", value: BANK_UK.accountName },
+                { label: "Bank",         value: BANK_UK.bankName },
+                { label: "Account No.",  value: BANK_UK.accountNumber },
+                { label: "Sort Code",    value: BANK_UK.sortCode },
+                { label: "Reference",    value: BANK_UK.reference },
               ].map(({ label, value }) => (
                 <div key={label} className="bg-muted/50 rounded-xl p-4">
                   <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-1">{label}</p>
-                  <div className="flex items-center">
-                    <p className="font-mono font-semibold text-foreground text-sm">{value}</p>
+                  <div className="flex items-center gap-2">
+                    <p className="font-mono font-semibold text-foreground text-sm flex-1">{value}</p>
+                    <CopyButton text={value} />
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Nigeria Account */}
+            <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-3">🇳🇬 Nigeria Account</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {[
+                { label: "Account Name", value: BANK_NG.accountName },
+                { label: "Bank",         value: BANK_NG.bankName },
+                { label: "Account No.",  value: BANK_NG.accountNumber },
+                { label: "Reference",    value: BANK_NG.reference },
+              ].map(({ label, value }) => (
+                <div key={label} className="bg-muted/50 rounded-xl p-4">
+                  <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-1">{label}</p>
+                  <div className="flex items-center gap-2">
+                    <p className="font-mono font-semibold text-foreground text-sm flex-1">{value}</p>
                     <CopyButton text={value} />
                   </div>
                 </div>
