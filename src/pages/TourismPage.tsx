@@ -241,6 +241,70 @@ export default function TourismPage() {
         </div>
       </section>
 
+      {/* Atikori Anthem */}
+      <section className="section-padding bg-primary relative overflow-hidden">
+        <AnimatedHeroBg />
+        <div className="container-main relative z-10 max-w-3xl">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease }}
+            className="text-center mb-8"
+          >
+            <p className="label-accent mb-2">Ọmọ Atikori</p>
+            <h2 className="font-display text-3xl sm:text-4xl font-black text-primary-foreground">
+              Atikori Anthem
+            </h2>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease, delay: 0.1 }}
+            className="bg-primary-foreground/5 border border-primary-foreground/15 rounded-2xl p-6 sm:p-10 backdrop-blur-sm"
+          >
+            <p className="font-display text-base sm:text-lg text-primary-foreground/90 leading-loose text-center whitespace-pre-line italic">
+              {`Atikori ilu mi
+Ilu Olola Olokiki
+Ng o gbe o leke okan mi
+Ng o ma wa ilosiwaju re
+Keegbo eni gba
+Keegba eni juse
+Olorun Oba ranmi lowo
+Lati gbe Atikori soke
+Konibaje lowo mi`}
+            </p>
+
+            <div className="my-7 flex items-center justify-center gap-3">
+              <span className="h-px w-12 bg-accent/50" />
+              <span className="text-accent text-xs font-bold tracking-[0.2em] uppercase">The Quarters</span>
+              <span className="h-px w-12 bg-accent/50" />
+            </div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-7">
+              {["Bogije", "Etitale", "Oriwu", "Oridan", "Igodo", "Aboyin", "Oke-Moje", "Itun-Tapa"].map((q) => (
+                <div
+                  key={q}
+                  className="bg-primary-foreground/10 border border-primary-foreground/10 rounded-xl py-2.5 px-2 text-center"
+                >
+                  <span className="font-display font-bold text-primary-foreground text-sm uppercase tracking-wide">{q}</span>
+                </div>
+              ))}
+            </div>
+
+            <p className="font-display text-base sm:text-lg text-primary-foreground/90 leading-loose text-center whitespace-pre-line italic">
+              {`Parapo dokan soso
+Eje ka jose koda
+Awa larole Kegbo
+Tanrin Larinkoye
+Kajose kodara.`}
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
       <Footer />
       <FloatingContact />
       <BackToTop />

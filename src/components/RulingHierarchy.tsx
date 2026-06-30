@@ -81,6 +81,10 @@ const gradeTwo = [
   {
     title: "Keegbo",
     area: "Atikori",
+    name: "His Royal Highness, Alayeluwa Kabiyesi Oba Ibitoye Solaja, JP — The Keegbo of Atikori",
+    photo: "/images/oba-keegbo-ibitoye-solaja.webp",
+    queenName: "Her Royal Highness Olori Yemisi Solaja — The Olori Keegbo of Atikori",
+    queenPhoto: "/images/olori-yemisi-solaja.webp",
     color: "from-purple-700 to-purple-500",
     accent: "border-purple-500/40 bg-purple-50",
     badge: "bg-purple-100 text-purple-800",
@@ -272,6 +276,39 @@ function ObaCard({ oba, index }: { oba: typeof gradeTwo[0]; index: number }) {
                       </div>
                     ))}
                   </div>
+                </div>
+              )}
+
+              {/* Royal couple portraits — for entries with photos but no administration block */}
+              {!("administration" in oba && Array.isArray(oba.administration)) &&
+                "photo" in oba && (oba.photo || ("queenPhoto" in oba && oba.queenPhoto)) && (
+                <div className="grid grid-cols-2 gap-4 max-w-md mx-auto">
+                  {"photo" in oba && oba.photo && (
+                    <div className="text-center">
+                      <ImageWithSkeleton
+                        src={oba.photo as string}
+                        alt={"name" in oba ? String(oba.name) : oba.title}
+                        className="w-full max-w-[200px] mx-auto rounded-2xl shadow-md border border-border aspect-[3/4]"
+                        imgClassName="object-cover rounded-2xl"
+                      />
+                      <p className="text-xs font-semibold text-foreground mt-2 leading-snug">
+                        {"name" in oba ? String(oba.name) : `${oba.title} of ${oba.area}`}
+                      </p>
+                    </div>
+                  )}
+                  {"queenPhoto" in oba && oba.queenPhoto && (
+                    <div className="text-center">
+                      <ImageWithSkeleton
+                        src={oba.queenPhoto as string}
+                        alt={"queenName" in oba ? String(oba.queenName) : "Olori"}
+                        className="w-full max-w-[200px] mx-auto rounded-2xl shadow-md border border-border aspect-[3/4]"
+                        imgClassName="object-cover rounded-2xl"
+                      />
+                      <p className="text-xs font-semibold text-foreground mt-2 leading-snug">
+                        {"queenName" in oba ? String(oba.queenName) : "Olori"}
+                      </p>
+                    </div>
+                  )}
                 </div>
               )}
 
