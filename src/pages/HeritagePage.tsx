@@ -42,7 +42,7 @@ export default function HeritagePage() {
 
       <RulingHierarchy />
 
-      {/* Kingdom Profiles */}
+      {/* Town Profiles */}
       <section className="py-12 sm:py-16 bg-muted/30">
         <div className="container-main">
           <motion.div
@@ -77,7 +77,7 @@ export default function HeritagePage() {
                   <div className="relative z-10 text-center px-4">
                     <Crown size={28} className="text-white mx-auto mb-1" />
                     <p className="text-white/70 text-xs font-bold uppercase tracking-widest">Grade Two Oba</p>
-                    <h4 className="text-white font-display font-black text-xl">Ojowo Kingdom</h4>
+                    <h4 className="text-white font-display font-black text-xl">Ojowo</h4>
                     <p className="text-white/70 text-xs mt-1">Olokine of Ojowo</p>
                   </div>
                 </div>
@@ -114,7 +114,7 @@ export default function HeritagePage() {
                   <div className="relative z-10 text-center px-4">
                     <Crown size={28} className="text-white mx-auto mb-1" />
                     <p className="text-white/70 text-xs font-bold uppercase tracking-widest">Grade Two Oba</p>
-                    <h4 className="text-white font-display font-black text-xl">Japara Kingdom</h4>
+                    <h4 className="text-white font-display font-black text-xl">Japara</h4>
                     <p className="text-white/70 text-xs mt-1">Abijaparako of Japara</p>
                   </div>
                 </div>
@@ -151,7 +151,7 @@ export default function HeritagePage() {
                   <div className="relative z-10 text-center px-4">
                     <Crown size={28} className="text-white mx-auto mb-1" />
                     <p className="text-white/70 text-xs font-bold uppercase tracking-widest">Grade Two Oba</p>
-                    <h4 className="text-white font-display font-black text-xl">Atikori Kingdom</h4>
+                    <h4 className="text-white font-display font-black text-xl">Atikori</h4>
                     <p className="text-white/70 text-xs mt-1">Keegbo of Atikori</p>
                   </div>
                 </div>
@@ -188,7 +188,7 @@ export default function HeritagePage() {
                   <div className="relative z-10 text-center px-4">
                     <Crown size={28} className="text-white mx-auto mb-1" />
                     <p className="text-white/70 text-xs font-bold uppercase tracking-widest">Grade Two Oba</p>
-                    <h4 className="text-white font-display font-black text-xl">Oke-Sopen Kingdom</h4>
+                    <h4 className="text-white font-display font-black text-xl">Oke-Sopen</h4>
                     <p className="text-white/70 text-xs mt-1">Sopenlukale of Oke-Sopen</p>
                   </div>
                 </div>
@@ -225,7 +225,7 @@ export default function HeritagePage() {
                   <div className="relative z-10 text-center px-4">
                     <Crown size={28} className="text-white mx-auto mb-1" />
                     <p className="text-white/70 text-xs font-bold uppercase tracking-widest">Grade Two Oba</p>
-                    <h4 className="text-white font-display font-black text-xl">Oke-Agbo Kingdom</h4>
+                    <h4 className="text-white font-display font-black text-xl">Oke-Agbo</h4>
                     <p className="text-white/70 text-xs mt-1">Bejeroku of Oke-Agbo</p>
                   </div>
                 </div>

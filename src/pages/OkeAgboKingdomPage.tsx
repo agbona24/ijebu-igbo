@@ -48,7 +48,7 @@ export default function OkeAgboKingdomPage() {
           </motion.p>
           <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }}
             className="font-display text-4xl sm:text-5xl lg:text-6xl font-black text-primary-foreground leading-tight">
-            Oke-Agbo Kingdom
+            Oke-Agbo
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}
             className="mt-3 text-primary-foreground/70 max-w-xl text-sm sm:text-base leading-relaxed">
@@ -68,7 +68,7 @@ export default function OkeAgboKingdomPage() {
             <h3 className="font-display font-black text-foreground text-lg leading-tight">
               His Royal Highness Oba Stephen Adekoya
             </h3>
-            <p className="text-accent font-semibold text-sm mt-1">The Bejeroku of Oke-Agbo</p>
+            <p className="text-accent font-semibold text-sm mt-1">The Bejeroku of Oke-Agbo, Ijebu Igbo</p>
           </motion.div>
         </div>
       </section>

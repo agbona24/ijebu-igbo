@@ -243,7 +243,7 @@ export default function OjowoKingdomPage() {
           </motion.p>
           <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }}
             className="font-display text-4xl sm:text-5xl lg:text-6xl font-black text-primary-foreground leading-tight">
-            Ojowo Kingdom
+            Ojowo
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}
             className="mt-3 text-primary-foreground/70 max-w-xl text-sm sm:text-base leading-relaxed">
@@ -257,7 +257,7 @@ export default function OjowoKingdomPage() {
         <div className="container-main">
           <div className="flex flex-col sm:flex-row gap-6 sm:gap-10 justify-center items-center">
             {[
-              { photo: "/images/oba-olokine-abdulrasheed-banjo.webp", name: "His Royal Highness Oba Abdulrasheed Abayomi Banjo, PhD", title: "Akereburu, Orilonise I — The Olokine of Ojowo" },
+              { photo: "/images/oba-olokine-abdulrasheed-banjo.webp", name: "His Royal Highness Oba Abdulrasheed Abayomi Banjo, PhD", title: "Akereburu, Orilonise I — The Olokine of Ojowo, Ijebu Igbo" },
               { photo: "/images/olori-olokine-ojowo.webp", name: "Olori Oluyinka Banjo, FISLT", title: "The Olori Olokine of Ojowo" },
             ].map((person, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
@@ -356,7 +356,7 @@ export default function OjowoKingdomPage() {
             {[
               {
                 icon: Eye, label: "Vision Statement",
-                text: "To place Ojowo Kingdom on the world map for its transformation efforts in being the most peaceful, friendly, merit and disciplined driven for people to live, work and play as a result of her safety, business, educational and cultural opportunities consistently advertised to the world.",
+                text: "To place Ojowo on the world map for its transformation efforts in being the most peaceful, friendly, merit and disciplined driven for people to live, work and play as a result of her safety, business, educational and cultural opportunities consistently advertised to the world.",
               },
               {
                 icon: Target, label: "Mission Statement",

@@ -15,7 +15,7 @@ const ease = [0.16, 1, 0.3, 1] as const;
 const ituns = ["Bogije", "Oriwu", "Igodo", "Oke Moje", "Etitale", "Oridan", "Aboyin", "Itun Tapa"];
 
 const royalCouple = [
-  { photo: "/images/oba-keegbo-ibitoye-solaja.webp", name: "Alayeluwa Kabiyesi Oba Ibitoye Solaja, JP", title: "The Keegbo of Atikori" },
+  { photo: "/images/oba-keegbo-ibitoye-solaja.webp", name: "Alayeluwa Kabiyesi Oba Ibitoye Solaja, JP", title: "The Keegbo of Atikori, Ijebu Igbo" },
   { photo: "/images/olori-yemisi-solaja.webp", name: "Olori Yemisi Solaja", title: "The Olori Keegbo of Atikori" },
 ];
 
@@ -106,7 +106,7 @@ export default function AtikoriKingdomPage() {
           </motion.p>
           <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }}
             className="font-display text-4xl sm:text-5xl lg:text-6xl font-black text-primary-foreground leading-tight">
-            Atikori Kingdom
+            Atikori
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}
             className="mt-3 text-primary-foreground/70 max-w-xl text-sm sm:text-base leading-relaxed">

@@ -114,17 +114,17 @@ const gradeTwo = [
   },
 ];
 
-const satelliteTowns = ["Agunboye","Odo-Alamo","Asigidi","Aparaki","Imope"];
+const satelliteTowns = ["Agunboye", "Odo-Alamo", "Asigidi"];
 
 const summary = [
-  { title: "Grade One Oba", count: 1 },
-  { title: "Grade Two Obas", count: 5 },
+  { title: "Grade One Oba (Orimolusi)", count: 1 },
+  { title: "Town Obas under the Orimolusi", count: 7 },
   { title: "Bales under Sopenlukale", count: 31 },
   { title: "Bales under Bejeroku", count: 46 },
   { title: "Bales under Olokine", count: 30 },
   { title: "Bales under Keegbo", count: 23 },
   { title: "Bales under Abijaparako", count: 32 },
-  { title: "Satellite Towns (Olorilus)", count: 5 },
+  { title: "Towns under Olori-Ilu (2 with Oba-designate)", count: 3 },
 ];
 
 function ObaCard({ oba, index }: { oba: typeof gradeTwo[0]; index: number }) {
@@ -499,7 +499,7 @@ export default function RulingHierarchy() {
         >
           <h4 className="font-display font-bold text-foreground text-lg mb-4 flex items-center gap-2">
             <MapPin size={18} className="text-accent" />
-            Olorilus / Satellite Towns
+            Towns under Olori-Ilu
           </h4>
           <div className="flex flex-wrap gap-3">
             {satelliteTowns.map((town) => (
@@ -511,6 +511,9 @@ export default function RulingHierarchy() {
               </span>
             ))}
           </div>
+          <p className="text-xs text-muted-foreground mt-3">
+            Two of these three towns currently have an Oba-designate awaiting traditional rites and coronation. Two other towns — Imope-Ijebu (Onimope) and Aparaki (Alaparaki) — have already been elevated to Obaship; their full profiles are being added to the site.
+          </p>
         </motion.div>
 
         {/* Summary table */}

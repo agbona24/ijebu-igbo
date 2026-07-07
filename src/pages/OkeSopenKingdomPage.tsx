@@ -11,7 +11,7 @@ import Lightbox, { useLightbox, ZoomableImage } from "@/components/Lightbox";
 const ease = [0.16, 1, 0.3, 1] as const;
 
 const galleryImages = [
-  { src: "/images/oba-sopenlukale-mufutau-adesesan-yusuf.webp", alt: "HRM Oba (Dr.) Mufutau Adesesan Yusuf, The Sopenlukale of Oke-Sopen" },
+  { src: "/images/oba-sopenlukale-mufutau-adesesan-yusuf.webp", alt: "HRH Oba (Dr.) Mufutau Adesesan Yusuf, The Sopenlukale of Oke-Sopen, Ijebu Igbo" },
 ];
 
 // ── Data ──────────────────────────────────────────────────────────────────
@@ -28,7 +28,7 @@ const pastRulers = [
   { no: 9, title: "Olori-Ilu", name: "S. Senjobi", years: "1967 – 1980" },
   { no: 10, title: "Olori-Ilu", name: "Amos Ogunbanjo", years: "1980 – 1987" },
   { no: 11, title: "HRH Oba", name: "S. O. Adeleye, MON", years: "1991 – 1998" },
-  { no: 12, title: "HRM Oba (Dr.)", name: "M. A. Yusuf", years: "2003 – Present", current: true },
+  { no: 12, title: "HRH Oba (Dr.)", name: "M. A. Yusuf", years: "2003 – Present", current: true },
 ];
 
 // ── Page ───────────────────────────────────────────────────────────────────
@@ -50,7 +50,7 @@ export default function OkeSopenKingdomPage() {
           </motion.p>
           <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }}
             className="font-display text-4xl sm:text-5xl lg:text-6xl font-black text-primary-foreground leading-tight">
-            Oke-Sopen Kingdom
+            Oke-Sopen
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}
             className="mt-3 text-primary-foreground/70 max-w-xl text-sm sm:text-base leading-relaxed">
@@ -68,9 +68,9 @@ export default function OkeSopenKingdomPage() {
               <ZoomableImage src={galleryImages[0].src} alt={galleryImages[0].alt} onClick={() => open(0)} />
             </div>
             <h3 className="font-display font-black text-foreground text-lg leading-tight">
-              His Royal Majesty Oba (Dr.) Mufutau Adesesan Yusuf
+              His Royal Highness Oba (Dr.) Mufutau Adesesan Yusuf
             </h3>
-            <p className="text-accent font-semibold text-sm mt-1">The Sopenlukale of Oke-Sopen</p>
+            <p className="text-accent font-semibold text-sm mt-1">The Sopenlukale of Oke-Sopen, Ijebu Igbo</p>
           </motion.div>
         </div>
       </section>
