@@ -131,6 +131,80 @@ export default function HeritagePage() {
                 </div>
               </Link>
             </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.16 }}
+            >
+              <Link
+                to="/atikori"
+                className="group flex flex-col bg-card border border-border rounded-2xl overflow-hidden hover:border-accent/50 hover:shadow-xl transition-all duration-300"
+              >
+                <div className="relative h-36 bg-gradient-to-br from-purple-700 to-purple-500 flex items-center justify-center overflow-hidden">
+                  <img
+                    src="/images/oba-keegbo-ibitoye-solaja.webp"
+                    alt="Keegbo of Atikori"
+                    className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-50 transition-opacity duration-300"
+                  />
+                  <div className="relative z-10 text-center px-4">
+                    <Crown size={28} className="text-white mx-auto mb-1" />
+                    <p className="text-white/70 text-xs font-bold uppercase tracking-widest">Grade Two Oba</p>
+                    <h4 className="text-white font-display font-black text-xl">Atikori Kingdom</h4>
+                    <p className="text-white/70 text-xs mt-1">Keegbo of Atikori</p>
+                  </div>
+                </div>
+                <div className="p-4 flex items-center justify-between">
+                  <div>
+                    <p className="text-xs text-muted-foreground flex items-center gap-1">
+                      <MapPin size={11} /> Atikori Quarter, Ijebu-Igbo
+                    </p>
+                    <p className="text-sm font-semibold text-foreground mt-0.5">
+                      Oloritun · Heritage Places · Anthem
+                    </p>
+                  </div>
+                  <ArrowRight size={18} className="text-accent shrink-0 transition-transform group-hover:translate-x-1" />
+                </div>
+              </Link>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.24 }}
+            >
+              <Link
+                to="/oke-sopen"
+                className="group flex flex-col bg-card border border-border rounded-2xl overflow-hidden hover:border-accent/50 hover:shadow-xl transition-all duration-300"
+              >
+                <div className="relative h-36 bg-gradient-to-br from-amber-700 to-amber-500 flex items-center justify-center overflow-hidden">
+                  <img
+                    src="/images/oba-sopenlukale-mufutau-adesesan-yusuf.webp"
+                    alt="Sopenlukale of Oke-Sopen"
+                    className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-50 transition-opacity duration-300"
+                  />
+                  <div className="relative z-10 text-center px-4">
+                    <Crown size={28} className="text-white mx-auto mb-1" />
+                    <p className="text-white/70 text-xs font-bold uppercase tracking-widest">Grade Two Oba</p>
+                    <h4 className="text-white font-display font-black text-xl">Oke-Sopen Kingdom</h4>
+                    <p className="text-white/70 text-xs mt-1">Sopenlukale of Oke-Sopen</p>
+                  </div>
+                </div>
+                <div className="p-4 flex items-center justify-between">
+                  <div>
+                    <p className="text-xs text-muted-foreground flex items-center gap-1">
+                      <MapPin size={11} /> Oke-Sopen Quarter, Ijebu-Igbo
+                    </p>
+                    <p className="text-sm font-semibold text-foreground mt-0.5">
+                      Past Rulers Since 1886
+                    </p>
+                  </div>
+                  <ArrowRight size={18} className="text-accent shrink-0 transition-transform group-hover:translate-x-1" />
+                </div>
+              </Link>
+            </motion.div>
           </div>
         </div>
       </section>
