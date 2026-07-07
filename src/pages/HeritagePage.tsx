@@ -94,6 +94,43 @@ export default function HeritagePage() {
                 </div>
               </Link>
             </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.08 }}
+            >
+              <Link
+                to="/japara"
+                className="group flex flex-col bg-card border border-border rounded-2xl overflow-hidden hover:border-accent/50 hover:shadow-xl transition-all duration-300"
+              >
+                <div className="relative h-36 bg-gradient-to-br from-rose-700 to-rose-500 flex items-center justify-center overflow-hidden">
+                  <img
+                    src="/images/oba-abijaparako-aderemi-adewale-ogunye.webp"
+                    alt="Abijaparako of Japara"
+                    className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-50 transition-opacity duration-300"
+                  />
+                  <div className="relative z-10 text-center px-4">
+                    <Crown size={28} className="text-white mx-auto mb-1" />
+                    <p className="text-white/70 text-xs font-bold uppercase tracking-widest">Grade Two Oba</p>
+                    <h4 className="text-white font-display font-black text-xl">Japara Kingdom</h4>
+                    <p className="text-white/70 text-xs mt-1">Abijaparako of Japara</p>
+                  </div>
+                </div>
+                <div className="p-4 flex items-center justify-between">
+                  <div>
+                    <p className="text-xs text-muted-foreground flex items-center gap-1">
+                      <MapPin size={11} /> Japara Quarter, Ijebu-Igbo
+                    </p>
+                    <p className="text-sm font-semibold text-foreground mt-0.5">
+                      History · Chiefs · Oriki · Past Rulers
+                    </p>
+                  </div>
+                  <ArrowRight size={18} className="text-accent shrink-0 transition-transform group-hover:translate-x-1" />
+                </div>
+              </Link>
+            </motion.div>
           </div>
         </div>
       </section>

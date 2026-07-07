@@ -35,6 +35,7 @@ import KingProfile from "./pages/KingProfile.tsx";
 import NewsPage from "./pages/NewsPage.tsx";
 import TourismPage from "./pages/TourismPage.tsx";
 import OjowoKingdomPage from "./pages/OjowoKingdomPage.tsx";
+import JaparaKingdomPage from "./pages/JaparaKingdomPage.tsx";
 import DonatePage from "./pages/DonatePage.tsx";
 import AnnouncementsPage from "./pages/AnnouncementsPage.tsx";
 import MembersPage from "./pages/MembersPage.tsx";
@@ -64,6 +65,7 @@ const App = () => (
           <Route path="/news"          element={<NewsPage />} />
           <Route path="/tourism"       element={<TourismPage />} />
           <Route path="/ojowo"         element={<OjowoKingdomPage />} />
+          <Route path="/japara"        element={<JaparaKingdomPage />} />
           <Route path="/donate"        element={<DonatePage />} />
           <Route path="/announcements" element={<AnnouncementsPage />} />
           <Route path="/members"       element={<MembersPage />} />

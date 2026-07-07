@@ -98,6 +98,8 @@ const gradeTwo = [
   {
     title: "Abijaparako",
     area: "Japara",
+    name: "His Royal Highness, Alayeluwa Oba Aderemi Adewale Ogunye (JP), Ilufemiloye — The Abijaparako of Japara (Kotolori-Ojuule I)",
+    photo: "/images/oba-abijaparako-aderemi-adewale-ogunye.webp",
     color: "from-rose-700 to-rose-500",
     accent: "border-rose-500/40 bg-rose-50",
     badge: "bg-rose-100 text-rose-800",
@@ -446,6 +448,17 @@ export default function RulingHierarchy() {
                 The supreme traditional ruler of Ijebu-Igbo, presiding over all five quarters and their communities.
               </p>
             </div>
+          </div>
+
+          {/* Council of Obas */}
+          <div className="mt-6 max-w-md mx-auto rounded-2xl overflow-hidden border border-border shadow-sm bg-white">
+            <ImageWithSkeleton
+              src="/images/ijebu-igbo-council-of-obas.webp"
+              alt="Ijebu-Igbo Council of Obas, chaired by the Orimolusi"
+              className="w-full"
+              imgClassName="h-auto"
+            />
+            <p className="text-xs text-muted-foreground text-center p-3">Ijebu-Igbo Council of Obas, chaired by the Orimolusi</p>
           </div>
 
           {/* Connector line */}
