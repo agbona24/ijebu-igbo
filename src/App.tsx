@@ -38,6 +38,7 @@ import OjowoKingdomPage from "./pages/OjowoKingdomPage.tsx";
 import JaparaKingdomPage from "./pages/JaparaKingdomPage.tsx";
 import AtikoriKingdomPage from "./pages/AtikoriKingdomPage.tsx";
 import OkeSopenKingdomPage from "./pages/OkeSopenKingdomPage.tsx";
+import OkeAgboKingdomPage from "./pages/OkeAgboKingdomPage.tsx";
 import DonatePage from "./pages/DonatePage.tsx";
 import AnnouncementsPage from "./pages/AnnouncementsPage.tsx";
 import MembersPage from "./pages/MembersPage.tsx";
@@ -70,6 +71,7 @@ const App = () => (
           <Route path="/japara"        element={<JaparaKingdomPage />} />
           <Route path="/atikori"       element={<AtikoriKingdomPage />} />
           <Route path="/oke-sopen"     element={<OkeSopenKingdomPage />} />
+          <Route path="/oke-agbo"      element={<OkeAgboKingdomPage />} />
           <Route path="/donate"        element={<DonatePage />} />
           <Route path="/announcements" element={<AnnouncementsPage />} />
           <Route path="/members"       element={<MembersPage />} />

@@ -205,6 +205,43 @@ export default function HeritagePage() {
                 </div>
               </Link>
             </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.32 }}
+            >
+              <Link
+                to="/oke-agbo"
+                className="group flex flex-col bg-card border border-border rounded-2xl overflow-hidden hover:border-accent/50 hover:shadow-xl transition-all duration-300"
+              >
+                <div className="relative h-36 bg-gradient-to-br from-emerald-700 to-emerald-500 flex items-center justify-center overflow-hidden">
+                  <img
+                    src="/images/oba-bejeroku-stephen-adekoya.webp"
+                    alt="Bejeroku of Oke-Agbo"
+                    className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-50 transition-opacity duration-300"
+                  />
+                  <div className="relative z-10 text-center px-4">
+                    <Crown size={28} className="text-white mx-auto mb-1" />
+                    <p className="text-white/70 text-xs font-bold uppercase tracking-widest">Grade Two Oba</p>
+                    <h4 className="text-white font-display font-black text-xl">Oke-Agbo Kingdom</h4>
+                    <p className="text-white/70 text-xs mt-1">Bejeroku of Oke-Agbo</p>
+                  </div>
+                </div>
+                <div className="p-4 flex items-center justify-between">
+                  <div>
+                    <p className="text-xs text-muted-foreground flex items-center gap-1">
+                      <MapPin size={11} /> Oke-Agbo Quarter, Ijebu-Igbo
+                    </p>
+                    <p className="text-sm font-semibold text-foreground mt-0.5">
+                      Bales of Oke-Agbo
+                    </p>
+                  </div>
+                  <ArrowRight size={18} className="text-accent shrink-0 transition-transform group-hover:translate-x-1" />
+                </div>
+              </Link>
+            </motion.div>
           </div>
         </div>
       </section>
