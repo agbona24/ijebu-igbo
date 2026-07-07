@@ -6,12 +6,18 @@ import Footer from "@/components/Footer";
 import FloatingContact from "@/components/FloatingContact";
 import BackToTop from "@/components/BackToTop";
 import AnimatedHeroBg from "@/components/AnimatedHeroBg";
+import Lightbox, { useLightbox, ZoomableImage } from "@/components/Lightbox";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
 // ── Data ──────────────────────────────────────────────────────────────────
 
 const ituns = ["Bogije", "Oriwu", "Igodo", "Oke Moje", "Etitale", "Oridan", "Aboyin", "Itun Tapa"];
+
+const royalCouple = [
+  { photo: "/images/oba-keegbo-ibitoye-solaja.webp", name: "Alayeluwa Kabiyesi Oba Ibitoye Solaja, JP", title: "The Keegbo of Atikori" },
+  { photo: "/images/olori-yemisi-solaja.webp", name: "Olori Yemisi Solaja", title: "The Olori Keegbo of Atikori" },
+];
 
 const oloriwuns = [
   { photo: "/images/chief-adebola-adenubi-oloritun-bogije.webp", name: "Chief Adebola Adenubi", title: "Oloritun of Bogije" },
@@ -59,6 +65,12 @@ const places = [
   },
 ];
 
+const galleryImages = [
+  ...royalCouple.map((p) => ({ src: p.photo, alt: `${p.name} — ${p.title}` })),
+  ...oloriwuns.map((c) => ({ src: c.photo, alt: `${c.name} — ${c.title}` })),
+  ...places.map((p) => ({ src: p.image, alt: p.name })),
+];
+
 const anthemVerse1 = `Atikori ilu mi
 Ilu Olola Olokiki
 Ng o gbe o leke okan mi
@@ -78,6 +90,8 @@ Kajose kodara.`;
 // ── Page ───────────────────────────────────────────────────────────────────
 
 export default function AtikoriKingdomPage() {
+  const { index, direction, open, close, prev, next } = useLightbox(galleryImages);
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -105,14 +119,11 @@ export default function AtikoriKingdomPage() {
       <section className="bg-[#f5f0ff] py-10 sm:py-14">
         <div className="container-main">
           <div className="flex flex-col sm:flex-row gap-6 sm:gap-10 justify-center items-center">
-            {[
-              { photo: "/images/oba-keegbo-ibitoye-solaja.webp", name: "Alayeluwa Kabiyesi Oba Ibitoye Solaja, JP", title: "The Keegbo of Atikori" },
-              { photo: "/images/olori-yemisi-solaja.webp", name: "Olori Yemisi Solaja", title: "The Olori Keegbo of Atikori" },
-            ].map((person, i) => (
+            {royalCouple.map((person, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: i * 0.15, ease }} className="text-center max-w-[260px]">
                 <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white aspect-[3/4] mb-4">
-                  <img src={person.photo} alt={person.name} className="w-full h-full object-cover" />
+                  <ZoomableImage src={person.photo} alt={person.name} onClick={() => open(i)} />
                 </div>
                 <h3 className="font-display font-black text-foreground text-base leading-tight">{person.name}</h3>
                 <p className="text-accent font-semibold text-sm mt-1">{person.title}</p>
@@ -183,7 +194,7 @@ export default function AtikoriKingdomPage() {
               <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.08, ease }} className="text-center">
                 <div className="relative rounded-2xl overflow-hidden shadow-lg border-4 border-white aspect-[3/4] mb-3">
-                  <img src={c.photo} alt={c.name} className="w-full h-full object-cover" />
+                  <ZoomableImage src={c.photo} alt={c.name} onClick={() => open(royalCouple.length + i)} />
                 </div>
                 <h4 className="font-display font-bold text-foreground text-xs sm:text-sm leading-tight">{c.name}</h4>
                 <p className="text-accent font-semibold text-xs mt-1">{c.title}</p>
@@ -207,7 +218,7 @@ export default function AtikoriKingdomPage() {
                 transition={{ duration: 0.5, delay: i * 0.08, ease }}
                 className="bg-card rounded-2xl overflow-hidden border border-border shadow-sm">
                 <div className="aspect-[4/3] overflow-hidden">
-                  <img src={p.image} alt={p.name} className="w-full h-full object-cover" />
+                  <ZoomableImage src={p.image} alt={p.name} onClick={() => open(royalCouple.length + oloriwuns.length + i)} />
                 </div>
                 <div className="p-4">
                   <h4 className="font-display font-bold text-foreground text-sm">{p.name}</h4>
@@ -255,6 +266,8 @@ export default function AtikoriKingdomPage() {
           </motion.div>
         </div>
       </section>
+
+      <Lightbox images={galleryImages} index={index} direction={direction} onClose={close} onPrev={prev} onNext={next} />
 
       <Footer />
       <FloatingContact />

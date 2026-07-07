@@ -7,10 +7,15 @@ import Footer from "@/components/Footer";
 import FloatingContact from "@/components/FloatingContact";
 import BackToTop from "@/components/BackToTop";
 import AnimatedHeroBg from "@/components/AnimatedHeroBg";
+import Lightbox, { useLightbox, ZoomableImage } from "@/components/Lightbox";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
 // ── Data ──────────────────────────────────────────────────────────────────
+
+const galleryImages = [
+  { src: "/images/oba-bejeroku-stephen-adekoya.webp", alt: "HRH Oba Stephen Adekoya, The Bejeroku of Oke-Agbo" },
+];
 
 const bales = [
   "Imoogbo", "Torimoguje", "Etemi", "Oshoko", "Etemi Jarad", "Dandola",
@@ -27,6 +32,7 @@ const bales = [
 
 export default function OkeAgboKingdomPage() {
   const [balesOpen, setBalesOpen] = useState(false);
+  const { index, direction, open, close, prev, next } = useLightbox(galleryImages);
 
   return (
     <div className="min-h-screen bg-background">
@@ -57,7 +63,7 @@ export default function OkeAgboKingdomPage() {
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
             transition={{ duration: 0.6, ease }} className="text-center max-w-[280px] mx-auto">
             <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white aspect-[3/4] mb-4">
-              <img src="/images/oba-bejeroku-stephen-adekoya.webp" alt="HRH Oba Stephen Adekoya" className="w-full h-full object-cover" />
+              <ZoomableImage src={galleryImages[0].src} alt={galleryImages[0].alt} onClick={() => open(0)} />
             </div>
             <h3 className="font-display font-black text-foreground text-lg leading-tight">
               His Royal Highness Oba Stephen Adekoya
@@ -130,6 +136,8 @@ export default function OkeAgboKingdomPage() {
           </motion.div>
         </div>
       </section>
+
+      <Lightbox images={galleryImages} index={index} direction={direction} onClose={close} onPrev={prev} onNext={next} />
 
       <Footer />
       <FloatingContact />

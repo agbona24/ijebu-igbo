@@ -1,111 +1,11 @@
-import { useState, useEffect, useCallback, useRef } from "react";
-import { motion, AnimatePresence, useMotionValue, useTransform, useSpring } from "framer-motion";
-import { Images, X, ChevronLeft, ChevronRight, ZoomIn, Expand } from "lucide-react";
-import { useSanityGallery, type GalleryImage } from "@/hooks/useSanityGallery";
+import { useState, useRef } from "react";
+import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
+import { Images, ZoomIn, Expand } from "lucide-react";
+import { useSanityGallery } from "@/hooks/useSanityGallery";
 import ImageWithSkeleton from "@/components/ImageWithSkeleton";
+import Lightbox, { useLightbox } from "@/components/Lightbox";
 
 const PAGE_SIZE = 8;
-
-/* ── Lightbox with directional slide ─────────────────────────── */
-function Lightbox({
-  images, index, direction, onClose, onPrev, onNext,
-}: {
-  images: GalleryImage[]; index: number; direction: number;
-  onClose: () => void; onPrev: () => void; onNext: () => void;
-}) {
-  const img = images[index];
-
-  useEffect(() => {
-    const handle = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-      if (e.key === "ArrowLeft") onPrev();
-      if (e.key === "ArrowRight") onNext();
-    };
-    window.addEventListener("keydown", handle);
-    return () => window.removeEventListener("keydown", handle);
-  }, [onClose, onPrev, onNext]);
-
-  const slideVariants = {
-    enter: (dir: number) => ({ x: dir >= 0 ? 260 : -260, opacity: 0, scale: 0.97 }),
-    center: { x: 0, opacity: 1, scale: 1 },
-    exit: (dir: number) => ({ x: dir >= 0 ? -260 : 260, opacity: 0, scale: 0.97 }),
-  };
-
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.2 }}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-sm p-4"
-      onClick={onClose}
-    >
-      {/* Close */}
-      <button
-        onClick={onClose}
-        className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center text-white transition-colors"
-      >
-        <X size={18} />
-      </button>
-
-      {/* Counter */}
-      <div className="absolute top-4 left-1/2 -translate-x-1/2 z-20 text-white/60 text-sm font-semibold bg-white/10 px-4 py-1.5 rounded-full border border-white/10">
-        {index + 1} / {images.length}
-      </div>
-
-      {/* Prev */}
-      <button
-        onClick={(e) => { e.stopPropagation(); onPrev(); }}
-        className="absolute left-3 sm:left-6 z-20 w-11 h-11 rounded-full bg-white/10 hover:bg-accent hover:text-primary border border-white/20 flex items-center justify-center text-white transition-all duration-200"
-      >
-        <ChevronLeft size={22} />
-      </button>
-
-      {/* Sliding image */}
-      <div className="relative max-w-5xl w-full flex items-center justify-center overflow-hidden" onClick={(e) => e.stopPropagation()}>
-        <AnimatePresence mode="wait" custom={direction}>
-          <motion.div
-            key={index}
-            custom={direction}
-            variants={slideVariants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="relative w-full flex items-center justify-center"
-          >
-            <img
-              src={img.src}
-              alt={img.alt}
-              className="max-w-full max-h-[80vh] object-contain rounded-2xl shadow-2xl"
-            />
-            <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 to-transparent rounded-b-2xl px-6 py-5">
-              <p className="text-white text-sm sm:text-base font-medium text-center">{img.alt}</p>
-            </div>
-          </motion.div>
-        </AnimatePresence>
-      </div>
-
-      {/* Next */}
-      <button
-        onClick={(e) => { e.stopPropagation(); onNext(); }}
-        className="absolute right-3 sm:right-6 z-20 w-11 h-11 rounded-full bg-white/10 hover:bg-accent hover:text-primary border border-white/20 flex items-center justify-center text-white transition-all duration-200"
-      >
-        <ChevronRight size={22} />
-      </button>
-
-      {/* Dot strip */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 max-w-[200px] overflow-hidden">
-        {images.map((_, i) => (
-          <div
-            key={i}
-            className={`h-1 rounded-full transition-all duration-300 ${i === index ? "bg-accent w-5" : "bg-white/30 w-1.5"}`}
-          />
-        ))}
-      </div>
-    </motion.div>
-  );
-}
 
 /* ── 3D tilt card ─────────────────────────────────────────────── */
 function GalleryCard({
@@ -202,24 +102,10 @@ export default function Gallery() {
   const { data: images = [] } = useSanityGallery();
   const [visible, setVisible] = useState(PAGE_SIZE);
   const [prevVisible, setPrevVisible] = useState(0);
-  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
-  const [direction, setDirection] = useState(0);
+  const { index: lightboxIndex, direction, open, close, prev, next } = useLightbox(images);
 
   const shown = images.slice(0, visible);
   const hasMore = visible < images.length;
-
-  const open = (i: number) => { setDirection(0); setLightboxIndex(i); };
-  const close = useCallback(() => setLightboxIndex(null), []);
-
-  const prev = useCallback(() => {
-    setDirection(-1);
-    setLightboxIndex((i) => i === null ? null : (i - 1 + images.length) % images.length);
-  }, [images.length]);
-
-  const next = useCallback(() => {
-    setDirection(1);
-    setLightboxIndex((i) => i === null ? null : (i + 1) % images.length);
-  }, [images.length]);
 
   const handleShowMore = () => {
     setPrevVisible(visible);
@@ -320,18 +206,14 @@ export default function Gallery() {
       </div>
 
       {/* Lightbox */}
-      <AnimatePresence>
-        {lightboxIndex !== null && (
-          <Lightbox
-            images={images}
-            index={lightboxIndex}
-            direction={direction}
-            onClose={close}
-            onPrev={prev}
-            onNext={next}
-          />
-        )}
-      </AnimatePresence>
+      <Lightbox
+        images={images}
+        index={lightboxIndex}
+        direction={direction}
+        onClose={close}
+        onPrev={prev}
+        onNext={next}
+      />
     </section>
   );
 }

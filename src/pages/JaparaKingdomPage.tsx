@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import FloatingContact from "@/components/FloatingContact";
 import BackToTop from "@/components/BackToTop";
 import AnimatedHeroBg from "@/components/AnimatedHeroBg";
+import Lightbox, { useLightbox, ZoomableImage } from "@/components/Lightbox";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -187,6 +188,18 @@ const notableProfiles = [
   },
 ];
 
+const galleryImages = [
+  { src: "/images/oba-abijaparako-aderemi-adewale-ogunye.webp", alt: "His Royal Highness Oba Aderemi Adewale Ogunye (JP) — The Abijaparako of Japara" },
+  ...palaceChiefs.map((c) => ({ src: c.photo, alt: `${c.name} — ${c.title}` })),
+  ...notableProfiles.map((p) => ({ src: p.photo, alt: `${p.name} — ${p.title}` })),
+  { src: galleries[0].src, alt: galleries[0].caption },
+  { src: "/images/japara-current-chiefs.webp", alt: "Current Chiefs of Japara" },
+  { src: "/images/japara-current-olori-ebis.webp", alt: "Current Olori Ebi of Japara" },
+  { src: galleries[1].src, alt: galleries[1].caption },
+  { src: galleries[2].src, alt: galleries[2].caption },
+  ...projectGalleries.map((src, i) => ({ src, alt: `Japara community projects, page ${i + 1}` })),
+];
+
 // ── Sub-components ─────────────────────────────────────────────────────────
 
 function Section({ title, label, children, className = "" }: { title: string; label: string; children: React.ReactNode; className?: string }) {
@@ -204,12 +217,14 @@ function Section({ title, label, children, className = "" }: { title: string; la
   );
 }
 
-function BioCard({ photo, name, title, bio }: { photo: string; name: string; title: string; bio: string[] }) {
+function BioCard({ photo, name, title, bio, onPhotoClick }: { photo: string; name: string; title: string; bio: string[]; onPhotoClick: () => void }) {
   const [open, setOpen] = useState(false);
   return (
     <div className="bg-card rounded-2xl border border-border overflow-hidden shadow-sm">
       <div className="p-5 flex flex-col sm:flex-row gap-5">
-        <img src={photo} alt={name} className="w-28 h-28 sm:w-32 sm:h-32 rounded-xl object-cover border-2 border-white shadow-md shrink-0 mx-auto sm:mx-0" />
+        <div className="w-28 h-28 sm:w-32 sm:h-32 rounded-xl overflow-hidden border-2 border-white shadow-md shrink-0 mx-auto sm:mx-0">
+          <ZoomableImage src={photo} alt={name} onClick={onPhotoClick} />
+        </div>
         <div className="flex-1 min-w-0">
           <h4 className="font-display font-bold text-foreground text-base sm:text-lg leading-tight">{name}</h4>
           <p className="text-accent font-semibold text-sm mt-1">{title}</p>
@@ -238,12 +253,16 @@ function BioCard({ photo, name, title, bio }: { photo: string; name: string; tit
   );
 }
 
-function PersonCard({ photo, name, title }: { photo?: string; name: string; title: string }) {
+function PersonCard({ photo, name, title, onPhotoClick }: { photo?: string; name: string; title: string; onPhotoClick?: () => void }) {
   return (
     <div className="text-center">
       {photo && (
         <div className="relative rounded-2xl overflow-hidden shadow-lg border-4 border-white aspect-[3/4] mb-3 max-w-[220px] mx-auto">
-          <img src={photo} alt={name} className="w-full h-full object-cover" />
+          {onPhotoClick ? (
+            <ZoomableImage src={photo} alt={name} onClick={onPhotoClick} />
+          ) : (
+            <img src={photo} alt={name} className="w-full h-full object-cover" />
+          )}
         </div>
       )}
       <h4 className="font-display font-bold text-foreground text-sm leading-tight">{name}</h4>
@@ -257,6 +276,7 @@ function PersonCard({ photo, name, title }: { photo?: string; name: string; titl
 export default function JaparaKingdomPage() {
   const [ituneOpen, setItuneOpen] = useState(false);
   const [baalesOpen, setBaalesOpen] = useState(false);
+  const { index, direction, open, close, prev, next } = useLightbox(galleryImages);
 
   return (
     <div className="min-h-screen bg-background">
@@ -287,7 +307,7 @@ export default function JaparaKingdomPage() {
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
             transition={{ duration: 0.6, ease }} className="text-center max-w-[280px] mx-auto">
             <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white aspect-[3/4] mb-4">
-              <img src="/images/oba-abijaparako-aderemi-adewale-ogunye.webp" alt="HRH Oba Aderemi Adewale Ogunye" className="w-full h-full object-cover" />
+              <ZoomableImage src={galleryImages[0].src} alt={galleryImages[0].alt} onClick={() => open(0)} />
             </div>
             <h3 className="font-display font-black text-foreground text-lg leading-tight">
               His Royal Highness Oba Aderemi Adewale Ogunye (JP)
@@ -346,7 +366,7 @@ export default function JaparaKingdomPage() {
             {palaceChiefs.map((c, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1, ease }}>
-                <PersonCard {...c} />
+                <PersonCard {...c} onPhotoClick={() => open(1 + i)} />
               </motion.div>
             ))}
           </div>
@@ -365,7 +385,7 @@ export default function JaparaKingdomPage() {
             {notableProfiles.map((p, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.08, ease }}>
-                <BioCard {...p} />
+                <BioCard {...p} onPhotoClick={() => open(3 + i)} />
               </motion.div>
             ))}
           </div>
@@ -487,7 +507,7 @@ export default function JaparaKingdomPage() {
 
           <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
             transition={{ duration: 0.5, ease }} className="rounded-2xl overflow-hidden border border-border shadow-sm mb-8">
-            <img src="/images/japara-immediate-past-obas.webp" alt="Immediate Past Obas of Japara" className="w-full h-auto" />
+            <ZoomableImage src="/images/japara-immediate-past-obas.webp" alt="Immediate Past Obas of Japara" className="w-full" imgClassName="w-full h-auto" onClick={() => open(7)} />
           </motion.div>
 
           {/* Full list of Past Baales */}
@@ -545,7 +565,7 @@ export default function JaparaKingdomPage() {
           </div>
           <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
             transition={{ duration: 0.5, ease }} className="rounded-2xl overflow-hidden border border-border shadow-sm max-w-2xl mx-auto">
-            <img src="/images/japara-current-chiefs.webp" alt="Current Chiefs of Japara" className="w-full h-auto" />
+            <ZoomableImage src="/images/japara-current-chiefs.webp" alt="Current Chiefs of Japara" className="w-full" imgClassName="w-full h-auto" onClick={() => open(8)} />
           </motion.div>
         </div>
       </section>
@@ -570,7 +590,7 @@ export default function JaparaKingdomPage() {
           </div>
           <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
             transition={{ duration: 0.5, ease }} className="rounded-2xl overflow-hidden border border-border shadow-sm max-w-2xl mx-auto">
-            <img src="/images/japara-current-olori-ebis.webp" alt="Current Olori Ebi of Japara" className="w-full h-auto" />
+            <ZoomableImage src="/images/japara-current-olori-ebis.webp" alt="Current Olori Ebi of Japara" className="w-full" imgClassName="w-full h-auto" onClick={() => open(9)} />
           </motion.div>
         </div>
       </section>
@@ -588,7 +608,7 @@ export default function JaparaKingdomPage() {
               <motion.div key={i} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1, ease }}
                 className="bg-card rounded-2xl overflow-hidden border border-border shadow-sm">
-                <img src={g.src} alt={g.caption} className="w-full h-auto" />
+                <ZoomableImage src={g.src} alt={g.caption} className="w-full" imgClassName="w-full h-auto" onClick={() => open(10 + i)} />
                 <p className="text-xs text-muted-foreground p-3 leading-snug">{g.caption}</p>
               </motion.div>
             ))}
@@ -621,7 +641,7 @@ export default function JaparaKingdomPage() {
               <motion.div key={i} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1, ease }}
                 className="rounded-2xl overflow-hidden border border-border shadow-sm">
-                <img src={src} alt={`Japara community projects, page ${i + 1}`} className="w-full h-auto" />
+                <ZoomableImage src={src} alt={`Japara community projects, page ${i + 1}`} className="w-full" imgClassName="w-full h-auto" onClick={() => open(12 + i)} />
               </motion.div>
             ))}
           </div>
@@ -652,6 +672,8 @@ export default function JaparaKingdomPage() {
           </p>
         </div>
       </section>
+
+      <Lightbox images={galleryImages} index={index} direction={direction} onClose={close} onPrev={prev} onNext={next} />
 
       <Footer />
       <FloatingContact />

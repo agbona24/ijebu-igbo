@@ -7,8 +7,14 @@ import Footer from "@/components/Footer";
 import FloatingContact from "@/components/FloatingContact";
 import BackToTop from "@/components/BackToTop";
 import AnimatedHeroBg from "@/components/AnimatedHeroBg";
+import Lightbox, { useLightbox, ZoomableImage } from "@/components/Lightbox";
 
 const ease = [0.16, 1, 0.3, 1] as const;
+
+const galleryImages = [
+  { src: "/images/oba-olokine-abdulrasheed-banjo.webp", alt: "His Royal Highness Oba Abdulrasheed Abayomi Banjo, PhD — The Olokine of Ojowo" },
+  { src: "/images/olori-olokine-ojowo.webp", alt: "Olori Oluyinka Banjo, FISLT — The Olori Olokine of Ojowo" },
+];
 
 // ── Data ──────────────────────────────────────────────────────────────────
 
@@ -221,6 +227,8 @@ function Council({ title, count, members, defaultOpen = false }: {
 // ── Page ───────────────────────────────────────────────────────────────────
 
 export default function OjowoKingdomPage() {
+  const { index, direction, open, close, prev, next } = useLightbox(galleryImages);
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -255,7 +263,7 @@ export default function OjowoKingdomPage() {
               <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: i * 0.15, ease }} className="text-center max-w-[260px]">
                 <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white aspect-[3/4] mb-4">
-                  <img src={person.photo} alt={person.name} className="w-full h-full object-cover" />
+                  <ZoomableImage src={person.photo} alt={person.name} onClick={() => open(i)} />
                 </div>
                 <h3 className="font-display font-black text-foreground text-base leading-tight">{person.name}</h3>
                 <p className="text-accent font-semibold text-sm mt-1">{person.title}</p>
@@ -473,6 +481,8 @@ export default function OjowoKingdomPage() {
           </motion.div>
         </div>
       </section>
+
+      <Lightbox images={galleryImages} index={index} direction={direction} onClose={close} onPrev={prev} onNext={next} />
 
       <Footer />
       <FloatingContact />
