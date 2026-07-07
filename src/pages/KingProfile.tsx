@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Crown, MapPin, Quote, ArrowLeft, ChevronLeft, ChevronRight, BookOpen, Star } from "lucide-react";
 import Navbar from "@/components/Navbar";
+import Seo from "@/components/Seo";
 import Footer from "@/components/Footer";
 import { useSanityKings } from "@/hooks/useSanityKings";
 
@@ -32,6 +33,13 @@ export default function KingProfile() {
 
   return (
     <div className="min-h-screen bg-[#f8f6f1]">
+      <Seo
+        title={`${king.name}${king.subtitle ? ` — ${king.subtitle}` : ""} | Ijebu Igbo Heritage`}
+        description={`${king.name}, ${king.subtitle ?? "an Orimolusi of Ijebu-Igbo"}. Read the history, reign and legacy of this Ijebu-Igbo king.`.slice(0, 155)}
+        image={king.photo}
+        type="article"
+        canonicalPath={`/heritage/orimolusi/${king.slug}`}
+      />
       <Navbar />
 
       {/* ── HERO ── */}

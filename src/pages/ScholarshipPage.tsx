@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { BookOpen, CheckCircle2, Clock, FileText, Users, ChevronRight, GraduationCap } from "lucide-react";
 import Navbar from "@/components/Navbar";
+import Seo from "@/components/Seo";
 import Footer from "@/components/Footer";
 import AnimatedHeroBg from "@/components/AnimatedHeroBg";
 import FloatingContact from "@/components/FloatingContact";
@@ -29,10 +30,10 @@ const PAST_RECIPIENTS: { name: string; year: number; institution: string }[] = [
 ];
 
 export default function ScholarshipPage() {
-  useEffect(() => { document.title = "Scholarship | Connect Ijebu Roots"; }, []);
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
+      <Seo path="/scholarship" />
 
       {/* Hero */}
       <section className="relative min-h-[40vh] flex items-end pb-10 pt-24 bg-primary overflow-hidden">

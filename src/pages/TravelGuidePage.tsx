@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Plane, Car, MapPin, Sun, Shirt, Phone, AlertCircle, ChevronRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
+import Seo from "@/components/Seo";
 import Footer from "@/components/Footer";
 import AnimatedHeroBg from "@/components/AnimatedHeroBg";
 import FloatingContact from "@/components/FloatingContact";
@@ -37,10 +38,10 @@ const CONTACTS = [
 ];
 
 export default function TravelGuidePage() {
-  useEffect(() => { document.title = "Travel Guide | Connect Ijebu Roots"; }, []);
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
+      <Seo path="/travel" />
 
       {/* Hero */}
       <section className="relative min-h-[40vh] flex items-end pb-10 pt-24 bg-primary overflow-hidden">

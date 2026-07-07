@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Baby, Heart, Star, Bell, Trophy, Calendar, ChevronRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
+import Seo from "@/components/Seo";
 import Footer from "@/components/Footer";
 import AnimatedHeroBg from "@/components/AnimatedHeroBg";
 import FloatingContact from "@/components/FloatingContact";
@@ -65,7 +66,6 @@ function AnnouncementCard({ item, index }: { item: typeof ANNOUNCEMENTS[0]; inde
 }
 
 export default function AnnouncementsPage() {
-  useEffect(() => { document.title = "Announcements | Connect Ijebu Roots"; }, []);
   const [active, setActive] = useState<AnnouncementCategory | "All">("All");
 
   const filtered = active === "All"
@@ -77,6 +77,7 @@ export default function AnnouncementsPage() {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
+      <Seo path="/announcements" />
 
       {/* Hero */}
       <section className="relative min-h-[38vh] flex items-end pb-10 pt-24 bg-primary overflow-hidden">

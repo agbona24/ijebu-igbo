@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Calendar, ArrowLeft, Share2 } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
 import Navbar from "@/components/Navbar";
+import Seo from "@/components/Seo";
 import Footer from "@/components/Footer";
 import FloatingContact from "@/components/FloatingContact";
 import BackToTop from "@/components/BackToTop";
@@ -35,8 +36,15 @@ export default function NewsPost() {
 
   return (
     <div className="min-h-screen bg-background">
+      <Seo
+        title={`${article.title} | Ijebu Igbo News — IID`}
+        description={(article.excerpt ?? "").slice(0, 155) || "Latest news from the Ijebu Igbo Descendants in Diaspora (Omo Orimolusi) community."}
+        image={article.featuredImage}
+        type="article"
+        canonicalPath={`/news/${article.id}`}
+      />
       <Navbar />
-      
+
       {/* Article Header */}
       <article className="pt-20 lg:pt-24">
         {/* Back Button */}

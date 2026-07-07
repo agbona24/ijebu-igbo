@@ -6,6 +6,7 @@ import {
   LayoutList, CalendarDays, ChevronLeft, ChevronRight,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
+import Seo from "@/components/Seo";
 import Footer from "@/components/Footer";
 import AnimatedHeroBg from "@/components/AnimatedHeroBg";
 import EventVideos from "@/components/EventVideos";
@@ -403,6 +404,7 @@ export default function EventsPage() {
   return (
     <div className="min-h-screen bg-[#f4f6f8]">
       <Navbar />
+      <Seo path="/events" />
 
       {/* ── HERO ────────────────────────────────────────────────────────── */}
       <section className="relative pt-14 md:pt-20 overflow-hidden">

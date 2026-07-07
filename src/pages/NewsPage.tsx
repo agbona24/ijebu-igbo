@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Calendar, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
+import Seo from "@/components/Seo";
 import Footer from "@/components/Footer";
 import FloatingContact from "@/components/FloatingContact";
 import BackToTop from "@/components/BackToTop";
@@ -14,6 +15,7 @@ export default function NewsPage() {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
+      <Seo path="/news" />
 
       {/* Hero */}
       <section className="relative min-h-[38vh] flex items-end pb-10 pt-24 bg-primary overflow-hidden">

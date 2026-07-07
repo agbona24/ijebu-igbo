@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Crown, Calendar, MapPin, Target, Eye, Music } from "lucide-react";
 import Navbar from "@/components/Navbar";
+import Seo from "@/components/Seo";
 import Footer from "@/components/Footer";
 import FloatingContact from "@/components/FloatingContact";
 import BackToTop from "@/components/BackToTop";
@@ -223,6 +224,7 @@ export default function OjowoKingdomPage() {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
+      <Seo path="/ojowo" />
 
       {/* Hero */}
       <section className="relative min-h-[48vh] flex items-end pb-12 pt-24 bg-primary overflow-hidden">

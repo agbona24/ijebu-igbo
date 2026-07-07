@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
+import Seo from "@/components/Seo";
 import Footer from "@/components/Footer";
 import AnimatedHeroBg from "@/components/AnimatedHeroBg";
 import {
@@ -365,6 +366,7 @@ export default function Businesses() {
   return (
     <div className="min-h-screen bg-[#f8f6f1]">
       <Navbar />
+      <Seo path="/businesses" />
 
       {/* ── HERO ──────────────────────────────────────────────────── */}
       <section className="relative pt-14 md:pt-20 overflow-hidden">

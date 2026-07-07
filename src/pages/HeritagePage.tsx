@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
+import Seo from "@/components/Seo";
 import Footer from "@/components/Footer";
 import Story from "@/components/Story";
 import Timeline from "@/components/Timeline";
@@ -10,10 +11,10 @@ import { Link } from "react-router-dom";
 import { ArrowRight, Crown, MapPin } from "lucide-react";
 
 export default function HeritagePage() {
-  useEffect(() => { document.title = "Heritage | Connect Ijebu Roots"; }, []);
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
+      <Seo path="/heritage" />
 
       <section className="relative pt-14 md:pt-20 overflow-hidden">
         <div className="relative h-52 md:h-64 flex flex-col items-center justify-center">

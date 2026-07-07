@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { MapPin, ExternalLink } from "lucide-react";
 import Navbar from "@/components/Navbar";
+import Seo from "@/components/Seo";
 import Footer from "@/components/Footer";
 import FloatingContact from "@/components/FloatingContact";
 import BackToTop from "@/components/BackToTop";
@@ -195,10 +196,10 @@ function PlaceCard({ place, index }: { place: Place; index: number }) {
 }
 
 export default function TourismPage() {
-  useEffect(() => { document.title = "Tourism | Connect Ijebu Roots"; }, []);
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
+      <Seo path="/tourism" />
 
       {/* Hero */}
       <section className="relative min-h-[42vh] flex items-end pb-12 pt-24 bg-primary overflow-hidden">

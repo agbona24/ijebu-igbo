@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { CheckCircle, FileText, Users } from "lucide-react";
 import Navbar from "@/components/Navbar";
+import Seo from "@/components/Seo";
 import Footer from "@/components/Footer";
 import AnimatedHeroBg from "@/components/AnimatedHeroBg";
 import FAQ from "@/components/FAQ";
@@ -89,6 +90,7 @@ export default function JoinPage() {
   return (
     <div className="min-h-screen bg-[#f4f6f8]">
       <Navbar />
+      <Seo path="/join" />
 
       {/* Hero */}
       <section className="relative pt-14 md:pt-20 overflow-hidden">

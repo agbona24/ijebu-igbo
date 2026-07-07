@@ -2,6 +2,7 @@ import { useState, useMemo, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Users, Search, MapPin, ChevronRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
+import Seo from "@/components/Seo";
 import Footer from "@/components/Footer";
 import AnimatedHeroBg from "@/components/AnimatedHeroBg";
 import FloatingContact from "@/components/FloatingContact";
@@ -17,7 +18,6 @@ const ALL_CLANS: (Clan | "All")[] = [
 ];
 
 export default function MembersPage() {
-  useEffect(() => { document.title = "Members | Connect Ijebu Roots"; }, []);
   const [query, setQuery] = useState("");
   const [clan, setClan] = useState<Clan | "All">("All");
 
@@ -33,6 +33,7 @@ export default function MembersPage() {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
+      <Seo path="/members" />
 
       {/* Hero */}
       <section className="relative min-h-[38vh] flex items-end pb-10 pt-24 bg-primary overflow-hidden">

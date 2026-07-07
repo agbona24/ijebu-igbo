@@ -1,4 +1,5 @@
 import Navbar from "@/components/Navbar";
+import Seo from "@/components/Seo";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import VideoSection from "@/components/VideoSection";
@@ -15,10 +16,29 @@ import Footer from "@/components/Footer";
 import FloatingContact from "@/components/FloatingContact";
 import BackToTop from "@/components/BackToTop";
 
+const ORG_JSONLD = {
+  "@context": "https://schema.org",
+  "@type": "NGO",
+  name: "Ijebu Igbo Descendants in Diaspora",
+  alternateName: [
+    "IID Omo Orimolusi in Diaspora",
+    "Ijebu Igbo Descendants Omo Orimolusi (UK)",
+    "Awa Omo Orimolusi Worldwide",
+  ],
+  url: "https://ijebuigbodescendants.org",
+  logo: "https://ijebuigbodescendants.org/logo.png",
+  description:
+    "A UK diaspora community uniting descendants of Ijebu-Igbo, a Yoruba town in Ogun State, Nigeria — promoting culture, welfare and hometown development.",
+  foundingDate: "2007",
+  areaServed: ["United Kingdom", "Worldwide"],
+  sameAs: ["https://www.ijebuigbodescendants.org/"],
+};
+
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
+      <Seo path="/" jsonLd={ORG_JSONLD} />
       <Hero />
       <About />
       <VideoSection />

@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
+import Seo from "@/components/Seo";
 import Footer from "@/components/Footer";
 import Team from "@/components/Team";
 import OrgChart from "@/components/OrgChart";
@@ -7,10 +8,10 @@ import AnimatedHeroBg from "@/components/AnimatedHeroBg";
 import { motion } from "framer-motion";
 
 export default function TeamPage() {
-  useEffect(() => { document.title = "Our Team | Connect Ijebu Roots"; }, []);
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
+      <Seo path="/team" />
 
       <section className="relative pt-14 md:pt-20 overflow-hidden">
         <div className="relative h-52 md:h-64 flex flex-col items-center justify-center">

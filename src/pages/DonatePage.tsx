@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Heart, Building2, Copy, CheckCircle2, Users, BookOpen, Wrench } from "lucide-react";
 import Navbar from "@/components/Navbar";
+import Seo from "@/components/Seo";
 import Footer from "@/components/Footer";
 import AnimatedHeroBg from "@/components/AnimatedHeroBg";
 import FloatingContact from "@/components/FloatingContact";
@@ -53,12 +54,12 @@ function CopyButton({ text }: { text: string }) {
 }
 
 export default function DonatePage() {
-  useEffect(() => { document.title = "Donate | Connect Ijebu Roots"; }, []);
   const pct = Math.min(100, Math.round((RAISED / TARGET) * 100));
 
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
+      <Seo path="/donate" />
 
       {/* Hero */}
       <section className="relative min-h-[42vh] flex items-end pb-12 pt-24 bg-primary overflow-hidden">

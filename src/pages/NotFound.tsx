@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Home, ArrowLeft, Search } from "lucide-react";
 import Navbar from "@/components/Navbar";
+import Seo from "@/components/Seo";
 import Footer from "@/components/Footer";
 
 const QUICK_LINKS = [
@@ -24,6 +25,7 @@ const NotFound = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <Seo title="Page Not Found | Connect Ijebu Roots" description="The page you are looking for does not exist." canonicalPath={location.pathname} />
       <Navbar />
 
       <main className="flex-1 flex items-center justify-center section-padding pt-32 pb-20">

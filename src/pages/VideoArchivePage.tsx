@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
+import Seo from "@/components/Seo";
 import Footer from "@/components/Footer";
 import EventVideos from "@/components/EventVideos";
 import AnimatedHeroBg from "@/components/AnimatedHeroBg";
@@ -8,10 +9,10 @@ import FloatingContact from "@/components/FloatingContact";
 import { motion } from "framer-motion";
 
 export default function VideoArchivePage() {
-  useEffect(() => { document.title = "Video Archive | Connect Ijebu Roots"; }, []);
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
+      <Seo path="/videos" />
 
       {/* Hero */}
       <section className="relative min-h-[38vh] flex items-end pb-10 pt-24 bg-primary overflow-hidden">

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
+import Seo from "@/components/Seo";
 import Footer from "@/components/Footer";
 import AnimatedHeroBg from "@/components/AnimatedHeroBg";
 import { motion, AnimatePresence } from "framer-motion";
@@ -228,6 +229,7 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen bg-[#f8f6f1]">
       <Navbar />
+      <Seo path="/contact" />
 
       {/* Hero */}
       <section className="relative pt-14 md:pt-20 overflow-hidden">

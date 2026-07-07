@@ -1,15 +1,16 @@
 import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
+import Seo from "@/components/Seo";
 import Footer from "@/components/Footer";
 import Gallery from "@/components/Gallery";
 import AnimatedHeroBg from "@/components/AnimatedHeroBg";
 import { motion } from "framer-motion";
 
 export default function GalleryPage() {
-  useEffect(() => { document.title = "Gallery | Connect Ijebu Roots"; }, []);
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
+      <Seo path="/gallery" />
 
       <section className="relative pt-14 md:pt-20 overflow-hidden">
         <div className="relative h-52 md:h-64 flex flex-col items-center justify-center">

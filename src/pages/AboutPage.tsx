@@ -1,4 +1,5 @@
 import Navbar from "@/components/Navbar";
+import Seo from "@/components/Seo";
 import Footer from "@/components/Footer";
 import About from "@/components/About";
 import AnimatedHeroBg from "@/components/AnimatedHeroBg";
@@ -8,6 +9,7 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
+      <Seo path="/about" />
 
       <section className="relative pt-14 md:pt-20 overflow-hidden">
         <div className="relative h-52 md:h-64 flex flex-col items-center justify-center">
