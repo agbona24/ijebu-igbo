@@ -5,10 +5,12 @@ const ease = [0.16, 1, 0.3, 1] as const;
 // Clan data with positions for the network visualization
 const clans = [
   { name: "Oke-Sopen", angle: 0 },
-  { name: "Oke-Agbo", angle: 72 },
-  { name: "Ojowo", angle: 144 },
-  { name: "Atikori", angle: 216 },
-  { name: "Japara", angle: 288 },
+  { name: "Oke-Agbo", angle: 51.43 },
+  { name: "Ojowo", angle: 102.86 },
+  { name: "Atikori", angle: 154.29 },
+  { name: "Japara", angle: 205.71 },
+  { name: "Imope-Ijebu", angle: 257.14 },
+  { name: "Aparaki", angle: 308.57 },
 ];
 
 // SVG animated clan network component

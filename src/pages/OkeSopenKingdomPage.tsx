@@ -87,7 +87,7 @@ export default function OkeSopenKingdomPage() {
             {[
               { icon: MapPin, label: "Neighbours", value: "Ojowo, Atikori, Japara" },
               { icon: Crown, label: "Ruler", value: "Sopenlukale" },
-              { icon: Users, label: "Bales", value: "31 Bales" },
+              { icon: Users, label: "Baales", value: "31 Baales" },
               { icon: Target, label: "Recorded Rulers", value: "12 since 1886" },
             ].map(({ icon: Icon, label, value }, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}

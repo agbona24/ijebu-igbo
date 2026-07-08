@@ -46,7 +46,7 @@
     },
     "/ojowo": {
       "title": "Ojowo, Ijebu Igbo — Olokine of Ojowo | Heritage",
-      "description": "Discover Ojowo, one of the towns of Ijebu-Igbo (Orimolusi Kingdom), its Olokine ruler, chiefs and bales within the Orimolusi traditional council."
+      "description": "Discover Ojowo, one of the towns of Ijebu-Igbo (Orimolusi Kingdom), its Olokine ruler, chiefs and Baales within the Orimolusi traditional council."
     },
     "/japara": {
       "title": "Japara, Ijebu Igbo — Abijaparako of Japara | Heritage",
@@ -62,7 +62,15 @@
     },
     "/oke-agbo": {
       "title": "Oke-Agbo, Ijebu Igbo — Bejeroku of Oke-Agbo | Heritage",
-      "description": "Discover Oke-Agbo, one of the towns of Ijebu-Igbo (Orimolusi Kingdom), its Bejeroku ruler and the Bales of its constituent villages."
+      "description": "Discover Oke-Agbo, one of the towns of Ijebu-Igbo (Orimolusi Kingdom), its Bejeroku ruler and the Baales of its constituent villages."
+    },
+    "/imope-ijebu": {
+      "title": "Imope-Ijebu — Onimope of Imope-Ijebu | Heritage",
+      "description": "Discover Imope-Ijebu, one of the towns of Ijebu-Igbo (Orimolusi Kingdom), and its Onimope ruler."
+    },
+    "/aparaki": {
+      "title": "Aparaki — Alaparaki of Aparaki | Heritage",
+      "description": "Discover Aparaki, one of the towns of Ijebu-Igbo (Orimolusi Kingdom), and its Alaparaki ruler."
     },
     "/donate": {
       "title": "Donate to Ijebu Igbo — Unity House Fund | IID",

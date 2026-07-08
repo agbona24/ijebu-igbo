@@ -17,7 +17,7 @@ const galleryImages = [
   { src: "/images/oba-bejeroku-stephen-adekoya.webp", alt: "HRH Oba Stephen Adekoya, The Bejeroku of Oke-Agbo" },
 ];
 
-const bales = [
+const Baales = [
   "Imoogbo", "Torimoguje", "Etemi", "Oshoko", "Etemi Jarad", "Dandola",
   "Fowoseje", "Iyaniwura", "Talaga Akinbambo", "Erilope", "Idagolu",
   "Tiyanbaki", "Talakila", "Titilodo", "Telubomi", "Bolorunduro", "Owolubo",
@@ -31,7 +31,7 @@ const bales = [
 // ── Page ───────────────────────────────────────────────────────────────────
 
 export default function OkeAgboKingdomPage() {
-  const [balesOpen, setBalesOpen] = useState(false);
+  const [BaalesOpen, setBaalesOpen] = useState(false);
   const { index, direction, open, close, prev, next } = useLightbox(galleryImages);
 
   return (
@@ -84,7 +84,7 @@ export default function OkeAgboKingdomPage() {
           <div className="grid grid-cols-2 gap-4 mb-8 max-w-md">
             {[
               { icon: Crown, label: "Ruler", value: "Bejeroku" },
-              { icon: Users, label: "Bales", value: `${bales.length} Bales` },
+              { icon: Users, label: "Baales", value: `${Baales.length} Baales` },
             ].map(({ icon: Icon, label, value }, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.08, ease }}
@@ -98,25 +98,25 @@ export default function OkeAgboKingdomPage() {
 
           <motion.p initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
             transition={{ duration: 0.5, ease }} className="text-muted-foreground leading-relaxed mb-8">
-            Oke-Agbo is one of the five quarters of Ijebu-Igbo, governed under the title Bejeroku, currently held by His Royal Highness Oba Stephen Adekoya. As with the other quarters, Oke-Agbo is home to a network of Bales who administer its constituent villages under the Bejeroku.
+            Oke-Agbo is one of the five quarters of Ijebu-Igbo, governed under the title Bejeroku, currently held by His Royal Highness Oba Stephen Adekoya. As with the other quarters, Oke-Agbo is home to a network of Baales who administer its constituent villages under the Bejeroku.
           </motion.p>
 
-          {/* Bales */}
+          {/* Baales */}
           <div className="rounded-2xl border border-border overflow-hidden">
-            <button onClick={() => setBalesOpen(v => !v)}
+            <button onClick={() => setBaalesOpen(v => !v)}
               className="w-full flex items-center justify-between px-5 py-4 bg-primary hover:brightness-110 transition-all text-left">
               <div>
-                <h4 className="font-display font-black text-accent text-base sm:text-lg">Bales under Bejeroku</h4>
-                <p className="text-white/60 text-xs mt-0.5">{bales.length} villages and communities</p>
+                <h4 className="font-display font-black text-accent text-base sm:text-lg">Baales under Bejeroku</h4>
+                <p className="text-white/60 text-xs mt-0.5">{Baales.length} villages and communities</p>
               </div>
-              <ChevronDown size={20} className={`text-accent shrink-0 transition-transform duration-300 ${balesOpen ? "rotate-180" : ""}`} />
+              <ChevronDown size={20} className={`text-accent shrink-0 transition-transform duration-300 ${BaalesOpen ? "rotate-180" : ""}`} />
             </button>
             <AnimatePresence initial={false}>
-              {balesOpen && (
+              {BaalesOpen && (
                 <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }}
                   transition={{ duration: 0.3, ease }} className="overflow-hidden">
                   <div className="p-5 bg-muted/30 grid grid-cols-2 sm:grid-cols-3 gap-2">
-                    {bales.map((b, i) => (
+                    {Baales.map((b, i) => (
                       <div key={i} className="flex items-center gap-2 text-sm text-foreground/80 font-medium">
                         <span className="w-1.5 h-1.5 rounded-full bg-accent/60 shrink-0" />{b}
                       </div>

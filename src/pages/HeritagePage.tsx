@@ -53,8 +53,8 @@ export default function HeritagePage() {
             className="text-center mb-8"
           >
             <h2 className="label-accent mb-2">Explore</h2>
-            <h3 className="heading-section">Quarter Profiles</h3>
-            <p className="text-body mt-2">Dive deeper into the history, leadership and culture of each quarter.</p>
+            <h3 className="heading-section">Town Profiles</h3>
+            <p className="text-body mt-2">Dive deeper into the history, leadership and culture of each town.</p>
           </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-4xl mx-auto">
@@ -76,7 +76,7 @@ export default function HeritagePage() {
                   />
                   <div className="relative z-10 text-center px-4">
                     <Crown size={28} className="text-white mx-auto mb-1" />
-                    <p className="text-white/70 text-xs font-bold uppercase tracking-widest">Grade Two Oba</p>
+                    <p className="text-white/70 text-xs font-bold uppercase tracking-widest">Town Oba</p>
                     <h4 className="text-white font-display font-black text-xl">Ojowo</h4>
                     <p className="text-white/70 text-xs mt-1">Olokine of Ojowo</p>
                   </div>
@@ -113,7 +113,7 @@ export default function HeritagePage() {
                   />
                   <div className="relative z-10 text-center px-4">
                     <Crown size={28} className="text-white mx-auto mb-1" />
-                    <p className="text-white/70 text-xs font-bold uppercase tracking-widest">Grade Two Oba</p>
+                    <p className="text-white/70 text-xs font-bold uppercase tracking-widest">Town Oba</p>
                     <h4 className="text-white font-display font-black text-xl">Japara</h4>
                     <p className="text-white/70 text-xs mt-1">Abijaparako of Japara</p>
                   </div>
@@ -150,7 +150,7 @@ export default function HeritagePage() {
                   />
                   <div className="relative z-10 text-center px-4">
                     <Crown size={28} className="text-white mx-auto mb-1" />
-                    <p className="text-white/70 text-xs font-bold uppercase tracking-widest">Grade Two Oba</p>
+                    <p className="text-white/70 text-xs font-bold uppercase tracking-widest">Town Oba</p>
                     <h4 className="text-white font-display font-black text-xl">Atikori</h4>
                     <p className="text-white/70 text-xs mt-1">Keegbo of Atikori</p>
                   </div>
@@ -187,7 +187,7 @@ export default function HeritagePage() {
                   />
                   <div className="relative z-10 text-center px-4">
                     <Crown size={28} className="text-white mx-auto mb-1" />
-                    <p className="text-white/70 text-xs font-bold uppercase tracking-widest">Grade Two Oba</p>
+                    <p className="text-white/70 text-xs font-bold uppercase tracking-widest">Town Oba</p>
                     <h4 className="text-white font-display font-black text-xl">Oke-Sopen</h4>
                     <p className="text-white/70 text-xs mt-1">Sopenlukale of Oke-Sopen</p>
                   </div>
@@ -224,7 +224,7 @@ export default function HeritagePage() {
                   />
                   <div className="relative z-10 text-center px-4">
                     <Crown size={28} className="text-white mx-auto mb-1" />
-                    <p className="text-white/70 text-xs font-bold uppercase tracking-widest">Grade Two Oba</p>
+                    <p className="text-white/70 text-xs font-bold uppercase tracking-widest">Town Oba</p>
                     <h4 className="text-white font-display font-black text-xl">Oke-Agbo</h4>
                     <p className="text-white/70 text-xs mt-1">Bejeroku of Oke-Agbo</p>
                   </div>
@@ -235,7 +235,81 @@ export default function HeritagePage() {
                       <MapPin size={11} /> Oke-Agbo Quarter, Ijebu-Igbo
                     </p>
                     <p className="text-sm font-semibold text-foreground mt-0.5">
-                      Bales of Oke-Agbo
+                      Baales of Oke-Agbo
+                    </p>
+                  </div>
+                  <ArrowRight size={18} className="text-accent shrink-0 transition-transform group-hover:translate-x-1" />
+                </div>
+              </Link>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+            >
+              <Link
+                to="/imope-ijebu"
+                className="group flex flex-col bg-card border border-border rounded-2xl overflow-hidden hover:border-accent/50 hover:shadow-xl transition-all duration-300"
+              >
+                <div className="relative h-36 bg-gradient-to-br from-cyan-700 to-cyan-500 flex items-center justify-center overflow-hidden">
+                  <img
+                    src="/images/oba-onimope-tajudeen-omotayo.webp"
+                    alt="Onimope of Imope-Ijebu"
+                    className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-50 transition-opacity duration-300"
+                  />
+                  <div className="relative z-10 text-center px-4">
+                    <Crown size={28} className="text-white mx-auto mb-1" />
+                    <p className="text-white/70 text-xs font-bold uppercase tracking-widest">Town Oba</p>
+                    <h4 className="text-white font-display font-black text-xl">Imope-Ijebu</h4>
+                    <p className="text-white/70 text-xs mt-1">Onimope of Imope-Ijebu</p>
+                  </div>
+                </div>
+                <div className="p-4 flex items-center justify-between">
+                  <div>
+                    <p className="text-xs text-muted-foreground flex items-center gap-1">
+                      <MapPin size={11} /> Imope-Ijebu Town, Ijebu-Igbo
+                    </p>
+                    <p className="text-sm font-semibold text-foreground mt-0.5">
+                      Royal Profile
+                    </p>
+                  </div>
+                  <ArrowRight size={18} className="text-accent shrink-0 transition-transform group-hover:translate-x-1" />
+                </div>
+              </Link>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.48 }}
+            >
+              <Link
+                to="/aparaki"
+                className="group flex flex-col bg-card border border-border rounded-2xl overflow-hidden hover:border-accent/50 hover:shadow-xl transition-all duration-300"
+              >
+                <div className="relative h-36 bg-gradient-to-br from-orange-700 to-orange-500 flex items-center justify-center overflow-hidden">
+                  <img
+                    src="/images/oba-alaparaki-julius-benedict-ogunfowora.webp"
+                    alt="Alaparaki of Aparaki"
+                    className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-50 transition-opacity duration-300"
+                  />
+                  <div className="relative z-10 text-center px-4">
+                    <Crown size={28} className="text-white mx-auto mb-1" />
+                    <p className="text-white/70 text-xs font-bold uppercase tracking-widest">Town Oba</p>
+                    <h4 className="text-white font-display font-black text-xl">Aparaki</h4>
+                    <p className="text-white/70 text-xs mt-1">Alaparaki of Aparaki</p>
+                  </div>
+                </div>
+                <div className="p-4 flex items-center justify-between">
+                  <div>
+                    <p className="text-xs text-muted-foreground flex items-center gap-1">
+                      <MapPin size={11} /> Aparaki Town, Ijebu-Igbo
+                    </p>
+                    <p className="text-sm font-semibold text-foreground mt-0.5">
+                      Royal Profile
                     </p>
                   </div>
                   <ArrowRight size={18} className="text-accent shrink-0 transition-transform group-hover:translate-x-1" />

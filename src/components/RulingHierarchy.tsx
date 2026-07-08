@@ -22,7 +22,7 @@ const gradeTwo = [
     color: "from-amber-700 to-amber-500",
     accent: "border-amber-500/40 bg-amber-50",
     badge: "bg-amber-100 text-amber-800",
-    bales: [
+    Baales: [
       "Tirojaiye","Atake","Papanla","Oshunbudepo","Togunberu","Gbokutaru",
       "Lakadi","Aiyetoro","Tolorunmodi","Aiyesan","Ajebandele Nugba",
       "Araromi Adekanbi","Sanni Jiren","Dandola","Tolobaloke","Togedengbe",
@@ -39,7 +39,7 @@ const gradeTwo = [
     color: "from-emerald-700 to-emerald-500",
     accent: "border-emerald-500/40 bg-emerald-50",
     badge: "bg-emerald-100 text-emerald-800",
-    bales: [
+    Baales: [
       "Imoogbo","Torimoguje","Etemi","Oshoko","Etemi Jarad","Dandola",
       "Fowoseje","Iyaniwura","Talaga Akinbambo","Erilope","Idagolu",
       "Tiyanbaki","Talakila","Titilodo","Telubomi","Bolorunduro","Owolubo",
@@ -70,7 +70,7 @@ const gradeTwo = [
       { name: "Chief Pst. Adebisi Ogundero",   title: "Majebolije of Ojowo / Chief of Staff", occupation: "School Proprietor", phone: "08050662897" },
       { name: "Chief Alaba Isamo",             title: "Olori Odo",                     occupation: "Estate Management",   phone: "08140387798" },
     ] as ChiefRecord[],
-    bales: [
+    Baales: [
       "Ita-Egba","Timode","Alege","Sonokiki","Oligbo","Sojinrin","Kujore",
       "Orita Agbede","Owonowen","Digbolu","Oluwa","Ajegunle","Lumogede",
       "Tidepolu","Ogunmade","Oligbo","Agbo","Olugbabogin","Erape","Eri Lidan",
@@ -88,7 +88,7 @@ const gradeTwo = [
     color: "from-purple-700 to-purple-500",
     accent: "border-purple-500/40 bg-purple-50",
     badge: "bg-purple-100 text-purple-800",
-    bales: [
+    Baales: [
       "Ogbirigbiri","Omitu","Legbata","Ilero","Lokuta","Lagada","Lajao",
       "Amula","Tolore","Papa Ologboni","Ipakodo","Oduja","Dagbolu",
       "Ajebandele","Aiyesan","Jegede","Mosinmi","Pensen","Tomolorun",
@@ -103,7 +103,7 @@ const gradeTwo = [
     color: "from-rose-700 to-rose-500",
     accent: "border-rose-500/40 bg-rose-50",
     badge: "bg-rose-100 text-rose-800",
-    bales: [
+    Baales: [
       "Loni","Okoliwo","Okoneki","Agbalashan","Araromi Badewa","Idagolu",
       "Okoliyan","Aba Meshu","Aba Lago","Idiegun","Abarika Agbena",
       "Abarika Omoba","Idi-Orogbo","Idi-Oparun","Isheru","Ganringan",
@@ -112,6 +112,26 @@ const gradeTwo = [
       "Aba Koko","Aba Agbede","Eru-Obodo","Aba Ajomale","Aba-Mati","Ajebo Obepi",
     ],
   },
+  {
+    title: "Onimope",
+    area: "Imope-Ijebu",
+    name: "His Royal Highness, Alaiyeluwa Oba Tajudeen Kolawole Ibirogbo Adesujibomi Omotayo — The Onimope of Imope-Ijebu",
+    photo: "/images/oba-onimope-tajudeen-omotayo.webp",
+    color: "from-cyan-700 to-cyan-500",
+    accent: "border-cyan-500/40 bg-cyan-50",
+    badge: "bg-cyan-100 text-cyan-800",
+    Baales: [],
+  },
+  {
+    title: "Alaparaki",
+    area: "Aparaki",
+    name: "His Royal Highness Oba Prof. Julius Adeniyi Benedict-Ogunfowora, Rudewoluakannisuru I — The Alaparaki of Aparaki",
+    photo: "/images/oba-alaparaki-julius-benedict-ogunfowora.webp",
+    color: "from-orange-700 to-orange-500",
+    accent: "border-orange-500/40 bg-orange-50",
+    badge: "bg-orange-100 text-orange-800",
+    Baales: [],
+  },
 ];
 
 const satelliteTowns = ["Agunboye", "Odo-Alamo", "Asigidi"];
@@ -119,11 +139,11 @@ const satelliteTowns = ["Agunboye", "Odo-Alamo", "Asigidi"];
 const summary = [
   { title: "Grade One Oba (Orimolusi)", count: 1 },
   { title: "Town Obas under the Orimolusi", count: 7 },
-  { title: "Bales under Sopenlukale", count: 31 },
-  { title: "Bales under Bejeroku", count: 46 },
-  { title: "Bales under Olokine", count: 30 },
-  { title: "Bales under Keegbo", count: 23 },
-  { title: "Bales under Abijaparako", count: 32 },
+  { title: "Baales under Sopenlukale", count: 31 },
+  { title: "Baales under Bejeroku", count: 46 },
+  { title: "Baales under Olokine", count: 30 },
+  { title: "Baales under Keegbo", count: 23 },
+  { title: "Baales under Abijaparako", count: 32 },
   { title: "Towns under Olori-Ilu (2 with Oba-designate)", count: 3 },
 ];
 
@@ -164,7 +184,7 @@ function ObaCard({ oba, index }: { oba: typeof gradeTwo[0]; index: number }) {
               )}
             </div>
             <div className="min-w-0">
-              <p className="text-white/70 text-xs font-bold uppercase tracking-widest mb-0.5">Grade Two Oba</p>
+              <p className="text-white/70 text-xs font-bold uppercase tracking-widest mb-0.5">Town Oba</p>
               <h3 className="text-white font-display font-black text-lg sm:text-xl leading-tight">
                 {oba.title} of {oba.area}
               </h3>
@@ -177,9 +197,11 @@ function ObaCard({ oba, index }: { oba: typeof gradeTwo[0]; index: number }) {
             </div>
           </div>
           <div className="flex items-center gap-3 shrink-0">
-            <span className={`text-xs font-bold px-2.5 py-1 rounded-full ${oba.badge} hidden sm:inline-flex`}>
-              {oba.bales.length} Bales
-            </span>
+            {oba.Baales.length > 0 && (
+              <span className={`text-xs font-bold px-2.5 py-1 rounded-full ${oba.badge} hidden sm:inline-flex`}>
+                {oba.Baales.length} Baales
+              </span>
+            )}
             <ChevronDown
               size={20}
               className={`text-white transition-transform duration-300 ${open ? "rotate-180" : ""}`}
@@ -188,7 +210,7 @@ function ObaCard({ oba, index }: { oba: typeof gradeTwo[0]; index: number }) {
         </div>
       </button>
 
-      {/* Bales list */}
+      {/* Baales list */}
       <AnimatePresence initial={false}>
         {open && (
           <motion.div
@@ -314,23 +336,29 @@ function ObaCard({ oba, index }: { oba: typeof gradeTwo[0]; index: number }) {
                 </div>
               )}
 
-              {/* Bales list */}
-              <div>
-                <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-3">
-                  Bales under {oba.title}
-                </p>
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
-                  {oba.bales.map((bale, i) => (
-                    <div
-                      key={i}
-                      className="flex items-center gap-1.5 text-xs text-foreground/80 font-medium"
-                    >
-                      <span className="w-1.5 h-1.5 rounded-full bg-current opacity-40 shrink-0" />
-                      {bale}
-                    </div>
-                  ))}
+              {/* Baales list */}
+              {oba.Baales.length > 0 ? (
+                <div>
+                  <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-3">
+                    Baales under {oba.title}
+                  </p>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
+                    {oba.Baales.map((bale, i) => (
+                      <div
+                        key={i}
+                        className="flex items-center gap-1.5 text-xs text-foreground/80 font-medium"
+                      >
+                        <span className="w-1.5 h-1.5 rounded-full bg-current opacity-40 shrink-0" />
+                        {bale}
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              ) : (
+                <p className="text-xs text-muted-foreground text-center py-2">
+                  Bale list for {oba.title} not yet documented.
+                </p>
+              )}
 
             </div>
           </motion.div>
@@ -356,8 +384,8 @@ export default function RulingHierarchy() {
           <h2 className="label-accent">Royal Structure</h2>
           <h3 className="heading-section">The Ijebu-Igbo Ruling Hierarchy</h3>
           <p className="text-body mt-3">
-            The traditional governance of Ijebu-Igbo is structured under one paramount Oba,
-            five Grade Two Obas each presiding over their quarter, and 162 Bales across all communities.
+            The traditional governance of Ijebu-Igbo is structured under one paramount Oba (the Orimolusi),
+            seven Town Obas presiding over their individual towns, and 162 Baales across all communities.
           </p>
         </motion.div>
 
@@ -477,7 +505,7 @@ export default function RulingHierarchy() {
         >
           <div className="flex-1 h-px bg-border" />
           <span className="text-xs font-bold text-muted-foreground uppercase tracking-widest whitespace-nowrap">
-            Grade Two Obas — Click to expand bales
+            Town Obas — Click to expand Baales
           </span>
           <div className="flex-1 h-px bg-border" />
         </motion.div>
@@ -512,7 +540,7 @@ export default function RulingHierarchy() {
             ))}
           </div>
           <p className="text-xs text-muted-foreground mt-3">
-            Two of these three towns currently have an Oba-designate awaiting traditional rites and coronation. Two other towns — Imope-Ijebu (Onimope) and Aparaki (Alaparaki) — have already been elevated to Obaship; their full profiles are being added to the site.
+            Two of these three towns currently have an Oba-designate awaiting traditional rites and coronation. Two other towns — Imope-Ijebu (Onimope) and Aparaki (Alaparaki) — have already been elevated to Obaship and now have their own Town Oba profiles above.
           </p>
         </motion.div>
 
@@ -535,7 +563,7 @@ export default function RulingHierarchy() {
               </div>
             ))}
             <div className="flex items-center justify-between px-6 py-4 bg-primary/5 border-t-2 border-primary/20">
-              <span className="font-display font-bold text-foreground">Total Bales Listed</span>
+              <span className="font-display font-bold text-foreground">Total Baales Listed</span>
               <span className="font-display font-black text-primary text-xl">162</span>
             </div>
           </div>

@@ -146,7 +146,7 @@ export default function AtikoriKingdomPage() {
               { icon: MapPin, label: "Neighbours", value: "Ojowo, Japara, Oke-Sopen" },
               { icon: Crown, label: "Ruler", value: "Keegbo" },
               { icon: Users, label: "Structure", value: "8 Itun Agba" },
-              { icon: Target, label: "Bales", value: "23 Bales" },
+              { icon: Target, label: "Baales", value: "23 Baales" },
             ].map(({ icon: Icon, label, value }, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.08, ease }}
