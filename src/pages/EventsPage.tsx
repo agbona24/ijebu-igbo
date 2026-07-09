@@ -111,6 +111,26 @@ const EVENTS: Event[] = [
   },
 ];
 
+const EVENTS_JSONLD = EVENTS.filter((e) => !e.isPast).map((e) => ({
+  "@context": "https://schema.org",
+  "@type": "Event",
+  name: e.title,
+  startDate: `${e.rawDate.slice(0, 4)}-${e.rawDate.slice(4, 6)}-${e.rawDate.slice(6, 8)}`,
+  eventAttendanceMode: e.isVirtual
+    ? "https://schema.org/OnlineEventAttendanceMode"
+    : "https://schema.org/OfflineEventAttendanceMode",
+  eventStatus: "https://schema.org/EventScheduled",
+  location: e.isVirtual
+    ? { "@type": "VirtualLocation", url: "https://ijebuigbodescendants.org/events" }
+    : { "@type": "Place", name: e.location, address: e.location },
+  description: e.description,
+  organizer: {
+    "@type": "NGO",
+    name: "Ijebu Igbo Descendants in Diaspora",
+    url: "https://ijebuigbodescendants.org",
+  },
+}));
+
 const TYPE_FILTERS: EventType[] = ["Cultural", "Meeting", "Networking", "Education", "Virtual"];
 
 const TYPE_ICONS: Record<EventType, React.ReactNode> = {
@@ -404,7 +424,7 @@ export default function EventsPage() {
   return (
     <div className="min-h-screen bg-[#f4f6f8]">
       <Navbar />
-      <Seo path="/events" />
+      <Seo path="/events" jsonLd={EVENTS_JSONLD} />
 
       {/* ── HERO ────────────────────────────────────────────────────────── */}
       <section className="relative pt-14 md:pt-20 overflow-hidden">

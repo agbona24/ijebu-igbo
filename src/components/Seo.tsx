@@ -16,8 +16,8 @@ interface Props {
   type?: string;
   /** Canonical URL path (defaults to `path`). */
   canonicalPath?: string;
-  /** Optional JSON-LD structured data object. */
-  jsonLd?: Record<string, unknown>;
+  /** Optional JSON-LD structured data — a single object or an array to emit multiple blocks. */
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 export default function Seo({ path, title, description, image, type = "website", canonicalPath, jsonLd }: Props) {
@@ -50,9 +50,9 @@ export default function Seo({ path, title, description, image, type = "website",
       <meta name="twitter:description" content={resolvedDesc} />
       <meta name="twitter:image" content={resolvedImage} />
 
-      {jsonLd && (
-        <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
-      )}
+      {jsonLd && (Array.isArray(jsonLd) ? jsonLd : [jsonLd]).map((block, i) => (
+        <script key={i} type="application/ld+json">{JSON.stringify(block)}</script>
+      ))}
     </Helmet>
   );
 }

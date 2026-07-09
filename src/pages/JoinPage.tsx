@@ -5,7 +5,17 @@ import Navbar from "@/components/Navbar";
 import Seo from "@/components/Seo";
 import Footer from "@/components/Footer";
 import AnimatedHeroBg from "@/components/AnimatedHeroBg";
-import FAQ from "@/components/FAQ";
+import FAQ, { faqs } from "@/components/FAQ";
+
+const JOIN_FAQ_JSONLD = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: { "@type": "Answer", text: faq.answer.join(" ") },
+  })),
+};
 
 const IJEBU_AREAS = [
   "Oke-Sopen",
@@ -90,7 +100,7 @@ export default function JoinPage() {
   return (
     <div className="min-h-screen bg-[#f4f6f8]">
       <Navbar />
-      <Seo path="/join" />
+      <Seo path="/join" jsonLd={JOIN_FAQ_JSONLD} />
 
       {/* Hero */}
       <section className="relative pt-14 md:pt-20 overflow-hidden">
