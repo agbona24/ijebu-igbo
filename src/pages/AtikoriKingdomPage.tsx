@@ -15,51 +15,51 @@ const ease = [0.16, 1, 0.3, 1] as const;
 const ituns = ["Bogije", "Oriwu", "Igodo", "Oke Moje", "Etitale", "Oridan", "Aboyin", "Itun Tapa"];
 
 const royalCouple = [
-  { photo: "/images/oba-keegbo-ibitoye-solaja.webp", name: "Alayeluwa Kabiyesi Oba Ibitoye Solaja, JP", title: "The Keegbo of Atikori, Ijebu Igbo" },
-  { photo: "/images/olori-yemisi-solaja.webp", name: "Olori Yemisi Solaja", title: "The Olori Keegbo of Atikori" },
+  { photo: "/images/atikori/oba-keegbo-ibitoye-solaja.webp", name: "Alayeluwa Kabiyesi Oba Ibitoye Solaja, JP", title: "The Keegbo of Atikori, Ijebu Igbo" },
+  { photo: "/images/atikori/olori-yemisi-solaja.webp", name: "Olori Yemisi Solaja", title: "The Olori Keegbo of Atikori" },
 ];
 
 const oloriwuns = [
-  { photo: "/images/chief-adebola-adenubi-oloritun-bogije.webp", name: "Chief Adebola Adenubi", title: "Oloritun of Bogije" },
-  { photo: "/images/chief-michael-folorunso-agbogunloko-oloritun-oriwu.webp", name: "Chief Michael Folorunso Agbogunloko", title: "Oloritun of Oriwu" },
-  { photo: "/images/chief-abolanle-ajadi-yekini-oloritun-oke-moje.webp", name: "Chief (Hon.) Abolanle Ajadi Yekini", title: "Oloritun of Oke Moje" },
-  { photo: "/images/chief-abiodun-olayinka-olomitutu-oloritun-oridan.webp", name: "Chief Abiodun Olayinka (Olomitutu)", title: "Oloritun of Oridan" },
-  { photo: "/images/chief-adesanya-tunde-sawyer-oloritun-itun-tapa.webp", name: "Chief Adesanya Tunde Sawyer, JP", title: "Oloritun of Itun Tapa" },
+  { photo: "/images/atikori/chief-adebola-adenubi-oloritun-bogije.webp", name: "Chief Adebola Adenubi", title: "Oloritun of Bogije" },
+  { photo: "/images/atikori/chief-michael-folorunso-agbogunloko-oloritun-oriwu.webp", name: "Chief Michael Folorunso Agbogunloko", title: "Oloritun of Oriwu" },
+  { photo: "/images/atikori/chief-abolanle-ajadi-yekini-oloritun-oke-moje.webp", name: "Chief (Hon.) Abolanle Ajadi Yekini", title: "Oloritun of Oke Moje" },
+  { photo: "/images/atikori/chief-abiodun-olayinka-olomitutu-oloritun-oridan.webp", name: "Chief Abiodun Olayinka (Olomitutu)", title: "Oloritun of Oridan" },
+  { photo: "/images/atikori/chief-adesanya-tunde-sawyer-oloritun-itun-tapa.webp", name: "Chief Adesanya Tunde Sawyer, JP", title: "Oloritun of Itun Tapa" },
 ];
 
 const places = [
   {
-    image: "/images/st-james-church-atikori.webp",
+    image: "/images/atikori/st-james-church-atikori.webp",
     name: "St James Anglican Church",
     description: "The first and oldest church in Ijebu-Igbo, standing as a living monument to the earliest introduction of Christianity into the region.",
   },
   {
-    image: "/images/abraham-adesanya-polytechnic-atikori.webp",
+    image: "/images/atikori/abraham-adesanya-polytechnic-atikori.webp",
     name: "Abraham Adesanya Polytechnic",
     description: "A key tertiary educational institution named in honour of the late Chief Abraham Adesanya, a towering figure in Yoruba and Nigerian politics.",
   },
   {
-    image: "/images/atikori-football-team.webp",
+    image: "/images/atikori/atikori-football-team.webp",
     name: "Atikori Football Team",
     description: "A vehicle for community pride and youth development, bringing together young men who carry the name of Atikori forward with discipline and passion.",
   },
   {
-    image: "/images/oke-oyinbo-colonial-office.webp",
+    image: "/images/atikori/oke-oyinbo-colonial-office.webp",
     name: "Oke-Oyinbo Colonial Office",
     description: "The former office of the colonial masters, a heritage site marking Atikori's place in the colonial-era administration of the region.",
   },
   {
-    image: "/images/muslim-praying-ground-oke-alafia-atikori.webp",
+    image: "/images/atikori/muslim-praying-ground-oke-alafia-atikori.webp",
     name: "Muslim Praying Ground, Oke Alafia",
     description: "A long-standing open-air praying ground serving the Muslim community of Atikori during Eid and other communal prayers.",
   },
   {
-    image: "/images/leper-colony-atikori-building.webp",
+    image: "/images/atikori/leper-colony-atikori-building.webp",
     name: "Leper Colony, Atikori",
     description: "A historic settlement built to house and care for people affected by leprosy, standing today as part of Atikori's social history.",
   },
   {
-    image: "/images/palm-oil-production-atikori.webp",
+    image: "/images/atikori/palm-oil-production-atikori.webp",
     name: "Palm-Oil Production Centre",
     description: "A local palm-oil production site reflecting Atikori's agrarian roots, where freshly harvested palm fruit is gathered for processing.",
   },

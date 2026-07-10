@@ -14,7 +14,7 @@ const ease = [0.16, 1, 0.3, 1] as const;
 // ── Data ──────────────────────────────────────────────────────────────────
 
 const galleryImages = [
-  { src: "/images/oba-bejeroku-stephen-adekoya.webp", alt: "HRH Oba Stephen Adekoya, The Bejeroku of Oke-Agbo" },
+  { src: "/images/oke-agbo/oba-bejeroku-stephen-adekoya.webp", alt: "HRH Oba Stephen Adekoya, The Bejeroku of Oke-Agbo" },
 ];
 
 const Baales = [

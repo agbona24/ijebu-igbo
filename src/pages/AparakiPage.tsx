@@ -11,7 +11,7 @@ import Lightbox, { useLightbox, ZoomableImage } from "@/components/Lightbox";
 const ease = [0.16, 1, 0.3, 1] as const;
 
 const galleryImages = [
-  { src: "/images/oba-alaparaki-julius-benedict-ogunfowora.webp", alt: "HRH Oba Prof. Julius Adeniyi Benedict-Ogunfowora, Rudewoluakannisuru I — The Alaparaki of Aparaki" },
+  { src: "/images/aparaki/oba-alaparaki-julius-benedict-ogunfowora.webp", alt: "HRH Oba Prof. Julius Adeniyi Benedict-Ogunfowora, Rudewoluakannisuru I — The Alaparaki of Aparaki" },
 ];
 
 export default function AparakiPage() {

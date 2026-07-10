@@ -70,7 +70,7 @@ export default function HeritagePage() {
               >
                 <div className="relative h-36 bg-gradient-to-br from-blue-700 to-blue-500 flex items-center justify-center overflow-hidden">
                   <img
-                    src="/images/oba-olokine-abdulrasheed-banjo.webp"
+                    src="/images/ojowo/oba-olokine-abdulrasheed-banjo.webp"
                     alt="Olokine of Ojowo"
                     className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-50 transition-opacity duration-300"
                   />
@@ -107,7 +107,7 @@ export default function HeritagePage() {
               >
                 <div className="relative h-36 bg-gradient-to-br from-rose-700 to-rose-500 flex items-center justify-center overflow-hidden">
                   <img
-                    src="/images/oba-abijaparako-aderemi-adewale-ogunye.webp"
+                    src="/images/japara/oba-abijaparako-aderemi-adewale-ogunye.webp"
                     alt="Abijaparako of Japara"
                     className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-50 transition-opacity duration-300"
                   />
@@ -144,7 +144,7 @@ export default function HeritagePage() {
               >
                 <div className="relative h-36 bg-gradient-to-br from-purple-700 to-purple-500 flex items-center justify-center overflow-hidden">
                   <img
-                    src="/images/oba-keegbo-ibitoye-solaja.webp"
+                    src="/images/atikori/oba-keegbo-ibitoye-solaja.webp"
                     alt="Keegbo of Atikori"
                     className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-50 transition-opacity duration-300"
                   />
@@ -181,7 +181,7 @@ export default function HeritagePage() {
               >
                 <div className="relative h-36 bg-gradient-to-br from-amber-700 to-amber-500 flex items-center justify-center overflow-hidden">
                   <img
-                    src="/images/oba-sopenlukale-mufutau-adesesan-yusuf.webp"
+                    src="/images/oke-sopen/oba-sopenlukale-mufutau-adesesan-yusuf.webp"
                     alt="Sopenlukale of Oke-Sopen"
                     className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-50 transition-opacity duration-300"
                   />
@@ -218,7 +218,7 @@ export default function HeritagePage() {
               >
                 <div className="relative h-36 bg-gradient-to-br from-emerald-700 to-emerald-500 flex items-center justify-center overflow-hidden">
                   <img
-                    src="/images/oba-bejeroku-stephen-adekoya.webp"
+                    src="/images/oke-agbo/oba-bejeroku-stephen-adekoya.webp"
                     alt="Bejeroku of Oke-Agbo"
                     className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-50 transition-opacity duration-300"
                   />
@@ -255,7 +255,7 @@ export default function HeritagePage() {
               >
                 <div className="relative h-36 bg-gradient-to-br from-cyan-700 to-cyan-500 flex items-center justify-center overflow-hidden">
                   <img
-                    src="/images/oba-onimope-tajudeen-omotayo.webp"
+                    src="/images/imope-ijebu/oba-onimope-tajudeen-omotayo.webp"
                     alt="Onimope of Imope-Ijebu"
                     className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-50 transition-opacity duration-300"
                   />
@@ -292,7 +292,7 @@ export default function HeritagePage() {
               >
                 <div className="relative h-36 bg-gradient-to-br from-orange-700 to-orange-500 flex items-center justify-center overflow-hidden">
                   <img
-                    src="/images/oba-alaparaki-julius-benedict-ogunfowora.webp"
+                    src="/images/aparaki/oba-alaparaki-julius-benedict-ogunfowora.webp"
                     alt="Alaparaki of Aparaki"
                     className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-50 transition-opacity duration-300"
                   />

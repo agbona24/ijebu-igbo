@@ -12,8 +12,8 @@ import Lightbox, { useLightbox, ZoomableImage } from "@/components/Lightbox";
 const ease = [0.16, 1, 0.3, 1] as const;
 
 const galleryImages = [
-  { src: "/images/oba-olokine-abdulrasheed-banjo.webp", alt: "His Royal Highness Oba Abdulrasheed Abayomi Banjo, PhD — The Olokine of Ojowo" },
-  { src: "/images/olori-olokine-ojowo.webp", alt: "Olori Oluyinka Banjo, FISLT — The Olori Olokine of Ojowo" },
+  { src: "/images/ojowo/oba-olokine-abdulrasheed-banjo.webp", alt: "His Royal Highness Oba Abdulrasheed Abayomi Banjo, PhD — The Olokine of Ojowo" },
+  { src: "/images/ojowo/olori-olokine-ojowo.webp", alt: "Olori Oluyinka Banjo, FISLT — The Olori Olokine of Ojowo" },
 ];
 
 // ── Data ──────────────────────────────────────────────────────────────────
@@ -257,8 +257,8 @@ export default function OjowoKingdomPage() {
         <div className="container-main">
           <div className="flex flex-col sm:flex-row gap-6 sm:gap-10 justify-center items-center">
             {[
-              { photo: "/images/oba-olokine-abdulrasheed-banjo.webp", name: "His Royal Highness Oba Abdulrasheed Abayomi Banjo, PhD", title: "Akereburu, Orilonise I — The Olokine of Ojowo, Ijebu Igbo" },
-              { photo: "/images/olori-olokine-ojowo.webp", name: "Olori Oluyinka Banjo, FISLT", title: "The Olori Olokine of Ojowo" },
+              { photo: "/images/ojowo/oba-olokine-abdulrasheed-banjo.webp", name: "His Royal Highness Oba Abdulrasheed Abayomi Banjo, PhD", title: "Akereburu, Orilonise I — The Olokine of Ojowo, Ijebu Igbo" },
+              { photo: "/images/ojowo/olori-olokine-ojowo.webp", name: "Olori Oluyinka Banjo, FISLT", title: "The Olori Olokine of Ojowo" },
             ].map((person, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: i * 0.15, ease }} className="text-center max-w-[260px]">

@@ -56,8 +56,8 @@ const oriki = [
 ];
 
 const palaceChiefs = [
-  { photo: "/images/chief-ayodele-francis-ogunye-baba-oba-japara.webp", name: "Engr. Prof. Ayodele Francis Ogunye, D.Sc, FAEng", title: "Baba Oba of Japara" },
-  { photo: "/images/chief-babatunde-babatomiwa-rowaiye-mayegun-ijebu-igbo.webp", name: "Dr. Babatunde Babatomiwa Rowaiye", title: "Otunba Odosigboro Japara & Mayegun of Ijebu-Igbo" },
+  { photo: "/images/japara/chief-ayodele-francis-ogunye-baba-oba-japara.webp", name: "Engr. Prof. Ayodele Francis Ogunye, D.Sc, FAEng", title: "Baba Oba of Japara" },
+  { photo: "/images/japara/chief-babatunde-babatomiwa-rowaiye-mayegun-ijebu-igbo.webp", name: "Dr. Babatunde Babatomiwa Rowaiye", title: "Otunba Odosigboro Japara & Mayegun of Ijebu-Igbo" },
 ];
 
 const currentChiefs = [
@@ -79,9 +79,9 @@ const oloriEbis = [
 ];
 
 const galleries = [
-  { src: "/images/japara-immediate-past-obas.webp", caption: "Immediate Past Obas of Japara — Oba Moses Kolawole Odujobi, Chief Emmanuel Oduyemi (Baale of Japara), Chief Albert Onateluwo (Olori Ilu of Japara)" },
-  { src: "/images/japara-current-baales-oloriwuns.webp", caption: "Current Baales and Oloritun of Japara" },
-  { src: "/images/japara-current-pampa-osugbos.webp", caption: "Current Pampa (Lawusi, Owogbegi, Kileyo, Odokotolori) and Osugbos of Japara" },
+  { src: "/images/japara/japara-immediate-past-obas.webp", caption: "Immediate Past Obas of Japara — Oba Moses Kolawole Odujobi, Chief Emmanuel Oduyemi (Baale of Japara), Chief Albert Onateluwo (Olori Ilu of Japara)" },
+  { src: "/images/japara/japara-current-baales-oloriwuns.webp", caption: "Current Baales and Oloritun of Japara" },
+  { src: "/images/japara/japara-current-pampa-osugbos.webp", caption: "Current Pampa (Lawusi, Owogbegi, Kileyo, Odokotolori) and Osugbos of Japara" },
 ];
 
 const pastBaales = [
@@ -130,14 +130,14 @@ const projectAchievements = [
 ];
 
 const projectGalleries = [
-  "/images/japara-projects-achievements-1.webp",
-  "/images/japara-projects-achievements-2.webp",
-  "/images/japara-projects-achievements-3.webp",
+  "/images/japara/japara-projects-achievements-1.webp",
+  "/images/japara/japara-projects-achievements-2.webp",
+  "/images/japara/japara-projects-achievements-3.webp",
 ];
 
 const notableProfiles = [
   {
-    photo: "/images/oba-abijaparako-aderemi-adewale-ogunye-2.webp",
+    photo: "/images/japara/oba-abijaparako-aderemi-adewale-ogunye-2.webp",
     name: "HRH Oba Aderemi Adewale Ogunye",
     title: "Ilufemiloye (Kotolori-Ojuule I) — The Abijaparako of Japara",
     bio: [
@@ -154,7 +154,7 @@ const notableProfiles = [
     ],
   },
   {
-    photo: "/images/chief-adedotun-olukorede-fasanya-otunba-odokotolori-japara.webp",
+    photo: "/images/japara/chief-adedotun-olukorede-fasanya-otunba-odokotolori-japara.webp",
     name: "Otunba Adedotun Olukorede Fasanya",
     title: "Otunba Odokotolori IV of Japara, Ijebu-Igbo",
     bio: [
@@ -166,7 +166,7 @@ const notableProfiles = [
     ],
   },
   {
-    photo: "/images/chief-ademola-adewumi-dayo-olori-omoba-japara.webp",
+    photo: "/images/japara/chief-ademola-adewumi-dayo-olori-omoba-japara.webp",
     name: "Chief Ademola Adewumi Dayo",
     title: "Olori Omoba Japara, Ijebu-Igbo",
     bio: [
@@ -177,7 +177,7 @@ const notableProfiles = [
     ],
   },
   {
-    photo: "/images/chief-olayinka-olanrewaju-oni-asiwaju-japara.webp",
+    photo: "/images/japara/chief-olayinka-olanrewaju-oni-asiwaju-japara.webp",
     name: "Otunba Olayinka Olanrewaju Oni",
     title: "Asiwaju of Japara, Ijebu-Igbo",
     bio: [
@@ -189,12 +189,12 @@ const notableProfiles = [
 ];
 
 const galleryImages = [
-  { src: "/images/oba-abijaparako-aderemi-adewale-ogunye.webp", alt: "His Royal Highness Oba Aderemi Adewale Ogunye (JP) — The Abijaparako of Japara" },
+  { src: "/images/japara/oba-abijaparako-aderemi-adewale-ogunye.webp", alt: "His Royal Highness Oba Aderemi Adewale Ogunye (JP) — The Abijaparako of Japara" },
   ...palaceChiefs.map((c) => ({ src: c.photo, alt: `${c.name} — ${c.title}` })),
   ...notableProfiles.map((p) => ({ src: p.photo, alt: `${p.name} — ${p.title}` })),
   { src: galleries[0].src, alt: galleries[0].caption },
-  { src: "/images/japara-current-chiefs.webp", alt: "Current Chiefs of Japara" },
-  { src: "/images/japara-current-olori-ebis.webp", alt: "Current Olori Ebi of Japara" },
+  { src: "/images/japara/japara-current-chiefs.webp", alt: "Current Chiefs of Japara" },
+  { src: "/images/japara/japara-current-olori-ebis.webp", alt: "Current Olori Ebi of Japara" },
   { src: galleries[1].src, alt: galleries[1].caption },
   { src: galleries[2].src, alt: galleries[2].caption },
   ...projectGalleries.map((src, i) => ({ src, alt: `Japara community projects, page ${i + 1}` })),
@@ -507,7 +507,7 @@ export default function JaparaKingdomPage() {
 
           <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
             transition={{ duration: 0.5, ease }} className="rounded-2xl overflow-hidden border border-border shadow-sm mb-8">
-            <ZoomableImage src="/images/japara-immediate-past-obas.webp" alt="Immediate Past Obas of Japara" className="w-full" imgClassName="w-full h-auto" onClick={() => open(7)} />
+            <ZoomableImage src="/images/japara/japara-immediate-past-obas.webp" alt="Immediate Past Obas of Japara" className="w-full" imgClassName="w-full h-auto" onClick={() => open(7)} />
           </motion.div>
 
           {/* Full list of Past Baales */}
@@ -565,7 +565,7 @@ export default function JaparaKingdomPage() {
           </div>
           <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
             transition={{ duration: 0.5, ease }} className="rounded-2xl overflow-hidden border border-border shadow-sm max-w-2xl mx-auto">
-            <ZoomableImage src="/images/japara-current-chiefs.webp" alt="Current Chiefs of Japara" className="w-full" imgClassName="w-full h-auto" onClick={() => open(8)} />
+            <ZoomableImage src="/images/japara/japara-current-chiefs.webp" alt="Current Chiefs of Japara" className="w-full" imgClassName="w-full h-auto" onClick={() => open(8)} />
           </motion.div>
         </div>
       </section>
@@ -590,7 +590,7 @@ export default function JaparaKingdomPage() {
           </div>
           <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
             transition={{ duration: 0.5, ease }} className="rounded-2xl overflow-hidden border border-border shadow-sm max-w-2xl mx-auto">
-            <ZoomableImage src="/images/japara-current-olori-ebis.webp" alt="Current Olori Ebi of Japara" className="w-full" imgClassName="w-full h-auto" onClick={() => open(9)} />
+            <ZoomableImage src="/images/japara/japara-current-olori-ebis.webp" alt="Current Olori Ebi of Japara" className="w-full" imgClassName="w-full h-auto" onClick={() => open(9)} />
           </motion.div>
         </div>
       </section>

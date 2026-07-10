@@ -11,7 +11,7 @@ import Lightbox, { useLightbox, ZoomableImage } from "@/components/Lightbox";
 const ease = [0.16, 1, 0.3, 1] as const;
 
 const galleryImages = [
-  { src: "/images/oba-onimope-tajudeen-omotayo.webp", alt: "HRH Alaiyeluwa Oba Tajudeen Kolawole Ibirogbo Adesujibomi Omotayo — The Onimope of Imope-Ijebu" },
+  { src: "/images/imope-ijebu/oba-onimope-tajudeen-omotayo.webp", alt: "HRH Alaiyeluwa Oba Tajudeen Kolawole Ibirogbo Adesujibomi Omotayo — The Onimope of Imope-Ijebu" },
 ];
 
 export default function ImopeIjebuPage() {

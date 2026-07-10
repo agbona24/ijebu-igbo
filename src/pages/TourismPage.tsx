@@ -48,7 +48,7 @@ const PLACES: Place[] = [
     badge: "Heritage Site",
     badgeColor: "bg-blue-700 text-white",
     location: "Ojowo, Ijebu-Igbo, Ogun State, Nigeria",
-    image: "/images/ojowo-important-places.webp",
+    image: "/images/ojowo/ojowo-important-places.webp",
     description: [
       "Ojowo is one of the five historic quarters of Ijebu-Igbo, governed under the traditional leadership of the Olokine. The quarter is home to a number of landmarks, sacred sites, and community spaces that have shaped the identity and daily life of its people across generations.",
       "These places of interest reflect the deep cultural roots, communal spirit, and living heritage of the Ojowo people — from traditional meeting grounds and community centres to historically significant locations that have witnessed the growth of Ijebu-Igbo over the centuries.",
@@ -62,7 +62,7 @@ const PLACES: Place[] = [
     badge: "Oldest Church in Ijebu Igbo",
     badgeColor: "bg-emerald-700 text-white",
     location: "Atikori, Ijebu-Igbo, Ogun State, Nigeria",
-    image: "/images/st-james-church-atikori.webp",
+    image: "/images/atikori/st-james-church-atikori.webp",
     description: [
       "St James Anglican Church holds the distinguished honour of being the first and oldest church in Ijebu-Igbo, standing as a living monument to the earliest introduction of Christianity into the region. Located in the Atikori quarter, this historic church has been a cornerstone of faith, community, and education for generations.",
       "As a landmark of spiritual and cultural significance, St James has witnessed the growth and transformation of Ijebu-Igbo across the centuries, its walls carrying the stories of families, community leaders, and milestones that have shaped the identity of the town.",
@@ -76,7 +76,7 @@ const PLACES: Place[] = [
     badge: "Education",
     badgeColor: "bg-emerald-600 text-white",
     location: "Atikori, Ijebu-Igbo, Ogun State, Nigeria",
-    image: "/images/abraham-adesanya-polytechnic-atikori.webp",
+    image: "/images/atikori/abraham-adesanya-polytechnic-atikori.webp",
     description: [
       "Abraham Adesanya Polytechnic is a key tertiary educational institution situated in the Atikori quarter of Ijebu-Igbo. Named in honour of the late Chief Abraham Adesanya, a towering figure in Yoruba and Nigerian politics, the institution stands as a tribute to his legacy of advocacy, leadership, and commitment to the development of the Yoruba people.",
       "The polytechnic plays a vital role in providing accessible higher education and vocational training to students from Ijebu-Igbo and the wider Ogun State region, contributing to the intellectual and economic development of the community.",
@@ -89,7 +89,7 @@ const PLACES: Place[] = [
     badge: "Community Sport",
     badgeColor: "bg-orange-600 text-white",
     location: "Atikori, Ijebu-Igbo, Ogun State, Nigeria",
-    image: "/images/atikori-football-team.webp",
+    image: "/images/atikori/atikori-football-team.webp",
     description: [
       "Football is more than a sport in Atikori — it is a vehicle for community pride, youth development, and local identity. The Atikori Football Team represents the heart of the quarter's youth, bringing together young men who compete with discipline and passion to carry the name of Atikori forward.",
       "The team's success on the pitch is a reflection of the strong communal bonds and the investment that community elders and leaders make in nurturing the next generation. Their victories are celebrated by the whole quarter as shared achievements.",
