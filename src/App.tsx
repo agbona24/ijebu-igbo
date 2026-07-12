@@ -47,6 +47,8 @@ import MembersPage from "./pages/MembersPage.tsx";
 import ScholarshipPage from "./pages/ScholarshipPage.tsx";
 import TravelGuidePage from "./pages/TravelGuidePage.tsx";
 import VideoArchivePage from "./pages/VideoArchivePage.tsx";
+import BlogPage from "./pages/BlogPage.tsx";
+import BlogPost from "./pages/BlogPost.tsx";
 
 const queryClient = new QueryClient();
 
@@ -83,6 +85,8 @@ const App = () => (
           <Route path="/travel"        element={<TravelGuidePage />} />
           <Route path="/videos"        element={<VideoArchivePage />} />
           <Route path="/news/:id"    element={<NewsPost />} />
+          <Route path="/blog"        element={<BlogPage />} />
+          <Route path="/blog/:slug"  element={<BlogPost />} />
           <Route path="/businesses"          element={<Businesses />} />
           <Route path="/businesses/:slug"    element={<BusinessProfile />} />
           <Route path="/join"              element={<JoinPage />} />

@@ -148,7 +148,48 @@ for (const biz of extractBusinesses(businessSrc)) {
   console.log(`  ✓  ${routePath}`);
 }
 
-// ── 3. sitemap.xml ────────────────────────────────────────────────────────────
+// ── 3. Blog post pages ─────────────────────────────────────────────────────────
+const blogSrc = fs.readFileSync(path.join(ROOT, "src/data/blogPosts.ts"), "utf-8");
+
+function extractBlogPosts(src) {
+  const posts = [];
+  const blockRe = /\{\s*slug:\s*"([^"]+)"[\s\S]*?(?=\n  \{|\n\];)/g;
+  let match;
+  while ((match = blockRe.exec(src)) !== null) {
+    const block = match[0];
+    const get = (key) => {
+      const m = block.match(new RegExp(`${key}:\\s*"([^"]*)"`));
+      return m ? m[1] : null;
+    };
+    posts.push({
+      slug: match[1],
+      title: get("title"),
+      excerpt: get("excerpt"),
+      image: get("image"),
+    });
+  }
+  return posts;
+}
+
+let blogCount = 0;
+for (const post of extractBlogPosts(blogSrc)) {
+  if (!post.slug || !post.title) continue;
+  const title = `${post.title} | Ijebu Igbo Blog — IID`;
+  const routePath = `/blog/${post.slug}`;
+  const html = buildHtml({
+    title,
+    description: post.excerpt ?? "",
+    image: post.image ?? defaultImage,
+    url: `${siteUrl}${routePath}`,
+    type: "article",
+  });
+  writeRoute(routePath, html);
+  addSitemap(routePath, "0.6");
+  blogCount++;
+}
+console.log(`  ✓  /blog (${blogCount} posts pre-rendered)`);
+
+// ── 4. sitemap.xml ────────────────────────────────────────────────────────────
 const today = new Date().toISOString().slice(0, 10);
 const sitemap =
   `<?xml version="1.0" encoding="UTF-8"?>\n` +

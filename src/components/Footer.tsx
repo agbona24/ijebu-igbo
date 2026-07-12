@@ -18,6 +18,7 @@ const communityLinks = [
   { label: "Our Team", href: "/team" },
   { label: "Impact", href: "/impact" },
   { label: "News", href: "/news" },
+  { label: "Blog", href: "/blog" },
   { label: "Business Directory", href: "/businesses" },
   { label: "Submit an Event", href: "mailto:softlineazeez123@gmail.com?subject=Event%20Submission" },
   { label: "List Your Business", href: "/businesses" },

@@ -19,6 +19,7 @@ const navLinks = [
 ];
 
 const moreLinks = [
+  { label: "Blog",           href: "/blog",          icon: "📝" },
   { label: "Impact",         href: "/impact",        icon: "📊" },
   { label: "Team",           href: "/team",          icon: "👥" },
   { label: "Tourism",        href: "/tourism",       icon: "🏛️" },
