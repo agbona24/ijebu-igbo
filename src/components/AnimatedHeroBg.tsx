@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 
 interface Props {
-  gradientClass: string;
+  gradientClass?: string;
   children?: React.ReactNode;
 }
 
@@ -26,7 +26,7 @@ const nodes = [
   { cx: 535, cy: 145, delay: 1.0 },
 ];
 
-export default function AnimatedHeroBg({ gradientClass, children }: Props) {
+export default function AnimatedHeroBg({ gradientClass = "bg-gradient-to-br from-primary via-primary/90 to-primary/80", children }: Props) {
   return (
     <div className={`absolute inset-0 ${gradientClass} overflow-hidden`}>
       <svg

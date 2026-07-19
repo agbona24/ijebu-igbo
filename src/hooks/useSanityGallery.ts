@@ -13,10 +13,14 @@ const policeImages: GalleryImage[] = Array.from({ length: 23 }, (_, i) => ({
 }));
 
 const FALLBACK_GALLERY: GalleryImage[] = [
-  { src: "/images/courtesy-call-orimolusi.webp", alt: "Courtesy Call to the Orimolusi of Ijebu Igbo" },
-  { src: "/images/iid-carnival1.webp", alt: "IID Carnival 2025" },
-  { src: "/images/iid-carnival2.webp", alt: "IID Carnival 2025" },
-  { src: "/images/iid-carnival3.webp", alt: "IID Carnival 2025" },
+  { src: "/images/aafin-orimolusi-palace.webp", alt: "Aafin Orimolusi, the palace of the Orimolusi of Ijebu Igbo" },
+  { src: "/images/ijebu-igbo-council-of-obas.webp", alt: "The Ijebu Igbo Council of Obas" },
+  { src: "/images/oba-jaiyeoba-portrait.webp", alt: "Oba Lawrence Jaiyeoba Adebajo, the reigning Orimolusi" },
+  { src: "/images/atikori/atikori-market.webp", alt: "Atikori Market" },
+  { src: "/images/atikori/atikori-football-team.webp", alt: "Atikori Football Team" },
+  { src: "/images/oke-sopen/customary-court.webp", alt: "Oke-Sopen Customary Court" },
+  { src: "/images/japara/japara-current-chiefs.webp", alt: "Japara Quarter Chiefs" },
+  { src: "/images/ojowo/ojowo-important-places.webp", alt: "Important places in Ojowo" },
   ...policeImages,
 ];
 

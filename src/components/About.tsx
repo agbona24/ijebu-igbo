@@ -1,40 +1,31 @@
 import { motion } from "framer-motion";
 import aboutImg from "@/assets/about-culture.jpg";
-import { Users, Crown, Heart, Megaphone, MapPin } from "lucide-react";
+import { Archive, BookOpen, Crown, Users } from "lucide-react";
 import ClanNetwork from "@/components/ClanNetwork";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
-// The 5 clans of Ijebu Igbo
-const clans = [
-  { name: "Oke-Sopen", meaning: "The Elevated Ones" },
-  { name: "Japara", meaning: "The Peaceful Settlers" },
-  { name: "Oke-Agbo", meaning: "The Noble Highlands" },
-  { name: "Atikori", meaning: "The Ancient Lineage" },
-  { name: "Ojowo", meaning: "The Prosperous Path" },
-];
-
-// IID Pillars
+// Archive pillars
 const culturalPillars = [
   {
-    icon: Megaphone,
-    title: "IID — Awareness",
-    description: "Ijebu Igbo Descendants create awareness on what is going on in Ijebu Igbo for all Omo Orimolusi in Diaspora worldwide.",
+    icon: Archive,
+    title: "Preserve",
+    description: "Documenting the Orimolusi throne, the seven Town Obas, and the history of Ijebu-Igbo before it's lost to time.",
   },
   {
-    icon: Users,
-    title: "IID — Togetherness",
-    description: "Ijebu Igbo Descendants create an atmosphere to bring all Omo Orimolusi in Diaspora together, no matter where in the world they live.",
-  },
-  {
-    icon: Heart,
-    title: "IID — Support",
-    description: "Ijebu Igbo Descendants give support to hometown projects and other related causes.",
+    icon: BookOpen,
+    title: "Document",
+    description: "Recording oriki, chieftaincy lines, quarters and landmarks with the same care given to any national archive.",
   },
   {
     icon: Crown,
-    title: "IID — We Represent",
-    description: "One of our visions is to represent our most respected town — Ijebu Igbo — well in character, diversity and prosperity.",
+    title: "Honour",
+    description: "Giving every reigning and past Oba of Ijebu-Igbo's towns a proper, accurate, respectful record.",
+  },
+  {
+    icon: Users,
+    title: "Connect",
+    description: "Making this history freely accessible to anyone with roots in Ijebu-Igbo, wherever they are.",
   },
 ];
 
@@ -107,9 +98,9 @@ export default function About() {
                 Proudly Ọmọ Alárè
               </h3>
               <p className="text-body leading-relaxed">
-                Being an Ọmọ Alárè is more than a title — it is a heritage of resilience, enterprise, 
-                and community. From the markets of Ijebu Igbo to cities around the world, our sons 
-                and daughters carry the pride, culture, and values of our homeland wherever they go.
+                Being an Ọmọ Alárè is more than a title — it is a heritage of resilience, enterprise,
+                and community. From the markets of Ijebu Igbo to cities around the world, the sons
+                and daughters of this kingdom carry its pride, culture, and values wherever they go.
               </p>
             </div>
 
@@ -123,11 +114,13 @@ export default function About() {
               </p>
             </div>
 
-            {/* Who We Are */}
+            {/* What This Archive Is */}
             <div>
-              <h4 className="font-display font-bold text-lg text-foreground mb-2">Who We Are</h4>
+              <h4 className="font-display font-bold text-lg text-foreground mb-2">What This Archive Is</h4>
               <p className="text-body text-sm sm:text-base leading-relaxed">
-                IID (Ijebu Igbo Descendants Omo Orimolusi in Diaspora) is a non-profit organisation that comes together to raise awareness about what is happening in Ijebu Igbo. This organisation is open to all Ijebu Igbo Descendants in Diaspora — wherever in the world they may be.
+                A free, growing record of Ijebu-Igbo — the Orimolusi throne, the seven Town Obas, and
+                the quarters, landmarks and history that make up the kingdom. Built for anyone who wants
+                to understand or trace their roots in Ijebu-Igbo.
               </p>
             </div>
 
@@ -135,13 +128,15 @@ export default function About() {
             <div>
               <h4 className="font-display font-bold text-lg text-foreground mb-2">What We Do</h4>
               <p className="text-body text-sm sm:text-base leading-relaxed">
-                We see to the welfare of our community and our people, both in Ijebu Igbo and in the Diaspora. We do this by complementing the efforts of the Government with whatever resources we have.
+                We document royal genealogies, town histories and heritage sites, and publish them
+                here in one place — correcting the record where it's wrong, and filling it in where
+                it's missing.
               </p>
             </div>
           </motion.div>
         </div>
 
-        {/* The 5 Clans - Mobile Only */}
+        {/* The 7 Towns - Mobile Only */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -151,10 +146,10 @@ export default function About() {
         >
           <div className="text-center mb-6 sm:mb-8">
             <h3 className="font-display font-bold text-xl sm:text-2xl text-foreground mb-2">
-              The Five Clans of Ijebu Igbo
+              The Seven Towns of Ijebu-Igbo
             </h3>
             <p className="text-body">
-              United under Orímólúsí, our town stands on five foundational quarters
+              United under the Orimolusi, each with its own Town Oba and quarters
             </p>
           </div>
 
@@ -179,10 +174,10 @@ export default function About() {
         >
           <div className="text-center mb-6 sm:mb-8">
             <h3 className="font-display font-bold text-xl sm:text-2xl text-foreground mb-2">
-              What We Stand For
+              What This Archive Stands For
             </h3>
             <p className="text-body text-sm sm:text-base">
-              The four pillars that guide everything IID does for our community
+              The four principles behind everything published here
             </p>
           </div>
 
@@ -222,8 +217,8 @@ export default function About() {
             Ijebu Igbo kì í ṣofo
           </p>
           <p className="text-primary-foreground/80 text-sm sm:text-base max-w-2xl mx-auto">
-            "Ijebu Igbo never runs dry" — Wherever we are in the world, the spirit of our homeland lives on.
-            Together, we uplift our town. Together, we preserve our legacy.
+            "Ijebu Igbo never runs dry" — a kingdom of seven towns, one crown, and a history
+            worth keeping. This archive exists to make sure it never is.
           </p>
         </motion.div>
       </div>

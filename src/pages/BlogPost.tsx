@@ -37,7 +37,7 @@ export default function BlogPost() {
   return (
     <div className="min-h-screen bg-background">
       <Seo
-        title={`${post.title} | Ijebu Igbo Blog — IID`}
+        title={`${post.title} | Ijebu-Igbo Heritage`}
         description={post.excerpt}
         image={post.image}
         type="article"

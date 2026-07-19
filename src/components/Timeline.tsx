@@ -1,13 +1,13 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import { Calendar, Crown, Globe, Ship, Users, Heart } from "lucide-react";
+import { Calendar, Crown, Landmark, Users, Heart, BookOpen } from "lucide-react";
 
 const timelineEvents = [
   {
-    era: "Ancient Times",
+    era: "Founding",
     year: "Pre-1500s",
-    title: "The Five Clans Unite",
-    description: "The five foundational clans—Oke-Sopen, Japara, Oke-Agbo, Atikori, and Ojowo—establish Ijebu Igbo under the Orímólúsí dynasty.",
+    title: "The Hunting Camps Unite",
+    description: "Onayelu, Ogunelegi, Princess Sopenlukale and the Agemo priest Moki establish Ijebu-Igbo from five hunting camps, with Onayelu installed as the first Oloja Ugbo — the first Orimolusi.",
     icon: Crown,
     color: "from-yellow-600 to-amber-700",
   },
@@ -15,7 +15,7 @@ const timelineEvents = [
     era: "Kingdom Era",
     year: "1500s-1800s",
     title: "Flourishing Kingdom",
-    description: "Ijebu Igbo becomes a prosperous trading center, known for its rich culture, craftsmanship, and the legendary Ojude Oba festival.",
+    description: "Ijebu-Igbo becomes a prosperous trading centre, known for its rich culture, craftsmanship, and the legendary Ojude Oba festival.",
     icon: Users,
     color: "from-blue-600 to-indigo-700",
   },
@@ -23,32 +23,32 @@ const timelineEvents = [
     era: "Colonial Period",
     year: "1800s-1960",
     title: "Resilience Through Change",
-    description: "Our ancestors preserve cultural identity and traditions despite colonial influence, maintaining the spirit of 'Ijebu Igbo kì í ṣofo.'",
+    description: "The town preserves its cultural identity and chieftaincy structures despite colonial influence, maintaining the spirit of 'Ijebu Igbo kì í ṣofo.'",
     icon: Heart,
     color: "from-red-600 to-rose-700",
   },
   {
     era: "Independence",
-    year: "1960-1980s",
+    year: "1960-1994",
     title: "Nigerian Independence",
-    description: "Post-independence era sees Ijebu Igbo sons and daughters contribute significantly to the building of modern Nigeria.",
+    description: "Ijebu-Igbo becomes headquarters of Ijebu-North Local Government Area, its seven towns and Council of Obas taking shape as the kingdom grows.",
     icon: Calendar,
     color: "from-green-600 to-emerald-700",
   },
   {
-    era: "Diaspora Begins",
-    year: "1980s-2000s",
-    title: "Migration to the West",
-    description: "First wave of migration as our people seek opportunities abroad, establishing communities in the UK, USA, and beyond.",
-    icon: Ship,
+    era: "Vacant Throne",
+    year: "1994-2022",
+    title: "Twenty-Eight Years Without an Orimolusi",
+    description: "The paramount stool at Oke-Tako stands vacant for nearly three decades, even as the seven Town Obas continue to govern their own towns.",
+    icon: Landmark,
     color: "from-purple-600 to-violet-700",
   },
   {
-    era: "Global Community",
-    year: "2000s-Present",
-    title: "Ijebu Igbo Descendants in Diaspora, UK",
-    description: "Formation of organized diaspora communities like IJIDD UK, connecting generations and preserving our heritage for the future.",
-    icon: Globe,
+    era: "Present Day",
+    year: "2022-Present",
+    title: "Oba Lawrence Jaiyeoba Adebajo, Ojuromi VI",
+    description: "The Orimolusi throne is filled once more, and in the years since, Imope-Ijebu and Aparaki are recognised as Ijebu-Igbo's newest Town Obaships — bringing the town Obas to seven.",
+    icon: BookOpen,
     color: "from-accent to-primary",
   },
 ];
@@ -83,11 +83,11 @@ export default function Timeline() {
         >
           <span className="label-accent">Our Journey</span>
           <h2 className="heading-section mt-3">
-            From Ancient Roots to{" "}
-            <span className="text-primary">Global Community</span>
+            From Hunting Camps to a{" "}
+            <span className="text-primary">Kingdom of Seven Towns</span>
           </h2>
           <p className="text-body max-w-2xl mx-auto mt-4">
-            Trace the remarkable journey of Ijebu Igbo people from our ancestral homeland to the diaspora
+            Trace the history of Ijebu-Igbo from its founding to the present-day Orimolusi
           </p>
         </motion.div>
 
@@ -196,7 +196,7 @@ export default function Timeline() {
               animate={{ opacity: [0.5, 1, 0.5] }}
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             >
-              The journey continues... 🌍
+              The record continues...
             </motion.p>
           </motion.div>
         </div>
@@ -210,13 +210,13 @@ export default function Timeline() {
           className="text-center mt-16 sm:mt-20"
         >
           <p className="text-lg sm:text-xl text-foreground/80 mb-6 font-display">
-            Be part of our living history
+            Explore the towns that make up this history
           </p>
           <a
-            href="#"
+            href="/heritage"
             className="btn-primary inline-flex items-center gap-2"
           >
-            Join the Community
+            View the Council of Obas
             <motion.span
               animate={{ x: [0, 5, 0] }}
               transition={{ duration: 1, repeat: Infinity, ease: "easeInOut" }}

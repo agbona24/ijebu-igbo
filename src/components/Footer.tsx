@@ -1,77 +1,33 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, MapPin, Phone, Globe, MessageCircle, ArrowRight, Users, CalendarDays, Flag, Send } from "lucide-react";
+import { Mail, MapPin, Phone, Globe, ArrowRight, MapPinned, Crown, BookOpen, Landmark } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const quickLinks = [
   { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Events", href: "/events" },
   { label: "Heritage", href: "/heritage" },
-  { label: "Directory", href: "/businesses" },
+  { label: "Tourism", href: "/tourism" },
   { label: "Gallery", href: "/gallery" },
-  { label: "Join Us", href: "/join" },
+  { label: "Blog", href: "/blog" },
+  { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];
 
-const communityLinks = [
-  { label: "Our Team", href: "/team" },
-  { label: "Impact", href: "/impact" },
-  { label: "News", href: "/news" },
-  { label: "Blog", href: "/blog" },
-  { label: "Business Directory", href: "/businesses" },
-  { label: "Submit an Event", href: "mailto:softlineazeez123@gmail.com?subject=Event%20Submission" },
-  { label: "List Your Business", href: "/businesses" },
+const townLinks = [
+  { label: "Oke-Sopen", href: "/oke-sopen" },
+  { label: "Atikori", href: "/atikori" },
+  { label: "Japara", href: "/japara" },
+  { label: "Ojowo", href: "/ojowo" },
+  { label: "Oke-Agbo", href: "/oke-agbo" },
+  { label: "Imope-Ijebu", href: "/imope-ijebu" },
+  { label: "Aparaki", href: "/aparaki" },
 ];
-
-const WHATSAPP_COMMUNITY = "https://wa.me/447496933887?text=Hello%2C%20I%27d%20like%20to%20join%20the%20IID%20community.";
 
 const stats = [
-  { icon: Users,       value: "200+",  label: "Members"      },
-  { icon: CalendarDays, value: "2017",  label: "Est."         },
-  { icon: Globe,       value: "3",     label: "Countries"    },
-  { icon: Flag,        value: "1",     label: "Hometown"     },
+  { icon: MapPinned, value: "7",   label: "Towns"    },
+  { icon: Crown,     value: "8",   label: "Obas"     },
+  { icon: BookOpen,  value: "70+", label: "Articles" },
+  { icon: Landmark,  value: "1",   label: "Kingdom"  },
 ];
-
-function NewsletterSignup() {
-  const [name, setName] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!name.trim()) return;
-    const msg = `👋 *Community Updates Signup*\n\nName: ${name}\n\nPlease add me to the IID community updates list.`;
-    window.open(`https://wa.me/447496933887?text=${encodeURIComponent(msg)}`, "_blank");
-    setSubmitted(true);
-    setTimeout(() => { setSubmitted(false); setName(""); }, 3000);
-  };
-
-  return (
-    <form onSubmit={handleSubmit} className="flex items-center gap-2 w-full sm:w-auto">
-      {submitted ? (
-        <span className="text-accent font-semibold text-sm">Opening WhatsApp…</span>
-      ) : (
-        <>
-          <input
-            type="text"
-            required
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Your name…"
-            aria-label="Your name for community updates"
-            className="px-4 py-2.5 rounded-xl bg-primary-foreground/10 border border-primary-foreground/20 text-white placeholder:text-primary-foreground/40 text-sm focus:outline-none focus:ring-2 focus:ring-accent/50 w-44"
-          />
-          <button
-            type="submit"
-            className="flex items-center gap-1.5 bg-accent text-charcoal font-bold text-sm px-4 py-2.5 rounded-xl hover:bg-accent/90 transition-colors shrink-0"
-          >
-            <Send size={14} /> Sign Up
-          </button>
-        </>
-      )}
-    </form>
-  );
-}
 
 export default function Footer() {
   return (
@@ -81,35 +37,26 @@ export default function Footer() {
         <div className="lg:hidden">
           {/* Brand header */}
           <div className="flex items-center gap-3 mb-6">
-            <img src="/logo-tp.webp" alt="IID Logo" className="w-12 h-12" />
+            <img src="/logo-tp.webp" alt="Ijebu-Igbo Heritage" className="w-12 h-12" />
             <div>
               <h3 className="font-display font-bold text-sm leading-tight">
-                Ijebu Igbo Descendants
+                Ijebu-Igbo Heritage
               </h3>
-              <p className="text-primary-foreground/50 text-xs">in Diaspora</p>
+              <p className="text-primary-foreground/50 text-xs">The Archive of a Yoruba Kingdom</p>
             </div>
           </div>
 
           {/* Action buttons — large tap targets */}
-          <div className="grid grid-cols-3 gap-2 mb-6">
+          <div className="grid grid-cols-2 gap-2 mb-6">
             <a
-              href="tel:+447723953174"
+              href="tel:+2340000000000"
               className="flex flex-col items-center gap-1.5 py-4 rounded-2xl bg-green-600/15 active:bg-green-600/30 transition-colors touch-manipulation"
             >
               <Phone size={22} className="text-green-400" />
               <span className="text-[11px] font-semibold text-primary-foreground/80">Call</span>
             </a>
             <a
-              href="https://wa.me/447723953174"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex flex-col items-center gap-1.5 py-4 rounded-2xl bg-[#25D366]/15 active:bg-[#25D366]/30 transition-colors touch-manipulation"
-            >
-              <MessageCircle size={22} className="text-[#25D366]" />
-              <span className="text-[11px] font-semibold text-primary-foreground/80">WhatsApp</span>
-            </a>
-            <a
-              href="mailto:info@ijebuigbodescendants.org"
+              href="mailto:hello@ijebu-igbo-heritage.example"
               className="flex flex-col items-center gap-1.5 py-4 rounded-2xl bg-blue-600/15 active:bg-blue-600/30 transition-colors touch-manipulation"
             >
               <Mail size={22} className="text-blue-400" />
@@ -132,27 +79,15 @@ export default function Footer() {
             ))}
           </div>
 
-          {/* WhatsApp community */}
-          <a
-            href={WHATSAPP_COMMUNITY}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 py-3 rounded-2xl bg-[#25D366]/15 active:bg-[#25D366]/30 transition-colors touch-manipulation mb-6"
-            aria-label="Join our WhatsApp community"
-          >
-            <MessageCircle size={20} className="text-[#25D366]" />
-            <span className="text-sm font-semibold text-primary-foreground/80">Join WhatsApp Community</span>
-          </a>
-
           {/* Website link */}
           <a
-            href="https://www.ijebuigbodescendants.org/"
+            href="https://ijebu-igbo-heritage.example/"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-center gap-2 py-3 rounded-2xl bg-accent/10 border border-accent/20 touch-manipulation active:bg-accent/20 transition-colors"
           >
             <Globe size={15} className="text-accent" />
-            <span className="text-sm font-medium text-accent">ijebuigbodescendants.org</span>
+            <span className="text-sm font-medium text-accent">ijebu-igbo-heritage.example</span>
           </a>
         </div>
 
@@ -180,23 +115,6 @@ export default function Footer() {
             ))}
           </motion.div>
 
-          {/* Newsletter signup */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.05 }}
-            className="mb-12 bg-primary-foreground/5 border border-primary-foreground/10 rounded-2xl px-6 py-6 flex flex-col sm:flex-row items-center gap-5"
-          >
-            <div className="sm:flex-1">
-              <h4 className="font-display font-bold text-white text-base mb-1">Stay Connected</h4>
-              <p className="text-primary-foreground/55 text-sm">
-                Sign up to receive community updates, event announcements, and news via WhatsApp.
-              </p>
-            </div>
-            <NewsletterSignup />
-          </motion.div>
-
           {/* Main grid */}
           <div className="grid grid-cols-12 gap-10 mb-14">
 
@@ -211,41 +129,28 @@ export default function Footer() {
               <div className="flex items-center gap-3 mb-5">
                 <motion.img
                   src="/logo-tp.webp"
-                  alt="IID Logo"
+                  alt="Ijebu-Igbo Heritage"
                   className="w-14 h-14"
                   whileHover={{ rotate: [0, -8, 8, 0], transition: { duration: 0.5 } }}
                 />
                 <div>
                   <h3 className="font-display font-bold text-base leading-tight">
-                    Ijebu Igbo Descendants
+                    Ijebu-Igbo Heritage
                   </h3>
-                  <p className="text-primary-foreground/50 text-xs">Ijebu Igbo Descendants in Diaspora</p>
+                  <p className="text-primary-foreground/50 text-xs">The Archive of a Yoruba Kingdom</p>
                 </div>
               </div>
               <p className="text-primary-foreground/55 leading-relaxed text-sm mb-6">
-                Uniting Ijebu Igbo descendants across the diaspora through culture,
-                development, and community pride. Proudly rooted in Ijebu Igbo, Nigeria.
+                A living record of Ijebu-Igbo's Orimolusi, its seven Town Obas,
+                and the history, places and people that make up the kingdom.
               </p>
 
-              {/* WhatsApp community */}
-              <a
-                href={WHATSAPP_COMMUNITY}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Join our WhatsApp community"
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#25D366]/15 hover:bg-[#25D366]/25 transition-colors duration-300 mb-6"
-              >
-                <MessageCircle size={16} className="text-[#25D366]" />
-                <span className="text-sm font-semibold text-primary-foreground/80">WhatsApp Community</span>
-              </a>
-
-              {/* Join CTA */}
               <Link
-                to="/join"
+                to="/heritage"
                 className="inline-flex items-center gap-2 bg-accent text-charcoal text-sm font-bold
                            px-5 py-2.5 rounded-xl hover:bg-accent/90 transition-colors duration-300 group"
               >
-                Join the Community
+                Explore the Archive
                 <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
               </Link>
             </motion.div>
@@ -277,7 +182,7 @@ export default function Footer() {
               </ul>
             </motion.div>
 
-            {/* Community — 2 cols */}
+            {/* Towns — 2 cols */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -286,30 +191,19 @@ export default function Footer() {
               className="col-span-2"
             >
               <h4 className="font-display font-bold text-sm text-white mb-5 uppercase tracking-widest">
-                Community
+                The Seven Towns
               </h4>
               <ul className="space-y-2.5">
-                {communityLinks.map((link) => (
+                {townLinks.map((link) => (
                   <li key={link.label}>
-                    {link.href.startsWith("mailto") ? (
-                      <a
-                        href={link.href}
-                        className="text-primary-foreground/55 hover:text-accent transition-colors duration-200
-                                   text-sm flex items-center gap-1.5 group"
-                      >
-                        <span className="w-0 group-hover:w-2 h-px bg-accent transition-all duration-200 rounded" />
-                        {link.label}
-                      </a>
-                    ) : (
-                      <Link
-                        to={link.href}
-                        className="text-primary-foreground/55 hover:text-accent transition-colors duration-200
-                                   text-sm flex items-center gap-1.5 group"
-                      >
-                        <span className="w-0 group-hover:w-2 h-px bg-accent transition-all duration-200 rounded" />
-                        {link.label}
-                      </Link>
-                    )}
+                    <Link
+                      to={link.href}
+                      className="text-primary-foreground/55 hover:text-accent transition-colors duration-200
+                                 text-sm flex items-center gap-1.5 group"
+                    >
+                      <span className="w-0 group-hover:w-2 h-px bg-accent transition-all duration-200 rounded" />
+                      {link.label}
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -329,7 +223,7 @@ export default function Footer() {
               <ul className="space-y-4">
                 <li>
                   <a
-                    href="tel:+447723953174"
+                    href="tel:+2340000000000"
                     className="flex items-center gap-3 group"
                   >
                     <div className="w-9 h-9 rounded-xl bg-green-500/15 flex items-center justify-center shrink-0 group-hover:bg-green-500/30 transition-colors">
@@ -337,13 +231,13 @@ export default function Footer() {
                     </div>
                     <div>
                       <p className="text-[10px] text-primary-foreground/40 uppercase tracking-widest">Phone</p>
-                      <p className="text-sm text-primary-foreground/75 group-hover:text-accent transition-colors">+44 7723 953174</p>
+                      <p className="text-sm text-primary-foreground/75 group-hover:text-accent transition-colors">+234 000 000 0000</p>
                     </div>
                   </a>
                 </li>
                 <li>
                   <a
-                    href="mailto:info@ijebuigbodescendants.org"
+                    href="mailto:hello@ijebu-igbo-heritage.example"
                     className="flex items-center gap-3 group"
                   >
                     <div className="w-9 h-9 rounded-xl bg-blue-500/15 flex items-center justify-center shrink-0 group-hover:bg-blue-500/30 transition-colors">
@@ -352,7 +246,7 @@ export default function Footer() {
                     <div>
                       <p className="text-[10px] text-primary-foreground/40 uppercase tracking-widest">Email</p>
                       <p className="text-sm text-primary-foreground/75 group-hover:text-accent transition-colors break-all">
-                        info@ijebuigbodescendants.org
+                        hello@ijebu-igbo-heritage.example
                       </p>
                     </div>
                   </a>
@@ -363,12 +257,12 @@ export default function Footer() {
                   </div>
                   <div>
                     <p className="text-[10px] text-primary-foreground/40 uppercase tracking-widest">Location</p>
-                    <p className="text-sm text-primary-foreground/75">Worldwide — In Diaspora</p>
+                    <p className="text-sm text-primary-foreground/75">Ijebu-Igbo, Ogun State, Nigeria</p>
                   </div>
                 </li>
                 <li>
                   <a
-                    href="https://ijebuigbodescendants.org"
+                    href="https://ijebu-igbo-heritage.example"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 group"
@@ -378,7 +272,7 @@ export default function Footer() {
                     </div>
                     <div>
                       <p className="text-[10px] text-primary-foreground/40 uppercase tracking-widest">Website</p>
-                      <p className="text-sm text-accent group-hover:underline">ijebuigbodescendants.org</p>
+                      <p className="text-sm text-accent group-hover:underline">ijebu-igbo-heritage.example</p>
                     </div>
                   </a>
                 </li>
@@ -403,23 +297,33 @@ export default function Footer() {
       {/* Bottom bar */}
       <div className="border-t border-primary-foreground/10">
         <div className="container-main py-5 md:py-6 flex flex-col md:flex-row justify-between items-center gap-2 md:gap-4 text-xs md:text-sm text-primary-foreground/40 text-center md:text-left">
-          <p>&copy; {new Date().getFullYear()} Ijebu Igbo Descendants in Diaspora. All rights reserved.</p>
-          <motion.a
-            href="https://azeezagbona.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-primary-foreground/80 hover:text-white transition-colors duration-300 font-medium"
+          <p>&copy; {new Date().getFullYear()} Ijebu-Igbo Heritage. All rights reserved.</p>
+          <motion.p
+            className="text-primary-foreground/80 font-medium"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            whileHover={{ scale: 1.02 }}
           >
-            Crafted by the son of the soil,{" "}
-            <span className="font-bold text-white underline underline-offset-2 decoration-accent/60">
+            Site by{" "}
+            <a
+              href="https://harzotech.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-bold text-white underline underline-offset-2 decoration-accent/60 hover:text-accent transition-colors"
+            >
+              Harzo Tech
+            </a>
+            {" — "}
+            <a
+              href="https://azeezagbona.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-bold text-white underline underline-offset-2 decoration-accent/60 hover:text-accent transition-colors"
+            >
               Azeez Agbona
-            </span>
-          </motion.a>
+            </a>
+          </motion.p>
         </div>
       </div>
     </footer>

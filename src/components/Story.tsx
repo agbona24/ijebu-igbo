@@ -12,7 +12,9 @@ export default function Story() {
           <h2 className="label-accent">Our Heritage</h2>
           <h3 className="heading-section">Our Roots, Our Responsibility</h3>
           <p className="text-body mt-4 sm:mt-6">
-            Ijebu Igbo is a land rich in culture, tradition, and history. Through festivals, community projects, and diaspora collaboration, we preserve the legacy of our ancestors while building opportunities for future generations.
+            Ijebu-Igbo is a land rich in culture, tradition, and history. This archive exists
+            to preserve that legacy accurately — for the town's people today, and for
+            generations to come.
           </p>
         </div>
 
@@ -75,9 +77,9 @@ export default function Story() {
               most iconic festivals.
             </p>
             <p className="text-body">
-              For the diaspora community, these cultural touchstones are a vital
-              link to home — a reminder of the identity and values that bind us
-              across continents and generations.
+              For Ijebu-Igbo's people — at home and abroad — these cultural touchstones
+              remain a vital link to identity, marking the calendar and the values
+              that bind the community across generations.
             </p>
           </motion.div>
 

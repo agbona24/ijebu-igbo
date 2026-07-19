@@ -6,34 +6,27 @@ const ease = [0.16, 1, 0.3, 1] as const;
 
 export const faqs = [
   {
-    category: "Membership & Contributions",
-    question: "What is Project 500, and is it a replacement for the Monthly Contribution?",
+    category: "About Ijebu-Igbo",
+    question: "Is Ijebu-Igbo related to the Igbo ethnic group?",
     answer: [
-      "Project 500 (Please Count Me In) is NOT a replacement for the monthly contribution of £10. It is a separate initiative designed to generate funds for our community cause — and importantly, you do not have to be a Member of IID to participate. Anyone who wants to support our people is welcome.",
-      "The idea is simple: if we can find 500 Ijebu Igbo sons and daughters in Diaspora who each commit to donating just £2 a month to their hometown, we would raise £12,000 a year — enough to fund the projects we have been working hard to deliver.",
-      "Members are also encouraged to participate voluntarily if they can afford it. Our children, friends, and others who may not wish to attend meetings but still want to help are especially welcome to be part of this initiative.",
-      "It was envisioned that if we reach the 500-person target, the monthly contribution may be scrapped entirely. To join Project 500, please contact Alhaji Kazeem Haruna Ishola. Feel free to share this with friends who may not want to be members but simply want to help.",
+      "No. Ijebu-Igbo is a Yoruba town in Ijebu-North Local Government Area of Ogun State, South-West Nigeria. The \"Igbo\" in its name is a Yoruba word for forest or bush, referring to the wooded terrain its hunter-founders settled — not the Igbo ethnic group of South-East Nigeria.",
+      "Ijebu-Igbo's language, chieftaincy system, festivals and oriki are all Yoruba, closely related to neighbouring Ijebu-Ode but with its own distinct royal houses, quarters and traditions.",
     ],
   },
   {
-    category: "Culture & Meetings",
-    question: "What does it mean when someone 'Hosts' an IID event or meeting?",
+    category: "About Ijebu-Igbo",
+    question: "How many towns make up Ijebu-Igbo, and who leads them?",
     answer: [
-      "One of the core aims and objectives of IID is to preserve and promote our culture — supported by Section 2, Subsections 2.2, 2.7 and 2.10 of our Constitution. Hosting is a beautiful expression of that culture.",
-      "In the tradition of our parents, a member would host the venue or prepare food for people attending the meeting. This is done in turns. It is a way of saying: I belong, I care, I love our meeting and our people, and I am a cheerful giver.",
-      "Our meetings are spiced with food and light music so members can relax, socialise and look forward to the next gathering. Many members come straight from work, church, or other commitments — hosting ensures they are taken care of.",
-      "With our number, if we all get involved and host in turns, it may come around once every three years. Some members link their hosting to a birthday, wedding anniversary, or another special occasion — though this is not required. Hosting is not compulsory, but if you can afford it, why not participate?",
-      "Hosting is supervised by the Social Secretary and the Cultural Secretary.",
+      "Ijebu-Igbo is made up of seven towns, each with its own Town Oba, all under the paramount authority of the Orimolusi: Oke-Sopen (seat of the Orimolusi), Atikori, Japara, Ojowo, Oke-Agbo, Imope-Ijebu and Aparaki.",
+      "Imope-Ijebu and Aparaki are the most recently recognised Town Obaships, joining the original five to bring the number of town Obas to seven.",
     ],
   },
   {
-    category: "Dignitaries & International Relations",
-    question: "How does IID organise meetings with dignitaries who visit London?",
+    category: "About This Archive",
+    question: "Where does the information on this site come from?",
     answer: [
-      "When we receive distinguished visitors — such as royals or people in government — we use a special hosting initiative: we invite all attendees to a restaurant or private venue. This creates a conducive atmosphere for our guest while allowing members to socialise in a relaxed setting.",
-      "This type of hosting is sponsored by those who attend and does not come from the organisation's funds.",
-      "The benefit is clear: it gives us the opportunity to be identified with the guest, make them feel honoured, dialogue in a comfortable environment, and promote our community — which in turn may open doors of support and goodwill.",
-      "We have done this in the past and believe we need more of such occasions as part of the ways we move forward together.",
+      "This archive draws on documented royal genealogies, chieftaincy records, published histories and the oral traditions of Ijebu-Igbo's own towns and royal houses.",
+      "It is a living project — corrections, missing details, and better sources are always welcome. See 'Contribute a Record' below to get in touch.",
     ],
   },
 ];
@@ -120,7 +113,7 @@ export default function FAQ({ limit }: { limit?: number }) {
           <h2 className="label-accent">Got Questions?</h2>
           <h3 className="heading-section">Frequently Asked Questions</h3>
           <p className="text-body mt-3">
-            Answers to the most common questions about IID Omo Orimolusi in Diaspora — our initiatives, culture, and how you can get involved.
+            Answers to common questions about Ijebu-Igbo, its towns and Obas, and this archive.
           </p>
         </motion.div>
 

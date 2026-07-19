@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import heroBg from "@/assets/hero-bg.jpg";
-import JoinModal from "@/components/JoinModal";
 import ClanNetwork from "@/components/ClanNetwork";
 
 const ease = [0.16, 1, 0.3, 1] as const;
@@ -68,28 +68,27 @@ export default function Hero() {
             </motion.div>
 
             <h1 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-display font-bold text-primary-foreground leading-[1.15] mb-3 sm:mb-5 tracking-tight">
-              Connecting Ijebu Igbo{" "}
-              <span className="text-accent">Descendants</span>{" "}
-              Across the World
+              Seven Towns, One Crown{" "}
+              <span className="text-accent">One Story</span>
             </h1>
             <p className="text-sm sm:text-base md:text-lg text-primary-foreground/85 font-sans max-w-xl mx-auto lg:mx-0 mb-4 sm:mb-7 leading-relaxed">
-              Uniting Ijebu Igbo descendants wherever they are in the world — from our ancestral homeland to every corner of the diaspora.
+              The living archive of Ijebu-Igbo — its Obas, its towns, and the
+              history that has shaped a Yoruba kingdom for generations.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
-              <JoinModal>
-                <button
-                  className="btn-primary text-center w-full sm:w-auto min-h-[48px] font-semibold"
-                >
-                  Join the Community
-                </button>
-              </JoinModal>
-              <a
-                href="#impact"
+              <Link
+                to="/heritage"
+                className="btn-primary text-center w-full sm:w-auto min-h-[48px] font-semibold"
+              >
+                Explore the Obas
+              </Link>
+              <Link
+                to="/tourism"
                 className="btn-outline-light text-center min-h-[48px] flex items-center justify-center font-semibold"
               >
-                Support Development
-              </a>
+                Discover the Towns
+              </Link>
             </div>
           </motion.div>
 

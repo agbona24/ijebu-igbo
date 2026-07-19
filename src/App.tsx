@@ -20,19 +20,11 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index.tsx";
 import NotFound from "./pages/NotFound.tsx";
-import NewsPost from "./pages/NewsPost.tsx";
 import AboutPage from "./pages/AboutPage.tsx";
-import ImpactPage from "./pages/ImpactPage.tsx";
-import TeamPage from "./pages/TeamPage.tsx";
 import HeritagePage from "./pages/HeritagePage.tsx";
-import EventsPage from "./pages/EventsPage.tsx";
 import GalleryPage from "./pages/GalleryPage.tsx";
 import ContactPage from "./pages/ContactPage.tsx";
-import Businesses from "./pages/Businesses.tsx";
-import BusinessProfile from "./pages/BusinessProfile.tsx";
-import JoinPage from "./pages/JoinPage.tsx";
 import KingProfile from "./pages/KingProfile.tsx";
-import NewsPage from "./pages/NewsPage.tsx";
 import TourismPage from "./pages/TourismPage.tsx";
 import OjowoKingdomPage from "./pages/OjowoKingdomPage.tsx";
 import JaparaKingdomPage from "./pages/JaparaKingdomPage.tsx";
@@ -41,12 +33,6 @@ import OkeSopenKingdomPage from "./pages/OkeSopenKingdomPage.tsx";
 import OkeAgboKingdomPage from "./pages/OkeAgboKingdomPage.tsx";
 import ImopeIjebuPage from "./pages/ImopeIjebuPage.tsx";
 import AparakiPage from "./pages/AparakiPage.tsx";
-import DonatePage from "./pages/DonatePage.tsx";
-import AnnouncementsPage from "./pages/AnnouncementsPage.tsx";
-import MembersPage from "./pages/MembersPage.tsx";
-import ScholarshipPage from "./pages/ScholarshipPage.tsx";
-import TravelGuidePage from "./pages/TravelGuidePage.tsx";
-import VideoArchivePage from "./pages/VideoArchivePage.tsx";
 import BlogPage from "./pages/BlogPage.tsx";
 import BlogPost from "./pages/BlogPost.tsx";
 
@@ -63,13 +49,9 @@ const App = () => (
         <Routes>
           <Route path="/"            element={<Index />} />
           <Route path="/about"       element={<AboutPage />} />
-          <Route path="/impact"      element={<ImpactPage />} />
-          <Route path="/team"        element={<TeamPage />} />
           <Route path="/heritage"    element={<HeritagePage />} />
-          <Route path="/events"      element={<EventsPage />} />
           <Route path="/gallery"     element={<GalleryPage />} />
           <Route path="/contact"     element={<ContactPage />} />
-          <Route path="/news"          element={<NewsPage />} />
           <Route path="/tourism"       element={<TourismPage />} />
           <Route path="/ojowo"         element={<OjowoKingdomPage />} />
           <Route path="/japara"        element={<JaparaKingdomPage />} />
@@ -78,18 +60,8 @@ const App = () => (
           <Route path="/oke-agbo"      element={<OkeAgboKingdomPage />} />
           <Route path="/imope-ijebu"   element={<ImopeIjebuPage />} />
           <Route path="/aparaki"       element={<AparakiPage />} />
-          <Route path="/donate"        element={<DonatePage />} />
-          <Route path="/announcements" element={<AnnouncementsPage />} />
-          <Route path="/members"       element={<MembersPage />} />
-          <Route path="/scholarship"   element={<ScholarshipPage />} />
-          <Route path="/travel"        element={<TravelGuidePage />} />
-          <Route path="/videos"        element={<VideoArchivePage />} />
-          <Route path="/news/:id"    element={<NewsPost />} />
           <Route path="/blog"        element={<BlogPage />} />
           <Route path="/blog/:slug"  element={<BlogPost />} />
-          <Route path="/businesses"          element={<Businesses />} />
-          <Route path="/businesses/:slug"    element={<BusinessProfile />} />
-          <Route path="/join"              element={<JoinPage />} />
           <Route path="/heritage/orimolusi/:slug" element={<KingProfile />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*"            element={<NotFound />} />

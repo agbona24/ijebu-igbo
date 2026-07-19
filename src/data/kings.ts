@@ -106,7 +106,6 @@ export const kings: King[] = [
       { year: "2021", event: "Received commendation letter from LSWMO for 12+ years of meritorious service" },
       { year: "2026", event: "Presided over Ojude Oba Orimolusi 2026 — a landmark cultural celebration" },
       { year: "2026", event: "Received magnificent horse gift from Egbe Bobagunwa Asiwaju Orimolu at Ojude Oba 2026" },
-      { year: "—", event: "Welcomed by IID Omo Orimolusi in Diaspora members in London — strengthening diaspora ties" },
     ],
     titles: [
       "Orimolusi of Ijebu-Igbo",

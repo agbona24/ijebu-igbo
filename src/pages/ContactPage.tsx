@@ -7,7 +7,7 @@ import AnimatedHeroBg from "@/components/AnimatedHeroBg";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Mail, Phone, Globe, MessageCircle, Send,
-  Clock, CheckCircle, MapPin, ArrowRight, Users,
+  Clock, CheckCircle, MapPin, ArrowRight,
 } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 
@@ -16,10 +16,10 @@ const contacts = [
   {
     icon: Phone,
     label: "Phone / WhatsApp",
-    value: "+44 7723 953174",
-    sub: "Available Mon – Fri, 9 am – 6 pm (BST)",
-    href: "tel:+447723953174",
-    cta: { label: "Chat on WhatsApp", href: "https://wa.me/447723953174" },
+    value: "+234 000 000 0000",
+    sub: "Available Mon – Fri, 9 am – 6 pm (WAT)",
+    href: "tel:+2340000000000",
+    cta: { label: "Chat on WhatsApp", href: "https://wa.me/2340000000000" },
     accent: "from-emerald-500 to-teal-600",
     bg: "bg-emerald-50",
     ring: "ring-emerald-200",
@@ -27,9 +27,9 @@ const contacts = [
   {
     icon: Mail,
     label: "General Enquiries",
-    value: "info@ijebuigbodescendants.org",
+    value: "hello@ijebu-igbo-heritage.example",
     sub: "We reply within 2 business days",
-    href: "mailto:info@ijebuigbodescendants.org",
+    href: "mailto:hello@ijebu-igbo-heritage.example",
     cta: null,
     accent: "from-blue-500 to-indigo-600",
     bg: "bg-blue-50",
@@ -38,9 +38,9 @@ const contacts = [
   {
     icon: Mail,
     label: "Support",
-    value: "support@ijebuigbodescendants.org",
-    sub: "Technical & membership questions",
-    href: "mailto:support@ijebuigbodescendants.org",
+    value: "archive@ijebu-igbo-heritage.example",
+    sub: "Technical questions & archive corrections",
+    href: "mailto:archive@ijebu-igbo-heritage.example",
     cta: null,
     accent: "from-violet-500 to-purple-600",
     bg: "bg-violet-50",
@@ -49,9 +49,9 @@ const contacts = [
   {
     icon: Globe,
     label: "Website",
-    value: "ijebuigbodescendants.org",
-    sub: "Official IID Omo Orimolusi portal",
-    href: "https://www.ijebuigbodescendants.org/",
+    value: "ijebu-igbo-heritage.example",
+    sub: "The official Ijebu-Igbo Heritage archive",
+    href: "https://ijebu-igbo-heritage.example/",
     cta: null,
     accent: "from-amber-500 to-orange-500",
     bg: "bg-amber-50",
@@ -59,9 +59,9 @@ const contacts = [
   },
   {
     icon: MapPin,
-    label: "Community Reach",
-    value: "Worldwide — in Diaspora",
-    sub: "Connecting Ijebu Igbo descendants globally",
+    label: "Open To",
+    value: "Anyone, Anywhere",
+    sub: "This archive is free to explore for anyone with an interest in Ijebu-Igbo",
     href: null,
     cta: null,
     accent: "from-rose-500 to-pink-600",
@@ -256,14 +256,14 @@ export default function ContactPage() {
             </p>
             <div className="flex flex-wrap items-center justify-center gap-3">
               <a
-                href="mailto:info@ijebuigbodescendants.org"
+                href="mailto:hello@ijebu-igbo-heritage.example"
                 className="inline-flex items-center gap-2 bg-accent text-primary font-bold text-sm px-5 py-3 rounded-xl hover:brightness-110 transition-all shadow-lg"
               >
                 <Mail size={15} />
                 Email Us
               </a>
               <a
-                href="https://wa.me/447723953174"
+                href="https://wa.me/2340000000000"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-white/15 border border-white/25 text-white font-bold text-sm px-5 py-3 rounded-xl hover:bg-white/25 transition-all backdrop-blur-sm"
@@ -284,7 +284,7 @@ export default function ContactPage() {
             <span className="hidden sm:block w-px h-4 bg-border" />
             <span className="flex items-center gap-1.5"><CheckCircle size={13} className="text-emerald-600" /> WhatsApp support available</span>
             <span className="hidden sm:block w-px h-4 bg-border" />
-            <span className="flex items-center gap-1.5"><MapPin size={13} className="text-accent" /> Serving the global Ijebu Igbo diaspora</span>
+            <span className="flex items-center gap-1.5"><MapPin size={13} className="text-accent" /> Open to anyone researching Ijebu-Igbo</span>
           </div>
         </div>
       </div>
@@ -374,7 +374,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Membership CTA */}
+      {/* Contribute CTA */}
       <section className="section-padding bg-primary">
         <div className="container-main">
           <motion.div
@@ -384,19 +384,19 @@ export default function ContactPage() {
             transition={{ duration: 0.6 }}
             className="max-w-2xl mx-auto text-center"
           >
-            <span className="label-accent text-accent/80">Join the Community</span>
+            <span className="label-accent text-accent/80">Help Build the Archive</span>
             <h2 className="font-display font-black text-white text-3xl sm:text-4xl mb-4 mt-2">
-              Become a Member of IID Omo Orimolusi
+              Have a Photo, Correction or Story to Share?
             </h2>
             <p className="text-white/70 text-sm sm:text-base mb-7 max-w-lg mx-auto">
-              Connect with Ijebu Igbo descendants in Diaspora worldwide. Join our growing family and help preserve our heritage.
+              This archive grows through the people who know Ijebu-Igbo best. Old photographs,
+              family histories and corrections are always welcome.
             </p>
             <Link
-              to="/join"
+              to="/heritage"
               className="inline-flex items-center gap-2 bg-accent text-primary font-bold px-7 py-3.5 rounded-xl hover:brightness-110 transition-all shadow-lg text-sm sm:text-base"
             >
-              <Users size={17} />
-              Register as a Member
+              Explore the Archive
               <ArrowRight size={15} />
             </Link>
           </motion.div>

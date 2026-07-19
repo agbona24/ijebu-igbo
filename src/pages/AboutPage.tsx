@@ -23,7 +23,7 @@ export default function AboutPage() {
             className="relative z-10 text-center px-4"
           >
             <span className="text-white/60 text-xs font-bold tracking-[0.2em] uppercase block mb-2">
-              Connect Ijebu Roots
+              Ijebu-Igbo Heritage
             </span>
             <h1 className="font-display font-black text-white text-4xl sm:text-5xl">
               About Us

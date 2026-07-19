@@ -24,13 +24,13 @@ export default function GalleryPage() {
             className="relative z-10 text-center px-4"
           >
             <span className="text-white/60 text-xs font-bold tracking-[0.2em] uppercase block mb-2">
-              Connect Ijebu Roots
+              Ijebu-Igbo Heritage
             </span>
             <h1 className="font-display font-black text-white text-4xl sm:text-5xl">
               Gallery
             </h1>
             <p className="text-white/70 text-sm sm:text-base mt-2 max-w-lg mx-auto">
-              Moments from cultural celebrations, community projects, and diaspora events.
+              Photos of Ijebu-Igbo's towns, palaces, landmarks and festivals.
             </p>
           </motion.div>
         </div>

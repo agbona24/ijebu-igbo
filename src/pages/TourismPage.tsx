@@ -96,21 +96,6 @@ const PLACES: Place[] = [
     ],
     quote: "United on the pitch, united as a community.",
   },
-  {
-    id: "unity-house",
-    name: "Unity House",
-    subtitle: "Multipurpose Learning Resource Centre",
-    badge: "Proposed Site",
-    badgeColor: "bg-primary text-white",
-    location: "Ijebu-Igbo, Ogun State, Nigeria",
-    image: "/images/unity-house.webp",
-    description: [
-      "Unity House is the proposed site for the Ijebu-Igbo Descendants Omo Orimolusi in Diaspora Multipurpose Learning Resource Centre — a landmark project that represents the community's commitment to education, development, and collective progress.",
-      "Once completed, the centre will serve as a hub for learning, skills development, community gatherings, and cultural exchange, benefiting the people of Ijebu-Igbo both at home and in the diaspora. The facility is envisioned as a lasting physical legacy of the IID's investment in the homeland.",
-      "The proposed site stands as a testament to what the diaspora community can achieve together — turning shared vision into brick-and-mortar reality for the next generation.",
-    ],
-    quote: "Building bridges between the diaspora and the homeland.",
-  },
 ];
 
 function PlaceCard({ place, index }: { place: Place; index: number }) {

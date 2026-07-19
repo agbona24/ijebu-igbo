@@ -1,42 +1,42 @@
 import { useState, useEffect, useRef, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, X, ArrowRight, Building2, Newspaper, Calendar, LayoutGrid } from "lucide-react";
+import { Search, X, ArrowRight, Crown, BookOpen, LayoutGrid, MapPin } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { useSanityBusinesses } from "@/hooks/useSanityBusinesses";
-import { useSanityNews } from "@/hooks/useSanityNews";
+import { useSanityKings } from "@/hooks/useSanityKings";
+import { BLOG_POSTS } from "@/data/blogPosts";
 
 interface SearchResult {
-  type: "business" | "news" | "event" | "page";
+  type: "oba" | "town" | "post" | "page";
   title: string;
   subtitle: string;
   href: string;
 }
 
 const PAGES: SearchResult[] = [
-  { type: "page", title: "Home", subtitle: "IID Omo Orimolusi in Diaspora", href: "/" },
-  { type: "page", title: "About Us", subtitle: "Our story, mission and vision", href: "/about" },
-  { type: "page", title: "Impact", subtitle: "Projects and achievements in Ijebu Igbo", href: "/impact" },
-  { type: "page", title: "Our Team", subtitle: "Executive committee members", href: "/team" },
-  { type: "page", title: "Heritage", subtitle: "History, kings and culture of Ijebu Igbo", href: "/heritage" },
-  { type: "page", title: "Events", subtitle: "Community events and gatherings", href: "/events" },
-  { type: "page", title: "Business Directory", subtitle: "Ijebu Igbo businesses in the diaspora", href: "/businesses" },
-  { type: "page", title: "Gallery", subtitle: "Photos and memories", href: "/gallery" },
-  { type: "page", title: "Contact Us", subtitle: "Get in touch with IID", href: "/contact" },
-  { type: "page", title: "News", subtitle: "Community news and updates", href: "/news" },
+  { type: "page", title: "Home", subtitle: "Ijebu-Igbo Heritage Archive", href: "/" },
+  { type: "page", title: "About This Archive", subtitle: "Our story, mission and vision", href: "/about" },
+  { type: "page", title: "Heritage", subtitle: "The Orimolusi, the Council of Obas and the seven towns", href: "/heritage" },
+  { type: "page", title: "Tourism", subtitle: "Landmarks and heritage sites in Ijebu-Igbo", href: "/tourism" },
+  { type: "page", title: "Gallery", subtitle: "Photos of Ijebu-Igbo's towns and festivals", href: "/gallery" },
+  { type: "page", title: "Blog", subtitle: "History, culture and kingship articles", href: "/blog" },
+  { type: "page", title: "Contact", subtitle: "Get in touch", href: "/contact" },
 ];
 
-const EVENTS: SearchResult[] = [
-  { type: "event", title: "Annual General Meeting 2026", subtitle: "April 15, 2026 · Virtual (Zoom)", href: "/events" },
-  { type: "event", title: "Ojude Oba Cultural Festival", subtitle: "June 20, 2026 · Ijebu Igbo, Nigeria", href: "/events" },
-  { type: "event", title: "Diaspora Networking Gala", subtitle: "August 10, 2026 · London, UK", href: "/events" },
-  { type: "event", title: "Youth Leadership Summit", subtitle: "October 5, 2026 · Birmingham, UK", href: "/events" },
+const TOWNS: SearchResult[] = [
+  { type: "town", title: "Oke-Sopen", subtitle: "Seat of the Orimolusi", href: "/oke-sopen" },
+  { type: "town", title: "Atikori", subtitle: "Town Oba: Keegbo", href: "/atikori" },
+  { type: "town", title: "Japara", subtitle: "Town Oba: Abijaparako", href: "/japara" },
+  { type: "town", title: "Ojowo", subtitle: "Town Oba: Olokine", href: "/ojowo" },
+  { type: "town", title: "Oke-Agbo", subtitle: "Town Oba: Bejeroku", href: "/oke-agbo" },
+  { type: "town", title: "Imope-Ijebu", subtitle: "Town Oba: Onimope", href: "/imope-ijebu" },
+  { type: "town", title: "Aparaki", subtitle: "Town Oba: Alaparaki", href: "/aparaki" },
 ];
 
 const TYPE_META: Record<string, { label: string; icon: React.ElementType; color: string }> = {
-  business: { label: "Business", icon: Building2, color: "text-blue-500" },
-  news:     { label: "News",     icon: Newspaper,  color: "text-green-500" },
-  event:    { label: "Event",    icon: Calendar,   color: "text-amber-500" },
-  page:     { label: "Page",     icon: LayoutGrid, color: "text-purple-500" },
+  oba:  { label: "Oba",  icon: Crown,      color: "text-amber-500" },
+  town: { label: "Town", icon: MapPin,     color: "text-emerald-500" },
+  post: { label: "Blog", icon: BookOpen,   color: "text-blue-500" },
+  page: { label: "Page", icon: LayoutGrid, color: "text-purple-500" },
 };
 
 interface Props {
@@ -55,8 +55,7 @@ export default function SearchModal({ open, onOpenChange }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
   const navigate = useNavigate();
-  const { data: BUSINESSES = [] } = useSanityBusinesses();
-  const { data: NEWS_ARTICLES = [] } = useSanityNews();
+  const { data: KINGS = [] } = useSanityKings();
 
   useEffect(() => {
     if (open) {
@@ -88,30 +87,30 @@ export default function SearchModal({ open, onOpenChange }: Props) {
     const q = query.trim();
     const found: SearchResult[] = [];
 
-    BUSINESSES.forEach((b) => {
-      if (match(q, b.name, b.tagline ?? "", b.category, b.description ?? "", b.location)) {
+    KINGS.forEach((k) => {
+      if (match(q, k.name, k.fullTitle ?? "", k.hometown ?? "")) {
         found.push({
-          type: "business",
-          title: b.name,
-          subtitle: `${b.category} · ${b.location}`,
-          href: `/businesses/${b.slug}`,
+          type: "oba",
+          title: k.name,
+          subtitle: k.fullTitle ?? k.hometown ?? "",
+          href: `/heritage/orimolusi/${k.slug}`,
         });
       }
     });
 
-    NEWS_ARTICLES.forEach((a) => {
-      if (match(q, a.title, a.excerpt, a.category)) {
-        found.push({
-          type: "news",
-          title: a.title,
-          subtitle: `${a.category} · ${a.date}`,
-          href: `/news/${a.id}`,
-        });
-      }
+    TOWNS.forEach((t) => {
+      if (match(q, t.title, t.subtitle)) found.push(t);
     });
 
-    EVENTS.forEach((ev) => {
-      if (match(q, ev.title, ev.subtitle)) found.push(ev);
+    BLOG_POSTS.forEach((p) => {
+      if (match(q, p.title, p.excerpt, p.category)) {
+        found.push({
+          type: "post",
+          title: p.title,
+          subtitle: p.category,
+          href: `/blog/${p.slug}`,
+        });
+      }
     });
 
     PAGES.forEach((pg) => {
@@ -119,7 +118,7 @@ export default function SearchModal({ open, onOpenChange }: Props) {
     });
 
     return found.slice(0, 12);
-  }, [query, BUSINESSES, NEWS_ARTICLES]);
+  }, [query, KINGS]);
 
   const handleSelect = (href: string) => {
     navigate(href);
@@ -173,7 +172,7 @@ export default function SearchModal({ open, onOpenChange }: Props) {
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     onKeyDown={handleKeyDown}
-                    placeholder="Search businesses, news, events, pages…"
+                    placeholder="Search Obas, towns, articles, pages…"
                     className="flex-1 bg-transparent text-foreground placeholder:text-muted-foreground outline-none text-base"
                     role="combobox"
                     aria-expanded={results.length > 0}
@@ -198,7 +197,7 @@ export default function SearchModal({ open, onOpenChange }: Props) {
                 <div className="max-h-[60vh] overflow-y-auto">
                   {!query.trim() && (
                     <div className="px-4 py-8 text-center text-muted-foreground text-sm">
-                      Start typing to search across the whole site
+                      Start typing to search across the whole archive
                     </div>
                   )}
 

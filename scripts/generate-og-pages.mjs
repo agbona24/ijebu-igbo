@@ -7,8 +7,8 @@
  * Runs automatically via: "build": "vite build && node scripts/generate-og-pages.mjs"
  *
  * Route metadata comes from src/config/seo.json (single source of truth shared
- * with the in-app <Seo> component). Business pages pull title/desc/image from
- * src/data/businesses.ts.
+ * with the in-app <Seo> component). Blog post pages pull title/excerpt/image
+ * from src/data/blogPosts.ts.
  */
 
 import fs from "fs";
@@ -98,57 +98,7 @@ for (const [routePath, meta] of Object.entries(routes)) {
   console.log(`  ✓  ${routePath}`);
 }
 
-// ── 2. Business profile pages ─────────────────────────────────────────────────
-const businessSrc = fs.readFileSync(path.join(ROOT, "src/data/businesses.ts"), "utf-8");
-
-function extractBusinesses(src) {
-  const businesses = [];
-  const blockRe = /\{\s*id:\s*(\d+),[\s\S]*?(?=\n  \{|\n\];)/g;
-  let match;
-  while ((match = blockRe.exec(src)) !== null) {
-    const block = match[0];
-    const get = (key) => {
-      const m = block.match(new RegExp(`${key}:\\s*["'\`]([^"'\`]+)["'\`]`));
-      return m ? m[1] : null;
-    };
-    const getMultiline = (key) => {
-      const m = block.match(new RegExp(`${key}:\\s*\\n?\\s*["'\`]([\\s\\S]*?)["'\`],`));
-      return m ? m[1].replace(/\s+/g, " ").trim() : null;
-    };
-    const slug = get("slug");
-    const name = get("name");
-    if (slug && name) {
-      businesses.push({
-        slug, name,
-        tagline: get("tagline"),
-        description: getMultiline("description") ?? get("description"),
-        flyer: get("flyer"),
-        banner: get("banner"),
-      });
-    }
-  }
-  return businesses;
-}
-
-let bizCount = 0;
-for (const biz of extractBusinesses(businessSrc)) {
-  const title = `${biz.name} | Ijebu Igbo Business Directory — Connect Ijebu Roots`;
-  const desc = biz.tagline
-    ? `${biz.tagline} — ${(biz.description ?? "").slice(0, 130)}...`
-    : (biz.description ?? "").slice(0, 160);
-  const routePath = `/businesses/${biz.slug}`;
-  const html = buildHtml({
-    title, description: desc,
-    image: biz.flyer ?? biz.banner ?? defaultImage,
-    url: `${siteUrl}${routePath}`,
-  });
-  writeRoute(routePath, html);
-  addSitemap(routePath, "0.6");
-  bizCount++;
-  console.log(`  ✓  ${routePath}`);
-}
-
-// ── 3. Blog post pages ─────────────────────────────────────────────────────────
+// ── 2. Blog post pages ─────────────────────────────────────────────────────────
 const blogSrc = fs.readFileSync(path.join(ROOT, "src/data/blogPosts.ts"), "utf-8");
 
 function extractBlogPosts(src) {
@@ -174,7 +124,7 @@ function extractBlogPosts(src) {
 let blogCount = 0;
 for (const post of extractBlogPosts(blogSrc)) {
   if (!post.slug || !post.title) continue;
-  const title = `${post.title} | Ijebu Igbo Blog — IID`;
+  const title = `${post.title} | Ijebu-Igbo Heritage`;
   const routePath = `/blog/${post.slug}`;
   const html = buildHtml({
     title,
@@ -200,5 +150,5 @@ const sitemap =
   `\n</urlset>\n`;
 fs.writeFileSync(path.join(DIST, "sitemap.xml"), sitemap);
 
-console.log(`\nPre-rendered ${staticCount} static routes + ${bizCount} business pages.`);
+console.log(`\nPre-rendered ${staticCount} static routes.`);
 console.log(`sitemap.xml: ${sitemapUrls.length} URLs.`);

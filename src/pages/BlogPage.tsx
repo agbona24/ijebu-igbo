@@ -47,7 +47,7 @@ export default function BlogPage() {
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}
             className="mt-3 text-primary-foreground/70 max-w-xl">
-            {BLOG_POSTS.length} articles on Ijebu-Igbo's history, kingship, culture, travel and diaspora community.
+            {BLOG_POSTS.length} articles on Ijebu-Igbo's history, kingship, culture and travel.
           </motion.p>
         </div>
       </section>

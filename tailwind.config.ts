@@ -61,8 +61,8 @@ export default {
         },
       },
       fontFamily: {
-        display: ['"Bricolage Grotesque"', 'sans-serif'],
-        sans: ['"Instrument Sans"', 'sans-serif'],
+        display: ['"Fraunces"', 'serif'],
+        sans: ['"Inter"', 'sans-serif'],
       },
       borderRadius: {
         lg: "var(--radius)",

@@ -2,36 +2,33 @@ import Navbar from "@/components/Navbar";
 import Seo from "@/components/Seo";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
-import VideoSection from "@/components/VideoSection";
-import Impact from "@/components/Impact";
-import Team from "@/components/Team";
-import Story from "@/components/Story";
-import Testimonials from "@/components/Testimonials";
-import News from "@/components/News";
-import Gallery from "@/components/Gallery";
 import OrimolusiSection from "@/components/OrimolusiSection";
+import Story from "@/components/Story";
+import Gallery from "@/components/Gallery";
 import FAQ, { faqs } from "@/components/FAQ";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 import FloatingContact from "@/components/FloatingContact";
 import BackToTop from "@/components/BackToTop";
 
-const ORG_JSONLD = {
+const SITE_JSONLD = {
   "@context": "https://schema.org",
-  "@type": "NGO",
-  name: "Ijebu Igbo Descendants in Diaspora",
-  alternateName: [
-    "IID Omo Orimolusi in Diaspora",
-    "Ijebu Igbo Descendants Omo Orimolusi (UK)",
-    "Awa Omo Orimolusi Worldwide",
-  ],
-  url: "https://ijebuigbodescendants.org",
-  logo: "https://ijebuigbodescendants.org/logo.png",
+  "@type": "WebSite",
+  name: "Ijebu-Igbo Heritage",
+  alternateName: "Ijebu-Igbo Heritage Archive",
+  url: "https://ijebu-igbo-heritage.example",
   description:
-    "A leading Ijebu Igbo NGO uniting UK diaspora and Nigeria-based descendants of Ijebu-Igbo, a Yoruba town in Ogun State, Nigeria — promoting culture, welfare and hometown development.",
-  foundingDate: "2007",
-  areaServed: ["United Kingdom", "Nigeria", "Worldwide"],
-  sameAs: ["https://www.ijebuigbodescendants.org/"],
+    "A living archive of Ijebu-Igbo, a Yoruba town of seven towns in Ijebu-North, Ogun State, Nigeria — its Orimolusi, its Town Obas, its history and its heritage.",
+  about: {
+    "@type": "Place",
+    name: "Ijebu-Igbo",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Ijebu-Igbo",
+      addressRegion: "Ogun State",
+      addressCountry: "NG",
+    },
+  },
 };
 
 const HOME_FAQ_JSONLD = {
@@ -48,16 +45,11 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      <Seo path="/" jsonLd={[ORG_JSONLD, HOME_FAQ_JSONLD]} />
+      <Seo path="/" jsonLd={[SITE_JSONLD, HOME_FAQ_JSONLD]} />
       <Hero />
       <About />
-      <VideoSection />
-      <Impact />
       <OrimolusiSection />
-      <Team />
       <Story />
-      <Testimonials />
-      <News />
       <Gallery />
       <FAQ limit={2} />
       <CTA />
