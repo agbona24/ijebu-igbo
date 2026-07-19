@@ -1,6 +1,6 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { Calendar, ArrowRight, Search, X } from "lucide-react";
+import { Calendar, ArrowRight, Search, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Seo from "@/components/Seo";
@@ -11,10 +11,12 @@ import AnimatedHeroBg from "@/components/AnimatedHeroBg";
 import { BLOG_POSTS } from "@/data/blogPosts";
 
 const CATEGORIES = ["All", ...Array.from(new Set(BLOG_POSTS.map((p) => p.category)))];
+const PAGE_SIZE = 12;
 
 export default function BlogPage() {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("All");
+  const [page, setPage] = useState(1);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -28,6 +30,16 @@ export default function BlogPage() {
       return matchesCategory && matchesQuery;
     });
   }, [query, category]);
+
+  useEffect(() => { setPage(1); }, [query, category]);
+
+  const pageCount = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  const paginated = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+
+  const goToPage = (p: number) => {
+    setPage(Math.min(Math.max(p, 1), pageCount));
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -92,7 +104,9 @@ export default function BlogPage() {
       <section className="section-padding">
         <div className="container-main">
           <p className="text-sm text-muted-foreground mb-6">
-            Showing {filtered.length} of {BLOG_POSTS.length} articles
+            {filtered.length === 0
+              ? "No articles found"
+              : `Showing ${(page - 1) * PAGE_SIZE + 1}–${Math.min(page * PAGE_SIZE, filtered.length)} of ${filtered.length} articles`}
           </p>
           {filtered.length === 0 ? (
             <div className="text-center py-20 text-muted-foreground">
@@ -100,7 +114,7 @@ export default function BlogPage() {
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filtered.map((post, index) => (
+              {paginated.map((post, index) => (
                 <motion.article
                   key={post.slug}
                   initial={{ opacity: 0, y: 20 }}
@@ -142,7 +156,48 @@ export default function BlogPage() {
             </div>
           )}
 
-          <div className="mt-12 text-center">
+          {pageCount > 1 && (
+            <nav aria-label="Blog pagination" className="mt-12 flex items-center justify-center gap-1.5">
+              <button
+                onClick={() => goToPage(page - 1)}
+                disabled={page === 1}
+                className="w-9 h-9 flex items-center justify-center rounded-full border border-border text-muted-foreground hover:border-primary hover:text-primary disabled:opacity-30 disabled:pointer-events-none transition-colors"
+                aria-label="Previous page"
+              >
+                <ChevronLeft size={16} />
+              </button>
+
+              {Array.from({ length: pageCount }, (_, i) => i + 1)
+                .filter((p) => p === 1 || p === pageCount || Math.abs(p - page) <= 1)
+                .map((p, i, arr) => (
+                  <span key={p} className="flex items-center gap-1.5">
+                    {i > 0 && arr[i - 1] !== p - 1 && (
+                      <span className="w-9 h-9 flex items-center justify-center text-muted-foreground/50 text-sm">…</span>
+                    )}
+                    <button
+                      onClick={() => goToPage(p)}
+                      className={`w-9 h-9 rounded-full text-sm font-semibold transition-colors ${
+                        p === page ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-muted"
+                      }`}
+                      aria-current={p === page ? "page" : undefined}
+                    >
+                      {p}
+                    </button>
+                  </span>
+                ))}
+
+              <button
+                onClick={() => goToPage(page + 1)}
+                disabled={page === pageCount}
+                className="w-9 h-9 flex items-center justify-center rounded-full border border-border text-muted-foreground hover:border-primary hover:text-primary disabled:opacity-30 disabled:pointer-events-none transition-colors"
+                aria-label="Next page"
+              >
+                <ChevronRight size={16} />
+              </button>
+            </nav>
+          )}
+
+          <div className="mt-8 text-center">
             <Link to="/" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors text-sm">
               ← Back to Home
             </Link>

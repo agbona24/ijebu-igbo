@@ -9,12 +9,13 @@ const PAGE_SIZE = 8;
 
 /* ── 3D tilt card ─────────────────────────────────────────────── */
 function GalleryCard({
-  img, index, isNew, onClick,
+  img, index, isNew, onClick, tall,
 }: {
   img: { src: string; alt: string };
   index: number;
   isNew: boolean;
   onClick: () => void;
+  tall?: boolean;
 }) {
   const cardRef = useRef<HTMLButtonElement>(null);
 
@@ -59,7 +60,7 @@ function GalleryCard({
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       onClick={onClick}
-      className="relative overflow-hidden rounded-2xl group shadow-md aspect-square w-full focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+      className={`relative overflow-hidden rounded-2xl group shadow-md w-full h-full focus:outline-none focus-visible:ring-2 focus-visible:ring-accent ${tall ? "row-span-2" : "row-span-1"}`}
       whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
     >
       <ImageWithSkeleton
@@ -124,7 +125,7 @@ export default function Gallery() {
           <h2 className="label-accent">Gallery</h2>
           <h3 className="heading-section">Moments That Matter</h3>
           <p className="text-gray-600 mt-3 sm:mt-4 text-sm sm:text-base max-w-2xl mx-auto">
-            Explore our community in action — from cultural celebrations to landmark developments
+            Palaces, landmarks and festivals — a visual record of Ijebu-Igbo's seven towns
           </p>
         </div>
 
@@ -152,9 +153,12 @@ export default function Gallery() {
           </div>
         </div>
 
-        {/* Desktop: grid with 3D tilt cards */}
+        {/* Desktop: asymmetric masonry with 3D tilt cards */}
         <div className="hidden md:block">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4" style={{ perspective: "1200px" }}>
+          <div
+            className="grid grid-cols-2 lg:grid-cols-4 auto-rows-[140px] lg:auto-rows-[160px] gap-3 lg:gap-4"
+            style={{ perspective: "1200px" }}
+          >
             {shown.map((img, i) => (
               <GalleryCard
                 key={img.src + i}
@@ -162,6 +166,7 @@ export default function Gallery() {
                 index={i}
                 isNew={i >= prevVisible}
                 onClick={() => open(i)}
+                tall={i % 5 === 0 || i % 5 === 3}
               />
             ))}
           </div>

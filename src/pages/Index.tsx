@@ -1,10 +1,12 @@
 import Navbar from "@/components/Navbar";
 import Seo from "@/components/Seo";
 import Hero from "@/components/Hero";
-import About from "@/components/About";
+import KingdomStats from "@/components/KingdomStats";
+import TownsShowcase from "@/components/TownsShowcase";
 import OrimolusiSection from "@/components/OrimolusiSection";
-import Story from "@/components/Story";
+import TimelineTeaser from "@/components/TimelineTeaser";
 import Gallery from "@/components/Gallery";
+import BlogTeaser from "@/components/BlogTeaser";
 import FAQ, { faqs } from "@/components/FAQ";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
@@ -47,10 +49,12 @@ const Index = () => {
       <Navbar />
       <Seo path="/" jsonLd={[SITE_JSONLD, HOME_FAQ_JSONLD]} />
       <Hero />
-      <About />
+      <KingdomStats />
+      <TownsShowcase />
       <OrimolusiSection />
-      <Story />
+      <TimelineTeaser />
       <Gallery />
+      <BlogTeaser />
       <FAQ limit={2} />
       <CTA />
       <Footer />
