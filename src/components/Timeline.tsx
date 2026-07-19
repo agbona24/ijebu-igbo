@@ -33,7 +33,7 @@ const timelineEvents = [
     title: "Nigerian Independence",
     description: "Ijebu-Igbo becomes headquarters of Ijebu-North Local Government Area, its seven towns and Council of Obas taking shape as the kingdom grows.",
     icon: Calendar,
-    color: "from-green-600 to-emerald-700",
+    color: "from-slate-600 to-slate-800",
   },
   {
     era: "Vacant Throne",

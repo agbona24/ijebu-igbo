@@ -311,7 +311,7 @@ export default function ClanNetwork() {
             cx={centerX}
             cy={centerY}
             r="40"
-            fill="#1A3A2F"
+            fill="#141110"
             stroke="#FFD700"
             strokeWidth="4"
             filter="url(#intenseGlow)"
@@ -413,7 +413,7 @@ export default function ClanNetwork() {
               cx={clan.x}
               cy={clan.y}
               r="28"
-              fill="#1A3A2F"
+              fill="#141110"
               stroke="#FFD700"
               strokeWidth="3"
               filter="url(#strongGlow)"

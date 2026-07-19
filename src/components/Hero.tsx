@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import heroBg from "@/assets/hero-bg.jpg";
+import ClanNetwork from "@/components/ClanNetwork";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -13,45 +14,6 @@ const quickTowns = [
   { name: "Imope-Ijebu", href: "/imope-ijebu" },
   { name: "Aparaki", href: "/aparaki" },
 ];
-
-/** Radiating adire-inspired vector line art, purely decorative */
-function VectorMotif() {
-  return (
-    <svg
-      className="absolute -right-24 -top-24 sm:right-0 sm:top-0 w-[500px] h-[500px] sm:w-[720px] sm:h-[720px] opacity-[0.14] pointer-events-none"
-      viewBox="0 0 400 400"
-      fill="none"
-      aria-hidden
-    >
-      {[60, 100, 140, 180].map((r, i) => (
-        <motion.circle
-          key={r}
-          cx="200" cy="200" r={r}
-          stroke="white" strokeWidth="1"
-          strokeDasharray={i % 2 === 0 ? "2 10" : "1 1"}
-          initial={{ rotate: 0 }}
-          animate={{ rotate: i % 2 === 0 ? 360 : -360 }}
-          transition={{ duration: 40 + i * 15, repeat: Infinity, ease: "linear" }}
-          style={{ transformOrigin: "200px 200px" }}
-        />
-      ))}
-      {Array.from({ length: 12 }).map((_, i) => {
-        const angle = (i / 12) * 360;
-        return (
-          <motion.line
-            key={i}
-            x1="200" y1="20" x2="200" y2="45"
-            stroke="white" strokeWidth="1"
-            style={{ transformOrigin: "200px 200px", rotate: angle }}
-            initial={{ opacity: 0.3 }}
-            animate={{ opacity: [0.3, 0.8, 0.3] }}
-            transition={{ duration: 3, repeat: Infinity, delay: i * 0.15, ease: "easeInOut" }}
-          />
-        );
-      })}
-    </svg>
-  );
-}
 
 export default function Hero() {
   return (
@@ -75,7 +37,15 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-r from-primary/30 via-transparent to-transparent z-10" />
       </div>
 
-      <VectorMotif />
+      {/* Vector network animation connecting all seven towns */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1, delay: 0.3, ease }}
+        className="hidden lg:block absolute right-[-60px] top-1/2 -translate-y-[54%] w-[560px] h-[560px] xl:w-[640px] xl:h-[640px] pointer-events-none"
+      >
+        <ClanNetwork />
+      </motion.div>
 
       {/* Top-left mark */}
       <div className="relative z-20 pt-20 sm:pt-24 lg:pt-28 container-main">
