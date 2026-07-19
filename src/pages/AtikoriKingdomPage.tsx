@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Crown, MapPin, Target, Users, Music } from "lucide-react";
+import { Crown, Landmark, MapPin, Target, Users, Music } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Seo from "@/components/Seo";
 import Footer from "@/components/Footer";
@@ -65,10 +65,90 @@ const places = [
   },
 ];
 
+const landmarks = [
+  {
+    image: "/images/atikori/correctional-academy-ijebu-igbo.webp",
+    name: "Nigerian Correctional Academy",
+    description: "The training academy of the Nigerian Correctional Service, marked by its landmark archway gate on the edge of Atikori, where officers of the Service receive their foundational training.",
+  },
+  {
+    image: "/images/atikori/nnpc-filling-station-atikori.webp",
+    name: "NNPC Filling Station, Atikori",
+    description: "A busy fuel station along the Atikori road, a constant landmark for commuters, commercial motorcyclists and travellers passing through the quarter.",
+  },
+  {
+    image: "/images/atikori/burial-tomb-first-chief-imam-oridan-atikori.webp",
+    name: "Tomb of Lemomu Ipile, First Chief Imam",
+    description: "The burial tomb of Lemomu Ipile, the first Chief Imam of Ijebu-Igbo, situated at Oridan, one of Atikori's eight Itun agba, marking the deep Islamic roots of the town.",
+  },
+  {
+    image: "/images/atikori/atikori-mosque-itamosugbo.webp",
+    name: "Atikori Mosque, Itamosugbo",
+    description: "The first central mosque built in Ijebu-Igbo, standing at Itamosugbo, the Muslim counterpart to St James Church as one of Atikori's two founding houses of worship.",
+  },
+  {
+    image: "/images/atikori/government-science-technical-college-ijebu-igbo.webp",
+    name: "Government Science & Technical College",
+    description: "Run by the Ogun State Technical and Vocational Education Board, this college trains students in trades such as welding and animal husbandry, sited within Atikori.",
+  },
+  {
+    image: "/images/atikori/so-safe-corps-oke-ife-atikori.webp",
+    name: "So-Safe Corps, Oke Ife",
+    description: "The Atikori Divisional Command of the Ogun State Community Social Orientation and Safety Corps (So-Safe), stationed at Oke Ife to support community security.",
+  },
+  {
+    image: "/images/atikori/triple-l-hotel-oke-oyinbo-atikori.webp",
+    name: "Triple L Hotel & Lounge",
+    description: "A modern hotel and lounge at Oke Oyinbo, reflecting Atikori's growing hospitality scene alongside its older institutions.",
+  },
+  {
+    image: "/images/atikori/atikori-market.webp",
+    name: "Atikori Market",
+    description: "The bustling commercial heart of the quarter, where traders line the sandy streets under umbrellas selling foodstuff, wares and household goods every market day.",
+  },
+  {
+    image: "/images/atikori/st-james-anglican-primary-school-atikori.webp",
+    name: "St James Anglican Primary School",
+    description: "Founded in 1918, the first school in Ijebu-Igbo, standing beside St James Church under the motto “Forward Be Our Watchword”, still active with pupils at play in its compound today.",
+  },
+  {
+    image: "/images/atikori/general-hospital-oke-ife-atikori.webp",
+    name: "General Hospital, Oke-Ife",
+    description: "The general hospital on Babalawo Street, Oke-Ife, serving as a key public healthcare facility for Atikori and the wider Ijebu-Igbo community.",
+  },
+  {
+    image: "/images/atikori/nigeria-police-command-headquarters-ijebu-igbo.webp",
+    name: "Nigeria Police Command Headquarters",
+    description: "The divisional police command headquarters for Ijebu-Igbo, anchoring law enforcement for the town from its base near Atikori.",
+  },
+  {
+    image: "/images/atikori/amotekun-security-corps-oke-oyinbo-atikori.webp",
+    name: "Amotekun Security Corps Outpost",
+    description: "The Atikori outpost of Amotekun (Ogun State Security Network Agency) under the Ijebu North command, part of the state's community vigilance network against crime.",
+  },
+  {
+    image: "/images/atikori/oba-ibitoye-centre-atikori.webp",
+    name: "Oba Ibitoye Centre",
+    description: "A community events centre named in honour of the reigning Keegbo, Oba Ibitoye Solaja, serving as a gathering hall for Atikori's residents.",
+  },
+  {
+    image: "/images/atikori/ijebu-igbo-customary-court.webp",
+    name: "Ijebu-Igbo Customary Court",
+    description: "The customary court that adjudicates traditional and civil matters for Ijebu-Igbo under native law and custom.",
+  },
+];
+
+const landmarkAltPhotos = [
+  { src: "/images/atikori/nnpc-filling-station-atikori-wide.webp", alt: "NNPC Filling Station, Atikori — wide view" },
+  { src: "/images/atikori/st-james-anglican-primary-school-atikori-gate.webp", alt: "St James Anglican Primary School, Atikori — gate and 1918 foundation plaque" },
+];
+
 const galleryImages = [
   ...royalCouple.map((p) => ({ src: p.photo, alt: `${p.name} — ${p.title}` })),
   ...oloriwuns.map((c) => ({ src: c.photo, alt: `${c.name} — ${c.title}` })),
   ...places.map((p) => ({ src: p.image, alt: p.name })),
+  ...landmarks.map((p) => ({ src: p.image, alt: p.name })),
+  ...landmarkAltPhotos,
 ];
 
 const anthemVerse1 = `Atikori ilu mi
@@ -219,6 +299,36 @@ export default function AtikoriKingdomPage() {
                 className="bg-card rounded-2xl overflow-hidden border border-border shadow-sm">
                 <div className="aspect-[4/3] overflow-hidden">
                   <ZoomableImage src={p.image} alt={p.name} onClick={() => open(royalCouple.length + oloriwuns.length + i)} />
+                </div>
+                <div className="p-4">
+                  <h4 className="font-display font-bold text-foreground text-sm">{p.name}</h4>
+                  <p className="text-xs text-muted-foreground mt-1.5 leading-relaxed">{p.description}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Around Atikori */}
+      <section className="section-padding bg-muted/30">
+        <div className="container-main max-w-6xl">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, ease }}
+            className="text-center mb-10">
+            <h2 className="label-accent mb-2">Heritage</h2>
+            <h3 className="heading-section flex items-center justify-center gap-2">
+              <Landmark size={26} className="text-accent" /> Around Atikori
+            </h3>
+            <p className="text-body mt-2">Institutions, landmarks and businesses that shape everyday life in the quarter.</p>
+          </motion.div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {landmarks.map((p, i) => (
+              <motion.div key={i} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: (i % 6) * 0.06, ease }}
+                className="bg-card rounded-2xl overflow-hidden border border-border shadow-sm">
+                <div className="aspect-[4/3] overflow-hidden">
+                  <ZoomableImage src={p.image} alt={p.name}
+                    onClick={() => open(royalCouple.length + oloriwuns.length + places.length + i)} />
                 </div>
                 <div className="p-4">
                   <h4 className="font-display font-bold text-foreground text-sm">{p.name}</h4>
