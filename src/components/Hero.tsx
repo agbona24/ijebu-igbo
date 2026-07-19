@@ -5,19 +5,18 @@ import ClanNetwork from "@/components/ClanNetwork";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
-const quickTowns = [
-  { name: "Oke-Sopen", href: "/oke-sopen" },
-  { name: "Atikori", href: "/atikori" },
-  { name: "Japara", href: "/japara" },
-  { name: "Ojowo", href: "/ojowo" },
-  { name: "Oke-Agbo", href: "/oke-agbo" },
-  { name: "Imope-Ijebu", href: "/imope-ijebu" },
-  { name: "Aparaki", href: "/aparaki" },
+// Cultural phrases for marquee
+const culturalPhrases = [
+  "KÁÀBỌ̀ ỌMỌ ORÍMÓLÚSÍ",
+  "Ẹ̀ WẸ̀ SỌ̀Ọ́ ỌMỌ ALÁRÈ",
+  "IJEBU IGBO KÌ Í ṢOFO",
+  "ILU WA, IGBERAGA WA",
+  "ỌMỌ ALÁRÈ KÁ GBÉ IJEBU IGBO GA",
 ];
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[100svh] lg:h-screen flex flex-col overflow-hidden bg-charcoal">
+    <section className="relative min-h-[100svh] lg:h-screen flex flex-col justify-between overflow-hidden bg-charcoal pt-14 md:pt-16">
       <div className="absolute inset-0 z-0">
         <video
           autoPlay loop muted playsInline
@@ -32,96 +31,115 @@ export default function Hero() {
           alt="Ijebu Igbo aerial view at golden hour"
           className="w-full h-full object-cover absolute inset-0 -z-10"
         />
-        {/* Bottom-weighted gradient so text sits on solid ground */}
-        <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/70 to-primary/50 z-10" />
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/30 via-transparent to-transparent z-10" />
+        <div className="absolute inset-0 bg-gradient-to-b sm:bg-gradient-to-r from-primary/80 via-primary/70 to-primary/60 z-10" />
       </div>
 
-      {/* Vector network animation connecting all seven towns */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1, delay: 0.3, ease }}
-        className="hidden lg:block absolute right-[-60px] top-1/2 -translate-y-[54%] w-[560px] h-[560px] xl:w-[640px] xl:h-[640px] pointer-events-none"
-      >
-        <ClanNetwork />
-      </motion.div>
-
-      {/* Top-left mark */}
-      <div className="relative z-20 pt-20 sm:pt-24 lg:pt-28 container-main">
-        <motion.span
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease }}
-          className="inline-block text-accent text-xs sm:text-sm font-bold uppercase tracking-[0.25em]"
-        >
-          Ẹ̀ wẹ̀ sọ̀ọ́ Ọmọ Alárè — a living archive
-        </motion.span>
-      </div>
-
-      {/* Bottom-anchored headline block */}
-      <div className="relative z-20 mt-auto container-main pb-8 sm:pb-10">
-        <motion.h1
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, ease, delay: 0.1 }}
-          className="font-display font-bold text-white leading-[0.98] tracking-tight
-                     text-[13vw] sm:text-6xl md:text-7xl lg:text-8xl max-w-4xl"
-        >
-          Seven Towns.
-          <br />
-          One <span className="text-accent italic">Crown.</span>
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.35, ease }}
-          className="text-white/75 text-sm sm:text-base md:text-lg max-w-lg mt-4 sm:mt-6 leading-relaxed"
-        >
-          The living archive of Ijebu-Igbo — its Obas, its towns, and the
-          history that has shaped a Yoruba kingdom for generations.
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.5, ease }}
-          className="flex flex-col sm:flex-row gap-3 mt-6 sm:mt-8"
-        >
-          <Link to="/heritage" className="btn-primary text-center min-h-[48px] font-semibold">
-            Explore the Obas
-          </Link>
-          <Link to="/tourism" className="btn-outline-light text-center min-h-[48px] flex items-center justify-center font-semibold">
-            Discover the Towns
-          </Link>
-        </motion.div>
-      </div>
-
-      {/* Seven-towns quick-nav strip */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8, delay: 0.7 }}
-        className="relative z-30 border-t border-white/10 bg-black/30 backdrop-blur-sm"
-      >
-        <div className="container-main flex items-center gap-1 sm:gap-2 overflow-x-auto scrollbar-hide py-3 sm:py-4">
-          <span className="text-white/40 text-[10px] sm:text-xs font-bold uppercase tracking-widest shrink-0 mr-2">
-            Towns
-          </span>
-          {quickTowns.map((t, i) => (
-            <Link
-              key={t.href}
-              to={t.href}
-              className="group shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs sm:text-sm text-white/70 hover:text-white hover:bg-white/10 transition-colors whitespace-nowrap"
+      <div className="container-main relative z-20 py-6 sm:py-10 lg:py-16 flex-grow flex items-center">
+        <div className="grid lg:grid-cols-2 gap-4 sm:gap-8 lg:gap-12 items-center w-full">
+          {/* Left content */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease }}
+            className="order-2 lg:order-1 text-center lg:text-left"
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2, ease }}
+              className="mb-3 sm:mb-5"
             >
-              <span className="w-1 h-1 rounded-full bg-accent group-hover:scale-150 transition-transform" />
-              {t.name}
-              {i < quickTowns.length - 1 && <span className="text-white/20 ml-1 sm:ml-2">/</span>}
-            </Link>
-          ))}
+              <span className="text-accent text-base sm:text-xl md:text-2xl font-display italic">
+                Ẹ̀ wẹ̀ sọ̀ọ́ Ọmọ Alárè
+              </span>
+              <p className="text-primary-foreground/70 text-xs sm:text-sm md:text-base mt-0.5 sm:mt-1">
+                Welcome, proud sons and daughters of Ijebu Igbo.
+              </p>
+            </motion.div>
+
+            <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-display font-bold text-primary-foreground leading-[1.1] mb-3 sm:mb-5 tracking-tight">
+              Seven Towns, One
+              <br className="hidden sm:block" /> Crown{" "}
+              <span className="text-accent">One Story</span>
+            </h1>
+            <p className="text-sm sm:text-base md:text-lg text-primary-foreground/85 font-sans max-w-xl mx-auto lg:mx-0 mb-4 sm:mb-7 leading-relaxed">
+              The living archive of Ijebu-Igbo — its Obas, its towns, and the
+              history that has shaped a Yoruba kingdom for generations.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
+              <Link to="/heritage" className="btn-primary text-center w-full sm:w-auto min-h-[48px] font-semibold">
+                Explore the Obas
+              </Link>
+              <Link to="/tourism" className="btn-outline-light text-center min-h-[48px] flex items-center justify-center font-semibold">
+                Discover the Towns
+              </Link>
+            </div>
+          </motion.div>
+
+          {/* Right side — town network animation */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, delay: 0.3, ease }}
+            className="order-1 lg:order-2 flex justify-center lg:justify-end hidden lg:flex"
+          >
+            <div className="w-full max-w-[320px] sm:max-w-[400px] lg:max-w-[480px] xl:max-w-[520px] aspect-square">
+              <ClanNetwork />
+            </div>
+          </motion.div>
         </div>
-      </motion.div>
+      </div>
+
+      {/* Cultural Greetings Marquee - Part of Hero */}
+      <div className="relative z-30 w-full">
+        <div className="relative bg-primary py-2.5 sm:py-4 overflow-hidden border-t border-accent/20">
+          <div className="container-main text-center mb-2">
+            <p className="text-accent/80 text-xs sm:text-sm font-semibold tracking-wider uppercase">
+              Cultural Greetings from Ijebu Igbo
+            </p>
+          </div>
+
+          <div className="relative flex overflow-hidden">
+            <div className="absolute left-0 top-0 bottom-0 w-20 sm:w-32 bg-gradient-to-r from-primary to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-20 sm:w-32 bg-gradient-to-l from-primary to-transparent z-10 pointer-events-none" />
+
+            <motion.div
+              className="flex gap-6 sm:gap-8 md:gap-12 whitespace-nowrap"
+              animate={{ x: [0, -1920] }}
+              transition={{ x: { repeat: Infinity, repeatType: "loop", duration: 40, ease: "linear" } }}
+              style={{ willChange: "transform" }}
+            >
+              {[...culturalPhrases, ...culturalPhrases, ...culturalPhrases].map((phrase, index) => (
+                <div key={index} className="flex items-center gap-6 sm:gap-8 md:gap-12">
+                  <span className="text-accent font-display font-bold text-base sm:text-lg md:text-xl lg:text-2xl tracking-wide">
+                    {phrase}
+                  </span>
+                  <span className="text-accent/60 text-xl sm:text-2xl">✦</span>
+                </div>
+              ))}
+            </motion.div>
+
+            <motion.div
+              className="flex gap-6 sm:gap-8 md:gap-12 whitespace-nowrap"
+              animate={{ x: [0, -1920] }}
+              transition={{ x: { repeat: Infinity, repeatType: "loop", duration: 40, ease: "linear" } }}
+              style={{ willChange: "transform" }}
+            >
+              {[...culturalPhrases, ...culturalPhrases, ...culturalPhrases].map((phrase, index) => (
+                <div key={`dup-${index}`} className="flex items-center gap-6 sm:gap-8 md:gap-12">
+                  <span className="text-accent font-display font-bold text-base sm:text-lg md:text-xl lg:text-2xl tracking-wide">
+                    {phrase}
+                  </span>
+                  <span className="text-accent/60 text-xl sm:text-2xl">✦</span>
+                </div>
+              ))}
+            </motion.div>
+          </div>
+
+          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent" />
+        </div>
+      </div>
     </section>
   );
 }
